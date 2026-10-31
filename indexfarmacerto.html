@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Farma Certo</title>
+<meta name="theme-color" content="#12382A">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312382A'/%3E%3Cpath d='M32 14v36M14 32h36' stroke='%23F4C20D' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --font-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --font-body:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --outer:#D3DCD2; --bg:#E9EEE8; --surface:#FFFFFF; --surface2:#F1F5F0;
+  --ink:#14201A; --muted:#556459; --line:#D1DAD0;
+  --hdr:#12382A; --hdr-ink:#F2F7F3; --brand:#1B6B47;
+  --cta:#F4C20D; --cta-ink:#1A1600;
+  --ok:#1E7A4A; --ok-bg:#DDF1E4;
+  --warn:#A94C08; --warn-bg:#FCE9D6;
+  --crit:#B3261E; --crit-bg:#FADAD7;
+  --info:#1B5E9B; --info-bg:#DCEAF7;
+  --strip:#0B100D; --strip-ink:#CDD7CF; --seg-bg:#1C261F; --seg-on:#EEF4EF; --seg-on-ink:#12382A;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --outer:#070B09; --bg:#0E1511; --surface:#17211B; --surface2:#1E2A23;
+    --ink:#E6EEE8; --muted:#9BAEA1; --line:#2B3A31;
+    --hdr:#0A2018; --hdr-ink:#EAF3EC; --brand:#7ED3A2;
+    --ok:#6FD39A; --ok-bg:#16372A; --warn:#F0A25C; --warn-bg:#3C2812;
+    --crit:#F2918A; --crit-bg:#431B18; --info:#8DBBEA; --info-bg:#172B40;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--outer);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.4;-webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+.px{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.device{height:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
+.device.wide{max-width:760px}
+@media (min-width:640px){
+  body{padding-block:12px}
+  .device{height:calc(100% - 0px);border-radius:26px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.2)}
+}
+.app{flex:1;min-height:0;display:flex;flex-direction:column}
+.strip{background:var(--strip);color:var(--strip-ink);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding-block:7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.seg{display:inline-flex;background:var(--seg-bg);border-radius:99px;padding:2px;align-items:center}
+.seg button,.seg select{border:0;background:transparent;color:var(--strip-ink);font-size:12px;letter-spacing:0;text-transform:none;padding:4px 11px;border-radius:99px;min-height:28px}
+.seg select{background:var(--seg-bg)}
+.seg button[aria-pressed="true"]{background:var(--seg-on);color:var(--seg-on-ink);font-weight:600}
+.strip-ctl{display:flex;gap:8px;flex-wrap:wrap}
+.hdr{background:var(--hdr);color:var(--hdr-ink);padding-block:12px 14px}
+.hdr-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.hdr-sub{font-size:13px;opacity:.82;margin-top:3px}
+.hdr .back{background:transparent;border:0;color:var(--hdr-ink);display:flex;align-items:center;gap:6px;min-height:44px;min-width:44px;margin-left:-8px;padding:0 8px;font-weight:600}
+.hdr .out{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--hdr-ink);border-radius:99px;min-height:32px;padding:0 12px;font-size:13px}
+.hr-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}
+.steps i{height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
+.steps i.on{background:var(--cta)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.crit{background:var(--crit-bg);color:var(--crit)}
+.pill.info{background:var(--info-bg);color:var(--info)}
+.view{flex:1;min-height:0;overflow-y:auto;padding-block:16px 24px;display:flex;flex-direction:column;gap:14px}
+.h1{font-family:var(--font-display);font-weight:700;font-size:30px;line-height:1.05;letter-spacing:.01em;text-wrap:balance}
+.h2{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:10px}
+.row.sb{justify-content:space-between}
+.grow{flex:1;min-width:0}
+.num{font-variant-numeric:tabular-nums}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:17px;padding:10px 16px;text-align:center}
+.btn.cta{background:var(--cta);color:var(--cta-ink);border-color:transparent}
+.btn.dark{background:var(--hdr);color:var(--hdr-ink);border-color:transparent}
+.btn.danger{color:var(--crit)}
+.btn.sm{min-height:44px;font-size:15px;width:auto;padding:8px 14px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.big{min-height:84px;font-size:22px;font-family:var(--font-display);letter-spacing:.04em;text-transform:uppercase;flex-direction:column;gap:2px}
+.btn.big small{font-family:var(--font-body);font-size:13px;letter-spacing:0;text-transform:none;font-weight:500;opacity:.85}
+.badge{background:var(--crit);color:#fff;border-radius:99px;font-size:12px;min-width:20px;height:20px;display:inline-grid;place-items:center;padding:0 6px;font-weight:700}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.two .btn{flex-direction:column;min-height:88px;font-size:15px;gap:6px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;min-height:96px;padding:14px;border-radius:14px;border:2px solid var(--line);background:var(--surface);width:100%}
+.tile b{font-family:var(--font-display);font-size:24px;letter-spacing:.03em;text-transform:uppercase;line-height:1}
+.tile[aria-pressed="true"]{border-color:var(--brand);background:var(--surface2)}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;min-height:64px;border-radius:14px;border:2px solid var(--line);background:var(--surface)}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:var(--surface2)}
+.opt:disabled{opacity:.5}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.input{min-height:56px;border-radius:14px;border:2px solid var(--line);background:var(--surface);padding:0 14px;font-size:20px;width:100%;font-variant-numeric:tabular-nums}
+.input.t{font-size:17px}
+.stepper{display:grid;grid-template-columns:64px 1fr 64px;align-items:stretch;gap:8px}
+.stepper button{min-height:64px;border-radius:14px;border:2px solid var(--line);background:var(--surface);font-size:30px;font-weight:600}
+.stepper output{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;background:var(--surface);border:2px solid var(--line);font-family:var(--font-display);font-size:40px;font-weight:700;line-height:1}
+.stepper output small{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--muted)}
+.sumrow{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.sumrow:last-child{border-bottom:0}
+.sumrow span:first-child{color:var(--muted)}
+.sumrow span:last-child{text-align:right;font-weight:600;min-width:0;overflow-wrap:anywhere}
+.note{border-radius:12px;padding:10px 12px;font-size:14px;display:flex;gap:10px;align-items:flex-start}
+.note.warn{background:var(--warn-bg);color:var(--warn)}
+.note.crit{background:var(--crit-bg);color:var(--crit)}
+.note.info{background:var(--info-bg);color:var(--info)}
+.note.ok{background:var(--ok-bg);color:var(--ok)}
+.note svg{flex:none;margin-top:1px}
+.foot{border-top:1px solid var(--line);background:var(--surface);padding-block:12px}
+.bar{height:9px;background:var(--surface2);border-radius:5px;position:relative;border:1px solid var(--line)}
+.bar i{display:block;height:100%;border-radius:4px;background:var(--ok)}
+.bar i.low{background:var(--warn)}
+.nav{background:var(--surface);border-top:1px solid var(--line);display:grid;gap:6px;padding-block:8px}
+.nav.n3{grid-template-columns:repeat(3,1fr)}
+.nav.n4{grid-template-columns:repeat(4,1fr)}
+.nav.n5{grid-template-columns:repeat(5,1fr)}
+.nav button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;border-radius:12px;font-size:12px;font-weight:600;color:var(--muted);position:relative}
+.nav button[aria-current="page"]{color:var(--brand)}
+.nav button.cta{background:var(--cta);color:var(--cta-ink)}
+.nav .badge{position:absolute;top:2px;right:calc(50% - 26px)}
+.toast{position:absolute;left:16px;right:16px;bottom:92px;background:var(--hdr);color:var(--hdr-ink);padding:12px 14px;border-radius:12px;font-size:14px;font-weight:500;z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.login{flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;gap:16px;padding-block:24px;background:var(--hdr);color:var(--hdr-ink)}
+.login .input{background:#fff;color:#14201A;border-color:transparent}
+.login .field label{color:var(--hdr-ink);opacity:.85}
+.login .lnk{background:transparent;border:0;color:var(--hdr-ink);text-decoration:underline;min-height:44px;font-size:14px}
+.login .err{background:var(--crit-bg);color:var(--crit);border-radius:12px;padding:10px 12px;font-size:14px}
+.bars{display:flex;flex-direction:column;gap:10px}
+.brow{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:center}
+.btrack{position:relative;height:26px;background:var(--surface2);border-radius:6px;border:1px solid var(--line)}
+.btrack i{position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--brand);opacity:.55}
+.btrack i.hi{opacity:1;background:var(--warn)}
+.btrack span{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:62px 1fr;gap:10px;font-size:11px;color:var(--muted)}
+.axis div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wide .kpis{grid-template-columns:repeat(4,1fr)}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.kpi small{display:block;color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.kpi b{font-family:var(--font-display);font-size:26px;line-height:1.1;font-weight:700;white-space:nowrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;padding:0 14px;border-radius:99px;border:2px solid var(--line);background:var(--surface);font-weight:600;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--hdr);color:var(--hdr-ink);border-color:var(--hdr)}
+.empty{text-align:center;padding:28px 16px;color:var(--muted)}
+.success{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding-top:10px}
+.success .tick{width:84px;height:84px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:480px){.grid2{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: no-preference){.toast{animation:up .2s ease-out}@keyframes up{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}}
+</style>
+</head>
+<body>
+<div class="device" id="dev">
+  <div class="app" id="app"></div>
+  <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* >>> COLE AQUI a configuração web do seu projeto Firebase (Configurações do projeto > Seus apps > Web).
+   Enquanto estiver "COLE_AQUI", o app roda em MODO TESTE: dados salvos só neste navegador, sem login. <<< */
+var firebaseConfig = {
+  apiKey: "AIzaSyAlARYb-Z_VOb8veVRICjpOqRL86dnthfI",
+  authDomain: "farma-control-1895f.firebaseapp.com",
+  projectId: "farma-control-1895f",
+  storageBucket: "farma-control-1895f.firebasestorage.app",
+  messagingSenderId: "519503464259",
+  appId: "1:519503464259:web:87277cb332a67eda5411f6"
+};
+var ADMIN_EMAILS = ['agrosafra7@gmail.com', 'menezesapptec@gmail.com'];
+</script>
+<script>
+(function(){
+'use strict';
+var DEMO = firebaseConfig.apiKey === 'COLE_AQUI';
+var NOFB = !DEMO && typeof firebase === 'undefined';
+var DAY = 864e5;
+
+/* ================= utilidades ================= */
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function ext(a,b){for(var k in b){if(Object.prototype.hasOwnProperty.call(b,k))a[k]=b[k]}return a}
+function byId(arr,id){for(var i=0;i<arr.length;i++){if(arr[i].id===id)return arr[i]}return null}
+function brl(n){return (n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function num(n){return (n||0).toLocaleString('pt-BR')}
+function ml(n){return num(Math.round((n||0)*10)/10)+' mL'}
+function shortMoney(v){return v>=1000?'R$ '+(v/1000).toFixed(1).replace('.',',')+' mil':brl(Math.round(v))}
+function dstr(ms){return new Date(ms).toLocaleDateString('pt-BR')}
+function hhmm(ms){return new Date(ms||Date.now()).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
+function startOfDay(){var d=new Date();d.setHours(0,0,0,0);return d.getTime()}
+function daysTo(ms){return Math.ceil((ms-Date.now())/DAY)}
+function uid8(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5)}
+function isoDate(ms){return new Date(ms).toISOString().slice(0,10)}
+
+var ICON={
+  home:'M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10',plus:'M12 5v14M5 12h14',box:'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',
+  clock:'M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z',back:'M15 5l-7 7 7 7',check:'M5 12l5 5L20 7',
+  truck:'M2 6h11v10H2zM13 9h4l4 4v3h-8M6 19a2 2 0 100-4 2 2 0 000 4zM17 19a2 2 0 100-4 2 2 0 000 4z',
+  alert:'M12 3l10 18H2zM12 10v5M12 18v.01',chart:'M4 20V10M10 20V4M16 20v-7M22 20H2',list:'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
+  cloud:'M7 18a4 4 0 010-8 5 5 0 019.6-1A4.5 4.5 0 0117 18zM3 3l18 18',users:'M16 11a4 4 0 10-8 0 4 4 0 008 0zM4 21a8 8 0 0116 0',
+  pill:'M10.5 20.5a5 5 0 01-7-7l10-10a5 5 0 017 7zM8.5 8.5l7 7'
+};
+function ic(n,s){s=s||22;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+ICON[n]+'"/></svg>'}
+
+var TIPOS=[
+  {id:'trat',nome:'Tratamento',sub:'Antibiótico e anti-inflamatório'},
+  {id:'vac',nome:'Vacinação',sub:'Aftosa, clostridioses'},
+  {id:'verm',nome:'Vermifugação',sub:'Antiparasitário'},
+  {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'}
+];
+function tipoNome(id){var t=byId(TIPOS,id);return t?t.nome:id}
+var RETIROS_DEFAULT=[
+  {id:'r1',nome:'Retiro 1',cabecas:1240},{id:'r2',nome:'Retiro 2',cabecas:1080},{id:'r3',nome:'Retiro 3',cabecas:980},
+  {id:'r4',nome:'Retiro 4',cabecas:1310},{id:'r5',nome:'Retiro 5',cabecas:760}
+];
+
+/* ================= camada de dados ================= */
+var DB=(function(){
+  var fs=null,L={},subs=[],simOff=false,KEY='farmacerto_teste_v1';
+  if(!DEMO&&!NOFB){
+    firebase.initializeApp(firebaseConfig);
+    fs=firebase.firestore();
+    try{fs.enablePersistence({synchronizeTabs:true}).catch(function(){})}catch(e){}
+  }
+  function lsLoad(){try{var s=localStorage.getItem(KEY);if(s)L=JSON.parse(s)}catch(e){L={}}}
+  function lsSave(){try{localStorage.setItem(KEY,JSON.stringify(L))}catch(e){}}
+  function arr(col){var c=L[col]||{},o=[];for(var k in c){o.push(ext({id:k},c[k]))}return o}
+  function emit(col){subs.forEach(function(s){if(s.col===col)s.cb(arr(col),false)})}
+  if(DEMO)lsLoad();
+  return {
+    isEmpty:function(){return !L.meds||!Object.keys(L.meds).length},
+    reset:function(){L={};lsSave();subs.forEach(function(s){s.cb([],false)})},
+    sub:function(col,cb,where){
+      if(DEMO){var s={col:col,cb:cb};subs.push(s);cb(arr(col),false);return function(){var i=subs.indexOf(s);if(i>-1)subs.splice(i,1)}}
+      var q=fs.collection(col);
+      if(where)q=q.where(where[0],where[1],where[2]);
+      return q.onSnapshot({includeMetadataChanges:true},function(snap){
+        cb(snap.docs.map(function(d){return ext(ext({id:d.id,_pend:d.metadata.hasPendingWrites},d.data()),{})}),snap.metadata.fromCache);
+      },function(err){console.error(col,err);if(err&&err.code==='permission-denied')toast('Sem permissão para ler '+col)});
+    },
+    setSimOff:function(off){
+      simOff=off;
+      if(!off){for(var c in L){for(var id in L[c]){delete L[c][id]._pend}}lsSave();Object.keys(L).forEach(emit)}
+    },
+    batch:function(ops){
+      if(DEMO){
+        var touched={};
+        ops.forEach(function(o){
+          var c=L[o.col]||(L[o.col]={});
+          if(o.op==='set'){c[o.id]=ext(c[o.id]||{},o.data)}
+          else if(o.op==='inc'){var d=c[o.id]||(c[o.id]=ext({qtd:0},o.data));d.qtd=(d.qtd||0)+o.n}
+          else if(o.op==='del'){delete c[o.id]}
+          if(simOff&&c[o.id])c[o.id]._pend=true;
+          touched[o.col]=1;
+        });
+        lsSave();Object.keys(touched).forEach(emit);
+        return Promise.resolve();
+      }
+      var b=fs.batch();
+      ops.forEach(function(o){
+        var ref=fs.collection(o.col).doc(o.id);
+        if(o.op==='set')b.set(ref,o.data,{merge:true});
+        else if(o.op==='inc')b.set(ref,ext(ext({},o.data),{qtd:firebase.firestore.FieldValue.increment(o.n)}),{merge:true});
+        else if(o.op==='del')b['delete'](ref);
+      });
+      return b.commit().catch(function(e){console.error(e);toast('Erro ao salvar: '+(e.code||e.message))});
+    }
+  };
+})();
+
+/* ================= dados de teste ================= */
+function seedMeds(){
+  var t=Date.now();
+  return [
+    {id:'oxi',nome:'Oxitetraciclina LA 200 mg/mL',cat:'trat',frasco:100,preco:38,kgMl:10,fixo:null,carencia:28,min:300,lote:'OX-2291',venc:t+210*DAY},
+    {id:'flor',nome:'Florfenicol 300 mg/mL',cat:'trat',frasco:100,preco:210,kgMl:15,fixo:null,carencia:44,min:300,lote:'FL-0873',venc:t+160*DAY},
+    {id:'flu',nome:'Flunixina 5%',cat:'trat',frasco:50,preco:95,kgMl:45,fixo:null,carencia:4,min:100,lote:'FX-1190',venc:t+300*DAY},
+    {id:'iver',nome:'Ivermectina 1%',cat:'verm',frasco:500,preco:160,kgMl:50,fixo:null,carencia:35,min:500,lote:'IV-5520',venc:t+18*DAY},
+    {id:'dora',nome:'Doramectina 1%',cat:'verm',frasco:500,preco:390,kgMl:50,fixo:null,carencia:42,min:400,lote:'DR-3307',venc:t+240*DAY},
+    {id:'aft',nome:'Vacina Aftosa',cat:'vac',frasco:50,preco:80,kgMl:null,fixo:2,carencia:0,min:400,lote:'AF-7741',venc:t+120*DAY},
+    {id:'clo',nome:'Vacina Clostridioses',cat:'vac',frasco:100,preco:52,kgMl:null,fixo:5,carencia:0,min:400,lote:'CL-6012',venc:t+180*DAY},
+    {id:'vit',nome:'Complexo Vitamínico B',cat:'outro',frasco:100,preco:28,kgMl:50,fixo:null,carencia:0,min:150,lote:'VB-2204',venc:t+400*DAY}
+  ];
+}
+function seedOps(){
+  var now=Date.now(),ops=[],meds=seedMeds(),T={teste:true};
+  ops.push({op:'set',col:'config',id:'farm',data:{nome:'Fazenda Boa Vista',retiros:RETIROS_DEFAULT,teste:true,
+    lotes:[{id:'A',nome:'Bezerros desmama A',n:24,peso:190},{id:'B',nome:'Novilhas recria',n:38,peso:310},{id:'C',nome:'Lote enfermaria',n:6,peso:420}]}});
+  meds.forEach(function(m){ops.push({op:'set',col:'meds',id:m.id,data:m})});
+  var central={oxi:2400,flor:1500,flu:600,iver:5000,dora:2000,aft:3000,clo:2500,vit:1200};
+  var base={oxi:420,flor:180,flu:140,iver:1100,dora:800,aft:600,clo:700,vit:300};
+  var mult={r1:1.3,r2:0.9,r3:1,r4:0.7,r5:1.1};
+  meds.forEach(function(m){
+    ops.push({op:'set',col:'stock',id:'central__'+m.id,data:{loc:'central',med:m.id,qtd:central[m.id]}});
+    RETIROS_DEFAULT.forEach(function(r){ops.push({op:'set',col:'stock',id:r.id+'__'+m.id,data:{loc:r.id,med:m.id,qtd:Math.round(base[m.id]*mult[r.id])}})});
+  });
+  /* histórico dos últimos 30 dias, calibrado com os valores do documento */
+  var alvo=[7850,12430,6950,9320,5680],lotes=['Bezerros desmama A','Novilhas recria','Lote enfermaria'];
+  RETIROS_DEFAULT.forEach(function(r,ri){
+    for(var i=0;i<7;i++){
+      var m=meds[(ri*3+i)%meds.length],perMl=m.preco/m.frasco,qtd=Math.max(5,Math.round(alvo[ri]/7/perMl)),n=10+((ri+i)*7)%40;
+      var ts=now-(1+i*4+(ri%3))*DAY-((ri*i)%9)*3600e3;
+      ops.push({op:'set',col:'launches',id:'T-'+r.id+'-'+i,data:{ts:ts,retiro:r.id,uid:'teste',userName:'Equipe '+r.nome,tipo:tipoNome(m.cat),modo:'lote',
+        alvo:lotes[(ri+i)%3]+' · '+n+' animais',peso:250,animais:n,med:m.id,medNome:m.nome,qtd:qtd,custo:qtd*perMl,lote:m.lote,libera:m.carencia?ts+m.carencia*DAY:null,st:'ok',teste:true}});
+    }
+  });
+  var oxi=meds[0],clo=meds[6];
+  ops.push({op:'set',col:'launches',id:'T-hoje-1',data:{ts:Math.max(startOfDay()+6e4,now-2*3600e3),retiro:'r3',uid:'teste',userName:'Raimundo S.',tipo:'Tratamento',modo:'animal',alvo:'Brinco 0331',brinco:'0331',peso:388,animais:1,
+    med:'oxi',medNome:oxi.nome,qtd:39,custo:39*oxi.preco/oxi.frasco,lote:oxi.lote,libera:now+28*DAY,st:'ok',teste:true}});
+  ops.push({op:'set',col:'launches',id:'T-hoje-2',data:{ts:Math.max(startOfDay()+12e4,now-3600e3),retiro:'r3',uid:'teste',userName:'Raimundo S.',tipo:'Vacinação',modo:'lote',alvo:'Bezerros desmama A · 24 animais',peso:190,animais:24,
+    med:'clo',medNome:clo.nome,qtd:120,custo:120*clo.preco/clo.frasco,lote:clo.lote,libera:null,st:'ok',teste:true}});
+  ops.push({op:'set',col:'transfers',id:'TR-0482',data:{dest:'r3',ts:now-3*3600e3,itens:[{med:'flor',ml:300},{med:'oxi',ml:200},{med:'flu',ml:100}],st:'transito',teste:true}});
+  ops.push({op:'set',col:'transfers',id:'TR-0479',data:{dest:'r1',ts:now-4*3600e3,itens:[{med:'iver',ml:1000}],st:'transito',teste:true}});
+  ops.push({op:'set',col:'transfers',id:'TR-0471',data:{dest:'r5',ts:now-DAY,itens:[{med:'aft',ml:400}],st:'recebida',recebido:[{med:'aft',ml:400}],teste:true}});
+  ops.push({op:'set',col:'approvals',id:'AP-1',data:{ts:now-2*3600e3,tipo:'Perda',retiro:'r1',st:'pend',por:'Encarregado do Retiro 1',
+    txt:'Retiro 1 · 2 frascos de Ivermectina 1% vencidos (R$ 320,00)',payload:{med:'iver',loc:'r1',qtd:1000,valor:320,motivo:'Vencido'},teste:true}});
+  ops.push({op:'set',col:'approvals',id:'AP-2',data:{ts:now-3600e3,tipo:'Divergência',retiro:'r4',st:'pend',por:'Encarregado do Retiro 4',
+    txt:'Retiro 4 recebeu 100 mL a menos de Flunixina 5% (TR-0468)',payload:{},teste:true}});
+  ops.push({op:'set',col:'approvals',id:'AP-3',data:{ts:now-9*DAY,tipo:'Perda',retiro:'r2',st:'ok',por:'Encarregado do Retiro 2',
+    txt:'Retiro 2 · frascos quebrados no transporte (R$ 720,00)',payload:{med:'dora',loc:'r2',qtd:0,valor:720,motivo:'Quebrado'},teste:true}});
+  ops.push({op:'set',col:'compras',id:'CP-1',data:{ts:now-6*DAY,med:'flor',ml:2000,nf:'NF 18452',por:'Gerência',teste:true}});
+  ops.push({op:'set',col:'compras',id:'CP-2',data:{ts:now-12*DAY,med:'iver',ml:5000,nf:'NF 18211',por:'Gerência',teste:true}});
+  return ops;
+}
+function seedDemoUsers(){
+  DB.batch([
+    {op:'set',col:'users',id:'u-admin',data:{nome:'Ismael (Admin)',email:'agrosafra7@gmail.com',role:'admin',status:'ativo',retiro:null}},
+    {op:'set',col:'users',id:'u-vaq',data:{nome:'Raimundo S.',email:'raimundo@teste.com',role:'vaqueiro',status:'ativo',retiro:'r3'}},
+    {op:'set',col:'users',id:'u-pend',data:{nome:'Joaquim P.',email:'joaquim@teste.com',role:'vaqueiro',status:'pendente',retiro:null}}
+  ]);
+}
+function clearTestOps(){
+  var ops=[];
+  ['launches','transfers','approvals','compras'].forEach(function(c){D[c].forEach(function(d){if(d.teste)ops.push({op:'del',col:c,id:d.id})})});
+  return ops;
+}
+
+/* ================= estado ================= */
+var D={config:null,meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[]};
+var SM={};
+var S={profile:null,authReady:DEMO||NOFB,view:'ger',asRetiro:'r3',tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
+  perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'r3',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
+  online:true,loginSignup:false,err:'',busy:false,srvCfg:false,srvMeds:false,seeded:false,vkey:''};
+var unsubs=[],profUnsub=null;
+
+function isMgr(){return !!S.profile&&(S.profile.role==='admin'||S.profile.role==='gerente')}
+function isAdmin(){return !!S.profile&&S.profile.role==='admin'}
+function retiros(){return (D.config&&D.config.retiros)||RETIROS_DEFAULT}
+function retiroNome(id){if(id==='central')return 'Central';var r=byId(retiros(),id);return r?r.nome:String(id)}
+function medById(id){return byId(D.meds,id)}
+function qty(loc,med){return SM[loc+'__'+med]||0}
+function ctxRet(){return isMgr()?S.asRetiro:S.profile.retiro}
+function isOnline(){return DEMO?S.online:navigator.onLine!==false}
+function pendCount(){var n=0;D.launches.forEach(function(l){if(l._pend)n++});return n}
+function medStatus(m,loc){var q=qty(loc,m.id),d=daysTo(m.venc);return {q:q,low:q<m.min,exp:d<=30,d:d}}
+
+var toastT;
+function toast(msg){var t=$('#toast');if(!t)return;t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},3200)}
+
+var rafId=0;
+function render(){if(rafId)return;rafId=requestAnimationFrame(function(){rafId=0;draw()})}
+
+function onData(col,docs,fromCache){
+  D[col]=col==='config'?docs:docs;
+  if(col==='config'){D.config=byId(docs,'farm');if(!fromCache)S.srvCfg=true}
+  if(col==='meds'&&!fromCache)S.srvMeds=true;
+  if(col==='stock'){SM={};docs.forEach(function(s){SM[s.loc+'__'+s.med]=s.qtd||0})}
+  maybeSeed();
+  render();
+}
+function maybeSeed(){
+  if(S.seeded||!isAdmin()||!S.srvCfg||!S.srvMeds)return;
+  if(!D.config&&!D.meds.length){S.seeded=true;DB.batch(seedOps());toast('Dados de teste carregados')}
+}
+function startSubs(){
+  stopSubs();
+  var mgr=isMgr(),ret=S.profile.retiro,since=Date.now()-30*DAY;
+  function s(col,where){unsubs.push(DB.sub(col,function(docs,fc){onData(col,docs,fc)},where))}
+  s('config');s('meds');
+  s('stock',mgr?null:['loc','==',ret]);
+  s('transfers',mgr?null:['dest','==',ret]);
+  s('launches',mgr?['ts','>=',since]:['retiro','==',ret]);
+  s('approvals',mgr?null:['retiro','==',ret]);
+  if(mgr)s('compras');
+  if(isAdmin())s('users');
+}
+function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];S.srvCfg=false;S.srvMeds=false}
+
+/* ================= autenticação ================= */
+var AUTH_MSG={'auth/invalid-credential':'E-mail ou senha incorretos.','auth/wrong-password':'E-mail ou senha incorretos.','auth/user-not-found':'E-mail ou senha incorretos.',
+  'auth/email-already-in-use':'Este e-mail já tem cadastro. Use Entrar.','auth/weak-password':'A senha precisa ter 6 ou mais caracteres.','auth/invalid-email':'E-mail inválido.',
+  'auth/network-request-failed':'Sem internet para entrar.','auth/too-many-requests':'Muitas tentativas. Aguarde um pouco.'};
+function authErr(e){return AUTH_MSG[e&&e.code]||('Erro: '+((e&&e.code)||(e&&e.message)||'tente de novo'))}
+function bootFirebase(){
+  if(DEMO||NOFB)return;
+  firebase.auth().onAuthStateChanged(function(u){
+    S.authReady=true;
+    if(profUnsub){profUnsub();profUnsub=null}
+    if(!u){stopSubs();S.profile=null;render();return}
+    var ref=firebase.firestore().collection('users').doc(u.uid);
+    profUnsub=ref.onSnapshot(function(snap){
+      if(!snap.exists){
+        if(snap.metadata.fromCache)return;
+        var email=(u.email||'').toLowerCase(),adm=ADMIN_EMAILS.indexOf(email)>-1;
+        ref.set({nome:S.signupName||u.displayName||email,email:email,role:adm?'admin':'vaqueiro',status:adm?'ativo':'pendente',retiro:null,criadoEm:Date.now()}).catch(function(e){S.err='Não foi possível criar o cadastro: '+(e.code||e.message);render()});
+        return;
+      }
+      var wasActive=S.profile&&S.profile.status==='ativo';
+      S.profile=ext({id:u.uid},snap.data());
+      if(S.profile.status==='ativo'){
+        if(!wasActive){S.view=isMgr()?'ger':'vaq';startSubs()}
+      }else{stopSubs()}
+      render();
+    },function(e){console.error(e);S.err='Sem permissão para ler seu cadastro. Confira as regras do Firestore.';render()});
+  });
+}
+function doLogin(){
+  var email=($('#l-email')||{}).value||'',pw=($('#l-senha')||{}).value||'',nome=(($('#l-nome')||{}).value||'').trim();
+  S.err='';
+  if(!email||!pw){S.err='Preencha e-mail e senha.';render();return}
+  if(S.loginSignup&&!nome){S.err='Informe seu nome.';render();return}
+  S.busy=true;render();
+  var p;
+  if(S.loginSignup){S.signupName=nome;p=firebase.auth().createUserWithEmailAndPassword(email.trim(),pw)}
+  else p=firebase.auth().signInWithEmailAndPassword(email.trim(),pw);
+  p.then(function(){S.busy=false}).catch(function(e){S.busy=false;S.err=authErr(e);render()});
+}
+function doReset(){
+  var email=(($('#l-email')||{}).value||'').trim();
+  if(!email){S.err='Digite seu e-mail para receber o link.';render();return}
+  firebase.auth().sendPasswordResetEmail(email).then(function(){toast('Link enviado para '+email)}).catch(function(e){S.err=authErr(e);render()});
+}
+function logout(){
+  if(DEMO){stopSubs();S.profile=null;S.wiz=null;S.tab='home';render();return}
+  stopSubs();S.wiz=null;firebase.auth().signOut();
+}
+function demoLogin(id){
+  var u=null;DB.sub('users',function(docs){u=byId(docs,id)})();
+  if(!u)return;
+  S.profile=ext({id:id},u);S.view=isMgr()?'ger':'vaq';S.tab='home';S.gtab='painel';S.wiz=null;S.seeded=true;startSubs();render();
+}
+
+/* ================= telas: comuns ================= */
+function connPill(){
+  var p=pendCount();
+  if(isOnline())return p?'<span class="pill info">Enviando '+p+'...</span>':'<span class="pill ok">Online</span>';
+  return '<span class="pill warn">Sem sinal'+(p?' · '+p+' na fila':'')+'</span>';
+}
+function stripHtml(){
+  if(!DEMO&&!isMgr())return '';
+  var h='<div class="strip px"><span>'+(DEMO?'Modo teste':'Painel de testes')+'</span><div class="strip-ctl">';
+  if(isMgr()){
+    h+='<div class="seg" role="group" aria-label="Perfil"><button data-act="perfil" data-v="ger" aria-pressed="'+(S.view==='ger')+'">Gerência</button><button data-act="perfil" data-v="vaq" aria-pressed="'+(S.view==='vaq')+'">Vaqueiro</button></div>';
+    if(S.view==='vaq'){
+      h+='<div class="seg"><select id="as-ret" aria-label="Ver como vaqueiro de qual retiro">';
+      retiros().forEach(function(r){h+='<option value="'+esc(r.id)+'"'+(r.id===S.asRetiro?' selected':'')+'>'+esc(r.nome)+'</option>'});
+      h+='</select></div>';
+    }
+  }
+  if(DEMO)h+='<div class="seg" role="group" aria-label="Conexão"><button data-act="net" data-v="on" aria-pressed="'+S.online+'">Com sinal</button><button data-act="net" data-v="off" aria-pressed="'+!S.online+'">Sem sinal</button></div>';
+  return h+'</div></div>';
+}
+function screenLogin(){
+  if(NOFB)return '<div class="login px"><div class="h1" style="text-align:center">Sem internet</div><p style="text-align:center">Abra o Farma Certo uma vez com sinal para instalar. Depois ele funciona no curral sem sinal.</p></div>';
+  if(!S.authReady)return '<div class="login px"><div class="brand" style="font-size:38px;text-align:center">Farma Certo</div><p style="text-align:center;opacity:.8">Carregando...</p></div>';
+  if(DEMO){
+    return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div><div class="hdr-sub">Modo teste · dados só neste navegador</div></div>'+
+      '<button class="btn cta" data-act="dlogin" data-v="u-admin">Entrar como Gerência (Admin)</button>'+
+      '<button class="btn" data-act="dlogin" data-v="u-vaq">Entrar como Vaqueiro · Retiro 3</button>'+
+      '<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button>'+
+      '<div class="small" style="text-align:center;opacity:.75">Para usar login de verdade, cole a configuração do Firebase no começo do index.html.</div></div>';
+  }
+  return '<form class="login px" id="lform"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div><div class="hdr-sub">Controle de medicamentos veterinários</div></div>'+
+    (S.err?'<div class="err" role="alert">'+esc(S.err)+'</div>':'')+
+    (S.loginSignup?'<div class="field"><label for="l-nome">Seu nome</label><input class="input t" id="l-nome" autocomplete="name"></div>':'')+
+    '<div class="field"><label for="l-email">E-mail</label><input class="input t" id="l-email" type="email" autocomplete="username" inputmode="email"></div>'+
+    '<div class="field"><label for="l-senha">Senha</label><input class="input t" id="l-senha" type="password" autocomplete="'+(S.loginSignup?'new-password':'current-password')+'"></div>'+
+    '<button class="btn cta" type="submit" '+(S.busy?'disabled':'')+'>'+(S.loginSignup?'Criar cadastro':'Entrar')+'</button>'+
+    '<button class="lnk" type="button" data-act="toggleSignup">'+(S.loginSignup?'Já tenho cadastro. Entrar':'Primeiro acesso? Criar cadastro')+'</button>'+
+    (S.loginSignup?'':'<button class="lnk" type="button" data-act="reset">Esqueci a senha</button>')+
+    '</form>';
+}
+function screenWait(){
+  var p=S.profile,bloq=p.status==='bloqueado';
+  return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div></div>'+
+    '<div class="h1" style="text-align:center">'+(bloq?'Acesso bloqueado':'Aguardando aprovação')+'</div>'+
+    '<p style="text-align:center">'+(bloq?'Fale com a gerência da fazenda.':'Seu cadastro foi enviado. A gerência vai liberar seu acesso e escolher o seu retiro. Esta tela atualiza sozinha.')+'</p>'+
+    '<div class="small" style="text-align:center;opacity:.8">'+esc(p.nome)+' · '+esc(p.email)+'</div>'+
+    '<button class="btn" data-act="logout">Sair</button></div>';
+}
+
+/* ================= telas: vaqueiro ================= */
+function hdrV(){
+  var r=ctxRet();
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Certo</div><div class="hdr-sub">'+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(retiroNome(r))+' · '+esc(S.profile.nome)+'</div></div>'+
+    '<div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+}
+function navV(){
+  var cur=S.tab==='receber'?'home':S.tab;
+  var items=[['home','Início','home'],['lancar','Lançar','plus'],['estoque','Estoque','box'],['hist','Histórico','clock']];
+  var h='<nav class="nav n4 px" aria-label="Principal">';
+  items.forEach(function(it){
+    var b=it[0]==='hist'&&pendCount()?'<span class="badge">'+pendCount()+'</span>':'';
+    h+='<button data-act="nav" data-v="'+it[0]+'" class="'+(it[0]==='lancar'?'cta':'')+'" '+(cur===it[0]?'aria-current="page"':'')+'>'+ic(it[2],24)+it[1]+b+'</button>';
+  });
+  return h+'</nav>';
+}
+function trIn(ret){return D.transfers.filter(function(t){return t.dest===ret&&t.st==='transito'})}
+function reposPend(ret,med){return D.approvals.some(function(a){return a.tipo==='Reposição'&&a.st==='pend'&&a.retiro===ret&&a.payload&&a.payload.med===med})}
+function todayLaunches(ret){return D.launches.filter(function(l){return l.retiro===ret&&l.ts>=startOfDay()}).sort(function(a,b){return b.ts-a.ts})}
+function emptyMeds(){return '<div class="card empty">Nenhum medicamento cadastrado ainda. A gerência cadastra em Cadastro.</div>'}
+
+function vHome(ret){
+  var hr=new Date().getHours(),sd=hr<12?'Bom dia':hr<18?'Boa tarde':'Boa noite';
+  var tl=todayLaunches(ret).filter(function(l){return l.st!=='cancelado'}),tr=trIn(ret),alerts=[];
+  D.meds.forEach(function(m){var s=medStatus(m,ret);if(s.low||(s.exp&&s.q>0))alerts.push({m:m,s:s})});
+  var h='<div><div class="h1">'+sd+', '+esc(S.profile.nome.split(' ')[0])+'</div><div class="muted">'+tl.length+' lançamentos hoje'+(pendCount()?' · '+pendCount()+' aguardando sinal':'')+'</div></div>';
+  h+='<button class="btn cta big" data-act="nav" data-v="lancar">Lançar aplicação<small>Leva menos de 20 segundos</small></button>';
+  h+='<div class="two"><button class="btn" data-act="nav" data-v="receber">'+ic('truck',26)+'Receber transferência'+(tr.length?'<span class="badge">'+tr.length+' a caminho</span>':'')+'</button>'+
+     '<button class="btn" data-act="repor">'+ic('box',26)+'Pedir reposição</button></div>';
+  h+='<div class="h2">Atenção no estoque</div>';
+  if(!D.meds.length)h+=emptyMeds();
+  else if(!alerts.length)h+='<div class="card empty">Nenhum medicamento abaixo do mínimo ou perto de vencer.</div>';
+  alerts.forEach(function(a){
+    h+='<div class="card stack"><div class="row sb"><b>'+esc(a.m.nome)+'</b>'+(a.s.low?'<span class="pill warn">Abaixo do mínimo</span>':'<span class="pill crit">Vence em '+a.s.d+' dias</span>')+'</div>'+
+      '<div class="small muted">Tem '+ml(a.s.q)+' · mínimo '+ml(a.m.min)+'</div>'+
+      (a.s.low?(reposPend(ret,a.m.id)?'<span class="pill info" style="align-self:flex-start">Pedido enviado à farmácia central</span>':'<button class="btn sm" style="align-self:flex-start" data-act="repor1" data-v="'+esc(a.m.id)+'">Pedir reposição</button>'):'<div class="small muted">Lote '+esc(a.m.lote)+'. Use este primeiro.</div>')+'</div>';
+  });
+  return h;
+}
+function vEstoque(ret){
+  var h='<div class="h1">Estoque do '+esc(retiroNome(ret))+'</div><div class="chips" role="group" aria-label="Filtro">';
+  [['todos','Todos'],['repor','Precisa repor'],['vence','Vencendo']].forEach(function(f){h+='<button class="chip" data-act="filtro" data-v="'+f[0]+'" aria-pressed="'+(S.filtro===f[0])+'">'+f[1]+'</button>'});
+  h+='</div>';
+  var n=0;
+  D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){
+    var s=medStatus(m,ret);
+    if(S.filtro==='repor'&&!s.low)return;
+    if(S.filtro==='vence'&&!s.exp)return;
+    n++;
+    var pct=Math.min(s.q/(m.min*2),1)*100;
+    h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b>'+(s.low?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
+      '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+ml(s.q)+'</span><span class="small muted">mínimo '+ml(m.min)+'</span></div>'+
+      '<div class="bar" aria-hidden="true"><i class="'+(s.low?'low':'')+'" style="width:'+pct+'%"></i></div>'+
+      '<div class="row sb small"><span class="muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+'</span>'+(s.exp?'<span class="pill crit">Vence em '+s.d+' dias</span>':'')+'</div>'+
+      '<div class="row" style="flex-wrap:wrap">'+
+      (s.low?(reposPend(ret,m.id)?'<span class="pill info">Pedido enviado</span>':'<button class="btn sm" data-act="repor1" data-v="'+esc(m.id)+'">Pedir reposição</button>'):'')+
+      '<button class="btn sm" data-act="perda" data-v="'+esc(m.id)+'">Registrar perda</button></div>';
+    if(S.perdaOpen===m.id){
+      h+='<div class="field"><label for="perda-q">Quantidade perdida (mL)</label><input class="input" id="perda-q" inputmode="decimal" value="'+esc(S.perdaQ)+'"></div><div class="chips">';
+      ['Vencido','Quebrado','Outro'].forEach(function(mo){h+='<button class="chip" data-act="perdaMot" data-v="'+mo+'" aria-pressed="'+(S.perdaMotivo===mo)+'">'+mo+'</button>'});
+      h+='</div><button class="btn cta" data-act="perdaSend" data-v="'+esc(m.id)+'">Enviar para aprovação</button>';
+    }
+    h+='</div>';
+  });
+  if(!D.meds.length)h+=emptyMeds();
+  else if(!n)h+='<div class="card empty">Nada nesta lista.</div>';
+  return h;
+}
+function vHist(ret){
+  var h='<div class="h1">Histórico de hoje</div>',p=pendCount();
+  if(p)h+='<div class="note warn">'+ic('cloud',20)+'<div><b>Fila de pendências: '+p+'</b><br>Salvos no celular. Enviam sozinhos quando pegar sinal.</div></div>';
+  var list=todayLaunches(ret);
+  if(!list.length)h+='<div class="card empty">Nenhum lançamento hoje.</div>';
+  list.forEach(function(l){
+    var pill=l.st==='cancelado'?'<span class="pill crit">Cancelado</span>':l._pend?'<span class="pill warn">Na fila</span>':'<span class="pill ok">Enviado</span>';
+    h+='<div class="card stack"><div class="row sb"><b>'+esc(l.medNome)+'</b>'+pill+'</div>'+
+      '<div class="small muted">'+hhmm(l.ts)+' · '+esc(l.tipo)+' · '+esc(l.alvo)+' · '+esc(l.userName)+'</div>'+
+      '<div class="row sb"><span class="num"><b>'+ml(l.qtd)+'</b></span>'+(l.st==='corr'?'<span class="pill info">Correção em análise</span>':l.st==='ok'?'<button class="btn sm" data-act="corr" data-v="'+esc(l.id)+'">Corrigir</button>':'')+'</div>';
+    if(S.corrOpen===l.id){
+      h+='<div class="note info"><div>Qual foi o erro?</div></div><div class="chips">';
+      ['Quantidade errada','Animal errado','Remédio errado'].forEach(function(r){h+='<button class="chip" data-act="corrWhy" data-v="'+esc(l.id)+'|'+r+'">'+r+'</button>'});
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  return h;
+}
+function vReceber(ret){
+  var tr=trIn(ret);
+  var h='<button class="btn sm" data-act="nav" data-v="home" style="align-self:flex-start">'+ic('back',18)+'Voltar</button><div class="h1">Receber da farmácia central</div>';
+  if(!tr.length)h+='<div class="card empty">Nada a caminho para o '+esc(retiroNome(ret))+'.</div>';
+  tr.forEach(function(t){
+    h+='<div class="card stack"><div class="row sb"><b>'+esc(t.id)+'</b><span class="pill info">Em trânsito</span></div><div class="small muted">Farmácia Central · saiu '+dstr(t.ts)+' '+hhmm(t.ts)+'</div>';
+    t.itens.forEach(function(it){
+      var m=medById(it.med);
+      h+='<div class="field"><label for="r-'+esc(t.id)+'-'+esc(it.med)+'">'+esc(m?m.nome:it.med)+' · enviado '+ml(it.ml)+'</label><input class="input" id="r-'+esc(t.id)+'-'+esc(it.med)+'" inputmode="decimal" value="'+it.ml+'"></div>';
+    });
+    h+='<div class="small muted">Se faltou ou sobrou, corrija o número. A diferença vai para a gerência.</div><button class="btn cta" data-act="rcv" data-v="'+esc(t.id)+'">Confirmar recebimento</button></div>';
+  });
+  return h;
+}
+
+/* ---------- assistente de lançamento ---------- */
+function wizStart(){S.wiz={step:0,tipo:null,modo:'animal',brinco:'',peso:380,loteNome:'',n:20,med:null,dose:0,all:false,q:'',last:null};S.tab='home'}
+function calc(){
+  var w=S.wiz,m=medById(w.med),heads=w.modo==='lote'?w.n:1;
+  var per=m.fixo?m.fixo:Math.max(1,Math.round(w.peso/(m.kgMl||50)));
+  return {m:m,per:per,heads:heads,sug:per*heads};
+}
+function alvoTxt(){var w=S.wiz;return w.modo==='lote'?((w.loteNome||'Lote sem nome')+' · '+w.n+' animais'):('Brinco '+(w.brinco||'sem número'))}
+function hdrWiz(){
+  var w=S.wiz,names=['Tipo','Quem','Remédio','Dose','Confirmar'],s='<div class="steps" aria-hidden="true">';
+  for(var i=0;i<5;i++)s+='<i class="'+(i<=Math.min(w.step,4)?'on':'')+'"></i>';
+  s+='</div>';
+  return '<header class="hdr px"><div class="hdr-row"><button class="back" data-act="wback">'+ic('back',22)+(w.step===5?'Fechar':'Voltar')+'</button>'+connPill()+'</div>'+
+    '<div class="hdr-sub" style="margin-top:0">'+(w.step<5?'Passo '+(w.step+1)+' de 5 · '+names[w.step]:'Pronto')+'</div>'+s+'</header>';
+}
+function wizBody(ret){
+  var w=S.wiz,h='';
+  if(w.step===0){
+    h+='<div class="h1">O que você vai aplicar?</div><div class="two">';
+    TIPOS.forEach(function(t){h+='<button class="tile" data-act="wtipo" data-v="'+t.id+'" aria-pressed="'+(w.tipo===t.id)+'"><b>'+t.nome+'</b><span class="small muted">'+t.sub+'</span></button>'});
+    h+='</div>';
+  }
+  if(w.step===1){
+    h+='<div class="h1">Em quem?</div><div class="chips" role="group"><button class="chip" data-act="wmodo" data-v="animal" aria-pressed="'+(w.modo==='animal')+'">Um animal</button><button class="chip" data-act="wmodo" data-v="lote" aria-pressed="'+(w.modo==='lote')+'">Um lote</button></div>';
+    if(w.modo==='animal'){
+      h+='<div class="field"><label for="brinco">Número do brinco</label><input class="input" id="brinco" inputmode="numeric" maxlength="15" placeholder="Ex.: 0331" value="'+esc(w.brinco)+'"></div>';
+    }else{
+      var lotes=(D.config&&D.config.lotes)||[];
+      if(lotes.length){h+='<div class="small muted">Toque num lote para preencher:</div><div class="chips">';lotes.forEach(function(l){h+='<button class="chip" data-act="wlote" data-v="'+esc(l.id)+'">'+esc(l.nome)+'</button>'});h+='</div>'}
+      h+='<div class="field"><label for="lnome">Nome do lote</label><input class="input t" id="lnome" value="'+esc(w.loteNome)+'"></div>';
+      h+='<div class="field"><label>Quantos animais receberam</label><div class="stepper"><button data-act="wn" data-v="-1" aria-label="Menos um animal">−</button><output>'+w.n+'<small>animais</small></output><button data-act="wn" data-v="1" aria-label="Mais um animal">+</button></div></div>';
+    }
+    h+='<div class="field"><label>'+(w.modo==='lote'?'Peso médio do lote':'Peso do animal')+'</label><div class="stepper"><button data-act="wpeso" data-v="-10" aria-label="Menos 10 quilos">−</button><output>'+w.peso+'<small>kg</small></output><button data-act="wpeso" data-v="10" aria-label="Mais 10 quilos">+</button></div></div>';
+  }
+  if(w.step===2){
+    h+='<div class="h1">Qual remédio?</div><div class="field"><label for="busca">Buscar</label><input class="input t" id="busca" placeholder="Digite o nome" value="'+esc(w.q)+'"></div>';
+    var list=D.meds.filter(function(m){return (w.all||m.cat===w.tipo)&&m.nome.toLowerCase().indexOf(w.q.toLowerCase())>-1});
+    if(!list.length)h+='<div class="card empty">Nenhum remédio encontrado.</div>';
+    list.forEach(function(m){
+      var s=medStatus(m,ret);
+      h+='<button class="opt" data-act="wmed" data-v="'+esc(m.id)+'" '+(s.q<=0?'disabled':'')+'><div class="grow"><b>'+esc(m.nome)+'</b><div class="small muted">No retiro: '+ml(s.q)+'</div></div>'+(s.low?'<span class="pill warn">Baixo</span>':'')+(s.exp?'<span class="pill crit">Vence em '+s.d+'d</span>':'')+'</button>';
+    });
+    h+='<button class="btn sm" data-act="wall" style="align-self:flex-start">'+(w.all?'Mostrar só '+tipoNome(w.tipo):'Ver todos os remédios')+'</button>';
+  }
+  if(w.step===3){
+    var c=calc(),m=c.m,s3=medStatus(m,ret),falta=w.dose>s3.q;
+    h+='<div class="h1">'+esc(m.nome)+'</div>';
+    h+='<div class="card small"><div class="muted">Dose sugerida pelo protocolo cadastrado</div><div style="margin-top:4px">'+(m.fixo?m.fixo+' mL por animal':w.peso+' kg ÷ '+m.kgMl+' kg por mL = <b>'+c.per+' mL</b> por animal')+(c.heads>1?' × '+c.heads+' animais = <b>'+ml(c.sug)+'</b>':'')+'</div></div>';
+    h+='<div class="field"><label>Quantidade total que vai usar</label><div class="stepper"><button data-act="dose" data-v="-1" aria-label="Diminuir">−</button><output>'+num(w.dose)+'<small>mL</small></output><button data-act="dose" data-v="1" aria-label="Aumentar">+</button></div></div>';
+    if(falta)h+='<div class="note crit">'+ic('alert',20)+'<div>O retiro só tem '+ml(s3.q)+'. Peça reposição ou use menos.</div></div>';
+    else h+='<div class="note info"><div>Sobra no retiro depois deste lançamento: <b>'+ml(s3.q-w.dose)+'</b></div></div>';
+    h+='<div class="card small stack"><div class="row sb"><span class="muted">Lote usado</span><b>'+esc(m.lote)+' · vence '+dstr(m.venc)+'</b></div><div class="row sb"><span class="muted">Carência</span><b>'+(m.carencia?m.carencia+' dias':'Sem carência')+'</b></div></div>';
+    h+='<div class="small muted">O sistema calcula o custo sozinho. Você não digita valores.</div>';
+  }
+  if(w.step===4){
+    var c4=calc(),m4=c4.m;
+    h+='<div class="h1">Confere?</div><div class="card">'+
+      '<div class="sumrow"><span>Tipo</span><span>'+tipoNome(w.tipo)+'</span></div>'+
+      '<div class="sumrow"><span>Quem</span><span>'+esc(alvoTxt())+'</span></div>'+
+      '<div class="sumrow"><span>Peso</span><span>'+w.peso+' kg</span></div>'+
+      '<div class="sumrow"><span>Remédio</span><span>'+esc(m4.nome)+'</span></div>'+
+      '<div class="sumrow"><span>Quantidade</span><span>'+ml(w.dose)+'</span></div>'+
+      '<div class="sumrow"><span>Lote</span><span>'+esc(m4.lote)+'</span></div>'+
+      '<div class="sumrow"><span>Responsável</span><span>'+esc(S.profile.nome)+' · '+hhmm()+'</span></div></div>';
+    if(m4.carencia)h+='<div class="note warn">'+ic('alert',20)+'<div>Não mandar para o abate antes de <b>'+dstr(Date.now()+m4.carencia*DAY)+'</b> (carência de '+m4.carencia+' dias).</div></div>';
+    if(!isOnline())h+='<div class="note info">'+ic('cloud',20)+'<div>Sem sinal. Vai salvar no celular e enviar sozinho depois.</div></div>';
+  }
+  if(w.step===5){
+    var l=w.last;
+    h+='<div class="success"><div class="tick">'+ic('check',46)+'</div><div class="h1">Lançamento salvo</div><div class="muted">'+(isOnline()?'Já está na base da fazenda.':'Está na fila do celular e vai enviar quando pegar sinal.')+'</div></div>'+
+      '<div class="card"><div class="sumrow"><span>Remédio</span><span>'+esc(l.medNome)+'</span></div><div class="sumrow"><span>Retirado do estoque</span><span>'+ml(l.qtd)+'</span></div>'+(l.libera?'<div class="sumrow"><span>Liberado para abate</span><span>'+dstr(l.libera)+'</span></div>':'')+'</div>'+
+      '<button class="btn cta" data-act="wnew">Lançar outro</button><button class="btn" data-act="whome">Voltar ao início</button>';
+  }
+  return h;
+}
+function wizFoot(ret){
+  var w=S.wiz;
+  if(w.step===1){var ok=w.modo==='lote'?(w.loteNome.trim().length>0):w.brinco.length>0;return '<div class="foot px"><button class="btn cta" data-act="wnext" '+(ok?'':'disabled')+'>Continuar</button></div>'}
+  if(w.step===3){var okd=w.dose>0&&w.dose<=qty(ret,w.med);return '<div class="foot px"><button class="btn cta" data-act="wnext" '+(okd?'':'disabled')+'>Continuar</button></div>'}
+  if(w.step===4)return '<div class="foot px"><button class="btn cta" data-act="save">Salvar lançamento</button></div>';
+  return '';
+}
+function saveLaunch(ret){
+  var w=S.wiz,c=calc(),m=c.m;
+  if(w.dose<=0||w.dose>qty(ret,m.id))return;
+  var id='L'+uid8(),doc={ts:Date.now(),retiro:ret,uid:S.profile.id,userName:S.profile.nome,tipo:tipoNome(w.tipo),modo:w.modo,alvo:alvoTxt(),brinco:w.modo==='animal'?w.brinco:null,
+    peso:w.peso,animais:c.heads,med:m.id,medNome:m.nome,qtd:w.dose,custo:w.dose*m.preco/m.frasco,lote:m.lote,libera:m.carencia?Date.now()+m.carencia*DAY:null,st:'ok'};
+  DB.batch([{op:'set',col:'launches',id:id,data:doc},{op:'inc',col:'stock',id:ret+'__'+m.id,data:{loc:ret,med:m.id},n:-w.dose}]);
+  w.last=ext({id:id},doc);w.step=5;
+}
+
+/* ================= telas: gerência ================= */
+function hdrG(){
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Certo</div><div class="hdr-sub">Gerência · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+}
+function navG(){
+  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill']];
+  if(isAdmin())items.push(['users','Usuários','users']);
+  var ap=D.approvals.filter(function(a){return a.st==='pend'}).length,pu=D.users.filter(function(u){return u.status==='pendente'}).length;
+  var h='<nav class="nav n'+items.length+' px" aria-label="Gerência">';
+  items.forEach(function(it){
+    var n=it[0]==='aprov'?ap:it[0]==='users'?pu:0;
+    h+='<button data-act="gnav" data-v="'+it[0]+'" '+(S.gtab===it[0]?'aria-current="page"':'')+'>'+ic(it[2],24)+it[1]+(n?'<span class="badge">'+n+'</span>':'')+'</button>';
+  });
+  return h+'</nav>';
+}
+function stats(){
+  var since=Date.now()-30*DAY,cons={},heads=0,valor=0,perdas=0,alerts=[],exp=[];
+  retiros().forEach(function(r){cons[r.id]=0;heads+=r.cabecas||0});
+  D.launches.forEach(function(l){if(l.st!=='cancelado'&&l.ts>=since&&cons[l.retiro]!=null)cons[l.retiro]+=l.custo||0});
+  D.stock.forEach(function(s){var m=medById(s.med);if(m)valor+=(s.qtd||0)*m.preco/m.frasco});
+  D.approvals.forEach(function(a){if(a.tipo==='Perda'&&a.st==='ok'&&a.ts>=since)perdas+=(a.payload&&a.payload.valor)||0});
+  retiros().forEach(function(r){D.meds.forEach(function(m){var q=qty(r.id,m.id);if(q<m.min)alerts.push({r:r,m:m,q:q})})});
+  D.meds.forEach(function(m){var d=daysTo(m.venc);if(d<=30){var tot=0;D.stock.forEach(function(s){if(s.med===m.id)tot+=s.qtd||0});if(tot>0)exp.push({m:m,d:d})}});
+  return {cons:cons,heads:heads,valor:valor,perdas:perdas,alerts:alerts,exp:exp};
+}
+function gPainel(){
+  var st=stats(),R=retiros(),total=0,max=0;
+  R.forEach(function(r){total+=st.cons[r.id];if(st.cons[r.id]>max)max=st.cons[r.id]});
+  var per=R.map(function(r){return r.cabecas?st.cons[r.id]/r.cabecas*100:0}),avg=st.heads?total/st.heads*100:0,hi=0;
+  per.forEach(function(v,i){if(v>per[hi])hi=i});
+  var nice=Math.max(2000,Math.ceil(max/2000)*2000);
+  var h='<div class="h1">Painel da fazenda</div><div class="kpis">'+
+    '<div class="kpi"><small>Valor em estoque</small><b>'+shortMoney(st.valor)+'</b></div>'+
+    '<div class="kpi"><small>Consumo em 30 dias</small><b>'+shortMoney(total)+'</b></div>'+
+    '<div class="kpi"><small>Abaixo do mínimo</small><b>'+st.alerts.length+'</b></div>'+
+    '<div class="kpi"><small>Perdas em 30 dias</small><b>'+brl(st.perdas)+'</b></div></div>';
+  h+='<div class="card stack"><div class="h2">Consumo por retiro (30 dias)</div><div class="bars">';
+  R.forEach(function(r,i){h+='<div class="brow"><span class="small"><b>'+esc(r.nome.replace('Retiro ','R'))+'</b><br><span class="muted">'+num(r.cabecas)+' cab.</span></span><div class="btrack"><i class="'+(i===hi&&per[hi]>avg*1.15?'hi':'')+'" style="width:'+Math.min(st.cons[r.id]/nice*100,100)+'%"></i><span>'+brl(Math.round(st.cons[r.id]))+'</span></div></div>'});
+  h+='</div><div class="axis"><span></span><div><span>R$ 0</span><span>'+num(nice/2)+'</span><span>'+num(nice)+'</span></div></div></div>';
+  if(total>0&&per[hi]>avg*1.15)h+='<div class="note warn">'+ic('alert',20)+'<div><b>'+esc(R[hi].nome)+'</b> gasta '+brl(Math.round(per[hi]))+' por 100 animais, '+Math.round((per[hi]/avg-1)*100)+'% acima da média da fazenda ('+brl(Math.round(avg))+'). Vale conferir o motivo.</div></div>';
+  h+='<div class="h2">Atenção hoje</div>';
+  if(!st.alerts.length&&!st.exp.length)h+='<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
+  st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'});
+  st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+ml(a.q)+', mínimo '+ml(a.m.min)+'</div></div><span class="pill warn">Baixo</span></div>'});
+  if(st.alerts.length>8)h+='<div class="small muted">e mais '+(st.alerts.length-8)+' itens abaixo do mínimo.</div>';
+  return h;
+}
+function gCentral(){
+  if(!D.meds.length)return '<div class="h1">Farmácia central</div><div class="card empty">Cadastre os medicamentos primeiro, na aba Cadastro.</div>';
+  if(!medById(S.env.med))S.env.med=D.meds[0].id;
+  if(!medById(S.compra.med))S.compra.med=D.meds[0].id;
+  if(!byId(retiros(),S.env.dest))S.env.dest=retiros()[0].id;
+  var e=S.env,m=medById(e.med),cp=S.compra,mc=medById(cp.med),dispo=qty('central',e.med);
+  var opts=function(sel){return D.meds.map(function(x){return '<option value="'+esc(x.id)+'"'+(x.id===sel?' selected':'')+'>'+esc(x.nome)+'</option>'}).join('')};
+  var h='<div class="h1">Farmácia central</div>';
+  h+='<div class="card stack"><div class="h2">Estoque da central</div>';
+  D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(x){
+    var q=qty('central',x.id),low=q<x.min*8;
+    h+='<div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
+  });
+  h+='</div>';
+  h+='<div class="card stack"><div class="h2">Enviar para um retiro</div>'+
+    '<div class="field"><label for="g-dest">Destino</label><select class="input t" id="g-dest">'+retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(r.id===e.dest?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'</select></div>'+
+    '<div class="field"><label for="g-med">Medicamento</label><select class="input t" id="g-med">'+opts(e.med)+'</select></div>'+
+    '<div class="small muted">Na central: '+ml(dispo)+' · frasco de '+m.frasco+' mL</div>'+
+    '<div class="field"><label>Frascos</label><div class="stepper"><button data-act="gfr" data-v="-1" aria-label="Menos um frasco">−</button><output>'+e.frascos+'<small>= '+ml(e.frascos*m.frasco)+'</small></output><button data-act="gfr" data-v="1" aria-label="Mais um frasco">+</button></div></div>'+
+    '<button class="btn cta" data-act="send" '+(e.frascos*m.frasco>dispo?'disabled':'')+'>Enviar para '+esc(retiroNome(e.dest))+'</button></div>';
+  h+='<div class="card stack"><div class="h2">Registrar compra (entrada)</div>'+
+    '<div class="field"><label for="c-med">Medicamento</label><select class="input t" id="c-med">'+opts(cp.med)+'</select></div>'+
+    '<div class="field"><label>Frascos recebidos</label><div class="stepper"><button data-act="cfr" data-v="-1" aria-label="Menos um frasco">−</button><output>'+cp.frascos+'<small>= '+ml(cp.frascos*mc.frasco)+'</small></output><button data-act="cfr" data-v="1" aria-label="Mais um frasco">+</button></div></div>'+
+    '<div class="field"><label for="c-nf">Nota fiscal</label><input class="input t" id="c-nf" placeholder="Número da NF" value="'+esc(cp.nf)+'"></div>'+
+    '<button class="btn" data-act="compra">Registrar entrada</button></div>';
+  h+='<div class="h2">Últimas transferências</div>';
+  var tr=D.transfers.slice().sort(function(a,b){return b.ts-a.ts}).slice(0,6);
+  if(!tr.length)h+='<div class="card empty">Nenhuma transferência ainda.</div>';
+  tr.forEach(function(t){
+    h+='<div class="card row sb"><div class="grow"><b>'+esc(t.id)+' · '+esc(retiroNome(t.dest))+'</b><div class="small muted">'+t.itens.map(function(i){var x=medById(i.med);return esc(x?x.nome.split(' ')[0]:i.med)+' '+ml(i.ml)}).join(', ')+'</div></div><span class="pill '+(t.st==='transito'?'info':'ok')+'">'+(t.st==='transito'?'Em trânsito':'Recebida')+'</span></div>';
+  });
+  var cs=D.compras.slice().sort(function(a,b){return b.ts-a.ts}).slice(0,4);
+  if(cs.length){h+='<div class="h2">Últimas compras</div>';cs.forEach(function(c){var x=medById(c.med);h+='<div class="card row sb"><div class="grow"><b>'+esc(x?x.nome:c.med)+'</b><div class="small muted">'+dstr(c.ts)+' · '+esc(c.nf||'sem NF')+'</div></div><b class="num">'+ml(c.ml)+'</b></div>'})}
+  return h;
+}
+function gAprov(){
+  var h='<div class="h1">Aprovações</div>',list=D.approvals.slice().sort(function(a,b){return (a.st==='pend'?0:1)-(b.st==='pend'?0:1)||b.ts-a.ts}).slice(0,25);
+  if(!list.length)h+='<div class="card empty">Nada para aprovar.</div>';
+  list.forEach(function(a){
+    h+='<div class="card stack"><div class="row sb"><span class="pill '+(a.tipo==='Reposição'||a.tipo==='Correção'?'info':'warn')+'">'+esc(a.tipo)+'</span>'+(a.st==='pend'?'<span class="small muted">'+dstr(a.ts)+' '+hhmm(a.ts)+'</span>':'<span class="pill '+(a.st==='ok'?'ok':'crit')+'">'+(a.st==='ok'?'Aprovado':'Rejeitado')+'</span>')+'</div><div>'+esc(a.txt)+'</div><div class="small muted">'+esc(a.por)+'</div>';
+    if(a.st==='pend'){
+      if(a.tipo==='Reposição')h+='<div class="two" style="gap:8px"><button class="btn sm" style="width:100%" data-act="atender" data-v="'+esc(a.id)+'">Atender envio</button><button class="btn sm danger" style="width:100%" data-act="apr" data-v="'+esc(a.id)+'|no">Rejeitar</button></div>';
+      else h+='<div class="two" style="gap:8px"><button class="btn sm" style="width:100%" data-act="apr" data-v="'+esc(a.id)+'|ok">Aprovar</button><button class="btn sm danger" style="width:100%" data-act="apr" data-v="'+esc(a.id)+'|no">Rejeitar</button></div>';
+      if(a.tipo==='Perda')h+='<div class="small muted">Aprovar tira a quantidade do estoque.</div>';
+      if(a.tipo==='Correção')h+='<div class="small muted">Aprovar cancela o lançamento e devolve o saldo ao estoque.</div>';
+    }
+    h+='</div>';
+  });
+  return h;
+}
+function gCad(){
+  var h='<div class="h1">Cadastro de medicamentos</div>',e=S.medEdit,ed=e&&e!=='novo'?medById(e):null;
+  if(e){
+    var v=function(k,d){return esc(ed&&ed[k]!=null?ed[k]:(d==null?'':d))};
+    h+='<div class="card stack"><div class="h2">'+(ed?'Editar':'Novo medicamento')+'</div>'+
+      '<div class="field"><label for="f-nome">Nome</label><input class="input t" id="f-nome" value="'+v('nome')+'"></div>'+
+      '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat">'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:'trat')===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
+      '<div class="grid2"><div class="field"><label for="f-frasco">Frasco (mL)</label><input class="input t" id="f-frasco" inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
+      '<div class="field"><label for="f-preco">Preço do frasco (R$)</label><input class="input t" id="f-preco" inputmode="decimal" value="'+v('preco')+'"></div>'+
+      '<div class="field"><label for="f-kgml">Peso por 1 mL (kg)</label><input class="input t" id="f-kgml" inputmode="decimal" placeholder="Ex.: 10" value="'+v('kgMl')+'"></div>'+
+      '<div class="field"><label for="f-fixo">Ou dose fixa (mL)</label><input class="input t" id="f-fixo" inputmode="decimal" placeholder="Ex.: 2" value="'+v('fixo')+'"></div>'+
+      '<div class="field"><label for="f-car">Carência (dias)</label><input class="input t" id="f-car" inputmode="numeric" value="'+v('carencia',0)+'"></div>'+
+      '<div class="field"><label for="f-min">Mínimo por retiro (mL)</label><input class="input t" id="f-min" inputmode="decimal" value="'+v('min')+'"></div>'+
+      '<div class="field"><label for="f-lote">Lote</label><input class="input t" id="f-lote" value="'+v('lote')+'"></div>'+
+      '<div class="field"><label for="f-venc">Validade</label><input class="input t" id="f-venc" type="date" value="'+isoDate(ed?ed.venc:Date.now()+365*DAY)+'"></div></div>'+
+      '<div class="small muted">Use o peso por mL para dose por peso do animal, ou a dose fixa para vacinas.</div>'+
+      '<button class="btn cta" data-act="medSave">Salvar medicamento</button><button class="btn" data-act="medCancel">Cancelar</button></div>';
+  }else{
+    h+='<button class="btn cta" data-act="medNew">Novo medicamento</button>';
+  }
+  D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){
+    h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b><span class="pill info">'+tipoNome(m.cat)+'</span></div>'+
+      '<div class="small muted">Frasco '+m.frasco+' mL · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por mL · mínimo '+ml(m.min)+'</div>'+
+      '<div class="small muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+' · carência '+(m.carencia?m.carencia+' dias':'nenhuma')+'</div>'+
+      '<button class="btn sm" style="align-self:flex-start" data-act="medEdit" data-v="'+esc(m.id)+'">Editar</button></div>';
+  });
+  if(!D.meds.length)h+='<div class="card empty">Nenhum medicamento cadastrado.</div>';
+  if(isAdmin()){
+    h+='<div class="card stack"><div class="h2">Dados de teste</div><div class="small muted">Carrega medicamentos, estoques, transferências, aprovações e 30 dias de consumo de exemplo.</div>'+
+      '<button class="btn" data-act="seed">Carregar dados de teste</button><button class="btn danger" data-act="clearTest">Apagar lançamentos, transferências e aprovações de teste</button></div>';
+  }
+  return h;
+}
+function gUsers(){
+  var h='<div class="h1">Usuários</div>',list=D.users.slice().sort(function(a,b){return (a.status==='pendente'?0:1)-(b.status==='pendente'?0:1)||String(a.nome).localeCompare(String(b.nome))});
+  if(!list.length)h+='<div class="card empty">Nenhum usuário ainda.</div>';
+  list.forEach(function(u){
+    var self=u.id===S.profile.id,pill=u.status==='ativo'?'ok':u.status==='pendente'?'warn':'crit';
+    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+'</div></div><span class="pill '+pill+'">'+esc(u.status==='ativo'?'Ativo':u.status==='pendente'?'Aguardando':'Bloqueado')+'</span></div>';
+    if(!self){
+      h+='<div class="grid2"><div class="field"><label for="u-role-'+esc(u.id)+'">Papel</label><select class="input t" id="u-role-'+esc(u.id)+'">'+
+        [['vaqueiro','Vaqueiro'],['gerente','Gerência'],['admin','Admin']].map(function(r){return '<option value="'+r[0]+'"'+(u.role===r[0]?' selected':'')+'>'+r[1]+'</option>'}).join('')+'</select></div>'+
+        '<div class="field"><label for="u-ret-'+esc(u.id)+'">Retiro (vaqueiro)</label><select class="input t" id="u-ret-'+esc(u.id)+'">'+
+        retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(u.retiro===r.id?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'</select></div></div>'+
+        '<div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="uSave" data-v="'+esc(u.id)+'">'+(u.status==='ativo'?'Salvar':'Aprovar acesso')+'</button>'+
+        (u.status==='ativo'?'<button class="btn sm danger" data-act="uBlock" data-v="'+esc(u.id)+'">Bloquear</button>':'')+'</div>';
+    }else h+='<div class="small muted">Este é o seu usuário.</div>';
+    h+='</div>';
+  });
+  return h;
+}
+
+/* ================= desenho principal ================= */
+function draw(){
+  var ae=document.activeElement,fid=ae&&ae.id,pos=null;
+  try{pos=ae&&ae.selectionStart}catch(e){}
+  var html,wide=false;
+  if(!S.profile){html=screenLogin()}
+  else if(S.profile.status!=='ativo'){html=screenWait()}
+  else if(isMgr()&&S.view==='ger'){
+    wide=true;
+    var b=S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():gUsers();
+    html=stripHtml()+hdrG()+'<main class="view px">'+b+'</main>'+navG();
+  }else{
+    var ret=ctxRet();
+    if(!ret){html=stripHtml()+hdrV()+'<main class="view px"><div class="card empty">Seu usuário ainda não tem um retiro. Peça para a gerência escolher o seu retiro.</div></main>'}
+    else if(S.wiz){html=stripHtml()+hdrWiz()+'<main class="view px">'+wizBody(ret)+'</main>'+wizFoot(ret)}
+    else{
+      var v=S.tab==='home'?vHome(ret):S.tab==='estoque'?vEstoque(ret):S.tab==='hist'?vHist(ret):vReceber(ret);
+      html=stripHtml()+hdrV()+'<main class="view px">'+v+'</main>'+navV();
+    }
+  }
+  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.medEdit].join('|');
+  var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
+  $('#dev').className='device'+(wide?' wide':'');
+  $('#app').innerHTML=html;
+  S.vkey=key;
+  var vw=$('.view');if(vw)vw.scrollTop=same?sc:0;
+  if(fid){var el=document.getElementById(fid);if(el){el.focus();try{if(pos!=null)el.setSelectionRange(pos,pos)}catch(e){}}}
+}
+
+/* ================= ações ================= */
+function parseNum(s){var n=parseFloat(String(s).replace(',','.'));return isNaN(n)?0:n}
+function resolveApproval(a,ok){
+  var ops=[{op:'set',col:'approvals',id:a.id,data:{st:ok?'ok':'no',resolvidoEm:Date.now(),resolvidoPor:S.profile.nome}}],p=a.payload||{};
+  if(a.tipo==='Perda'&&ok&&p.qtd>0)ops.push({op:'inc',col:'stock',id:p.loc+'__'+p.med,data:{loc:p.loc,med:p.med},n:-p.qtd});
+  if(a.tipo==='Correção'){
+    var l=byId(D.launches,p.launchId);
+    if(l){
+      if(ok){ops.push({op:'set',col:'launches',id:l.id,data:{st:'cancelado'}});ops.push({op:'inc',col:'stock',id:l.retiro+'__'+l.med,data:{loc:l.retiro,med:l.med},n:l.qtd})}
+      else ops.push({op:'set',col:'launches',id:l.id,data:{st:'ok'}});
+    }
+  }
+  DB.batch(ops);
+}
+function sendTransfer(){
+  var e=S.env,m=medById(e.med),q=e.frascos*m.frasco;
+  if(q>qty('central',e.med))return;
+  var id='TR-'+(Date.now()%1000000),ops=[
+    {op:'set',col:'transfers',id:id,data:{dest:e.dest,ts:Date.now(),itens:[{med:e.med,ml:q}],st:'transito',por:S.profile.nome}},
+    {op:'inc',col:'stock',id:'central__'+e.med,data:{loc:'central',med:e.med},n:-q}];
+  D.approvals.forEach(function(a){if(a.tipo==='Reposição'&&a.st==='pend'&&a.retiro===e.dest&&a.payload&&a.payload.med===e.med)ops.push({op:'set',col:'approvals',id:a.id,data:{st:'ok',resolvidoEm:Date.now(),resolvidoPor:S.profile.nome}})});
+  DB.batch(ops);
+  toast('Enviado para '+retiroNome(e.dest)+'. Já aparece na tela do vaqueiro.');
+}
+
+document.addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-act]');if(!b||b.disabled)return;
+  var a=b.getAttribute('data-act'),v=b.getAttribute('data-v'),w=S.wiz,ret=S.profile?(S.profile.status==='ativo'?ctxRet():null):null;
+  if(a==='perfil'){S.view=v;S.wiz=null;S.tab='home'}
+  else if(a==='net'){var was=S.online;S.online=(v==='on');DB.setSimOff(!S.online);if(!was&&S.online)toast('Sinal voltou. Fila enviada.');else if(was&&!S.online)toast('Sem sinal. Lançamentos ficam salvos no celular.')}
+  else if(a==='dlogin'){demoLogin(v);return}
+  else if(a==='dreset'){DB.reset();S.seeded=false;seedDemoUsers();DB.batch(seedOps());toast('Dados de teste recarregados');render();return}
+  else if(a==='toggleSignup'){S.loginSignup=!S.loginSignup;S.err=''}
+  else if(a==='reset'){doReset();return}
+  else if(a==='logout'){logout();return}
+  else if(a==='nav'){if(v==='lancar')wizStart();else S.tab=v}
+  else if(a==='repor'){S.tab='estoque';S.filtro='repor'}
+  else if(a==='repor1'){
+    if(reposPend(ret,v))return;
+    var mm=medById(v);
+    DB.batch([{op:'set',col:'approvals',id:'AP'+uid8(),data:{ts:Date.now(),tipo:'Reposição',retiro:ret,st:'pend',por:S.profile.nome+' · '+retiroNome(ret),txt:retiroNome(ret)+' pediu reposição de '+mm.nome+' (tem '+ml(qty(ret,v))+', mínimo '+ml(mm.min)+')',payload:{med:v,retiro:ret}}}]);
+    toast('Pedido enviado à farmácia central');
+  }
+  else if(a==='filtro'){S.filtro=v}
+  else if(a==='perda'){S.perdaOpen=(S.perdaOpen===v?null:v);S.perdaQ=''}
+  else if(a==='perdaMot'){S.perdaMotivo=v}
+  else if(a==='perdaSend'){
+    var q=parseNum(S.perdaQ),pm=medById(v);
+    if(q<=0){toast('Digite a quantidade perdida');return}
+    if(q>qty(ret,v)){toast('Mais do que tem no estoque');return}
+    DB.batch([{op:'set',col:'approvals',id:'AP'+uid8(),data:{ts:Date.now(),tipo:'Perda',retiro:ret,st:'pend',por:S.profile.nome+' · '+retiroNome(ret),
+      txt:retiroNome(ret)+' · perda de '+ml(q)+' de '+pm.nome+' ('+S.perdaMotivo+', '+brl(q*pm.preco/pm.frasco)+')',payload:{med:v,loc:ret,qtd:q,valor:q*pm.preco/pm.frasco,motivo:S.perdaMotivo}}}]);
+    S.perdaOpen=null;S.perdaQ='';toast('Perda enviada para aprovação');
+  }
+  else if(a==='corr'){S.corrOpen=(S.corrOpen===v?null:v)}
+  else if(a==='corrWhy'){
+    var p=v.split('|'),l=byId(D.launches,p[0]);if(!l)return;
+    DB.batch([{op:'set',col:'launches',id:l.id,data:{st:'corr'}},{op:'set',col:'approvals',id:'AP'+uid8(),data:{ts:Date.now(),tipo:'Correção',retiro:l.retiro,st:'pend',por:S.profile.nome+' · '+retiroNome(l.retiro),
+      txt:retiroNome(l.retiro)+' pediu correção do lançamento de '+l.medNome+' ('+ml(l.qtd)+', '+l.alvo+'). Motivo: '+p[1],payload:{launchId:l.id}}}]);
+    S.corrOpen=null;toast('Correção enviada para aprovação');
+  }
+  else if(a==='rcv'){
+    var t=byId(D.transfers,v);if(!t)return;
+    var ops=[],dif=[],got=[];
+    t.itens.forEach(function(it){
+      var inp=document.getElementById('r-'+t.id+'-'+it.med),g=Math.max(0,parseNum(inp?inp.value:it.ml));
+      got.push({med:it.med,ml:g});
+      ops.push({op:'inc',col:'stock',id:t.dest+'__'+it.med,data:{loc:t.dest,med:it.med},n:g});
+      if(g!==it.ml){var x=medById(it.med);dif.push((x?x.nome:it.med)+': enviado '+ml(it.ml)+', recebido '+ml(g))}
+    });
+    ops.push({op:'set',col:'transfers',id:t.id,data:{st:'recebida',recebido:got,recebidoEm:Date.now(),recebidoPor:S.profile.nome}});
+    if(dif.length)ops.push({op:'set',col:'approvals',id:'AP'+uid8(),data:{ts:Date.now(),tipo:'Divergência',retiro:t.dest,st:'pend',por:S.profile.nome+' · '+retiroNome(t.dest),txt:retiroNome(t.dest)+' recebeu '+t.id+' com diferença. '+dif.join('; '),payload:{}}});
+    DB.batch(ops);
+    toast(dif.length?'Recebido. A diferença foi para a gerência.':'Recebimento confirmado. Estoque atualizado.');
+    S.tab='home';
+  }
+  else if(a==='wback'){if(w.step===0||w.step===5)S.wiz=null;else w.step--}
+  else if(a==='wtipo'){w.tipo=v;w.step=1;w.all=false;w.q=''}
+  else if(a==='wmodo'){w.modo=v}
+  else if(a==='wpeso'){w.peso=Math.max(40,Math.min(900,w.peso+parseInt(v,10)))}
+  else if(a==='wlote'){var lt=byId((D.config&&D.config.lotes)||[],v);if(lt){w.loteNome=lt.nome;w.n=lt.n;w.peso=lt.peso}}
+  else if(a==='wn'){w.n=Math.max(1,w.n+parseInt(v,10))}
+  else if(a==='wmed'){w.med=v;w.step=3;w.dose=calc().sug}
+  else if(a==='wall'){w.all=!w.all}
+  else if(a==='wnext'){w.step++}
+  else if(a==='dose'){var stp=w.dose>=100?5:1;w.dose=Math.max(1,w.dose+parseInt(v,10)*stp)}
+  else if(a==='save'){saveLaunch(ret)}
+  else if(a==='wnew'){wizStart()}
+  else if(a==='whome'){S.wiz=null;S.tab='home'}
+  else if(a==='gnav'){S.gtab=v}
+  else if(a==='gfr'){S.env.frascos=Math.max(1,S.env.frascos+parseInt(v,10))}
+  else if(a==='cfr'){S.compra.frascos=Math.max(1,S.compra.frascos+parseInt(v,10))}
+  else if(a==='send'){sendTransfer()}
+  else if(a==='compra'){
+    var cp=S.compra,mc=medById(cp.med),qc=cp.frascos*mc.frasco;
+    DB.batch([{op:'inc',col:'stock',id:'central__'+cp.med,data:{loc:'central',med:cp.med},n:qc},{op:'set',col:'compras',id:'CP'+uid8(),data:{ts:Date.now(),med:cp.med,ml:qc,nf:cp.nf,por:S.profile.nome}}]);
+    S.compra.nf='';S.compra.frascos=1;toast('Entrada registrada na central');
+  }
+  else if(a==='apr'){var pp=v.split('|'),ap=byId(D.approvals,pp[0]);if(ap){resolveApproval(ap,pp[1]==='ok');toast(pp[1]==='ok'?'Aprovado':'Rejeitado')}}
+  else if(a==='atender'){
+    var ar=byId(D.approvals,v);if(ar&&ar.payload){S.env.dest=ar.payload.retiro;S.env.med=ar.payload.med;S.env.frascos=1;S.gtab='central';toast('Confira a quantidade e envie')}
+  }
+  else if(a==='medNew'){S.medEdit='novo'}
+  else if(a==='medEdit'){S.medEdit=v}
+  else if(a==='medCancel'){S.medEdit=null}
+  else if(a==='medSave'){
+    var g=function(id){return ($('#'+id)||{}).value||''},nome=g('f-nome').trim(),fr=parseNum(g('f-frasco'));
+    if(!nome||fr<=0){toast('Preencha o nome e o tamanho do frasco');return}
+    var mid=S.medEdit==='novo'?'m'+uid8():S.medEdit,kg=parseNum(g('f-kgml')),fx=parseNum(g('f-fixo'));
+    if(!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
+    DB.batch([{op:'set',col:'meds',id:mid,data:{nome:nome,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()}}]);
+    S.medEdit=null;toast('Medicamento salvo');
+  }
+  else if(a==='seed'){DB.batch(seedOps());toast('Dados de teste carregados')}
+  else if(a==='clearTest'){var co=clearTestOps();if(co.length){DB.batch(co);toast('Dados de teste apagados')}else toast('Não há dados de teste para apagar')}
+  else if(a==='uSave'){
+    var role=($('#u-role-'+v)||{}).value||'vaqueiro',rt=($('#u-ret-'+v)||{}).value||null;
+    DB.batch([{op:'set',col:'users',id:v,data:{role:role,retiro:role==='vaqueiro'?rt:null,status:'ativo'}}]);toast('Usuário salvo');
+  }
+  else if(a==='uBlock'){DB.batch([{op:'set',col:'users',id:v,data:{status:'bloqueado'}}]);toast('Usuário bloqueado')}
+  render();
+});
+document.addEventListener('submit',function(ev){if(ev.target.id==='lform'){ev.preventDefault();doLogin()}});
+document.addEventListener('input',function(ev){
+  var t=ev.target,w=S.wiz;
+  if(t.id==='brinco'&&w){w.brinco=t.value.replace(/\D/g,'').slice(0,15);render()}
+  else if(t.id==='lnome'&&w){w.loteNome=t.value;render()}
+  else if(t.id==='busca'&&w){w.q=t.value;render()}
+  else if(t.id==='perda-q'){S.perdaQ=t.value}
+  else if(t.id==='c-nf'){S.compra.nf=t.value}
+});
+document.addEventListener('change',function(ev){
+  var t=ev.target;
+  if(t.id==='g-dest'){S.env.dest=t.value}
+  else if(t.id==='g-med'){S.env.med=t.value;S.env.frascos=1}
+  else if(t.id==='c-med'){S.compra.med=t.value;S.compra.frascos=1}
+  else if(t.id==='as-ret'){S.asRetiro=t.value;S.wiz=null}
+  else return;
+  render();
+});
+window.addEventListener('online',render);
+window.addEventListener('offline',render);
+
+/* ================= início ================= */
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0){navigator.serviceWorker.register('sw.js').catch(function(){})}
+if(DEMO){
+  if(DB.isEmpty()){seedDemoUsers();DB.batch(seedOps())}
+  S.seeded=true;
+}else{bootFirebase()}
+draw();
+})();
+</script>
+</body>
+</html>
