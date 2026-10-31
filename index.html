@@ -41,11 +41,13 @@ button{cursor:pointer}
 :focus-visible{outline:3px solid var(--info);outline-offset:2px}
 .px{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .device{height:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
-.device.wide{max-width:760px}
 @media (min-width:640px){
   body{padding-block:12px}
   .device{border-radius:26px;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.2)}
+  body.dsk{padding-block:0}
 }
+/* Painéis de gerência e administrador: tela cheia de notebook. O app do responsável continua em coluna de celular. */
+.device.desktop{max-width:none;margin:0;border:0;border-radius:0;box-shadow:none}
 .app{flex:1;min-height:0;display:flex;flex-direction:column}
 .strip{background:var(--strip);color:var(--strip-ink);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding-block:7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .seg{display:inline-flex;background:var(--seg-bg);border-radius:99px;padding:2px;align-items:center}
@@ -125,7 +127,6 @@ button{cursor:pointer}
 .nav{background:var(--surface);border-top:1px solid var(--line);display:grid;gap:4px;padding-block:8px}
 .nav.n1{grid-template-columns:1fr}
 .nav.n4{grid-template-columns:repeat(4,1fr)}
-.nav.n6{grid-template-columns:repeat(6,1fr)}
 .nav button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;border-radius:12px;font-size:11px;font-weight:600;color:var(--muted);position:relative;min-width:0}
 .nav.n4 button{font-size:12px}
 .nav button[aria-current="page"]{color:var(--brand)}
@@ -146,7 +147,6 @@ button{cursor:pointer}
 .axis{display:grid;grid-template-columns:62px 1fr;gap:10px;font-size:11px;color:var(--muted)}
 .axis div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.wide .kpis{grid-template-columns:repeat(4,1fr)}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
 .kpi small{display:block;color:var(--muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
 .kpi b{font-family:var(--font-display);font-size:26px;line-height:1.1;font-weight:700;white-space:nowrap}
@@ -163,6 +163,40 @@ button{cursor:pointer}
 .splash img{width:min(78vmin,520px);height:auto;display:block}
 .splash.out{opacity:0;pointer-events:none}
 @media (prefers-reduced-motion: reduce){.splash{transition:none}}
+.login>*{width:100%;max-width:420px;align-self:center}
+.shell{flex:1;min-height:0;display:flex;flex-direction:row}
+.side{width:236px;flex:none;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;padding:16px 12px;overflow-y:auto}
+.side button{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:16px;font-weight:600;text-align:left;position:relative}
+.side button:hover{background:var(--surface2)}
+.side button[aria-current="page"]{background:var(--surface2);color:var(--brand)}
+.side button .badge{margin-left:auto}
+.view.desk{align-content:start;grid-auto-rows:max-content;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-content:start;align-items:start;padding-block:24px 40px;padding-inline:max(24px,calc((100% - 1320px)/2))}
+.desk>.h1,.desk>.h2,.desk>.kpis,.desk>.note,.desk>.chips,.desk>.small,.desk>.filters,.desk>.card.full,.desk>.card.empty{grid-column:1/-1}
+.desk>.btn{grid-column:1/-1;width:auto;justify-self:start;min-width:240px}
+.desk>.h1{font-size:34px}
+.desk .span2{grid-column:span 2}
+.desktop .hdr.px{padding-left:24px;padding-right:24px}
+.desktop .strip.px{padding-left:24px;padding-right:24px}
+.desktop .kpis{grid-template-columns:repeat(4,1fr)}
+.desktop .kpi b{font-size:34px}
+.desktop .brow{grid-template-columns:120px 1fr}
+.desktop .axis{grid-template-columns:120px 1fr}
+.chks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
+.filters .field{min-width:220px}
+.card.tbl{padding:0;overflow-x:auto}
+.tbl table{width:100%;min-width:760px;border-collapse:collapse;font-size:15px}
+.tbl th{position:sticky;top:0;background:var(--surface2);text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;white-space:nowrap}
+.tbl td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.tbl td.dt{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (max-width:860px){
+  .shell{flex-direction:column-reverse}
+  .side{width:auto;flex-direction:row;border-right:0;border-top:1px solid var(--line);padding:8px 8px;gap:4px;overflow-x:auto;overflow-y:hidden}
+  .side button{flex:1;min-width:64px;flex-direction:column;justify-content:center;gap:2px;min-height:56px;padding:0 6px;font-size:11px;text-align:center}
+  .side button .badge{position:absolute;top:2px;right:calc(50% - 24px);margin-left:0}
+  .desktop .kpis{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){.desk .span2{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -803,9 +837,9 @@ function hdrG(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+(isSuper()?'Administrador · ':'Gerência · ')+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function navG(){
-  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovar','list'],['cad','Cadastro','pill'],['equipe','Equipe','users'],['hist','Histórico','book']];
+  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['equipe','Equipe','users'],['hist','Histórico','book']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length;
-  var h='<nav class="nav n6 px" aria-label="Gerência">';
+  var h='<nav class="side" aria-label="Gerência">';
   items.forEach(function(it){
     var n=it[0]==='aprov'?ap:0;
     h+='<button data-act="gnav" data-v="'+it[0]+'" '+(S.gtab===it[0]?'aria-current="page"':'')+'>'+ic(it[2],22)+it[1]+(n?'<span class="badge">'+n+'</span>':'')+'</button>';
@@ -835,8 +869,8 @@ function gPainel(){
     '<div class="kpi"><small>Consumo em 30 dias</small><b>'+shortMoney(total)+'</b></div>'+
     '<div class="kpi"><small>Abaixo do mínimo</small><b>'+st.alerts.length+'</b></div>'+
     '<div class="kpi"><small>Perdas em 30 dias</small><b>'+brl(st.perdas)+'</b></div></div>';
-  h+='<div class="card stack"><div class="h2">Consumo por retiro (30 dias)</div><div class="bars">';
-  R.forEach(function(r,i){h+='<div class="brow"><span class="small"><b>'+esc(r.nome.length>8?r.nome.slice(0,8):r.nome)+'</b><br><span class="muted">'+num(r.cabecas)+' cab.</span></span><div class="btrack"><i class="'+(i===hi&&per[hi]>avg*1.15?'hi':'')+'" style="width:'+Math.min(st.cons[r.id]/nice*100,100)+'%"></i><span>'+brl(Math.round(st.cons[r.id]))+'</span></div></div>'});
+  h+='<div class="card stack span2"><div class="h2">Consumo por retiro (30 dias)</div><div class="bars">';
+  R.forEach(function(r,i){h+='<div class="brow"><span class="small"><b>'+esc(r.nome)+'</b><br><span class="muted">'+num(r.cabecas)+' cab.</span></span><div class="btrack"><i class="'+(i===hi&&per[hi]>avg*1.15?'hi':'')+'" style="width:'+Math.min(st.cons[r.id]/nice*100,100)+'%"></i><span>'+brl(Math.round(st.cons[r.id]))+'</span></div></div>'});
   h+='</div><div class="axis"><span></span><div><span>R$ 0</span><span>'+num(nice/2)+'</span><span>'+num(nice)+'</span></div></div></div>';
   if(total>0&&per[hi]>avg*1.15)h+='<div class="note warn">'+ic('alert',20)+'<div><b>'+esc(R[hi].nome)+'</b> gasta '+brl(Math.round(per[hi]))+' por 100 animais, '+Math.round((per[hi]/avg-1)*100)+'% acima da média da fazenda ('+brl(Math.round(avg))+'). Vale conferir o motivo.</div></div>';
   h+='<div class="h2">Atenção hoje</div>';
@@ -899,7 +933,7 @@ function gAprov(){
 function gCad(){
   var h='<div class="h1">Cadastro</div>',R=retiros();
   /* retiros */
-  h+='<div class="card stack"><div class="h2">Retiros</div>';
+  h+='<div class="card stack span2"><div class="h2">Retiros</div>';
   if(!R.length)h+='<div class="note info"><div>Nenhum retiro cadastrado. Adicione o primeiro abaixo.</div></div>';
   R.forEach(function(r){
     h+='<div class="grid2"><div class="field"><label for="rt-n-'+esc(r.id)+'">Nome</label><input class="input t" id="rt-n-'+esc(r.id)+'" data-keep value="'+esc(r.nome)+'"></div>'+
@@ -914,7 +948,7 @@ function gCad(){
   var e=S.medEdit,ed=e&&e!=='novo'?medById(e):null;
   if(e){
     var v=function(k,d){return esc(ed&&ed[k]!=null?ed[k]:(d==null?'':d))};
-    h+='<div class="card stack"><div class="h2">'+(ed?'Editar':'Novo medicamento')+'</div>'+
+    h+='<div class="card stack span2"><div class="h2">'+(ed?'Editar':'Novo medicamento')+'</div>'+
       '<div class="field"><label for="f-nome">Nome</label><input class="input t" id="f-nome" data-keep value="'+v('nome')+'"></div>'+
       '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:'trat')===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
       '<div class="grid2"><div class="field"><label for="f-frasco">Frasco (mL)</label><input class="input t" id="f-frasco" data-keep inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
@@ -945,11 +979,11 @@ function gEquipe(){
   var R=retiros(),fid=fidNow(),team=D.users.filter(function(u){return u.role==='vaqueiro'&&u.fazendaId===fid}).sort(function(a,b){return String(a.nome).localeCompare(String(b.nome))});
   var h='<div class="h1">Equipe</div><div class="small muted">Cada responsável só vê e lança nos retiros que você liberar.</div>';
   if(!R.length)return h+'<div class="card empty stack">Cadastre os retiros antes de cadastrar a equipe.<button class="btn cta" data-act="gnav" data-v="cad">Ir para Cadastro</button></div>';
-  h+='<div class="card stack"><div class="h2">Novo responsável</div>'+
+  h+='<div class="card stack span2"><div class="h2">Novo responsável</div>'+
     '<div class="field"><label for="eq-nome">Nome</label><input class="input t" id="eq-nome" data-keep autocomplete="off"></div>'+
     '<div class="grid2"><div class="field"><label for="eq-email">E-mail (login)</label><input class="input t" id="eq-email" data-keep type="email" autocomplete="off"></div>'+
     '<div class="field"><label for="eq-senha">Senha inicial</label><input class="input t" id="eq-senha" data-keep type="text" autocomplete="off" placeholder="6 ou mais caracteres"></div></div>'+
-    '<div class="field"><label>Retiros liberados</label><div class="stack" style="gap:6px">';
+    '<div class="field"><label>Retiros liberados</label><div class="chks">';
   R.forEach(function(r){h+='<label class="chk"><input type="checkbox" class="eq-r" value="'+esc(r.id)+'" data-keep>'+esc(r.nome)+'</label>'});
   h+='</div></div><button class="btn cta" data-act="eqNew" '+(S.busy?'disabled':'')+'>Cadastrar responsável</button><div class="small muted">Passe o e-mail e a senha para o responsável. Ele pode trocar em "Esqueci a senha".</div></div>';
   h+='<div class="h2">Responsáveis cadastrados</div>';
@@ -957,7 +991,7 @@ function gEquipe(){
   team.forEach(function(u){
     var pill=u.status==='ativo'?'ok':'crit';
     h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+'</div></div><span class="pill '+pill+'">'+(u.status==='ativo'?'Ativo':'Bloqueado')+'</span></div>'+
-      '<div class="field"><label>Retiros liberados</label><div class="stack" style="gap:6px">';
+      '<div class="field"><label>Retiros liberados</label><div class="chks">';
     R.forEach(function(r){h+='<label class="chk"><input type="checkbox" data-keep data-eqr="'+esc(u.id)+'" value="'+esc(r.id)+'"'+((u.retiros||[]).indexOf(r.id)>-1?' checked':'')+'>'+esc(r.nome)+'</label>'});
     h+='</div></div><div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="eqSave" data-v="'+esc(u.id)+'">Salvar retiros</button>'+
       (u.status==='ativo'?'<button class="btn sm danger" data-act="eqBlock" data-v="'+esc(u.id)+'">Bloquear</button>':'<button class="btn sm" data-act="eqUnblock" data-v="'+esc(u.id)+'">Reativar</button>')+
@@ -967,23 +1001,24 @@ function gEquipe(){
 }
 function gHist(){
   var h='<div class="h1">Histórico</div><div class="note info">'+ic('book',20)+'<div>Registro permanente de tudo o que foi feito, com quem fez e quando. Ninguém pode editar ou apagar.</div></div>';
-  h+='<div class="chips" role="group" aria-label="Tipo de registro">';
+  h+='<div class="filters"><div class="chips" role="group" aria-label="Tipo de registro">';
   GRUPOS.forEach(function(g){h+='<button class="chip" data-act="hgrupo" data-v="'+g[0]+'" aria-pressed="'+(S.histGrupo===g[0])+'">'+g[1]+'</button>'});
   h+='</div><div class="field"><label for="h-ret">Retiro</label><select class="input t" id="h-ret"><option value="todos">Todos os retiros</option>'+
-    retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(S.histRet===r.id?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'</select></div>';
+    retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(S.histRet===r.id?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'</select></div></div>';
   var list=D.logs.filter(function(l){return (S.histGrupo==='todos'||l.grupo===S.histGrupo)&&(S.histRet==='todos'||l.retiro===S.histRet)}).sort(function(a,b){return b.ts-a.ts});
-  if(!list.length)h+='<div class="card empty">Nenhum registro com esse filtro.</div>';
+  if(!list.length)return h+'<div class="card empty">Nenhum registro com esse filtro.</div>';
+  h+='<div class="card full tbl"><table><thead><tr><th>Data e hora</th><th>Quem</th><th>Papel</th><th>Retiro</th><th>O que fez</th></tr></thead><tbody>';
   list.slice(0,S.histN).forEach(function(l){
-    h+='<div class="card stack" style="gap:6px"><div class="row sb"><b>'+esc(l.nome)+'</b><span class="small muted num">'+dstr(l.ts)+' '+hhmm(l.ts)+'</span></div><div>'+esc(l.resumo)+'</div>'+
-      '<div class="chips" style="gap:6px"><span class="pill info">'+esc(ROLE_NOME[l.role]||l.role)+'</span>'+(l.retiro?'<span class="pill ok">'+esc(retiroNome(l.retiro))+'</span>':'')+(l._pend?'<span class="pill warn">Na fila</span>':'')+'</div></div>';
+    h+='<tr><td class="dt">'+dstr(l.ts)+' '+hhmm(l.ts)+'</td><td><b>'+esc(l.nome)+'</b></td><td><span class="pill info">'+esc(ROLE_NOME[l.role]||l.role)+'</span></td><td>'+(l.retiro?esc(retiroNome(l.retiro)):'<span class="muted">Fazenda</span>')+'</td><td>'+esc(l.resumo)+(l._pend?' <span class="pill warn">Na fila</span>':'')+'</td></tr>';
   });
+  h+='</tbody></table></div>';
   if(list.length>S.histN)h+='<button class="btn" data-act="hmais">Mostrar mais</button>';
-  h+='<div class="small muted">Mostrando os registros mais recentes.</div>';
+  h+='<div class="small muted">Mostrando os '+Math.min(list.length,S.histN)+' registros mais recentes de '+list.length+'.</div>';
   return h;
 }
 
 /* ================= telas: administrador geral ================= */
-function navSA(){return '<nav class="nav n1 px"><button aria-current="page">'+ic('farm',24)+'Fazendas</button></nav>'}
+function navSA(){return '<nav class="side" aria-label="Administrador"><button aria-current="page">'+ic('farm',22)+'Fazendas</button></nav>'}
 function hdrSA(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Administrador geral · '+esc(S.profile.nome)+'</div></div><div class="hr-right"><button class="out" data-act="logout">Sair</button></div></div></header>';
 }
@@ -1016,16 +1051,16 @@ function draw(){
   var ae=document.activeElement,fid=ae&&ae.id,pos=null;
   try{pos=ae&&ae.selectionStart}catch(e){}
   var html,wide=false;
-  if(!S.profile){html=screenLogin()}
-  else if(S.profile.status!=='ativo'||S.farmBlocked){html=screenWait()}
+  if(!S.profile){wide=true;html=screenLogin()}
+  else if(S.profile.status!=='ativo'||S.farmBlocked){wide=true;html=screenWait()}
   else if(isSuper()&&S.view==='sa'){
     wide=true;
-    html=hdrSA()+'<main class="view px">'+gSuper()+'</main>'+navSA();
+    html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+gSuper()+'</main></div>';
   }
   else if(isMgr()&&S.view==='ger'){
     wide=true;
     var b=S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist();
-    html=stripHtml()+hdrG()+'<main class="view px">'+b+'</main>'+navG();
+    html=stripHtml()+hdrG()+'<div class="shell">'+navG()+'<main class="view desk px">'+b+'</main></div>';
   }else{
     var ret=ctxRet();
     if(!ret){html=stripHtml()+hdrV()+'<main class="view px"><div class="card empty">'+(isMgr()?'Cadastre os retiros da fazenda para ver como o responsável enxerga.':'Seu usuário ainda não tem um retiro liberado. Peça para a gerência liberar o seu retiro.')+'</div></main>'}
@@ -1037,7 +1072,8 @@ function draw(){
   }
   var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet].join('|');
   var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
-  $('#dev').className='device'+(wide?' wide':'');
+  $('#dev').className='device'+(wide?' desktop':'');
+  document.body.className=wide?'dsk':'';
   $('#app').innerHTML=html;
   S.vkey=key;
   var vw=$('.view');if(vw)vw.scrollTop=same?sc:0;
