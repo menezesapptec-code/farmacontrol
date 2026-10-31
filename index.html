@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Farma Certo</title>
+<title>Farma Control</title>
 <meta name="theme-color" content="#12382A">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2312382A'/%3E%3Cpath d='M32 14v36M14 32h36' stroke='%23F4C20D' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -225,7 +225,7 @@ var RETIROS_DEFAULT=[
 
 /* ================= camada de dados ================= */
 var DB=(function(){
-  var fs=null,L={},subs=[],simOff=false,KEY='farmacerto_teste_v1';
+  var fs=null,L={},subs=[],simOff=false,KEY='farmacontrol_teste_v1';
   if(!DEMO&&!NOFB){
     firebase.initializeApp(firebaseConfig);
     fs=firebase.firestore();
@@ -470,16 +470,16 @@ function stripHtml(){
   return h+'</div></div>';
 }
 function screenLogin(){
-  if(NOFB)return '<div class="login px"><div class="h1" style="text-align:center">Sem internet</div><p style="text-align:center">Abra o Farma Certo uma vez com sinal para instalar. Depois ele funciona no curral sem sinal.</p></div>';
-  if(!S.authReady)return '<div class="login px"><div class="brand" style="font-size:38px;text-align:center">Farma Certo</div><p style="text-align:center;opacity:.8">Carregando...</p></div>';
+  if(NOFB)return '<div class="login px"><div class="h1" style="text-align:center">Sem internet</div><p style="text-align:center">Abra o Farma Control uma vez com sinal para instalar. Depois ele funciona no curral sem sinal.</p></div>';
+  if(!S.authReady)return '<div class="login px"><div class="brand" style="font-size:38px;text-align:center">Farma Control</div><p style="text-align:center;opacity:.8">Carregando...</p></div>';
   if(DEMO){
-    return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div><div class="hdr-sub">Modo teste · dados só neste navegador</div></div>'+
+    return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Control</div><div class="hdr-sub">Modo teste · dados só neste navegador</div></div>'+
       '<button class="btn cta" data-act="dlogin" data-v="u-admin">Entrar como Gerência (Admin)</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq">Entrar como Vaqueiro · Retiro 3</button>'+
       '<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button>'+
       '<div class="small" style="text-align:center;opacity:.75">Para usar login de verdade, cole a configuração do Firebase no começo do index.html.</div></div>';
   }
-  return '<form class="login px" id="lform"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div><div class="hdr-sub">Controle de medicamentos veterinários</div></div>'+
+  return '<form class="login px" id="lform"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Control</div><div class="hdr-sub">Controle de medicamentos veterinários</div></div>'+
     (S.err?'<div class="err" role="alert">'+esc(S.err)+'</div>':'')+
     (S.loginSignup?'<div class="field"><label for="l-nome">Seu nome</label><input class="input t" id="l-nome" autocomplete="name"></div>':'')+
     '<div class="field"><label for="l-email">E-mail</label><input class="input t" id="l-email" type="email" autocomplete="username" inputmode="email"></div>'+
@@ -491,7 +491,7 @@ function screenLogin(){
 }
 function screenWait(){
   var p=S.profile,bloq=p.status==='bloqueado';
-  return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Certo</div></div>'+
+  return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Control</div></div>'+
     '<div class="h1" style="text-align:center">'+(bloq?'Acesso bloqueado':'Aguardando aprovação')+'</div>'+
     '<p style="text-align:center">'+(bloq?'Fale com a gerência da fazenda.':'Seu cadastro foi enviado. A gerência vai liberar seu acesso e escolher o seu retiro. Esta tela atualiza sozinha.')+'</p>'+
     '<div class="small" style="text-align:center;opacity:.8">'+esc(p.nome)+' · '+esc(p.email)+'</div>'+
@@ -501,7 +501,7 @@ function screenWait(){
 /* ================= telas: vaqueiro ================= */
 function hdrV(){
   var r=ctxRet();
-  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Certo</div><div class="hdr-sub">'+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(retiroNome(r))+' · '+esc(S.profile.nome)+'</div></div>'+
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(retiroNome(r))+' · '+esc(S.profile.nome)+'</div></div>'+
     '<div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function navV(){
@@ -693,7 +693,7 @@ function saveLaunch(ret){
 
 /* ================= telas: gerência ================= */
 function hdrG(){
-  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Certo</div><div class="hdr-sub">Gerência · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Gerência · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function navG(){
   var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill']];
