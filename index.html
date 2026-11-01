@@ -60,6 +60,9 @@ button{cursor:pointer}
 .brand{font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
 .hdr-sub{font-size:13px;opacity:.82;margin-top:3px}
 .hdr .back{background:transparent;border:0;color:var(--hdr-ink);display:flex;align-items:center;gap:6px;min-height:44px;min-width:44px;margin-left:-8px;padding:0 8px;font-weight:600}
+.modal{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.mbox{background:var(--surface);color:var(--ink);border-radius:16px;padding:22px;max-width:420px;width:100%;display:flex;flex-direction:column;gap:12px}
+.hdr .out svg{vertical-align:-3px}
 .hdr .out{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--hdr-ink);border-radius:99px;min-height:32px;padding:0 12px;font-size:13px}
 .hdr .chips{margin-top:10px}
 .hdr .chip{min-height:32px;font-size:13px;padding:0 12px;background:transparent;border-color:rgba(255,255,255,.35);color:var(--hdr-ink)}
@@ -253,6 +256,7 @@ var ICON={
   truck:'M2 6h11v10H2zM13 9h4l4 4v3h-8M6 19a2 2 0 100-4 2 2 0 000 4zM17 19a2 2 0 100-4 2 2 0 000 4z',
   alert:'M12 3l10 18H2zM12 10v5M12 18v.01',chart:'M4 20V10M10 20V4M16 20v-7M22 20H2',list:'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01',
   cloud:'M7 18a4 4 0 010-8 5 5 0 019.6-1A4.5 4.5 0 0117 18zM3 3l18 18',users:'M16 11a4 4 0 10-8 0 4 4 0 008 0zM4 21a8 8 0 0116 0',
+  download:'M12 4v11M7 11l5 5 5-5M4 20h16',
   pill:'M10.5 20.5a5 5 0 01-7-7l10-10a5 5 0 017 7zM8.5 8.5l7 7',farm:'M3 21V10l9-6 9 6v11M9 21v-6h6v6',book:'M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11'
 };
 function ic(n,s){s=s||22;return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+ICON[n]+'"/></svg>'}
@@ -575,6 +579,20 @@ function demoLogin(id){
 }
 
 /* ================= telas: comuns ================= */
+var instEv=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();instEv=e;draw()});
+window.addEventListener('appinstalled',function(){instEv=null;toast('Farma Control instalado');draw()});
+function isInstalled(){return (window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true}
+function instBtn(){if(isInstalled())return '';return '<button class="out" data-act="install">'+ic('download',16)+' Instalar</button>'}
+function instHelp(){
+  var ua=navigator.userAgent||'',ios=/iPhone|iPad|iPod/.test(ua),and=/Android/.test(ua);
+  var t=ios?'No iPhone/iPad: abra no Safari, toque em <b>Compartilhar</b> (quadrado com seta) e depois em <b>Adicionar à Tela de Início</b>.':
+    and?'No Android: abra o menu <b>⋮</b> do Chrome e toque em <b>Instalar app</b> (ou <b>Adicionar à tela inicial</b>).':
+    'No notebook: use o Chrome ou Edge. Clique no ícone de instalar na barra de endereço (à direita) ou em <b>⋮ › Salvar e compartilhar › Instalar Farma Control</b>.';
+  var d=document.createElement('div');d.className='modal';d.setAttribute('role','dialog');
+  d.innerHTML='<div class="mbox"><div class="h2">Instalar o Farma Control</div><p>'+t+'</p><p class="small">Depois de instalado ele abre como um aplicativo e funciona mesmo sem sinal.</p><button class="btn cta" data-act="closeModal">Entendi</button></div>';
+  document.body.appendChild(d);
+}
 function connPill(){
   var p=pendCount();
   if(isOnline())return p?'<span class="pill info">Enviando '+p+'...</span>':'<span class="pill ok">Online</span>';
@@ -606,7 +624,7 @@ function screenLogin(){
       '<button class="btn" data-act="dlogin" data-v="u-ger">Gerente · Fazenda Boa Vista</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq">Responsável · Retiro 3</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq2">Responsável · Retiros 1 e 2</button>'+
-      '<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button></div>';
+      (isInstalled()?'':'<button class="btn" data-act="install">'+ic('download',18)+' Baixar o aplicativo</button>')+'<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button></div>';
   }
   var su=S.loginSignup;
   return '<form class="login px" id="lform"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Control</div><div class="hdr-sub">Controle de medicamentos veterinários</div></div>'+
@@ -617,6 +635,7 @@ function screenLogin(){
     '<button class="btn cta" type="submit" '+(S.busy?'disabled':'')+'>'+(su?'Pedir acesso para minha fazenda':'Entrar')+'</button>'+
     '<button class="lnk" type="button" data-act="toggleSignup">'+(su?'Já tenho cadastro. Entrar':'Sou gerente e quero cadastrar minha fazenda')+'</button>'+
     (su?'':'<button class="lnk" type="button" data-act="reset">Esqueci a senha</button>')+
+    (isInstalled()?'':'<button class="btn" type="button" data-act="install">'+ic('download',18)+' Baixar o aplicativo (celular ou notebook)</button>')+
     '</form>';
 }
 function screenWait(){
@@ -641,7 +660,7 @@ function hdrV(){
     ch+='</div>';
   }
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(r?retiroNome(r):'sem retiro')+' · '+esc(S.profile.nome)+'</div></div>'+
-    '<div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div>'+ch+'</header>';
+    '<div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div>'+ch+'</header>';
 }
 function navV(){
   var cur=S.tab==='receber'?'home':S.tab;
@@ -834,7 +853,7 @@ function saveLaunch(ret){
 
 /* ================= telas: gerência ================= */
 function hdrG(){
-  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+(isSuper()?'Administrador · ':'Gerência · ')+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+(isSuper()?'Administrador · ':'Gerência · ')+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function navG(){
   var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['equipe','Equipe','users'],['hist','Histórico','book']];
@@ -1020,7 +1039,7 @@ function gHist(){
 /* ================= telas: administrador geral ================= */
 function navSA(){return '<nav class="side" aria-label="Administrador"><button aria-current="page">'+ic('farm',22)+'Fazendas</button></nav>'}
 function hdrSA(){
-  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Administrador geral · '+esc(S.profile.nome)+'</div></div><div class="hr-right"><button class="out" data-act="logout">Sair</button></div></div></header>';
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Administrador geral · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function gSuper(){
   var pend=D.users.filter(function(u){return u.role==='gerente'&&u.status==='pendente'}).sort(function(a,b){return (a.criadoEm||0)-(b.criadoEm||0)});
@@ -1133,6 +1152,10 @@ document.addEventListener('click',function(ev){
   else if(a==='dreset'){DB.reset();seedDemo();toast('Dados de teste recarregados')}
   else if(a==='toggleSignup'){S.loginSignup=!S.loginSignup;S.err=''}
   else if(a==='reset'){doReset();return}
+  else if(a==='install'){
+    if(instEv){var ev=instEv;instEv=null;ev.prompt();ev.userChoice.then(function(){draw()}).catch(function(){});return}
+    instHelp();return}
+  else if(a==='closeModal'){var m=document.querySelector('.modal');if(m)m.parentNode.removeChild(m);return}
   else if(a==='logout'){logout();return}
   else if(a==='selRet'){S.retiroSel=v;S.wiz=null;S.tab='home'}
   else if(a==='nav'){if(v==='lancar')wizStart();else S.tab=v}
