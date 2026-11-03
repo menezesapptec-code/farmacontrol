@@ -180,7 +180,7 @@ button{cursor:pointer}
 .desk .span2{grid-column:span 2}
 .desktop .hdr.px{padding-left:24px;padding-right:24px}
 .desktop .strip.px{padding-left:24px;padding-right:24px}
-.desktop .kpis{grid-template-columns:repeat(4,1fr)}
+.desktop .kpis{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .desktop .kpi b{font-size:34px}
 .desktop .brow{grid-template-columns:120px 1fr}
 .desktop .axis{grid-template-columns:120px 1fr}
@@ -268,7 +268,7 @@ var TIPOS=[
   {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'}
 ];
 function tipoNome(id){var t=byId(TIPOS,id);return t?t.nome:id}
-var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',vaqueiro:'Responsável'};
+var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',vaqueiro:'Responsável'};
 var GRUPOS=[['todos','Tudo'],['aplicacao','Aplicações'],['estoque','Estoque'],['aprovacao','Aprovações'],['cadastro','Cadastro'],['equipe','Equipe']];
 var SEED_RETIROS=[
   {id:'r1',nome:'Retiro 1',cabecas:1240},{id:'r2',nome:'Retiro 2',cabecas:1080},{id:'r3',nome:'Retiro 3',cabecas:980},
@@ -278,7 +278,7 @@ var TOP={users:1,fazendas:1};
 
 /* ================= camada de dados ================= */
 var DB=(function(){
-  var fs=null,L={},subs=[],simOff=false,FID=null,KEY='farmacontrol_teste_v2';
+  var fs=null,L={},subs=[],simOff=false,FID=null,KEY='farmacontrol_teste_v3';
   if(!DEMO&&!NOFB){
     firebase.initializeApp(firebaseConfig);
     fs=firebase.firestore();
@@ -430,6 +430,7 @@ function seedDemo(){
   DB.batch([
     {op:'set',col:'users',id:'u-super',data:{nome:'Ismael (Admin geral)',email:'agrosafra7@gmail.com',role:'superadmin',status:'ativo',fazendaId:null,retiros:[]}},
     {op:'set',col:'users',id:'u-ger',data:{nome:'Marcos (Gerente)',email:'gerente@teste.com',role:'gerente',status:'ativo',fazendaId:'f-demo',retiros:[]}},
+    {op:'set',col:'users',id:'u-alm',data:{nome:'Fábio (Almoxarife)',email:'almoxarife@teste.com',role:'almoxarife',status:'ativo',fazendaId:'f-demo',retiros:[]}},
     {op:'set',col:'users',id:'u-vaq',data:{nome:'Raimundo S.',email:'raimundo@teste.com',role:'vaqueiro',status:'ativo',fazendaId:'f-demo',retiros:['r3']}},
     {op:'set',col:'users',id:'u-vaq2',data:{nome:'Joaquim P.',email:'joaquim@teste.com',role:'vaqueiro',status:'ativo',fazendaId:'f-demo',retiros:['r1','r2']}},
     {op:'set',col:'users',id:'u-pend',data:{nome:'Carlos Souza',email:'carlos@teste.com',role:'gerente',status:'pendente',fazendaId:null,fazendaNome:'Fazenda Santa Rita',retiros:[],criadoEm:now-3600e3}},
@@ -452,6 +453,9 @@ var S={profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retir
 var unsubs=[],profUnsub=null;
 
 function isSuper(){return !!S.profile&&S.profile.role==='superadmin'}
+function isAlmox(){return !!S.profile&&S.profile.role==='almoxarife'}
+function isStaff(){return isMgr()||isAlmox()}
+function homeView(){return isSuper()?'sa':isMgr()?'ger':isAlmox()?'alm':'vaq'}
 function isMgr(){return !!S.profile&&(S.profile.role==='superadmin'||S.profile.role==='gerente')}
 function fidNow(){return isSuper()?S.fid:(S.profile?S.profile.fazendaId:null)}
 function retiros(){return (D.config&&D.config.retiros)||[]}
@@ -492,7 +496,7 @@ function clearFarmData(){
 function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];clearFarmData();D.fazendas=[];D.users=[]}
 function startSubs(){
   stopSubs();S.farmBlocked=false;subErrShown=false;
-  var p=S.profile,sup=isSuper(),mgr=isMgr(),since=Date.now()-30*DAY;
+  var p=S.profile,sup=isSuper(),mgr=isStaff(),boss=isMgr(),since=Date.now()-30*DAY;
   function s(col,opts){unsubs.push(DB.sub(col,function(docs){onData(col,docs)},opts))}
   if(sup){s('fazendas');s('users')}
   var fid=fidNow();
@@ -502,8 +506,8 @@ function startSubs(){
   s('meds');
   if(mgr){
     s('stock');s('transfers');s('launches',{where:['ts','>=',since]});s('approvals');s('compras');
-    s('logs',{order:['ts','desc'],limit:300});
-    if(!sup)s('users',{where:['fazendaId','==',fid]});
+    if(boss)s('logs',{order:['ts','desc'],limit:300});
+    if(boss&&!sup)s('users',{where:['fazendaId','==',fid]});
   }else{
     var rs=p.retiros||[];
     [['stock','loc'],['transfers','dest'],['launches','retiro'],['approvals','retiro']].forEach(function(pair){
@@ -541,7 +545,7 @@ function bootFirebase(){
       var key=subKeyOf(S.profile);
       if(key!==S.subKey){
         S.subKey=key;
-        S.view=isSuper()?'sa':isMgr()?'ger':'vaq';S.fid=null;S.tab='home';S.gtab='painel';
+        S.view=homeView();S.fid=null;S.tab='home';S.gtab=isAlmox()?'central':'painel';
         if(S.profile.status==='ativo')startSubs();else stopSubs();
       }
       render(true);
@@ -574,7 +578,7 @@ function demoLogin(id){
   var u=null;DB.sub('users',function(docs){u=byId(docs,id)})();
   if(!u)return;
   S.profile=ext({id:id},u);S.subKey=subKeyOf(S.profile);S.fid=null;
-  S.view=isSuper()?'sa':isMgr()?'ger':'vaq';S.tab='home';S.gtab='painel';S.wiz=null;
+  S.view=homeView();S.tab='home';S.gtab=isAlmox()?'central':'painel';S.wiz=null;
   startSubs();render(true);
 }
 
@@ -622,6 +626,7 @@ function screenLogin(){
     return '<div class="login px"><div style="text-align:center"><div class="brand" style="font-size:38px">Farma Control</div><div class="hdr-sub">Modo teste · dados só neste navegador</div></div>'+
       '<button class="btn cta" data-act="dlogin" data-v="u-super">Administrador geral</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-ger">Gerente · Fazenda Boa Vista</button>'+
+      '<button class="btn" data-act="dlogin" data-v="u-alm">Almoxarife · Fazenda Boa Vista</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq">Responsável · Retiro 3</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq2">Responsável · Retiros 1 e 2</button>'+
       (isInstalled()?'':'<button class="btn" data-act="install">'+ic('download',18)+' Baixar o aplicativo</button>')+'<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button></div>';
@@ -855,6 +860,34 @@ function saveLaunch(ret){
 function hdrG(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+(isSuper()?'Administrador · ':'Gerência · ')+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
+function hdrA(){
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Almoxarife · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+}
+function navA(){
+  var items=[['central','Central','truck'],['aprov','Aprovações','list'],['alert','Estoque baixo','alert'],['meds','Medicamentos','pill']];
+  var ap=D.approvals.filter(function(a){return a.st==='pend'}).length,low=stats().alerts.length+centralLow().length;
+  var h='<nav class="side" aria-label="Almoxarifado">';
+  items.forEach(function(it){
+    var n=it[0]==='aprov'?ap:it[0]==='alert'?low:0;
+    h+='<button data-act="gnav" data-v="'+it[0]+'" '+(S.gtab===it[0]?'aria-current="page"':'')+'>'+ic(it[2],22)+it[1]+(n?'<span class="badge">'+n+'</span>':'')+'</button>';
+  });
+  return h+'</nav>';
+}
+function centralLow(){
+  var out=[];D.meds.forEach(function(m){var q=qty('central',m.id);if(q<m.min*8)out.push({m:m,q:q})});
+  return out.sort(function(a,b){return a.q/(a.m.min*8)-b.q/(b.m.min*8)});
+}
+function gAlertas(){
+  var st=stats(),cl=centralLow(),h='<div class="h1">Estoque baixo e vencimentos</div>';
+  if(!cl.length&&!st.alerts.length&&!st.exp.length)return h+'<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
+  if(cl.length){h+='<div class="h2">Farmácia central</div>';
+    cl.forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>'+esc(c.m.nome)+'</b><div class="small muted">Tem '+ml(c.q)+' na central · '+num(Math.round(c.q/c.m.frasco*10)/10)+' frascos</div></div><span class="pill warn">Repor</span></div>'})}
+  if(st.alerts.length){h+='<div class="h2">Nos retiros</div>';
+    st.alerts.forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+ml(a.q)+', mínimo '+ml(a.m.min)+'</div></div><span class="pill warn">Baixo</span></div>'})}
+  if(st.exp.length){h+='<div class="h2">Vencendo</div>';
+    st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'})}
+  return h;
+}
 function navG(){
   var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['equipe','Equipe','users'],['hist','Histórico','book']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length;
@@ -875,6 +908,7 @@ function stats(){
   D.meds.forEach(function(m){var d=daysTo(m.venc);if(d<=30){var tot=0;D.stock.forEach(function(s){if(s.med===m.id)tot+=s.qtd||0});if(tot>0)exp.push({m:m,d:d})}});
   return {cons:cons,heads:heads,valor:valor,perdas:perdas,alerts:alerts,exp:exp};
 }
+function compras30(){var since=Date.now()-30*DAY,t=0;D.compras.forEach(function(c){var m=medById(c.med);if(m&&c.ts>=since)t+=c.ml*m.preco/m.frasco});return t}
 function gPainel(){
   var R=retiros();
   if(!R.length)return '<div class="h1">Painel da fazenda</div><div class="card empty stack">Primeiro cadastre os retiros da fazenda.<button class="btn cta" data-act="gnav" data-v="cad">Ir para Cadastro</button></div>';
@@ -887,13 +921,16 @@ function gPainel(){
     '<div class="kpi"><small>Valor em estoque</small><b>'+shortMoney(st.valor)+'</b></div>'+
     '<div class="kpi"><small>Consumo em 30 dias</small><b>'+shortMoney(total)+'</b></div>'+
     '<div class="kpi"><small>Abaixo do mínimo</small><b>'+st.alerts.length+'</b></div>'+
+    '<div class="kpi"><small>Compras em 30 dias</small><b>'+shortMoney(compras30())+'</b></div>'+
     '<div class="kpi"><small>Perdas em 30 dias</small><b>'+brl(st.perdas)+'</b></div></div>';
   h+='<div class="card stack span2"><div class="h2">Consumo por retiro (30 dias)</div><div class="bars">';
   R.forEach(function(r,i){h+='<div class="brow"><span class="small"><b>'+esc(r.nome)+'</b><br><span class="muted">'+num(r.cabecas)+' cab.</span></span><div class="btrack"><i class="'+(i===hi&&per[hi]>avg*1.15?'hi':'')+'" style="width:'+Math.min(st.cons[r.id]/nice*100,100)+'%"></i><span>'+brl(Math.round(st.cons[r.id]))+'</span></div></div>'});
   h+='</div><div class="axis"><span></span><div><span>R$ 0</span><span>'+num(nice/2)+'</span><span>'+num(nice)+'</span></div></div></div>';
   if(total>0&&per[hi]>avg*1.15)h+='<div class="note warn">'+ic('alert',20)+'<div><b>'+esc(R[hi].nome)+'</b> gasta '+brl(Math.round(per[hi]))+' por 100 animais, '+Math.round((per[hi]/avg-1)*100)+'% acima da média da fazenda ('+brl(Math.round(avg))+'). Vale conferir o motivo.</div></div>';
   h+='<div class="h2">Atenção hoje</div>';
-  if(!st.alerts.length&&!st.exp.length)h+='<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
+  var cl=centralLow();
+  cl.slice(0,6).forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>Central · '+esc(c.m.nome)+'</b><div class="small muted">Tem '+ml(c.q)+' na farmácia central, está acabando</div></div><span class="pill warn">Acabando</span></div>'});
+  if(!st.alerts.length&&!st.exp.length&&!cl.length)h+='<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
   st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'});
   st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+ml(a.q)+', mínimo '+ml(a.m.min)+'</div></div><span class="pill warn">Baixo</span></div>'});
   if(st.alerts.length>8)h+='<div class="small muted">e mais '+(st.alerts.length-8)+' itens abaixo do mínimo.</div>';
@@ -962,6 +999,10 @@ function gCad(){
   h+='<div class="h2" style="margin-top:6px">Novo retiro</div><div class="grid2"><div class="field"><label for="rt-n-novo">Nome</label><input class="input t" id="rt-n-novo" data-keep placeholder="Ex.: Retiro 6"></div>'+
     '<div class="field"><label for="rt-c-novo">Animais</label><input class="input t" id="rt-c-novo" data-keep inputmode="numeric" placeholder="0"></div></div>'+
     '<button class="btn" data-act="rtSave" data-v="novo">Adicionar retiro</button></div>';
+  return h+gMeds(true);
+}
+function gMeds(embed){
+  var h=embed?'':'<div class="h1">Medicamentos</div>';
   /* medicamentos */
   h+='<div class="h2">Medicamentos</div>';
   var e=S.medEdit,ed=e&&e!=='novo'?medById(e):null;
@@ -990,29 +1031,34 @@ function gCad(){
       '<button class="btn sm" style="align-self:flex-start" data-act="medEdit" data-v="'+esc(m.id)+'">Editar</button></div>';
   });
   if(!D.meds.length)h+='<div class="card empty">Nenhum medicamento cadastrado.</div>';
-  h+='<div class="card stack"><div class="h2">Dados de exemplo</div><div class="small muted">Carrega retiros, medicamentos, estoques, transferências, aprovações e 30 dias de consumo de exemplo para testar.</div>'+
+  if(embed)h+='<div class="card stack"><div class="h2">Dados de exemplo</div><div class="small muted">Carrega retiros, medicamentos, estoques, transferências, aprovações e 30 dias de consumo de exemplo para testar.</div>'+
     '<button class="btn" data-act="seed">Carregar dados de exemplo</button><button class="btn danger" data-act="clearTest">Apagar lançamentos, transferências e aprovações de exemplo</button></div>';
   return h;
 }
 function gEquipe(){
-  var R=retiros(),fid=fidNow(),team=D.users.filter(function(u){return u.role==='vaqueiro'&&u.fazendaId===fid}).sort(function(a,b){return String(a.nome).localeCompare(String(b.nome))});
-  var h='<div class="h1">Equipe</div><div class="small muted">Cada responsável só vê e lança nos retiros que você liberar.</div>';
+  var R=retiros(),fid=fidNow(),team=D.users.filter(function(u){return (u.role==='vaqueiro'||u.role==='almoxarife')&&u.fazendaId===fid}).sort(function(a,b){return String(a.nome).localeCompare(String(b.nome))});
+  var h='<div class="h1">Equipe</div><div class="small muted">Todos entram com o próprio e-mail. O almoxarife cuida da farmácia central. Cada responsável de retiro só vê e lança nos retiros que você liberar.</div>';
+  h+='<div class="card stack span2"><div class="h2">Novo almoxarife</div>'+
+    '<div class="field"><label for="al-nome">Nome</label><input class="input t" id="al-nome" data-keep autocomplete="off"></div>'+
+    '<div class="grid2"><div class="field"><label for="al-email">E-mail (login)</label><input class="input t" id="al-email" data-keep type="email" autocomplete="off"></div>'+
+    '<div class="field"><label for="al-senha">Senha inicial</label><input class="input t" id="al-senha" data-keep type="text" autocomplete="off" placeholder="6 ou mais caracteres"></div></div>'+
+    '<button class="btn cta" data-act="alNew" '+(S.busy?'disabled':'')+'>Cadastrar almoxarife</button><div class="small muted">Acessa a farmácia central: compras, envios aos retiros, aprovações, estoque baixo e medicamentos.</div></div>';
   if(!R.length)return h+'<div class="card empty stack">Cadastre os retiros antes de cadastrar a equipe.<button class="btn cta" data-act="gnav" data-v="cad">Ir para Cadastro</button></div>';
-  h+='<div class="card stack span2"><div class="h2">Novo responsável</div>'+
+  h+='<div class="card stack span2"><div class="h2">Novo responsável de retiro</div>'+
     '<div class="field"><label for="eq-nome">Nome</label><input class="input t" id="eq-nome" data-keep autocomplete="off"></div>'+
     '<div class="grid2"><div class="field"><label for="eq-email">E-mail (login)</label><input class="input t" id="eq-email" data-keep type="email" autocomplete="off"></div>'+
     '<div class="field"><label for="eq-senha">Senha inicial</label><input class="input t" id="eq-senha" data-keep type="text" autocomplete="off" placeholder="6 ou mais caracteres"></div></div>'+
     '<div class="field"><label>Retiros liberados</label><div class="chks">';
   R.forEach(function(r){h+='<label class="chk"><input type="checkbox" class="eq-r" value="'+esc(r.id)+'" data-keep>'+esc(r.nome)+'</label>'});
   h+='</div></div><button class="btn cta" data-act="eqNew" '+(S.busy?'disabled':'')+'>Cadastrar responsável</button><div class="small muted">Passe o e-mail e a senha para o responsável. Ele pode trocar em "Esqueci a senha".</div></div>';
-  h+='<div class="h2">Responsáveis cadastrados</div>';
-  if(!team.length)h+='<div class="card empty">Nenhum responsável ainda.</div>';
+  h+='<div class="h2">Equipe cadastrada</div>';
+  if(!team.length)h+='<div class="card empty">Ninguém cadastrado ainda.</div>';
   team.forEach(function(u){
     var pill=u.status==='ativo'?'ok':'crit';
-    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+'</div></div><span class="pill '+pill+'">'+(u.status==='ativo'?'Ativo':'Bloqueado')+'</span></div>'+
-      '<div class="field"><label>Retiros liberados</label><div class="chks">';
-    R.forEach(function(r){h+='<label class="chk"><input type="checkbox" data-keep data-eqr="'+esc(u.id)+'" value="'+esc(r.id)+'"'+((u.retiros||[]).indexOf(r.id)>-1?' checked':'')+'>'+esc(r.nome)+'</label>'});
-    h+='</div></div><div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="eqSave" data-v="'+esc(u.id)+'">Salvar retiros</button>'+
+    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+' · '+(u.role==='almoxarife'?'Almoxarife':'Responsável de retiro')+'</div></div><span class="pill '+pill+'">'+(u.status==='ativo'?'Ativo':'Bloqueado')+'</span></div>'+
+      (u.role==='almoxarife'?'':'<div class="field"><label>Retiros liberados</label><div class="chks">');
+    if(u.role!=='almoxarife')R.forEach(function(r){h+='<label class="chk"><input type="checkbox" data-keep data-eqr="'+esc(u.id)+'" value="'+esc(r.id)+'"'+((u.retiros||[]).indexOf(r.id)>-1?' checked':'')+'>'+esc(r.nome)+'</label>'});
+    h+=(u.role==='almoxarife'?'':'</div></div>')+'<div class="row" style="flex-wrap:wrap">'+(u.role==='almoxarife'?'':'<button class="btn sm cta" data-act="eqSave" data-v="'+esc(u.id)+'">Salvar retiros</button>')+
       (u.status==='ativo'?'<button class="btn sm danger" data-act="eqBlock" data-v="'+esc(u.id)+'">Bloquear</button>':'<button class="btn sm" data-act="eqUnblock" data-v="'+esc(u.id)+'">Reativar</button>')+
       '<button class="btn sm" data-act="eqReset" data-v="'+esc(u.id)+'">Enviar link de nova senha</button></div></div>';
   });
@@ -1076,6 +1122,11 @@ function draw(){
     wide=true;
     html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+gSuper()+'</main></div>';
   }
+  else if(isAlmox()&&S.view==='alm'){
+    wide=true;
+    var ba=S.gtab==='aprov'?gAprov():S.gtab==='meds'?gMeds():S.gtab==='alert'?gAlertas():gCentral();
+    html=stripHtml()+hdrA()+'<div class="shell">'+navA()+'<main class="view desk px">'+ba+'</main></div>';
+  }
   else if(isMgr()&&S.view==='ger'){
     wide=true;
     var b=S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist();
@@ -1124,13 +1175,14 @@ function sendTransfer(){
   DB.batch(ops);
   toast('Enviado para '+retiroNome(e.dest)+'. Já aparece na tela do responsável.');
 }
-function createResponsavel(nome,email,senha,rets){
+function createResponsavel(nome,email,senha,rets,role){
+  role=role||'vaqueiro';
   S.busy=true;render(true);
   var fid=fidNow();
   function gravar(uid){
-    DB.batch([{op:'set',col:'users',id:uid,data:{nome:nome,email:email.toLowerCase(),role:'vaqueiro',status:'ativo',fazendaId:fid,retiros:rets,criadoPor:S.profile.id,criadoEm:Date.now()}},
-      lg('equipe','usuario_criado','Cadastrou o responsável '+nome+' ('+email+') nos retiros: '+rets.map(retiroNome).join(', '),null,{uid:uid,retiros:rets})]);
-    S.busy=false;toast('Responsável cadastrado');render(true);
+    DB.batch([{op:'set',col:'users',id:uid,data:{nome:nome,email:email.toLowerCase(),role:role,status:'ativo',fazendaId:fid,retiros:rets,criadoPor:S.profile.id,criadoEm:Date.now()}},
+      lg('equipe','usuario_criado',role==='almoxarife'?'Cadastrou o almoxarife '+nome+' ('+email+')':'Cadastrou o responsável '+nome+' ('+email+') nos retiros: '+rets.map(retiroNome).join(', '),null,{uid:uid,retiros:rets,role:role})]);
+    S.busy=false;toast(role==='almoxarife'?'Almoxarife cadastrado':'Responsável cadastrado');render(true);
   }
   if(DEMO){gravar('u-'+uid8());return}
   var sec=null;firebase.apps.forEach(function(a){if(a.name==='sec')sec=a});
@@ -1258,6 +1310,12 @@ document.addEventListener('click',function(ev){
   }
   else if(a==='seed'){DB.batch(seedOps(fidNow(),false).concat([lg('cadastro','dados_exemplo','Carregou os dados de exemplo',null,{})]));toast('Dados de exemplo carregados')}
   else if(a==='clearTest'){var co=clearTestOps();if(co.length){co.push(lg('cadastro','dados_exemplo_apagados','Apagou os lançamentos, transferências e aprovações de exemplo',null,{}));DB.batch(co);toast('Dados de exemplo apagados')}else toast('Não há dados de exemplo para apagar')}
+  else if(a==='alNew'){
+    var anome=g('al-nome').trim(),aemail=g('al-email').trim(),asenha=g('al-senha');
+    if(!anome||!aemail){toast('Preencha o nome e o e-mail');return}
+    if(asenha.length<6){toast('A senha precisa ter 6 ou mais caracteres');return}
+    createResponsavel(anome,aemail,asenha,[],'almoxarife');return;
+  }
   else if(a==='eqNew'){
     var enome=g('eq-nome').trim(),eemail=g('eq-email').trim(),esenha=g('eq-senha'),rets=[];
     document.querySelectorAll('.eq-r').forEach(function(c){if(c.checked)rets.push(c.value)});
