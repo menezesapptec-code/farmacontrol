@@ -268,7 +268,7 @@ var TIPOS=[
   {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'}
 ];
 function tipoNome(id){var t=byId(TIPOS,id);return t?t.nome:id}
-var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',vaqueiro:'Responsável'};
+var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',vaqueiro:'Responsável por retiro'};
 var GRUPOS=[['todos','Tudo'],['aplicacao','Aplicações'],['estoque','Estoque'],['aprovacao','Aprovações'],['cadastro','Cadastro'],['equipe','Equipe']];
 var SEED_RETIROS=[
   {id:'r1',nome:'Retiro 1',cabecas:1240},{id:'r2',nome:'Retiro 2',cabecas:1080},{id:'r3',nome:'Retiro 3',cabecas:980},
@@ -603,19 +603,10 @@ function connPill(){
   return '<span class="pill warn">Sem sinal'+(p?' · '+p+' na fila':'')+'</span>';
 }
 function stripHtml(){
-  if(!DEMO&&!isMgr())return '';
-  var inFarm=isMgr()&&S.view!=='sa';
-  if(!DEMO&&!inFarm)return '';
-  var h='<div class="strip px"><span>'+(DEMO?'Modo teste':'Painel de testes')+'</span><div class="strip-ctl">';
-  if(isSuper()&&S.view!=='sa')h+='<div class="seg"><button data-act="sa">← Painel geral</button></div>';
-  if(inFarm){
-    h+='<div class="seg" role="group" aria-label="Perfil"><button data-act="perfil" data-v="ger" aria-pressed="'+(S.view==='ger')+'">Gerência</button><button data-act="perfil" data-v="vaq" aria-pressed="'+(S.view==='vaq')+'">Responsável</button></div>';
-    if(S.view==='vaq'&&retiros().length){
-      h+='<div class="seg"><select id="as-ret" aria-label="Ver como responsável de qual retiro">';
-      retiros().forEach(function(r){h+='<option value="'+esc(r.id)+'"'+(r.id===S.asRetiro?' selected':'')+'>'+esc(r.nome)+'</option>'});
-      h+='</select></div>';
-    }
-  }
+  var back=isSuper()&&S.view!=='sa';
+  if(!DEMO&&!back)return '';
+  var h='<div class="strip px"><span>'+(DEMO?'Modo teste':'Administrador geral')+'</span><div class="strip-ctl">';
+  if(back)h+='<div class="seg"><button data-act="sa">← Painel geral</button></div>';
   if(DEMO)h+='<div class="seg" role="group" aria-label="Conexão"><button data-act="net" data-v="on" aria-pressed="'+S.online+'">Com sinal</button><button data-act="net" data-v="off" aria-pressed="'+!S.online+'">Sem sinal</button></div>';
   return h+'</div></div>';
 }
@@ -664,7 +655,7 @@ function hdrV(){
     rs.forEach(function(id){ch+='<button class="chip" data-act="selRet" data-v="'+esc(id)+'" aria-pressed="'+(id===r)+'">'+esc(retiroNome(id))+'</button>'});
     ch+='</div>';
   }
-  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">'+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(r?retiroNome(r):'sem retiro')+' · '+esc(S.profile.nome)+'</div></div>'+
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Responsável por retiro · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(r?retiroNome(r):'sem retiro')+' · '+esc(S.profile.nome)+'</div></div>'+
     '<div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div>'+ch+'</header>';
 }
 function navV(){
