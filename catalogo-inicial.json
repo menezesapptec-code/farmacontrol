@@ -1,0 +1,8408 @@
+[
+ {
+  "nome": "Ric Be",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "implante",
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Benzoato de Estradiol Veiculo",
+  "barcodes": [
+   "7896006205975"
+  ],
+  "bula": "4007220-Ric-Be.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-ric-be"
+ },
+ {
+  "nome": "Mod Plus",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006200369"
+  ],
+  "bula": "4008288-Mod-Plus.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-mod-plus"
+ },
+ {
+  "nome": "Aliv V",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intrauterina",
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cloridrato de bromexina.......................................................... 300,0 mg Veículo",
+  "barcodes": [
+   "7896006248576"
+  ],
+  "bula": "4012911-Aliv-V_exclusao-especies.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-aliv-v"
+ },
+ {
+  "nome": "Thion C",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 40,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006212812"
+  ],
+  "bula": "4013108-Thion-C.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-thion-c"
+ },
+ {
+  "nome": "Primer PR",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intravaginal"
+  ],
+  "especies": [
+   "ovinos",
+   "caprinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006212782"
+  ],
+  "bula": "4013284-Primer-PR.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-primer-pr"
+ },
+ {
+  "nome": "Dextar",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 7,
+  "carenciaLeite": "3 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dexametasona (fosfato dissédico) 028 Veicul SP --100,0 ml Indica",
+  "barcodes": [
+   "7896006216506"
+  ],
+  "bula": "4017059-Dextar.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-dextar"
+ },
+ {
+  "nome": "TEC Relin",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 1 mL contém: Lecirelina...................................................................................................................................... 25 µg Veículo",
+  "barcodes": [
+   "7896006217152"
+  ],
+  "bula": "4017284-TEC-Relin.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-tec-relin"
+ },
+ {
+  "nome": "Calmiun",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": "1 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cloridrato de xilazina ....................................................................................................................... 2,33 g* Veículo",
+  "barcodes": [
+   "7896006212997"
+  ],
+  "bula": "4017304-Calmiun.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-calmiun"
+ },
+ {
+  "nome": "Dormiun",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 5.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006230601"
+  ],
+  "bula": "4018246-Dormiun.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-dormiun"
+ },
+ {
+  "nome": "Roflin inj",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 27,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006221159"
+  ],
+  "bula": "4019129-Roflin-inj.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-roflin-inj"
+ },
+ {
+  "nome": "Agemoxi CL",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006202752",
+   "7896006202745"
+  ],
+  "bula": "4019264-Agemoxi-CL.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-agemoxi-cl"
+ },
+ {
+  "nome": "Progecio",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 1 mL contém: Progesterona.............................................................................................................................................. 70 mg Veículo",
+  "barcodes": [
+   "7896006213024"
+  ],
+  "bula": "4019986-Progecio.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-progecio"
+ },
+ {
+  "nome": "Decathrine",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": 30.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "pulverização"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Deltametrina............................................................................................................................................................................2,5 g Veículo",
+  "barcodes": [
+   "7896006217695"
+  ],
+  "bula": "4020573-Decathrine.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-decathrine"
+ },
+ {
+  "nome": "Clinbacter",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos"
+  ],
+  "comp": "Cada comprimido de 210 mg contém: Administrar o produto de acordo com a tabela abaixo: Clindamicina*........................................................75 mg Excipiente",
+  "barcodes": [
+   "7896006218050",
+   "7896006218067"
+  ],
+  "bula": "4020676-Clinbacter-1.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-clinbacter"
+ },
+ {
+  "nome": "Megacilin Plus PPU",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 25.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 33,
+  "carenciaLeite": "5 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "caprinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006200475"
+  ],
+  "bula": "4021581-Megacilin-Plus-PPU.pdf",
+  "pend": [
+   "Várias doses por peso na bula [10.0, 15.0] (por espécie/indicação): definir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-megacilin-plus-ppu"
+ },
+ {
+  "nome": "Dorax Plus Pasta",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006218272"
+  ],
+  "bula": "4023727-Dorax-Plus-Pasta.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-dorax-plus-pasta"
+ },
+ {
+  "nome": "Estron",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada mL contém: Cloprostenol sddico’ .... Veiculo",
+  "barcodes": [
+   "7896006205128"
+  ],
+  "bula": "4025189-Estron.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Várias doses fixas na bula [0.7, 1.0, 2.0]: definir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-estron"
+ },
+ {
+  "nome": "Ceftrat",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "cães"
+  ],
+  "comp": "Cada comprimido de 321,18 mg contém: Cefpodoxime* ...................................................................................................................... 100 mg Excipiente",
+  "barcodes": [
+   "7896006217879",
+   "7896006217886"
+  ],
+  "bula": "4028415-BU-CEFTRAT-COM (1).pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-ceftrat"
+ },
+ {
+  "nome": "Combatt 3 (1 L)",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006201991"
+  ],
+  "bula": "4031290-Combatt-3-1L.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-combatt-3-1-l"
+ },
+ {
+  "nome": "Combatt 3 (5 L)",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006202004"
+  ],
+  "bula": "4031291-Combatt-3-5L.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-combatt-3-5-l"
+ },
+ {
+  "nome": "Fortgal Plus",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 12,
+  "carenciaLeite": "6 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006297000"
+  ],
+  "bula": "4031526-FORTGAL-PLUS.indd_.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-fortgal-plus"
+ },
+ {
+  "nome": "Mectimax Plus Pasta",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006214236"
+  ],
+  "bula": "4032089-Mectimax-Plus-Pasta.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-mectimax-plus-pasta"
+ },
+ {
+  "nome": "Placentex",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "caprinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006238799"
+  ],
+  "bula": "4032321-Placentex.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-placentex"
+ },
+ {
+  "nome": "Primer X (10 dispositivos)",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intravaginal"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006212775"
+  ],
+  "bula": "4033099-SC-AL-PRIMER-X-10-DISP.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-primer-x-10-dispositivos"
+ },
+ {
+  "nome": "Ectocid Pulverizacao",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 77,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pulverização",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006219880",
+   "7896006204152",
+   "7896006299714",
+   "7896006220077"
+  ],
+  "bula": "4033305-Ectocid-Pulverizacao.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-ectocid-pulverizacao"
+ },
+ {
+  "nome": "Zelotril Plus",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 14,
+  "carenciaLeite": "6 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006297123"
+  ],
+  "bula": "4033384-Zelotril-Plus.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-zelotril-plus"
+ },
+ {
+  "nome": "Fortgal 20 mg / 40 mg",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 5,
+  "carenciaLeite": "2 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006202646"
+  ],
+  "bula": "4033468-BU-FORTGAL-20MG-40MG.indd_.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-fortgal-20-mg-40-mg"
+ },
+ {
+  "nome": "Epmox",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 47,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006298083"
+  ],
+  "bula": "4033704-Epmox.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-epmox"
+ },
+ {
+  "nome": "Posilac 325 mg (25 un)",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 ml contém: Sometribove zinco ................................................................................................ 36 g Veículo",
+  "barcodes": [
+   "7896006221203"
+  ],
+  "bula": "4033728-BU-POSILAC-325MG-25CT-PACOTE.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-posilac-325-mg-25-un"
+ },
+ {
+  "nome": "Posilac 325 mg (100 un)",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006221203"
+  ],
+  "bula": "4033729-BU-POSILAC-325MG-100CT-PACOTE.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-posilac-325-mg-100-un"
+ },
+ {
+  "nome": "Agemoxi injetável",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 5,
+  "carenciaLeite": "7 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL de Agemoxi ® contém: Amoxicilina tri-hidratada*................................................................................................. 17,22 g Excipiente",
+  "barcodes": [
+   "7896006223337"
+  ],
+  "bula": "4033730-BU-AGEMOXI-INJ.indd_.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-agemoxi-injetavel"
+ },
+ {
+  "nome": "Dorax",
+  "lab": "Agener União",
+  "cat": "vac",
+  "frasco": 50.0,
+  "kgMl": 33.0,
+  "fixo": null,
+  "carencia": 34,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Doramectina .........................................................................................................................................................................1,0 g Veículo",
+  "barcodes": [
+   "7896006229179"
+  ],
+  "bula": "4034240-Dorax-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-dorax"
+ },
+ {
+  "nome": "Ubersec",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": "28 dias",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 g contém: Cefalexina Benzatina ............................................................................ 5,0 g Excipiente",
+  "barcodes": [
+   "7896006217862"
+  ],
+  "bula": "4034594-Ubersec.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-ubersec"
+ },
+ {
+  "nome": "Cipertroide Pour On",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 16,
+  "carenciaLeite": "12 horas",
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cipermetrina..................................................................................................... 5,0 g Veículo",
+  "barcodes": [
+   "7896006205456"
+  ],
+  "bula": "4035089-CIPERTROIDE-POUR-ON.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-cipertroide-pour-on"
+ },
+ {
+  "nome": "Zelotril 10",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 5,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Enrofloxacina ..................................................................................................................... 10 g Veículo",
+  "barcodes": [
+   "7896006223603"
+  ],
+  "bula": "4035705-Zelotril-10.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-zelotril-10"
+ },
+ {
+  "nome": "Carproflan 100 mg",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006210160"
+  ],
+  "bula": "4036416-Carproflan-100mg.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-carproflan-100-mg"
+ },
+ {
+  "nome": "Carproflan 75 mg",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006210122"
+  ],
+  "bula": "4036484-Carproflan-75mg.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-carproflan-75-mg"
+ },
+ {
+  "nome": "Carproflan 25 mg",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006210146"
+  ],
+  "bula": "4036489-Carproflan-25mg.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-carproflan-25-mg"
+ },
+ {
+  "nome": "Aerocid",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896006200888",
+   "7896006200871"
+  ],
+  "bula": "4038949Aerocid.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-aerocid"
+ },
+ {
+  "nome": "Clean Up (100 mL)",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 100,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896006215165"
+  ],
+  "bula": "4040144CleanUp100ML.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-clean-up-100-ml"
+ },
+ {
+  "nome": "Roflin (1 L)",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "Cada 100 mL Contém: Florfenicol . Veiculo",
+  "barcodes": [
+   "7896006221159"
+  ],
+  "bula": "AAD-ROFLIN-X-1L-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-roflin-1-l"
+ },
+ {
+  "nome": "Terracam Spray (125 mL)",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 125,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006217831"
+  ],
+  "bula": "AEROSOL-TERRACAM-SPRAY-X-125ML-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-terracam-spray-125-ml"
+ },
+ {
+  "nome": "Agebendazol injetável",
+  "lab": "Agener União",
+  "cat": "vac",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 14,
+  "carenciaLeite": "3 dias",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006200116"
+  ],
+  "bula": "AGEBENDAZOL-INJ-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Várias doses por peso na bula [20.0, 33.85] (por espécie/indicação): definir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-agebendazol-injetavel"
+ },
+ {
+  "nome": "Analgex",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "gatos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dipirona 50,00 g Veiculo",
+  "barcodes": [
+   "7896006263364"
+  ],
+  "bula": "ANALGEX-INJ-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Várias doses fixas na bula [10.0, 20.0]: definir",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-analgex"
+ },
+ {
+  "nome": "Animax Gel",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 21,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "Cada 100 g contém: Abamectina Excipiente",
+  "barcodes": [
+   "7896006211303"
+  ],
+  "bula": "ANIMAX-GEL-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-animax-gel"
+ },
+ {
+  "nome": "Agespirin",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896006228684"
+  ],
+  "bula": "Agespirin®.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-agespirin"
+ },
+ {
+  "nome": "Ketojet injetável",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 33.33,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": "24 horas",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cetoprofeno ......................................................................................................................................... 10,00 g Veículo",
+  "barcodes": [
+   "7896006238201"
+  ],
+  "bula": "BU-KETOJET-INJ-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-ketojet-injetavel"
+ },
+ {
+  "nome": "MECTIMAX GOLD",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": 500.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 72,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Ivermectina.................................................................................................................................... 3,15 g Veículo",
+  "barcodes": [
+   "7896006228264"
+  ],
+  "bula": "BU-MECTIMAX-GOLD-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-mectimax-gold"
+ },
+ {
+  "nome": "Agecox Neo (100 mL)",
+  "lab": "Agener União",
+  "cat": "verm",
+  "frasco": 100,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 65,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "suínos"
+  ],
+  "comp": "Cada 1 mL contém: Toltrazuril...............................................................................................50 mg Veículo",
+  "barcodes": [
+   "7896006227120"
+  ],
+  "bula": "BULA-AGECOX-NEO-X-100ML-10-02-2021.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-agecox-neo-100-ml"
+ },
+ {
+  "nome": "Cipiotec",
+  "lab": "Agener União",
+  "cat": "outro",
+  "frasco": 60.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006217848"
+  ],
+  "bula": "BULA-CIPIOTEC.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-cipiotec"
+ },
+ {
+  "nome": "Megacilin Super Plus",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 8.4,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006201038"
+  ],
+  "bula": "Bula-Megacilin-Super-Plus.pdf",
+  "pend": [
+   "Várias doses por peso na bula [20.0, 30.0] (por espécie/indicação): definir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-megacilin-super-plus"
+ },
+ {
+  "nome": "Buscofin",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 12,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006206088"
+  ],
+  "bula": "Bula-atualizada-Buscofin.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-buscofin"
+ },
+ {
+  "nome": "Cef 50 mg",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 1 mL contém: Ceftiofur (cloridrato)................................................................................................. 50,0 mg Veículo",
+  "barcodes": [
+   "7896006200314"
+  ],
+  "bula": "Bula-atualizada-CEF-50mg.pdf",
+  "pend": [
+   "Várias doses por peso na bula [15.0, 50.0] (por espécie/indicação): definir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-cef-50-mg"
+ },
+ {
+  "nome": "Doxitrat",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "cães",
+   "gatos",
+   "aves"
+  ],
+  "comp": "Cada comprimido de 130,00 mg contém: Hiclato de Doxiciclina*............................................ 57,70 mg Excipiente",
+  "barcodes": [
+   "7896006212768",
+   "7896006212805",
+   "7896006263548"
+  ],
+  "bula": "Doxitrat_BU_atualizada.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Mais de um código (apresentações/volumes diferentes)",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-doxitrat"
+ },
+ {
+  "nome": "Izoot B12",
+  "lab": "Agener União",
+  "cat": "vac",
+  "frasco": 15.0,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dipropionato de imidocarb Vitamina B12 Veiculo",
+  "barcodes": [
+   "7896006200239"
+  ],
+  "bula": "IZOOT-B12-INJ-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-izoot-b12"
+ },
+ {
+  "nome": "Providean Repro (250 mL)",
+  "lab": "Agener União",
+  "cat": "vac",
+  "frasco": 250,
+  "kgMl": null,
+  "fixo": 5.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [],
+  "bula": "RT-BU-Providean-Repro-12-x-250ml-Brasil.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Carência de abate não encontrada: conferir"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-providean-repro-250-ml"
+ },
+ {
+  "nome": "Providean Respiratória (250 mL)",
+  "lab": "Agener União",
+  "cat": "vac",
+  "frasco": 250,
+  "kgMl": null,
+  "fixo": 5.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7798177130646"
+  ],
+  "bula": "RT-BU-Providean-Respiratoria-x-250ml-Brasil.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-providean-respiratoria-250-ml"
+ },
+ {
+  "nome": "Terracam Plus",
+  "lab": "Agener União",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 27,
+  "carenciaLeite": "30 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896006200468"
+  ],
+  "bula": "TERRACAM-BAIXA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "agener-uniao-terracam-plus"
+ },
+ {
+  "nome": "Cantrimol",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": 11.73,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 47,
+  "carenciaLeite": "8 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898254640256"
+  ],
+  "bula": "cantrimol.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-cantrimol"
+ },
+ {
+  "nome": "Ceftiomax",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": "12 horas",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898254640911"
+  ],
+  "bula": "ceftiomax.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-ceftiomax"
+ },
+ {
+  "nome": "Floroxin",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 33,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898254642335"
+  ],
+  "bula": "floroxin.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-floroxin"
+ },
+ {
+  "nome": "Ketoprofeno",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898254642953",
+   "7898254642960"
+  ],
+  "bula": "ketoprofeno.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Várias doses por peso na bula [33.0, 33.33] (por espécie/indicação): definir",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-ketoprofeno"
+ },
+ {
+  "nome": "Maxibiotic",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 8,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898254642465"
+  ],
+  "bula": "maxibiotic.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-maxibiotic"
+ },
+ {
+  "nome": "Parofor solução oral",
+  "lab": "Biogénesis Bagó",
+  "cat": "trat",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 62,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "5414916626349"
+  ],
+  "bula": "parofor-solucaooral.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "biogenesis-bago-parofor-solucao-oral"
+ },
+ {
+  "nome": "Bovikalc",
+  "lab": "Boehringer Ingelheim",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": "24 horas",
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "5703655004014"
+  ],
+  "bula": "Bula - Bovikalc® .pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-bovikalc"
+ },
+ {
+  "nome": "Ivomec Gold",
+  "lab": "Boehringer Ingelheim",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 101,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL Contém: Ivermectina....................................3,15 g Veículo",
+  "barcodes": [
+   "7898053779966"
+  ],
+  "bula": "Bula Ivomec Gold.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-ivomec-gold"
+ },
+ {
+  "nome": "Topline Pour On",
+  "lab": "Boehringer Ingelheim",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 172,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Fipronil..............................................1,0 g Corante Diazóico Vermelho..........0,04 g Veículo",
+  "barcodes": [
+   "7898053771311"
+  ],
+  "bula": "Bula Topline Pour On.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-topline-pour-on"
+ },
+ {
+  "nome": "Topline Spray",
+  "lab": "Boehringer Ingelheim",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 64,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Fipronil.......................................................0,32 g Sulfadiazina de prata..................................0,09 g Alumínio.....................................................3,10 g ",
+  "barcodes": [
+   "7898053773124"
+  ],
+  "bula": "Bula Topline Spray.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-topline-spray"
+ },
+ {
+  "nome": "Ubrolexin",
+  "lab": "Boehringer Ingelheim",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 10,
+  "carenciaLeite": "5 dias",
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 10 g da seringa intramamária contém: 210 mg Cefalexina monoidratada Monosulfato de canamicina 100.000 U.I. Indica",
+  "barcodes": [
+   "4028691518938"
+  ],
+  "bula": "Bula Ubrolexin.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-ubrolexin"
+ },
+ {
+  "nome": "J-Vac",
+  "lab": "Boehringer Ingelheim",
+  "cat": "vac",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "0350604268956"
+  ],
+  "bula": "Bula- J VAC_compressed_0.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-j-vac"
+ },
+ {
+  "nome": "Ivomec F",
+  "lab": "Boehringer Ingelheim",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 19,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898053773056"
+  ],
+  "bula": "Ivomec F.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-ivomec-f"
+ },
+ {
+  "nome": "Metacam 20 mg",
+  "lab": "Boehringer Ingelheim",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 15,
+  "carenciaLeite": "5 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "oral",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7896026307413"
+  ],
+  "bula": "METACAM 20MG_CLEAN.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-metacam-20-mg"
+ },
+ {
+  "nome": "Ivomec injetável",
+  "lab": "Boehringer Ingelheim",
+  "cat": "vac",
+  "frasco": 50.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Ivermectina ............................................................................................1,0 g Veículo",
+  "barcodes": [
+   "7898053772769"
+  ],
+  "bula": "ivomec-injetavel.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-ivomec-injetavel"
+ },
+ {
+  "nome": "Mamyzin S",
+  "lab": "Boehringer Ingelheim",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 9,
+  "carenciaLeite": "37 dias",
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada seringa de 5 mL contém: Hidroiodeto de Penetamato 100 mg (100.000 UI); Penicilina G Benetamina 280 mg (280.000 UI); Sulfato de Framicetina 100 mg. Excipiente",
+  "barcodes": [
+   "7898659783800"
+  ],
+  "bula": "mamyzin-s.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "boehringer-ingelheim-mamyzin-s"
+ },
+ {
+  "nome": "ADE injetável Corte & Leite (100 mL)",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 100,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172273406"
+  ],
+  "bula": "ADE-100mL-Bula-1.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-ade-injetavel-corte-leite-100-ml"
+ },
+ {
+  "nome": "Amoclox",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 8,
+  "carenciaLeite": "60 dias",
+  "unidade": "mL",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043431461"
+  ],
+  "bula": "AMOCLOX-1.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-amoclox"
+ },
+ {
+  "nome": "Anasedan",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043432185"
+  ],
+  "bula": "ANASEDAN-1.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-anasedan"
+ },
+ {
+  "nome": "Aftomune (100 mL)",
+  "lab": "Ceva",
+  "cat": "vac",
+  "frasco": 100,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [],
+  "bula": "Aftomune-100ml-Bula-1-1.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir"
+  ],
+  "conferido": false,
+  "id": "ceva-aftomune-100-ml"
+ },
+ {
+  "nome": "Anavac B19",
+  "lab": "Ceva",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutanea"
+  ],
+  "especies": [
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172271204"
+  ],
+  "bula": "Anavac-B19.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-anavac-b19"
+ },
+ {
+  "nome": "Benzoato HC",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 ml do produto contém: Benzoato de Estradiol Olg Excipiente",
+  "barcodes": [
+   "7898172273550"
+  ],
+  "bula": "BENZOATO-HC-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-benzoato-hc"
+ },
+ {
+  "nome": "Foli-Rec líquido",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 30.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": "0 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100ml contém: Gonadotrofina coriônica equina recombinante (reCG) ............................. 7.000 UI Excipiente",
+  "barcodes": [
+   "7798166874933"
+  ],
+  "bula": "BR_-_FOLI-REC_LIQUIDO-_1_.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-foli-rec-liquido"
+ },
+ {
+  "nome": "Cevarelin",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 4.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Gonadorelina (Diacetato) .................................................................................................................................................... 0,005 g Veículo",
+  "barcodes": [
+   "3411113152581"
+  ],
+  "bula": "Bula-Cevarelin.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-cevarelin"
+ },
+ {
+  "nome": "Cefavet",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 1,
+  "carenciaLeite": "84 horas",
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043430266"
+  ],
+  "bula": "CEFAVET-1.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-cefavet"
+ },
+ {
+  "nome": "Ceva PPD Tub A",
+  "lab": "Ceva",
+  "cat": "vac",
+  "frasco": 2.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172270078"
+  ],
+  "bula": "CEVA-PPD-TUB-A-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-ceva-ppd-tub-a"
+ },
+ {
+  "nome": "Ceva PPD Tub B",
+  "lab": "Ceva",
+  "cat": "vac",
+  "frasco": 2.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172270016"
+  ],
+  "bula": "CEVA-PPD-TUB-B-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-ceva-ppd-tub-b"
+ },
+ {
+  "nome": "Cipionato de estradiol",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cipionato de Estradiol 100 mg EXCIpIeNES 9.8.9 oo sanneniuninniinnnninniinniinnniinniniinnnninninniinaniinnvinneiinnnnaeness 100 ML Indica",
+  "barcodes": [
+   "7898172273536"
+  ],
+  "bula": "CIPIONATO-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-cipionato-de-estradiol"
+ },
+ {
+  "nome": "Combo Pó",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898576820152"
+  ],
+  "bula": "COMBO-PO.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-combo-po"
+ },
+ {
+  "nome": "Cyperclor Plus Pulverização",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": 25.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 8,
+  "carenciaLeite": "2 dias",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043432314"
+  ],
+  "bula": "Cyperclor-Plus-Pulverizacao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-cyperclor-plus-pulverizacao"
+ },
+ {
+  "nome": "Dexacort",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 8,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dexametasona (fosfato de sódio) ........ 250 mg Excipiente",
+  "barcodes": [
+   "7899706414210"
+  ],
+  "bula": "DEXACORT-ALTA-RESOLUCAO.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-dexacort"
+ },
+ {
+  "nome": "EPRECIS",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Eprinomectina Excipiente",
+  "barcodes": [
+   "7898043435056"
+  ],
+  "bula": "EPRECIS-1.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-eprecis"
+ },
+ {
+  "nome": "FIPROLINE",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 67,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Fipronil... 3g Excipiente",
+  "barcodes": [
+   "7898576820374"
+  ],
+  "bula": "FIPROLINE.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-fiproline"
+ },
+ {
+  "nome": "FLURON GOLD",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": 1000.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 91,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "pour-on",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043434196"
+  ],
+  "bula": "FLURON-GOLD-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-fluron-gold"
+ },
+ {
+  "nome": "Foli-Rec",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7798166874933"
+  ],
+  "bula": "FOLI-REC-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-foli-rec"
+ },
+ {
+  "nome": "Indigest",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 30.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Membutona sn vn 102-8 Excipiente",
+  "barcodes": [
+   "7898172274960"
+  ],
+  "bula": "INDIGEST-ALTA-RESOLUCAO.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-indigest"
+ },
+ {
+  "nome": "Ketofen 10%",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 10.0,
+  "kgMl": 33.33,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898053772981"
+  ],
+  "bula": "KETOFEN.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-ketofen-10"
+ },
+ {
+  "nome": "Luteglan",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém D (+) Cloprostenol 7,50 mg (*) Excipiente",
+  "barcodes": [
+   "7898172275011"
+  ],
+  "bula": "LUTEGLAN-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-luteglan"
+ },
+ {
+  "nome": "Marbox",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 3,
+  "carenciaLeite": "48 horas",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "3411113027339"
+  ],
+  "bula": "MARBOX-Alta-resolucao.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-marbox"
+ },
+ {
+  "nome": "Modfic (500 mL)",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": 10.0,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898576820411"
+  ],
+  "bula": "MODFIC-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-modfic-500-ml"
+ },
+ {
+  "nome": "Niglumine",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 45.0,
+  "fixo": null,
+  "carencia": 20,
+  "carenciaLeite": "1 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172277640"
+  ],
+  "bula": "NIGLUMINE-ALTA-RESOLUCAO.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-niglumine"
+ },
+ {
+  "nome": "Partomicina",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 7.91,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 41,
+  "carenciaLeite": "8 dias",
+  "unidade": "outro",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043435025"
+  ],
+  "bula": "PARTOMICINA-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-partomicina"
+ },
+ {
+  "nome": "Puritec Gold (1 L)",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": 50.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 117,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Ivermectina B1a............................................. 3,50 g Excipiente",
+  "barcodes": [
+   "7898043432505"
+  ],
+  "bula": "PURITEC-GOLD-1.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-puritec-gold-1-l"
+ },
+ {
+  "nome": "Pro-Ciclar",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intravaginal"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "CADA DISPOSITIVO CONTEM: Progesterona (4-pregnane-3, 20-diona) micronizada ... Excipiente",
+  "barcodes": [
+   "7898172277763"
+  ],
+  "bula": "Pro-Ciclar.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-pro-ciclar"
+ },
+ {
+  "nome": "Roboforte",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Hidrolisado de caseina 50g Calcio fosforilcloreto de colina 50g Excipiente",
+  "barcodes": [
+   "7898576820527"
+  ],
+  "bula": "ROBOFORTE.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-roboforte"
+ },
+ {
+  "nome": "Rabmune",
+  "lab": "Ceva",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898172274717"
+  ],
+  "bula": "Rabmune-Bula.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-rabmune"
+ },
+ {
+  "nome": "Tilmicovet",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém Tilmicosina 300g Excipiente",
+  "barcodes": [
+   "7898172274823"
+  ],
+  "bula": "TILMICOVET-Alta-resolucao.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-tilmicovet"
+ },
+ {
+  "nome": "Tyladen",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 20,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "intramamária",
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "Cada 100mL contém: Tilosina (sob forma base) ............................................................. 20,0 g Veículo",
+  "barcodes": [
+   "7898043430402"
+  ],
+  "bula": "TYLADEN-ALTA-RESOLUCAO.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-tyladen"
+ },
+ {
+  "nome": "Velactis",
+  "lab": "Ceva",
+  "cat": "outro",
+  "frasco": 5.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 23,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL de produto contém: Cabergolina \b�������������������������������������������������������������������������������������������������������������� 0,112 g Excipiente",
+  "barcodes": [
+   "7898043433823"
+  ],
+  "bula": "VELACTIS.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-velactis"
+ },
+ {
+  "nome": "Vivedium",
+  "lab": "Ceva",
+  "cat": "verm",
+  "frasco": 50.0,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 46,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898043433809"
+  ],
+  "bula": "VIVEDIUM.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-vivedium"
+ },
+ {
+  "nome": "Zeleris",
+  "lab": "Ceva",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 56,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "3411112944538"
+  ],
+  "bula": "Zeleris-Bula-.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ceva-zeleris"
+ },
+ {
+  "nome": "Supravac 10 (50 mL)",
+  "lab": "Ourofino",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 5.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898344750797"
+  ],
+  "bula": "302010052_Supravac_10_50mL_139-6.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-supravac-10-50-ml"
+ },
+ {
+  "nome": "Cálcio Reforçado (200 mL)",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Gluconato de cálcio ...... 20,00 g Cloreto de magnésio hidratado ............1,80 g Hipofosfito de sódio ........... 3,10 g Dextrose .............................. 10,00 g Veículo",
+  "barcodes": [
+   "7898019860738"
+  ],
+  "bula": "50006605_0425_OF00_CALCIO_REFORCADO_200ML_TEXTO_TECNICO.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-calcio-reforcado-200-ml"
+ },
+ {
+  "nome": "Boostin",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada seringa de 2 g contém: Somatotropina bovina recombinante ....................... 500,0 mg Excipiente",
+  "barcodes": [
+   "7898019862275"
+  ],
+  "bula": "BUL_13000798_1224_OF00_LPIS00003D-3_BOOSTIN_COM_AP_QFLmY97.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-boostin"
+ },
+ {
+  "nome": "Diclofenaco 50",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": "8 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Diclofenaco sódico ....... 5,00 g Veículo",
+  "barcodes": [
+   "7898019861315"
+  ],
+  "bula": "BUL_50004196_0720_OF00_DICLOFENACO_50-VD.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-diclofenaco-50"
+ },
+ {
+  "nome": "Pareun",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898019867973"
+  ],
+  "bula": "BUL_50004532_0920_OF00_PAREUN.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-pareun"
+ },
+ {
+  "nome": "Produce",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 32,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Abamectina .................... 1,00 g Veículo",
+  "barcodes": [
+   "7898019869021"
+  ],
+  "bula": "BUL_50005729_1222_OF00_PRODUCE.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-produce"
+ },
+ {
+  "nome": "Evol",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 22,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Ivermectina ...................... 0,80 g Sulfóxido de Albendazol ........................ 10,0 g Veículo",
+  "barcodes": [
+   "7898019867751"
+  ],
+  "bula": "BUL_50006173_0923_OF00_EVOL-VD.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-evol"
+ },
+ {
+  "nome": "Master LP",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 37,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Ivermectina ...................... 4,00 g Veículo",
+  "barcodes": [
+   "7898019863258"
+  ],
+  "bula": "BUL_50006326_0324_OF00_MASTER_LP_VD_1.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-master-lp"
+ },
+ {
+  "nome": "Finador",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": "2 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dipirona Sódica ............. 50,00 g Veículo",
+  "barcodes": [
+   "7898019860905"
+  ],
+  "bula": "BUL_50006423_0524_OF00_FINADOR-VD.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-finador"
+ },
+ {
+  "nome": "Desflan",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 45.5,
+  "fixo": null,
+  "carencia": 10,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Flunixina (Meglumina) ................... 5,0 g Veículo",
+  "barcodes": [
+   "7898019861636"
+  ],
+  "bula": "BUL_50006614_1224_OF00_DESFLAN-VD.pdf",
+  "pend": [
+   "Dose calculada de 1,1 mg/kg e 50.0 mg/mL: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-desflan"
+ },
+ {
+  "nome": "Mastifin Vaca Seca",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada seringa de 10 g contém: Sulfato de Gentamicina ........... 677,00 mg* Excipiente",
+  "barcodes": [
+   "7898019868963"
+  ],
+  "bula": "BUL_50006686_0225_OF00_MASTIFIN_VACA_SECA-VD.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-mastifin-vaca-seca"
+ },
+ {
+  "nome": "Maxicam 2%",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 15,
+  "carenciaLeite": "5 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Meloxicam ................................................. 2,0 g Excipiente",
+  "barcodes": [
+   "7898019863241"
+  ],
+  "bula": "BUL_50006693_0325_OF00_MAXICAM_2_VD.pdf",
+  "pend": [
+   "Várias doses por peso na bula [33.33, 40.0, 50.0] (por espécie/indicação): definir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-maxicam-2"
+ },
+ {
+  "nome": "Colosso Pour On",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 69,
+  "carenciaLeite": "7 dias",
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Cipermetrina ....................... 5,00 g Clorpirifós ............................. 7,00 g Veículo",
+  "barcodes": [
+   "7898019861919"
+  ],
+  "bula": "BUL_50006733_50006736_50006738_0325_OF00_KIT_COLOS_VZPCScW.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-colosso-pour-on"
+ },
+ {
+  "nome": "Colosso FC30",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 24,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "banho",
+   "pulverização"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Clorpirifós ............................... 30,0 g Cipermetrina ............................ 15,0 g Fenthion .................................... 15,0 g Veículo",
+  "barcodes": [
+   "7898019867218"
+  ],
+  "bula": "BUL_50006741_50006746_0325_OF00_KIT_COLOSSO_FC30-VD.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-colosso-fc30"
+ },
+ {
+  "nome": "Sincro eCG",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898019864330"
+  ],
+  "bula": "BUL_50007037_0725_OF00_SINCRO_ECG_BILINGUE-VD.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-sincro-ecg"
+ },
+ {
+  "nome": "Enfrent",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 100.0,
+  "fixo": null,
+  "carencia": 220,
+  "carenciaLeite": "10 dias",
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Dipropionato de Imidocarb ............................... 12,00 g Veículo",
+  "barcodes": [
+   "7898019867775"
+  ],
+  "bula": "BUL_50007152_0825_OF00_ENFRENT-VD_3SzsqZ2.pdf",
+  "pend": [
+   "Dose calculada de 1,2 mg/kg e 120.0 mg/mL: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-enfrent"
+ },
+ {
+  "nome": "Fluatac Duo",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 60,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Fluazuron .......................... 3,00 g Abamectina ..................... 0,50 g Veículo",
+  "barcodes": [
+   "7898019864149"
+  ],
+  "bula": "BUL_50007159_1025_OF00_FLUATAC_DUO_KIT_12UNI-VD.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-fluatac-duo"
+ },
+ {
+  "nome": "Resolutor",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 5,
+  "carenciaLeite": "56 horas",
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898019867836"
+  ],
+  "bula": "BUL_50007166_0825_OF00_RESOLUTOR-VD.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-resolutor"
+ },
+ {
+  "nome": "Maxicam Gel",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "Cada 100 g contém: Meloxicam .................................... 4,50 g Vitamina E (acetato) ................... 7,50 g Veículo",
+  "barcodes": [
+   "7898019869649"
+  ],
+  "bula": "BUL_50007359_0126_OF00_MAXICAM_GEL-VD.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-maxicam-gel"
+ },
+ {
+  "nome": "Vacina Feedlot (Ourofino)",
+  "lab": "Ourofino",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 5.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [],
+  "bula": "BUL_SITE_FEEDLOT.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir"
+  ],
+  "conferido": false,
+  "id": "ourofino-vacina-feedlot-ourofino"
+ },
+ {
+  "nome": "NexLaner (1 L)",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 24,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "pour on",
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Fluralaner ................................................... 2,50 g Excipiente",
+  "barcodes": [
+   "7898019862343"
+  ],
+  "bula": "CXI_50006709_0225_OF00_NEXLANER_1L_PP-TEXTO_TECNICO_2.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-nexlaner-1-l"
+ },
+ {
+  "nome": "Fortemil (500 mL)",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898019869625"
+  ],
+  "bula": "CXI_50006845_0425_OF00_FORTEMIL_500ML_UN-TEXTO_TECNICO.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-fortemil-500-ml"
+ },
+ {
+  "nome": "Biobac PRO",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898019862336"
+  ],
+  "bula": "DIS_BIOBAC_OF-V3_0225_TEXTO_TECNICO_1.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-biobac-pro"
+ },
+ {
+  "nome": "Lepecid BR Spray (400 mL)",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 33,
+  "carenciaLeite": "12 horas",
+  "unidade": "mL",
+  "via": [
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898019864040"
+  ],
+  "bula": "LAT_50006503_0824_OF00_LEPECID_400ML_TEXTO_TECNICO_1.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-lepecid-br-spray-400-ml"
+ },
+ {
+  "nome": "Brinco Mosquicida Na Mosca",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 1,
+  "carenciaLeite": "1 dias",
+  "unidade": "outro",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada brinco de 15 g contém: Diazinon .................. 6,0 g Veículo",
+  "barcodes": [
+   "7898019867843"
+  ],
+  "bula": "SHC_50006927_0725_OF00_BRINCO_MOSQ_NA_MOSCA_20X15G_ewRg4HX.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-brinco-mosquicida-na-mosca"
+ },
+ {
+  "nome": "Colosso Pulverização",
+  "lab": "Ourofino",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 24,
+  "carenciaLeite": "108 horas",
+  "unidade": "mL",
+  "via": [
+   "banho",
+   "pulverização"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Clorpirifós ............................................. 25,0 g Cipermetrina ......................................... 15,0 g Veículo",
+  "barcodes": [
+   "7898019861766"
+  ],
+  "bula": "bula-colosso-pulverizacao.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-colosso-pulverizacao"
+ },
+ {
+  "nome": "Sincrocio",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cloprostenol sódico* .......................... 26,30 mg Veículo",
+  "barcodes": [
+   "7898019863647"
+  ],
+  "bula": "bula-sincrocio.pdf",
+  "pend": [
+   "Várias doses fixas na bula [1.0, 2.0]: definir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-sincrocio"
+ },
+ {
+  "nome": "SincroCP",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 1.0,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Cipionato de Estradiol ....................... 100 mg Veículo",
+  "barcodes": [
+   "7898019867300"
+  ],
+  "bula": "bula-sincrocp.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-sincrocp"
+ },
+ {
+  "nome": "Sincrodiol",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "implante",
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Benzoato de Estradiol ....... 100,00 mg Veículo",
+  "barcodes": [
+   "7898019863883"
+  ],
+  "bula": "bula-sincrodiol.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-sincrodiol"
+ },
+ {
+  "nome": "Sincrogest",
+  "lab": "Ourofino",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intravaginal"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada dispositivo contém: Progesterona ...................................................................................... 1 g Excipiente",
+  "barcodes": [
+   "7898019863944"
+  ],
+  "bula": "bula-sincrogest.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-sincrogest"
+ },
+ {
+  "nome": "Hidrat Up",
+  "lab": "Ourofino",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7908150200024"
+  ],
+  "bula": "hidrat-up-ficha-tecnica-030221.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "ourofino-hidrat-up"
+ },
+ {
+  "nome": "ADE injetável",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 2.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos",
+   "cães",
+   "gatos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898597993507"
+  ],
+  "bula": "ADE.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ade-injetavel"
+ },
+ {
+  "nome": "Alatox",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral",
+   "pulverização"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049711550"
+  ],
+  "bula": "ALATOX.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-alatox"
+ },
+ {
+  "nome": "Abor-Vac",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898053770468"
+  ],
+  "bula": "Abor-Vac.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-abor-vac"
+ },
+ {
+  "nome": "Advocin 180",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 30.0,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": "41 horas",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Danofloxacin (mesilato) ......... 00... .ccc cee ceceeeteseesteesteeteteeeeeeeees 18,0 Veiculo",
+  "barcodes": [
+   "7898597993736"
+  ],
+  "bula": "Advocin_180.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-advocin-180"
+ },
+ {
+  "nome": "Barrage",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "pulverização"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Cipermetrina 92%............ 13,47 mL Veículo",
+  "barcodes": [
+   "7898049719723"
+  ],
+  "bula": "Barrage.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-barrage"
+ },
+ {
+  "nome": "Blo-Trol",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 150.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716555"
+  ],
+  "bula": "Blo-Trol.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-blo-trol"
+ },
+ {
+  "nome": "Bopriva",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718382"
+  ],
+  "bula": "Bopriva.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-bopriva"
+ },
+ {
+  "nome": "Bovi-Shield Gold One Shot",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898597993224"
+  ],
+  "bula": "Bovi-Shield-Gold-One-Shot.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-bovi-shield-gold-one-shot"
+ },
+ {
+  "nome": "CattleMaster 4 L5",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": 5.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049717040"
+  ],
+  "bula": "CattleMaster-4L5.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-cattlemaster-4-l5"
+ },
+ {
+  "nome": "Ciclase",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 1 mL contém: Cloprostenol sódico.................... 263 μg Excipiente",
+  "barcodes": [
+   "7898597993194"
+  ],
+  "bula": "Ciclase.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ciclase"
+ },
+ {
+  "nome": "CIDR",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": "24 horas",
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "intravaginal"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada dispositivo em forma de T contém: Progesterona 1,99 Excipiente",
+  "barcodes": [
+   "7898049716180"
+  ],
+  "bula": "Cidr.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-cidr"
+ },
+ {
+  "nome": "Clamoxyl",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 8,
+  "carenciaLeite": "5 dias",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Amoxicilina (trihidratada) ......................... 15,0 g Veículo",
+  "barcodes": [
+   "7898049716197"
+  ],
+  "bula": "Clamoxyl.pdf",
+  "pend": [
+   "Dose calculada de 15 mg/kg e 150.0 mg/mL: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-clamoxyl"
+ },
+ {
+  "nome": "Cydectin",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": 500.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 21,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Moxidectina ....................... 1 g Veículo",
+  "barcodes": [
+   "7898049710379"
+  ],
+  "bula": "Cydectin.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-cydectin"
+ },
+ {
+  "nome": "D-500",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": "72 horas",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049710386"
+  ],
+  "bula": "D-500.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher"
+  ],
+  "conferido": false,
+  "id": "zoetis-d-500"
+ },
+ {
+  "nome": "Dectomax",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 33,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716623"
+  ],
+  "bula": "Dectomax.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Várias doses por peso na bula [3.0, 33.0] (por espécie/indicação): definir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-dectomax"
+ },
+ {
+  "nome": "Dib 0,5",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intravaginal"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049719891"
+  ],
+  "bula": "Dib_05.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-dib-0-5"
+ },
+ {
+  "nome": "Draxxin KP",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 25,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 1 mL contém: Tulatromicina ...................... 100 mg Cetoprofeno ........................ 120 mg Excipiente",
+  "barcodes": [
+   "7898049716005"
+  ],
+  "bula": "DraxxinKP.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-draxxin-kp"
+ },
+ {
+  "nome": "E.C.P.",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716654"
+  ],
+  "bula": "E.C.P.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-e-c-p"
+ },
+ {
+  "nome": "Excede",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 13,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Ácido Livre Cristalino de Ceftiofur (atividade).......................... 20,0 g Veículo",
+  "barcodes": [
+   "7898049716227"
+  ],
+  "bula": "Excede-200_0.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-excede"
+ },
+ {
+  "nome": "Excenel RTU EZ",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 3,
+  "carenciaLeite": "0 dias",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "5414736040622"
+  ],
+  "bula": "Excenel-RTU-EZ.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-excenel-rtu-ez"
+ },
+ {
+  "nome": "Fluvac Innovator EWT",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049719693"
+  ],
+  "bula": "FLUVAC-INNOVATOR-EWT.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-fluvac-innovator-ewt"
+ },
+ {
+  "nome": "Flumast",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 45,
+  "carenciaLeite": "4 dias",
+  "unidade": "mL",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049710560"
+  ],
+  "bula": "Flumast.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-flumast"
+ },
+ {
+  "nome": "Fluvac Innovator EHV",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "0726287982210"
+  ],
+  "bula": "Fluvac-Innovator-EHV.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-fluvac-innovator-ehv"
+ },
+ {
+  "nome": "Formoped",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: M.D.M.H. (Monometilol dimetil hidantoína) ……………………… 27,5 g Veículo",
+  "barcodes": [
+   "7898049716685"
+  ],
+  "bula": "Formoped.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-formoped"
+ },
+ {
+  "nome": "Fortress 7",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716968"
+  ],
+  "bula": "Fortress-7.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-fortress-7"
+ },
+ {
+  "nome": "Fortress 8",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716975"
+  ],
+  "bula": "Fortress-8.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-fortress-8"
+ },
+ {
+  "nome": "Ganadol",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": "1 dias",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718948"
+  ],
+  "bula": "Ganadol.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ganadol"
+ },
+ {
+  "nome": "Glanvac",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716784"
+  ],
+  "bula": "Glanvac.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-glanvac"
+ },
+ {
+  "nome": "Gonadiol",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718689"
+  ],
+  "bula": "Gonadiol.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-gonadiol"
+ },
+ {
+  "nome": "Inforce 3",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049719228"
+  ],
+  "bula": "Inforce3.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-inforce-3"
+ },
+ {
+  "nome": "Leptoferm 5.2",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049717071"
+  ],
+  "bula": "Leptoferm5.2.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-leptoferm-5-2"
+ },
+ {
+  "nome": "Lutalyse",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049716777"
+  ],
+  "bula": "Lutalyse.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-lutalyse"
+ },
+ {
+  "nome": "Matabicheiras Forte SV",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 4,
+  "carenciaLeite": "1 dias",
+  "unidade": "mL",
+  "via": [
+   "tópica"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 g contém (% p/p): Supona (Chlorfenvinphos) ........... 0,52 g Vapona (Dichlorvos) ..................... 0,83 g Excipiente",
+  "barcodes": [
+   "7898049717569"
+  ],
+  "bula": "Matabicheiras-Forte-SV.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-matabicheiras-forte-sv"
+ },
+ {
+  "nome": "Novormon",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 25.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "suínos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718665"
+  ],
+  "bula": "Novormon.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-novormon"
+ },
+ {
+  "nome": "Onyx",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049712007"
+  ],
+  "bula": "Onyx.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-onyx"
+ },
+ {
+  "nome": "Orbenin",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": "42 dias",
+  "unidade": "mL",
+  "via": [
+   "intramamaria"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada seringa contém: Cloxacilina (como cloxacilina benzatina) Excipiente",
+  "barcodes": [
+   "7898049717941"
+  ],
+  "bula": "Orbenin.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-orbenin"
+ },
+ {
+  "nome": "Ovalyse",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": 2.0,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada mL contém: Gonadorelina Acetato ............. 50 µg Excipiente",
+  "barcodes": [
+   "7898049710515"
+  ],
+  "bula": "Ovalyse.pdf",
+  "pend": [
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ovalyse"
+ },
+ {
+  "nome": "Pentabiótico Veterinário",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": 3.0,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 22,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049711086"
+  ],
+  "bula": "PENTABIOTICO-VETERINARIO-BR.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-pentabiotico-veterinario"
+ },
+ {
+  "nome": "Pneumabort K + 1b",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "outro",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7894442002264"
+  ],
+  "bula": "Pneumabort-k-+-1b.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-pneumabort-k-1b"
+ },
+ {
+  "nome": "Potenay 50c (10 mL)",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": 10,
+  "kgMl": 12.5,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 1 mL da solugao contém Cafeina 50,0 mg Vitamina Bo 20mg Vitamina Bs 4000 mg Vitamina Be 50mg Veiculo",
+  "barcodes": [
+   "7898049710102"
+  ],
+  "bula": "Potenay-50c-10ml.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-potenay-50c-10-ml"
+ },
+ {
+  "nome": "Potenay Gold",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": 120.0,
+  "kgMl": 2.5,
+  "fixo": null,
+  "carencia": 3,
+  "carenciaLeite": "24 horas",
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "cães",
+   "gatos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049711161"
+  ],
+  "bula": "Potenay-gold.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-potenay-gold"
+ },
+ {
+  "nome": "Potenay injetável",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 4,
+  "carenciaLeite": "36 horas",
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049711116"
+  ],
+  "bula": "Potenay-injetável.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-potenay-injetavel"
+ },
+ {
+  "nome": "Progespon",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": "30 dias",
+  "unidade": "mL",
+  "via": [
+   "intrauterina"
+  ],
+  "especies": [
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [],
+  "bula": "Progespon.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir"
+  ],
+  "conferido": false,
+  "id": "zoetis-progespon"
+ },
+ {
+  "nome": "Ripercol L solução oral",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 16,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Cloridrato de Levamisol ....................... 5 g Veículo",
+  "barcodes": [
+   "7898049711871"
+  ],
+  "bula": "Ripercol-L-Solução-Oral.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ripercol-l-solucao-oral"
+ },
+ {
+  "nome": "Ripercol L injetável",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": 250.0,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 4,
+  "carenciaLeite": "24 horas",
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Cloridrato de levamisol ............................................... 7,5 g Veículo",
+  "barcodes": [
+   "7898049711314"
+  ],
+  "bula": "Ripercol_L_Injetavel.pdf",
+  "pend": [
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-ripercol-l-injetavel"
+ },
+ {
+  "nome": "ScourGuard 4KC",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049717149"
+  ],
+  "bula": "ScourGuard-4KC-_1.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-scourguard-4kc"
+ },
+ {
+  "nome": "Spectramast DC",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 16,
+  "carenciaLeite": "30 dias",
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718832"
+  ],
+  "bula": "Spectramast-DC.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-spectramast-dc"
+ },
+ {
+  "nome": "Spectramast LC",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 2,
+  "carenciaLeite": "72 horas",
+  "unidade": "mL",
+  "via": [
+   "intramamária",
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049718078"
+  ],
+  "bula": "Spectramast-LC_0.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-spectramast-lc"
+ },
+ {
+  "nome": "Synulox LC",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 3,
+  "carenciaLeite": "72 horas",
+  "unidade": "mL",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "8436025722054"
+  ],
+  "bula": "Synulox-lc.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código de barras estrangeiro (importado): conferir na caixa",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-synulox-lc"
+ },
+ {
+  "nome": "Top Tag 180",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada brinco de 15 g contém: Diazinon .. 6,759 Excipiente",
+  "barcodes": [
+   "7898049717781"
+  ],
+  "bula": "TOP_TAG_180.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-top-tag-180"
+ },
+ {
+  "nome": "Tackzuron",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 45,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral",
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Fluazuron . Veiculo",
+  "barcodes": [
+   "7898049715732"
+  ],
+  "bula": "Tackzuron.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-tackzuron"
+ },
+ {
+  "nome": "Teat-Seal",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada seringa de 4 g contém: Subnitrato de bismuto ........... 2,6 g Veículo",
+  "barcodes": [
+   "7891268200959"
+  ],
+  "bula": "Teat-seal.pdf",
+  "pend": [
+   "Apresentação não é em mL (dispositivo, pasta, brinco ou seringa): dose por animal, conferir na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-teat-seal"
+ },
+ {
+  "nome": "Terra-Cortril Spray",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "cada 100 mL contém: Terramicina (cloridrato de oxitetraciclina) ........ 6,8 g, Hidrocortisona ....... 2,0 g, Veículo",
+  "barcodes": [
+   "7898049717705"
+  ],
+  "bula": "Terra-Cortril-Spray.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-terra-cortril-spray"
+ },
+ {
+  "nome": "Terramicina Mais",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 16,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL contém: Oxitetraciclina (diidratada).....................................20,0 g Diclofenaco de sódio.................................................1,0 g Veículo",
+  "barcodes": [
+   "7898049718573"
+  ],
+  "bula": "Terramicina-MAIS.pdf",
+  "pend": [
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-terramicina-mais"
+ },
+ {
+  "nome": "Terramicina LA",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": "120 horas",
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Oxitetraciclina (di-hidratada) ................ccceccecceccceeceseueeeeeeessuseueeueeeeeees 20,0 g Veiculo",
+  "barcodes": [
+   "7898049717729"
+  ],
+  "bula": "Terramicina_LA.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-terramicina-la"
+ },
+ {
+  "nome": "Treo-Ace",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 63,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: DOramMectina...ceecccsssnsstensesnesenenuneeneennn 3, 99 VOICUIOL. eseeeeseG-S.PeecressensstenensenenetO0,00 mL Indica",
+  "barcodes": [
+   "7898049717804"
+  ],
+  "bula": "Treo-Ace.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-treo-ace"
+ },
+ {
+  "nome": "Valbazen 10 + cobalto",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 14,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049717811"
+  ],
+  "bula": "Valbazen-10-cobalto.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-valbazen-10-cobalto"
+ },
+ {
+  "nome": "Valcor",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": 100.0,
+  "kgMl": 25.0,
+  "fixo": null,
+  "carencia": 27,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém: Doramectina 059 Cloridrato de Levamisol 15,0g Veiculo",
+  "barcodes": [
+   "7898049710225"
+  ],
+  "bula": "Valcor.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-valcor"
+ },
+ {
+  "nome": "Vaxall",
+  "lab": "Zoetis",
+  "cat": "vac",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "suínos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049710140"
+  ],
+  "bula": "Vaxall.pdf",
+  "pend": [
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-vaxall"
+ },
+ {
+  "nome": "Draxxin",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 18,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "subcutanea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL contém Tulatromicina Veiculo",
+  "barcodes": [
+   "7898049716647"
+  ],
+  "bula": "draxxin.pdf",
+  "pend": [
+   "Texto lido por OCR: conferir tudo na bula",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-draxxin"
+ },
+ {
+  "nome": "Equest Pramox",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "Cada 100 g contém: Moxidectina 2,0 g, Praziquantel 12,5 g, Excipiente",
+  "barcodes": [
+   "7898049711857"
+  ],
+  "bula": "equest-pramox.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-equest-pramox"
+ },
+ {
+  "nome": "Equest",
+  "lab": "Zoetis",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898049710522"
+  ],
+  "bula": "equest.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-equest"
+ },
+ {
+  "nome": "Torbugesic",
+  "lab": "Zoetis",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": null,
+  "carenciaLeite": null,
+  "unidade": "mL",
+  "via": [
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "equinos",
+   "cães",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898049714650"
+  ],
+  "bula": "torbugesic.pdf",
+  "pend": [
+   "Bula não cita bovinos: confirmar uso",
+   "Dose não encontrada: preencher",
+   "Carência de abate não encontrada: conferir",
+   "Tamanho do frasco não encontrado: conferir",
+   "Código vindo da planilha de códigos (dígito verificador conferido)"
+  ],
+  "conferido": false,
+  "id": "zoetis-torbugesic"
+ },
+ {
+  "nome": "Adethor",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870031",
+   "7898586870048"
+  ],
+  "apres": "50 mL: 7898586870031 / 250 mL: 7898586870048",
+  "bula": "Adethor.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898586870031 / 250 mL: 7898586870048",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 250)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-adethor"
+ },
+ {
+  "nome": "Agrothal",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": 3,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870055"
+  ],
+  "apres": "15 mL / 5.350.000 UI: 7898586870055",
+  "bula": "Agrothal.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-agrothal"
+ },
+ {
+  "nome": "Albendathor 10 Oral",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871007"
+  ],
+  "apres": "5 L: 7898586871007",
+  "bula": "Albendathor-10-Oral.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (200 / 1000 / 5000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-albendathor-10-oral"
+ },
+ {
+  "nome": "Albendathor Injetável",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 40,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870093"
+  ],
+  "apres": "500 mL: 7898586870093",
+  "bula": "Albendathor-Injetavel.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Doses diferentes por espécie/indicação (1 mL/20 kg, 1 mL/40 kg): conferir"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-albendathor-injetavel"
+ },
+ {
+  "nome": "Amox LA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 14,
+  "carenciaLeite": 6,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270730"
+  ],
+  "apres": "100 mL (Amox J.A.): 7898601270730",
+  "bula": "Amox-LA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-amox-la"
+ },
+ {
+  "nome": "Ative A.D.E",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270815"
+  ],
+  "apres": "50 mL: 7898601270815",
+  "bula": "Ative-ADE.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 250)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ative-ade"
+ },
+ {
+  "nome": "Benzafort 12 Milhões",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270143"
+  ],
+  "apres": "50 mL: 7898601270143",
+  "bula": "Benzafort-12-Milhoes.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-benzafort-12-milhoes"
+ },
+ {
+  "nome": "Benzogest",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270990"
+  ],
+  "apres": "100 mL: 7898601270990",
+  "bula": "Benzogest.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-benzogest"
+ },
+ {
+  "nome": "Bloc",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 1,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181895"
+  ],
+  "apres": "50 mL: 7898903181895",
+  "bula": "Bloc.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Abate: 24 horas (convertido para dias, arredondado pra cima)",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-bloc"
+ },
+ {
+  "nome": "Calfomag",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270310"
+  ],
+  "apres": "500 mL: 7898601270310",
+  "bula": "Calfomag.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-calfomag"
+ },
+ {
+  "nome": "Catofós B12",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270129",
+   "7898601270136"
+  ],
+  "apres": "100 mL: 7898601270129 / 250 mL: 7898601270136",
+  "bula": "Catofos-B12.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 100 mL: 7898601270129 / 250 mL: 7898601270136",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 100 / 250 / 500)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-catofos-b12"
+ },
+ {
+  "nome": "Cetofur",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 25.0,
+  "fixo": null,
+  "carencia": 3,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601271003",
+   "7898601270396"
+  ],
+  "apres": "50 mL: 7898601271003 / 100 mL: 7898601270396",
+  "bula": "Cetofur.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898601271003 / 100 mL: 7898601270396",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-cetofur"
+ },
+ {
+  "nome": "Cioton",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270501"
+  ],
+  "apres": "20 mL: 7898601270501",
+  "bula": "Cioton.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 50)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-cioton"
+ },
+ {
+  "nome": "Cursotril",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270198"
+  ],
+  "apres": "50 mL: 7898601270198",
+  "bula": "Cursotril.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 50)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-cursotril"
+ },
+ {
+  "nome": "Detoxan",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871304"
+  ],
+  "apres": "100 mL: 7898586871304",
+  "bula": "Detoxan.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-detoxan"
+ },
+ {
+  "nome": "Dexa-JA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "Cada 100 mL do produto contém: Dexametasona (Fosfato)............................................................. 200 mg Veículo q.s.p. .................................................................................... 100 mL",
+  "barcodes": [
+   "7898601271126"
+  ],
+  "apres": "50 mL: 7898601271126",
+  "bula": "Dexa-JA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (10 / 50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-dexa-ja"
+ },
+ {
+  "nome": "Diclofenaco JA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 10,
+  "carenciaLeite": 7,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181086"
+  ],
+  "apres": "50 mL: 7898903181086",
+  "bula": "Diclofenaco-JA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-diclofenaco-ja"
+ },
+ {
+  "nome": "Diclopen 5 Milhões",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 12.5,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": 4,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181918"
+  ],
+  "apres": "Frasco-ampola: 7898903181918",
+  "bula": "Diclopen-5-Milhoes.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-diclopen-5-milhoes"
+ },
+ {
+  "nome": "Diclopen 10 Milhões",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 12.5,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": 4,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181079"
+  ],
+  "apres": "Frasco-ampola: 7898903181079",
+  "bula": "Diclopen-10-Milhoes.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-diclopen-10-milhoes"
+ },
+ {
+  "nome": "Diclotril",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": 7,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181093"
+  ],
+  "apres": "50 mL: 7898903181093",
+  "bula": "Diclotril.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Doses diferentes por espécie/indicação (1 mL/20 kg, 1 mL/40 kg): conferir",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100 / 250)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-diclotril"
+ },
+ {
+  "nome": "Doragold 1%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871090",
+   "7898586871106"
+  ],
+  "apres": "50 mL: 7898586871090 / 500 mL: 7898586871106",
+  "bula": "Doragold-1.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898586871090 / 500 mL: 7898586871106",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 500)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-doragold-1"
+ },
+ {
+  "nome": "Duplatak",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 180,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "pour-on"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898586871014",
+   "7898586871021"
+  ],
+  "apres": "1000 mL: 7898586871014 / 5000 mL: 7898586871021",
+  "bula": "Duplatak.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 1000 mL: 7898586871014 / 5000 mL: 7898586871021",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (1000 / 5000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-duplatak"
+ },
+ {
+  "nome": "Enro 10",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 500.0,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 7,
+  "carenciaLeite": 3,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270761"
+  ],
+  "apres": "Enro 10 100 mL (JA Saúde Animal)",
+  "bula": "Enro-10.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-enro-10"
+ },
+ {
+  "nome": "Eprigold 0,6%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 6,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa",
+   "tópica",
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871052"
+  ],
+  "apres": "Eprigold Pour-On 1000 mL (JA Saúde Animal)",
+  "bula": "Eprigold.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (1000 / 5000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-eprigold"
+ },
+ {
+  "nome": "Ferrodex",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870222",
+   "7898586870215",
+   "7898586870239"
+  ],
+  "apres": "Ferrodex 50 mL (10 mL: 7898586870215 / 250 mL: 7898586870239)",
+  "bula": "Ferrodex.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): Ferrodex 50 mL (10 mL: 7898586870215 / 250 mL: 7898586870239)",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (10 / 50 / 250)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ferrodex"
+ },
+ {
+  "nome": "Ferrodex 20%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870833"
+  ],
+  "apres": "Ferrodex 20% 50 mL (JA Saúde Animal)",
+  "bula": "Ferrodex-20.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ferrodex-20"
+ },
+ {
+  "nome": "Ferrodex B12",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898586871038"
+  ],
+  "apres": "Ferrodex B12 50 mL (JA Saúde Animal)",
+  "bula": "Ferrodex-B12.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ferrodex-b12"
+ },
+ {
+  "nome": "Flumax",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 45.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270297"
+  ],
+  "apres": "Flumax 20 mL (JA Saúde Animal)",
+  "bula": "Flumax.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-flumax"
+ },
+ {
+  "nome": "Frigoboi Facilite",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 28,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral",
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270273"
+  ],
+  "apres": "Frigoboi Facilite Pour-On 5000 mL (JA Saúde Animal)",
+  "bula": "Frigoboi-Facilite.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (1000 / 5000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-frigoboi-facilite"
+ },
+ {
+  "nome": "Frigoboi Produção",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": 1000.0,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270044",
+   "7898601270662"
+  ],
+  "apres": "Frigoboi Produção 500 mL (1000 mL: 7898601270662)",
+  "bula": "Frigoboi-Producao.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): Frigoboi Produção 500 mL (1000 mL: 7898601270662)",
+   "Leite: não identificado, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-frigoboi-producao"
+ },
+ {
+  "nome": "Ganavet Plus",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": 20.0,
+  "fixo": null,
+  "carencia": 39,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181277",
+   "7898903181482"
+  ],
+  "apres": "Ganavet Plus 30 mL (50 mL: 7898903181482)",
+  "bula": "Ganavet-Plus.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): Ganavet Plus 30 mL (50 mL: 7898903181482)",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (30 / 50)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ganavet-plus"
+ },
+ {
+  "nome": "Gentopen",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 18,
+  "carenciaLeite": 4,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181987"
+  ],
+  "apres": "Gentopen 20 Milhões UI frasco + diluente (JA Saúde Animal)",
+  "bula": "Gentopen.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Doses diferentes por espécie/indicação (1 mL/12.5 kg, 1 mL/21 kg): conferir",
+   "Várias apresentações: escolher o frasco no cadastro ()"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-gentopen"
+ },
+ {
+  "nome": "Glicoton B12",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270464"
+  ],
+  "apres": "Glicoton B12 500 mL (JA Saúde Animal)",
+  "bula": "Glicoton-B12.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (500 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-glicoton-b12"
+ },
+ {
+  "nome": "Hemosthal",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": 5.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871236",
+   "7898586871243"
+  ],
+  "apres": "Hemosthal 50 mL (100 mL: 7898586871243)",
+  "bula": "Hemosthal.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): Hemosthal 50 mL (100 mL: 7898586871243)",
+   "Período de carência não localizado: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-hemosthal"
+ },
+ {
+  "nome": "Hidralac",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270679"
+  ],
+  "apres": "Hidralac 500 mL (JA Saúde Animal)",
+  "bula": "Hidralac.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 500)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-hidralac"
+ },
+ {
+  "nome": "Imidovet",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 216,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871083"
+  ],
+  "apres": "Imidovet 50 mL (JA Saúde Animal)",
+  "bula": "Imidovet.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)",
+   "Doses diferentes por espécie/indicação (1 mL/40 kg, 1 mL/50 kg, 1 mL/100 kg): conferir"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-imidovet"
+ },
+ {
+  "nome": "Insemax Pour-On",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 39,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270846"
+  ],
+  "apres": "Insemax Pour-On 1000 mL (JA Saúde Animal)",
+  "bula": "Insemax-Pour-On.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (1000 / 5000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-insemax-pour-on"
+ },
+ {
+  "nome": "Ivermectina 1% JA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 35,
+  "carenciaLeite": 35,
+  "unidade": "mL",
+  "via": [
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "caprinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181017"
+  ],
+  "apres": "Ivermectina 1% JA 500 mL (JA Saúde Animal)",
+  "bula": "Ivermectina-1-JA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Doses diferentes por espécie/indicação (1 mL/33 kg, 1 mL/50 kg): conferir",
+   "Várias apresentações: escolher o frasco no cadastro (500 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-ivermectina-1-ja"
+ },
+ {
+  "nome": "Lactocina",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181567"
+  ],
+  "apres": "Lactocina 50 mL (JA Saúde Animal)",
+  "bula": "Lactocina.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-lactocina"
+ },
+ {
+  "nome": "Lidocol",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586871137",
+   "7898586871120"
+  ],
+  "apres": "Lidocol 100 mL (50 mL: 7898586871120)",
+  "bula": "Lidocol.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): Lidocol 100 mL (50 mL: 7898586871120)",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (100 / 250)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-lidocol"
+ },
+ {
+  "nome": "Longamectina Premium 3,5%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 50.0,
+  "fixo": null,
+  "carencia": 122,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "Cada 100 mL do produto contém:",
+  "barcodes": [
+   "7898903181215"
+  ],
+  "apres": "Longamectina Premium 3,5% 500 mL (JA Saúde Animal)",
+  "bula": "Longamectina-Premium-35.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 500 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-longamectina-premium-35"
+ },
+ {
+  "nome": "Mastclin",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 2,
+  "unidade": "outro",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181260"
+  ],
+  "apres": "Mastclin Seringa 10 mL (JA Saúde Animal)",
+  "bula": "Mastclin.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: 48 horas (convertido para dias, arredondado pra cima)",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-mastclin"
+ },
+ {
+  "nome": "Mastite Clínica VL",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 18,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181628"
+  ],
+  "apres": "Mastite Clínica VL Seringa 8 g (JA Saúde Animal)",
+  "bula": "Mastite-Clinica-VL.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-mastite-clinica-vl"
+ },
+ {
+  "nome": "Metrifim",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 7,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270037"
+  ],
+  "apres": "Metrifim 100 mL (JA Saúde Animal)",
+  "bula": "Metrifim.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-metrifim"
+ },
+ {
+  "nome": "Paracurso",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870284"
+  ],
+  "apres": "10 mL: 7898586870284 (linha Tortuga/Fabiani incorporada pela JA); 50 mL sem EAN indexado publicamente",
+  "bula": "Paracurso.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Código com ressalva na tabela de origem: conferir na caixa — 10 mL: 7898586870284 (linha Tortuga/Fabiani incorporada pela JA); 50 mL sem EAN indexado publicamente",
+   "Período de carência não localizado: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-paracurso"
+ },
+ {
+  "nome": "Prador",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 25.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "equinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270709",
+   "7898601270716"
+  ],
+  "apres": "50 mL: 7898601270709 | 100 mL: 7898601270716",
+  "bula": "Prador.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898601270709 | 100 mL: 7898601270716",
+   "Período de carência não localizado: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-prador"
+ },
+ {
+  "nome": "Pró-Bezerro",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": 8.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181406",
+   "7898601270020",
+   "7899192153785"
+  ],
+  "apres": "50 mL: 7898903181406 | Seringa 5 mL: 7898601270020 (também registrado como 7899192153785 em cadastros legados)",
+  "bula": "Pro-Bezerro.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Código com ressalva na tabela de origem: conferir na caixa — 50 mL: 7898903181406 | Seringa 5 mL: 7898601270020 (também registrado como 7899192153785 em cadastros legados)",
+   "Abate: não identificado, conferir na bula",
+   "Leite: não identificado, conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-pro-bezerro"
+ },
+ {
+  "nome": "ProBacter Bezerro",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7897940708348"
+  ],
+  "apres": "Seringa 34 g (SKU 111773 / NCM 2309.90.90)",
+  "bula": "ProBacter-Bezerro.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-probacter-bezerro"
+ },
+ {
+  "nome": "ProBacter Bov",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7897940708348"
+  ],
+  "apres": "Seringa 34 g (Cód. Fab. 50200335 / NCM 2309.90.90) - comercializado sem GTIN indexado publicamente; linha correlata ao Probacter Bezerro (7897940708348)",
+  "bula": "ProBacter-Bov.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Código com ressalva na tabela de origem: conferir na caixa — Seringa 34 g (Cód. Fab. 50200335 / NCM 2309.90.90) - comercializado sem GTIN indexado publicamente; linha correlata ao Probacter Bezerro (7897940708348)",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-probacter-bov"
+ },
+ {
+  "nome": "Profertil",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870291"
+  ],
+  "apres": "Frasco/Kit Liofilizado 5 mL / 20 mL (Cód. Fab. 51400022)",
+  "bula": "Profertil.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-profertil"
+ },
+ {
+  "nome": "Prolacton",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898586870307",
+   "7896413812063"
+  ],
+  "apres": "10 mL: 7898586870307 (Cód. Fab. 51400000; também consta 7896413812063 em cadastros antigos)",
+  "bula": "Prolacton.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Código com ressalva na tabela de origem: conferir na caixa — 10 mL: 7898586870307 (Cód. Fab. 51400000; também consta 7896413812063 em cadastros antigos)",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-prolacton"
+ },
+ {
+  "nome": "Prontostrep",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 36,
+  "carenciaLeite": 4,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270167"
+  ],
+  "apres": "50 mL: 7898601270167 (SKU 107070 / NCM 3004.10.20)",
+  "bula": "Prontostrep.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-prontostrep"
+ },
+ {
+  "nome": "Proverme",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "suínos",
+   "aves"
+  ],
+  "comp": "Cada sachê do produto contém: Citrato de Piperazina Tetra Hidratado ............................. 28,00 g *Equivalente a 36% de Piperazina Base.",
+  "barcodes": [
+   "7898586870338"
+  ],
+  "apres": "Sachê 28 g (Pó Solúvel - Cód. Fab. 51300000)",
+  "bula": "Proverme.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-proverme"
+ },
+ {
+  "nome": "Proverme Injetável",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": 40.0,
+  "fixo": null,
+  "carencia": 10,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "subcutânea"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601271065",
+   "7898601271072"
+  ],
+  "apres": "500 mL: 7898601271065 | 1000 mL (1 L): 7898601271072 (Cód. Fab. 50200293)",
+  "bula": "Proverme-Injetavel.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 500 mL: 7898601271065 | 1000 mL (1 L): 7898601271072 (Cód. Fab. 50200293)",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (250 / 500 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-proverme-injetavel"
+ },
+ {
+  "nome": "Rambo Pulverização",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270921",
+   "7898601270938"
+  ],
+  "apres": "1 L: 7898601270921 | 20 mL: 7898601270938 (Cód. Fab. 50200139)",
+  "bula": "Rambo-Pulverizacao.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 1 L: 7898601270921 | 20 mL: 7898601270938 (Cód. Fab. 50200139)",
+   "Abate: não identificado, conferir na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 100 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-rambo-pulverizacao"
+ },
+ {
+  "nome": "Tetra-micina",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 39,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270488",
+   "7898601270495"
+  ],
+  "apres": "50 mL: 7898601270488 | 100 mL: 7898601270495",
+  "bula": "Tetra-micina.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898601270488 | 100 mL: 7898601270495",
+   "Leite: não identificado, conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-tetra-micina"
+ },
+ {
+  "nome": "Tormicina 100",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 24,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870369",
+   "7898586870352"
+  ],
+  "apres": "50 mL: 7898586870369 | 10 mL: 7898586870352 (Cód. Fab. 51200011)",
+  "bula": "Tormicina-100.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898586870369 | 10 mL: 7898586870352 (Cód. Fab. 51200011)",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)",
+   "Várias apresentações: escolher o frasco no cadastro (10 / 50)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-tormicina-100"
+ },
+ {
+  "nome": "Tormicina LA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": 10.0,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870376"
+  ],
+  "apres": "50 mL: 7898586870376",
+  "bula": "Tormicina-LA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-tormicina-la"
+ },
+ {
+  "nome": "Trifon 50",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "pour-on"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870345"
+  ],
+  "apres": "Frasco 1 L: 7898586870345 (Cód. Fab. 51300010)",
+  "bula": "Trifon-50.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro ()"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-trifon-50"
+ },
+ {
+  "nome": "Turbocálcio",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa"
+  ],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181352"
+  ],
+  "apres": "500 mL: 7898903181352 (SKU 101615 / NCM 3004.90.23)",
+  "bula": "Turbocalcio.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Abate: não identificado, conferir na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-turbocalcio"
+ },
+ {
+  "nome": "Vetimax",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 7,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [
+   "intramamária"
+  ],
+  "especies": [
+   "bovinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270419"
+  ],
+  "apres": "Seringa 8 g / Kit 20 un: 7898601270419 (Cód. Fab. 50100027 / SKU 104600)",
+  "bula": "Vetimax.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não identificado, conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Apresentação não é em mL (seringa, sachê, pó, frasco-ampola): dose por animal, conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-vetimax"
+ },
+ {
+  "nome": "Vetipen LA",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 30,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intramuscular"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "suínos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898601270723"
+  ],
+  "apres": "50 mL: 7898601270723",
+  "bula": "Vetipen-LA.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Leite: não deve ser usado em animais produtores de leite (conferir bula)",
+   "Dose por kg não identificada: conferir na bula"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-vetipen-la"
+ },
+ {
+  "nome": "Vetprofen",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 45.0,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "intravenosa"
+  ],
+  "especies": [
+   "equinos",
+   "aves"
+  ],
+  "comp": "Cada 100 mL do produto contém: Cetoprofeno .......................................................... 10 g Veículo q.s.p. .................................................... 100 mL",
+  "barcodes": [],
+  "apres": "50 mL (Cód. Fab. 50200334) / 100 mL (Cód. Fab. 50200333) - sem GTIN indexado publicamente",
+  "bula": "Vetprofen.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Código com ressalva na tabela de origem: conferir na caixa — 50 mL (Cód. Fab. 50200334) / 100 mL (Cód. Fab. 50200333) - sem GTIN indexado publicamente",
+   "Sem código de barras na tabela: lançar da caixa",
+   "Período de carência não localizado: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-vetprofen"
+ },
+ {
+  "nome": "Vetsulfa",
+  "lab": "J.A. Saúde Animal",
+  "cat": "trat",
+  "frasco": null,
+  "kgMl": 7.5,
+  "fixo": null,
+  "carencia": 37,
+  "carenciaLeite": 5,
+  "unidade": "mL",
+  "via": [
+   "intramuscular",
+   "subcutânea",
+   "intravenosa"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898903181116",
+   "7898903181109"
+  ],
+  "apres": "50 mL: 7898903181116 | 100 mL: 7898903181109",
+  "bula": "Vetsulfa.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 50 mL: 7898903181116 | 100 mL: 7898903181109",
+   "Várias apresentações: escolher o frasco no cadastro (50 / 100)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-vetsulfa"
+ },
+ {
+  "nome": "Vitagold Potenciado",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "frasco": null,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "mL",
+  "via": [
+   "oral"
+  ],
+  "especies": [
+   "bovinos",
+   "equinos",
+   "ovinos",
+   "caprinos",
+   "suínos",
+   "aves"
+  ],
+  "comp": "",
+  "barcodes": [
+   "7898586870413",
+   "7898586870406",
+   "7898586870420",
+   "7898586870437"
+  ],
+  "apres": "20 mL: 7898586870406 | 50 mL: 7898586870413 | 250 mL: 7898586870420 | 1 L: 7898586870437",
+  "bula": "Vitagold-Potenciado.pdf",
+  "pend": [
+   "Lido de PDF unificado da J.A. Saúde Animal: conferir tudo na bula",
+   "Mais de um código (um por apresentação): 20 mL: 7898586870406 | 50 mL: 7898586870413 | 250 mL: 7898586870420 | 1 L: 7898586870437",
+   "Período de carência não localizado: conferir na bula",
+   "Dose por kg não identificada: conferir na bula",
+   "Várias apresentações: escolher o frasco no cadastro (20 / 50 / 250 / 1000)"
+  ],
+  "conferido": false,
+  "id": "ja-saude-animal-vitagold-potenciado"
+ }
+]
