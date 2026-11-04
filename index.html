@@ -274,7 +274,7 @@ var SEED_RETIROS=[
   {id:'r1',nome:'Retiro 1',cabecas:1240},{id:'r2',nome:'Retiro 2',cabecas:1080},{id:'r3',nome:'Retiro 3',cabecas:980},
   {id:'r4',nome:'Retiro 4',cabecas:1310},{id:'r5',nome:'Retiro 5',cabecas:760}
 ];
-var TOP={users:1,fazendas:1};
+var TOP={users:1,fazendas:1,catalogo:1,sugestoes:1};
 
 /* ================= camada de dados ================= */
 var DB=(function(){
@@ -445,9 +445,9 @@ function clearTestOps(){
 }
 
 /* ================= estado ================= */
-var D={config:null,fazendas:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[]};
+var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[]};
 var SM={};
-var S={profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
+var S={satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
   perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
   online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
@@ -493,17 +493,18 @@ function onData(col,docs){
 function clearFarmData(){
   D.config=null;D.meds=[];D.stock=[];D.transfers=[];D.launches=[];D.approvals=[];D.compras=[];D.logs=[];SM={};
 }
-function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];clearFarmData();D.fazendas=[];D.users=[]}
+function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];clearFarmData();D.fazendas=[];D.users=[];D.catalogo=[];D.sugestoes=[]}
 function startSubs(){
   stopSubs();S.farmBlocked=false;subErrShown=false;
   var p=S.profile,sup=isSuper(),mgr=isStaff(),boss=isMgr(),since=Date.now()-30*DAY;
   function s(col,opts){unsubs.push(DB.sub(col,function(docs){onData(col,docs)},opts))}
-  if(sup){s('fazendas');s('users')}
+  if(sup){s('fazendas');s('users');s('catalogo');s('sugestoes')}
   var fid=fidNow();
   if(!fid){render();return}
   DB.setFarm(fid);
   unsubs.push(DB.subDoc('fazendas',fid,function(doc){D.config=doc;render()},function(err){if(err&&err.code==='permission-denied'){S.farmBlocked=true;render(true)}}));
   s('meds');
+  if(mgr&&!sup)s('catalogo');
   if(mgr){
     s('stock');s('transfers');s('launches',{where:['ts','>=',since]});s('approvals');s('compras');
     if(boss)s('logs',{order:['ts','desc'],limit:300});
@@ -992,16 +993,75 @@ function gCad(){
     '<button class="btn" data-act="rtSave" data-v="novo">Adicionar retiro</button></div>';
   return h+gMeds(true);
 }
+var scanStop=function(){};
+function mqRun(q){
+  q=String(q||'').trim();S.mq=q;
+  if(isCode(q)){
+    S.pendCode=q;
+    var own=ownByCode(q),f=catFind(q);
+    if(!own&&f.length===1){catUse(f[0].id);return}
+  }
+  render(true);
+}
+function catUse(id){
+  var c=byId(D.catalogo,id);if(!c)return;
+  var code=S.pendCode||'';
+  var d={nome:c.nome,lab:c.lab,cat:c.cat,frasco:c.frasco,catId:c.id,conf:!!c.conferido,
+    barcode:code||((c.barcodes||[])[0]||''),codeNew:!!code&&(c.barcodes||[]).indexOf(code)<0};
+  if(c.conferido){d.kgMl=c.kgMl;d.fixo=c.fixo;d.carencia=c.carencia}
+  S.medDraft=d;S.medEdit='novo';S.pendCode='';
+  toast(c.conferido?'Preenchido pelo catálogo. Falta lote, validade, preço e mínimo.':'Preenchido. Dose e carência ainda não foram conferidas: confira na bula.');
+  render(true);
+}
+function scanOpen(){
+  if(!('BarcodeDetector' in window)||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('Este navegador não lê código pela câmera. Use o leitor USB ou digite o código.');return}
+  var d=document.createElement('div');d.className='modal';d.id='scanm';
+  d.innerHTML='<div class="mbox"><div class="h2">Aponte para o código de barras</div><video id="scanv" playsinline muted style="width:100%;border-radius:12px;background:#000"></video><button class="btn" data-act="scanClose">Cancelar</button></div>';
+  document.body.appendChild(d);
+  var det,stream=null,timer=null;
+  try{det=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e','code_128']})}catch(e){document.body.removeChild(d);toast('Este navegador não lê código pela câmera.');return}
+  scanStop=function(){clearInterval(timer);if(stream)stream.getTracks().forEach(function(t){t.stop()});var m=document.getElementById('scanm');if(m&&m.parentNode)m.parentNode.removeChild(m);scanStop=function(){}};
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(function(st){
+    stream=st;var v=document.getElementById('scanv');if(!v){scanStop();return}
+    v.srcObject=st;v.play();
+    timer=setInterval(function(){det.detect(v).then(function(r){if(r&&r.length){var code=r[0].rawValue;scanStop();mqRun(code)}}).catch(function(){})},350);
+  }).catch(function(){scanStop();toast('Não consegui abrir a câmera. Confira a permissão do navegador.')});
+}
+function mqResults(){
+  var q=S.mq;if(!q)return '';
+  var h='';
+  if(isCode(q)){
+    var own=ownByCode(q);
+    if(own)return '<div class="note info">'+ic('check',20)+'<div>Este código já está cadastrado na sua fazenda: <b>'+esc(own.nome)+'</b>. <button class="btn sm" data-act="medEdit" data-v="'+esc(own.id)+'">Abrir cadastro</button></div></div>';
+  }
+  var f=catFind(q).slice(0,8);
+  if(!isCode(q)&&S.pendCode)h+='<div class="small muted">O código <b>'+esc(S.pendCode)+'</b> será ligado ao produto que você escolher.</div>';
+  if(!f.length){
+    return h+'<div class="note warn">'+ic('alert',20)+'<div>'+(isCode(q)?'Código <b>'+esc(q)+'</b> novo, ainda não está no catálogo. Procure o produto pelo nome para ligar o código a ele, ou preencha abaixo.':'Nenhum produto com esse nome no catálogo. Preencha abaixo; o cadastro será enviado como sugestão para o catálogo.')+'</div></div>';
+  }
+  if(isCode(q))h+='<div class="small muted">Código '+esc(q)+' encontrado:</div>';
+  f.forEach(function(c){
+    h+='<div class="card row sb"><div class="grow"><b>'+esc(c.nome)+'</b><div class="small muted">'+esc(c.lab)+' · '+tipoNome(c.cat)+(c.frasco?' · frasco '+c.frasco+' mL':'')+'</div></div>'+(c.conferido?'<span class="pill ok">Conferido</span>':'<span class="pill warn">Dose a conferir</span>')+'<button class="btn sm cta" data-act="catUse" data-v="'+esc(c.id)+'">Usar este</button></div>';
+  });
+  return h;
+}
 function gMeds(embed){
   var h=embed?'':'<div class="h1">Medicamentos</div>';
   /* medicamentos */
   h+='<div class="h2">Medicamentos</div>';
   var e=S.medEdit,ed=e&&e!=='novo'?medById(e):null;
   if(e){
-    var v=function(k,d){return esc(ed&&ed[k]!=null?ed[k]:(d==null?'':d))};
+    var dr=(!ed&&S.medDraft)||{};
+    var v=function(k,d){return esc(ed&&ed[k]!=null?ed[k]:(dr[k]!=null?dr[k]:(d==null?'':d)))};
+    if(!ed){
+      h+='<div class="card stack span2"><div class="h2">Buscar no catálogo</div><div class="small muted">Leia o código de barras do frasco (leitor USB ou câmera) ou digite o nome. Se o produto estiver no catálogo, o formulário é preenchido sozinho.</div>'+
+        '<div class="row" style="flex-wrap:wrap"><input class="input t" id="mq" data-keep style="flex:1;min-width:220px" autocomplete="off" placeholder="Código de barras ou nome do remédio" value="'+esc(S.mq)+'"><button class="btn sm cta" data-act="mqGo">Buscar</button><button class="btn sm" data-act="scanOpen">Ler com a câmera</button></div>'+mqResults()+'</div>';
+      if(dr.catId&&!dr.conf)h+='<div class="note warn">'+ic('alert',20)+'<div>A dose e a carência deste produto ainda não foram conferidas no catálogo. Preencha pela bula.</div></div>';
+    }
     h+='<div class="card stack span2"><div class="h2">'+(ed?'Editar':'Novo medicamento')+'</div>'+
       '<div class="field"><label for="f-nome">Nome</label><input class="input t" id="f-nome" data-keep value="'+v('nome')+'"></div>'+
-      '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:'trat')===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
+      '<div class="grid2"><div class="field"><label for="f-lab">Laboratório</label><input class="input t" id="f-lab" data-keep value="'+v('lab')+'"></div><div class="field"><label for="f-barcode">Código de barras</label><input class="input t" id="f-barcode" data-keep inputmode="numeric" value="'+v('barcode')+'"></div></div>'+
+      '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:(dr.cat||'trat'))===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
       '<div class="grid2"><div class="field"><label for="f-frasco">Frasco (mL)</label><input class="input t" id="f-frasco" data-keep inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
       '<div class="field"><label for="f-preco">Preço do frasco (R$)</label><input class="input t" id="f-preco" data-keep inputmode="decimal" value="'+v('preco')+'"></div>'+
       '<div class="field"><label for="f-kgml">Peso por 1 mL (kg)</label><input class="input t" id="f-kgml" data-keep inputmode="decimal" placeholder="Ex.: 10" value="'+v('kgMl')+'"></div>'+
@@ -1074,7 +1134,87 @@ function gHist(){
 }
 
 /* ================= telas: administrador geral ================= */
-function navSA(){return '<nav class="side" aria-label="Administrador"><button aria-current="page">'+ic('farm',22)+'Fazendas</button></nav>'}
+function navSA(){
+  var np=D.sugestoes.filter(function(x){return x.st==='pend'}).length;
+  return '<nav class="side" aria-label="Administrador"><button data-act="sanav" data-v="faz" '+(S.satab==='faz'?'aria-current="page"':'')+'>'+ic('farm',22)+'Fazendas</button>'+
+    '<button data-act="sanav" data-v="cat" '+(S.satab==='cat'?'aria-current="page"':'')+'>'+ic('pill',22)+'Catálogo'+(np?'<span class="badge">'+np+'</span>':'')+'</button></nav>';
+}
+/* ================= catálogo de medicamentos ================= */
+function norm(x){return String(x==null?'':x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function isCode(q){return /^\d{8,14}$/.test(String(q).trim())}
+function catFind(q){
+  q=String(q||'').trim();if(!q)return [];
+  if(isCode(q))return D.catalogo.filter(function(c){return (c.barcodes||[]).indexOf(q)>-1});
+  var tk=norm(q).split(/\s+/).filter(Boolean);
+  return D.catalogo.filter(function(c){var h=norm(c.nome+' '+c.lab);return tk.every(function(t){return h.indexOf(t)>-1})}).sort(function(a,b){return norm(a.nome).localeCompare(norm(b.nome))});
+}
+function ownByCode(q){return D.meds.filter(function(m){return m.barcode&&m.barcode===q})[0]||null}
+function doseTxt(c){return c.fixo?c.fixo+' mL por animal':c.kgMl?'1 mL a cada '+c.kgMl+' kg':'—'}
+function gCatalogo(){
+  var h='<div class="h1">Catálogo de medicamentos</div>';
+  var sug=D.sugestoes.filter(function(x){return x.st==='pend'}).sort(function(a,b){return (a.ts||0)-(b.ts||0)});
+  h+='<div class="note info">'+ic('book',20)+'<div>Este catálogo é seu e vale para todas as fazendas. Quando a fazenda cadastra um remédio, o sistema procura aqui e preenche tudo. <b>Dose e carência só preenchem sozinhas depois que você marca o produto como conferido com a bula.</b></div></div>';
+  var total=D.catalogo.length,ok=D.catalogo.filter(function(c){return c.conferido}).length,comBc=D.catalogo.filter(function(c){return (c.barcodes||[]).length}).length;
+  h+='<div class="kpis"><div class="kpi"><small>Produtos</small><b>'+total+'</b></div><div class="kpi"><small>Conferidos</small><b>'+ok+'</b></div><div class="kpi"><small>Aguardando conferência</small><b>'+(total-ok)+'</b></div><div class="kpi"><small>Com código de barras</small><b>'+comBc+'</b></div></div>';
+  if(total)h+='<div class="row"><button class="btn" data-act="catImport" '+(S.importing?'disabled':'')+'>Atualizar a partir do catálogo inicial</button></div>';
+  if(!total)h+='<div class="card stack full"><div class="h2">Catálogo vazio</div><div class="small muted">Importe o arquivo catalogo-inicial.json (publicado junto com o sistema) com as bulas já lidas.</div><button class="btn cta" data-act="catImport" '+(S.importing?'disabled':'')+'>Importar catálogo inicial</button></div>';
+  if(sug.length){
+    h+='<div class="h2">Sugestões das fazendas ('+sug.length+')</div>';
+    sug.forEach(function(x){
+      var fz=byId(D.fazendas,x.fazendaId),cat=x.catId?byId(D.catalogo,x.catId):null;
+      h+='<div class="card stack"><div class="row sb"><b>'+(x.tipo==='codigo'?'Código de barras novo':'Produto novo')+'</b><span class="pill warn">'+esc(fz?fz.nome:'Fazenda')+'</span></div>';
+      if(x.tipo==='codigo')h+='<div class="small">Código <b>'+esc(x.codigo)+'</b> ligado a <b>'+esc(cat?cat.nome+' · '+cat.lab:(x.nomeCat||x.catId))+'</b></div>';
+      else h+='<div class="small"><b>'+esc(x.nome)+'</b> · frasco '+esc(x.frasco)+' mL · '+doseTxt(x)+' · carência '+esc(x.carencia==null?'?':x.carencia)+' dias'+(x.barcode?' · código '+esc(x.barcode):'')+'</div><div class="small muted">Dados digitados pela fazenda, ainda não conferidos.</div>';
+      h+='<div class="small muted">Enviado por '+esc(x.por||'')+' em '+dstr(x.ts)+'</div><div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="sugOk" data-v="'+esc(x.id)+'">'+(x.tipo==='codigo'?'Aprovar ligação':'Adicionar ao catálogo')+'</button><button class="btn sm danger" data-act="sugNo" data-v="'+esc(x.id)+'">Descartar</button></div></div>';
+    });
+  }
+  if(S.catEdit){h+=catForm();return h}
+  var labs=[];D.catalogo.forEach(function(c){if(labs.indexOf(c.lab)<0)labs.push(c.lab)});labs.sort();
+  h+='<div class="h2">Produtos</div><div class="filters"><div class="field" style="flex:1;min-width:220px"><label for="cat-q2">Buscar por nome, laboratório ou código de barras</label><input class="input t" id="cat-q2" data-keep value="'+esc(S.catQ)+'" placeholder="Digite e aperte Enter"></div>'+
+    '<div class="field"><label for="cat-lab">Laboratório</label><select class="input t" id="cat-lab"><option value="todos">Todos</option>'+labs.map(function(l){return '<option'+(S.catLab===l?' selected':'')+'>'+esc(l)+'</option>'}).join('')+'</select></div>'+
+    '<div class="field"><label for="cat-st">Situação</label><select class="input t" id="cat-st"><option value="todos">Todas</option><option value="pend"'+(S.catSt==='pend'?' selected':'')+'>Aguardando conferência</option><option value="ok"'+(S.catSt==='ok'?' selected':'')+'>Conferidos</option></select></div>'+
+    '<button class="btn" data-act="catNew">Novo produto</button>'+(total?'<button class="btn" data-act="catImport" '+(S.importing?'disabled':'')+'>Importar do arquivo</button>':'')+'</div>';
+  var list=D.catalogo.filter(function(c){
+    if(S.catLab!=='todos'&&c.lab!==S.catLab)return false;
+    if(S.catSt==='ok'&&!c.conferido)return false;
+    if(S.catSt==='pend'&&c.conferido)return false;
+    return true;
+  });
+  if(S.catQ){var ids={};catFind(S.catQ).forEach(function(c){ids[c.id]=1});list=list.filter(function(c){return ids[c.id]})}
+  list.sort(function(a,b){return norm(a.nome).localeCompare(norm(b.nome))});
+  if(!list.length)return h+'<div class="card empty">Nenhum produto encontrado.</div>';
+  h+='<div class="card full tbl"><table><thead><tr><th>Produto</th><th>Laboratório</th><th>Frasco</th><th>Dose</th><th>Carência (abate)</th><th>Códigos</th><th>Situação</th><th></th></tr></thead><tbody>';
+  list.slice(0,S.catN).forEach(function(c){
+    h+='<tr><td><b>'+esc(c.nome)+'</b><div class="small muted">'+tipoNome(c.cat)+(c.unidade==='outro'?' · não é em mL':'')+'</div></td><td>'+esc(c.lab)+'</td><td>'+(c.frasco?c.frasco+' mL':'<span class="muted">?</span>')+'</td><td>'+doseTxt(c)+'</td><td>'+(c.carencia==null?'<span class="muted">?</span>':c.carencia+' dias')+'</td><td class="small">'+((c.barcodes||[]).map(esc).join('<br>')||'<span class="muted">—</span>')+'</td><td>'+(c.conferido?'<span class="pill ok">Conferido</span>':'<span class="pill warn">Conferir'+((c.pend||[]).length?' ('+c.pend.length+')':'')+'</span>')+'</td><td><button class="btn sm" data-act="catEdit" data-v="'+esc(c.id)+'">Abrir</button></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  if(list.length>S.catN)h+='<button class="btn" data-act="catMais">Mostrar mais</button>';
+  h+='<div class="small muted">Mostrando '+Math.min(list.length,S.catN)+' de '+list.length+' produtos.</div>';
+  return h;
+}
+function catForm(){
+  var e=S.catEdit,c=e==='novo'?{cat:'trat',unidade:'mL',barcodes:[],pend:[]}:byId(D.catalogo,e);
+  if(!c){S.catEdit=null;return ''}
+  var v=function(k){return esc(c[k]==null?'':c[k])};
+  var h='<div class="h2">'+(e==='novo'?'Novo produto':'Produto do catálogo')+'</div><div class="card stack span2">';
+  if((c.pend||[]).length)h+='<div class="note warn">'+ic('alert',20)+'<div><b>Conferir na bula:</b><ul style="margin:6px 0 0 18px">'+c.pend.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul></div></div>';
+  if(c.bula)h+='<div class="small muted">Bula de origem: '+esc(c.bula)+'</div>';
+  if(c.comp)h+='<div class="small muted">Composição lida: '+esc(c.comp)+'</div>';
+  h+='<div class="grid2"><div class="field"><label for="k-nome">Nome</label><input class="input t" id="k-nome" data-keep value="'+v('nome')+'"></div><div class="field"><label for="k-lab">Laboratório</label><input class="input t" id="k-lab" data-keep value="'+v('lab')+'"></div>'+
+    '<div class="field"><label for="k-cat">Tipo</label><select class="input t" id="k-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+(c.cat===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
+    '<div class="field"><label for="k-uni">Apresentação</label><select class="input t" id="k-uni" data-keep><option value="mL"'+(c.unidade!=='outro'?' selected':'')+'>Líquido (mL)</option><option value="outro"'+(c.unidade==='outro'?' selected':'')+'>Outra (dispositivo, pasta, brinco, seringa)</option></select></div>'+
+    '<div class="field"><label for="k-fr">Frasco (mL)</label><input class="input t" id="k-fr" data-keep inputmode="decimal" value="'+v('frasco')+'"></div>'+
+    '<div class="field"><label for="k-kg">Peso por 1 mL (kg)</label><input class="input t" id="k-kg" data-keep inputmode="decimal" value="'+v('kgMl')+'"></div>'+
+    '<div class="field"><label for="k-fx">Ou dose fixa (mL)</label><input class="input t" id="k-fx" data-keep inputmode="decimal" value="'+v('fixo')+'"></div>'+
+    '<div class="field"><label for="k-car">Carência para abate (dias)</label><input class="input t" id="k-car" data-keep inputmode="numeric" value="'+v('carencia')+'"></div>'+
+    '<div class="field"><label for="k-lt">Carência do leite</label><input class="input t" id="k-lt" data-keep value="'+v('carenciaLeite')+'" placeholder="Ex.: 4 dias"></div>'+
+    '<div class="field"><label for="k-via">Via de aplicação</label><input class="input t" id="k-via" data-keep value="'+esc((c.via||[]).join(', '))+'"></div></div>'+
+    '<div class="field"><label for="k-bc">Códigos de barras (um por linha)</label><textarea class="input t" id="k-bc" data-keep rows="3">'+esc((c.barcodes||[]).join('\n'))+'</textarea></div>'+
+    '<div class="field"><label for="k-obs">Observações da bula</label><textarea class="input t" id="k-obs" data-keep rows="2">'+v('obs')+'</textarea></div>'+
+    '<label class="chk"><input type="checkbox" id="k-ok" data-keep'+(c.conferido?' checked':'')+'>Conferido com a bula (libera o preenchimento automático de dose e carência)</label>'+
+    '<button class="btn cta" data-act="catSave">Salvar</button><button class="btn" data-act="catCancel">Voltar</button></div>';
+  return h;
+}
 function hdrSA(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Administrador geral · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
@@ -1111,7 +1251,7 @@ function draw(){
   else if(S.profile.status!=='ativo'||S.farmBlocked){wide=true;html=screenWait()}
   else if(isSuper()&&S.view==='sa'){
     wide=true;
-    html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+gSuper()+'</main></div>';
+    html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+(S.satab==='cat'?gCatalogo():gSuper())+'</main></div>';
   }
   else if(isAlmox()&&S.view==='alm'){
     wide=true;
@@ -1131,7 +1271,7 @@ function draw(){
       html=stripHtml()+hdrV()+'<main class="view px">'+v+'</main>'+navV();
     }
   }
-  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet].join('|');
+  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit].join('|');
   var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
   $('#dev').className='device'+(wide?' desktop':'');
   document.body.className=wide?'dsk':'';
@@ -1273,17 +1413,72 @@ document.addEventListener('click',function(ev){
   else if(a==='atender'){
     var ar=byId(D.approvals,v);if(ar&&ar.payload){S.env.dest=ar.payload.retiro;S.env.med=ar.payload.med;S.env.frascos=1;S.gtab='central';toast('Confira a quantidade e envie')}
   }
-  else if(a==='medNew'){S.medEdit='novo'}
+  else if(a==='mqGo'){mqRun(g('mq'));return}
+  else if(a==='catUse'){catUse(v);return}
+  else if(a==='scanOpen'){scanOpen();return}
+  else if(a==='scanClose'){scanStop();return}
+  else if(a==='sanav'){S.satab=v;S.catEdit=null}
+  else if(a==='catNew'){S.catEdit='novo'}
+  else if(a==='catEdit'){S.catEdit=v}
+  else if(a==='catCancel'){S.catEdit=null}
+  else if(a==='catMais'){S.catN+=60}
+  else if(a==='catSave'){
+    var kn=g('k-nome').trim(),kl=g('k-lab').trim();
+    if(!kn||!kl){toast('Preencha o nome e o laboratório');return}
+    var kcur=S.catEdit==='novo'?null:byId(D.catalogo,S.catEdit),kid=kcur?kcur.id:norm(kl+' '+kn).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    if(!kcur&&byId(D.catalogo,kid)){toast('Já existe um produto com esse nome e laboratório');return}
+    var bcs=[];g('k-bc').split(/[\s,;]+/).forEach(function(x){x=x.replace(/\D/g,'');if(x.length>=8&&bcs.indexOf(x)<0)bcs.push(x)});
+    var dup=null;bcs.forEach(function(b){D.catalogo.forEach(function(o){if(o.id!==kid&&(o.barcodes||[]).indexOf(b)>-1)dup=o})});
+    if(dup){toast('Esse código já está em '+dup.nome+' ('+dup.lab+')');return}
+    var kok=!!($('#k-ok')||{}).checked,kkg=parseNum(g('k-kg')),kfx=parseNum(g('k-fx')),kfr=parseNum(g('k-fr')),kcar=g('k-car').trim();
+    DB.batch([{op:'set',col:'catalogo',id:kid,data:{nome:kn,lab:kl,cat:g('k-cat'),unidade:g('k-uni'),frasco:kfr||null,kgMl:kkg||null,fixo:kfx||null,carencia:kcar===''?null:Math.round(parseNum(kcar)),carenciaLeite:g('k-lt').trim()||null,via:g('k-via').split(',').map(function(x){return x.trim()}).filter(Boolean),barcodes:bcs,obs:g('k-obs').trim(),conferido:kok,pend:kok?[]:((kcur&&kcur.pend)||[]),atualizadoPor:S.profile.nome,atualizadoEm:Date.now()}}]);
+    S.catEdit=null;toast(kok?'Salvo e conferido':'Salvo');
+  }
+  else if(a==='catImport'){
+    if(S.importing)return;
+    S.importing=true;render(true);
+    fetch('catalogo-inicial.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json()}).then(function(list){
+      var have={};D.catalogo.forEach(function(c){have[c.id]=c.conferido?2:1});
+      var ops=list.filter(function(c){return have[c.id]!==2}).map(function(c){return {op:'set',col:'catalogo',id:c.id,data:ext(ext({},c),{importadoEm:Date.now()})}});
+      if(!ops.length){toast('Nada novo para importar');return}
+      var chunks=[],i;for(i=0;i<ops.length;i+=400)chunks.push(ops.slice(i,i+400));
+      return chunks.reduce(function(p,ch){return p.then(function(){return DB.batch(ch)})},Promise.resolve()).then(function(){toast(ops.length+' produtos importados/atualizados (os conferidos não foram alterados)')});
+    }).catch(function(e){console.error(e);toast('Não consegui ler o catalogo-inicial.json. Ele está no GitHub junto do index.html?')}).then(function(){S.importing=false;render(true)});
+    return;
+  }
+  else if(a==='sugOk'||a==='sugNo'){
+    var sg=byId(D.sugestoes,v);if(!sg)return;
+    var sops=[];
+    if(a==='sugNo')sops.push({op:'set',col:'sugestoes',id:v,data:{st:'descartada',decididoPor:S.profile.nome,decididoEm:Date.now()}});
+    else if(sg.tipo==='codigo'){
+      var cc=byId(D.catalogo,sg.catId);if(!cc){toast('Produto do catálogo não encontrado');return}
+      var nb=(cc.barcodes||[]).slice();if(nb.indexOf(sg.codigo)<0)nb.push(sg.codigo);
+      sops.push({op:'set',col:'catalogo',id:cc.id,data:{barcodes:nb}},{op:'set',col:'sugestoes',id:v,data:{st:'ok',decididoPor:S.profile.nome,decididoEm:Date.now()}});
+    }else{
+      var nid=norm((sg.lab||'fazenda')+' '+sg.nome).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      if(byId(D.catalogo,nid))nid+='-'+uid8();
+      sops.push({op:'set',col:'catalogo',id:nid,data:{nome:sg.nome,lab:sg.lab||'(informar)',cat:sg.cat||'outro',unidade:'mL',frasco:sg.frasco||null,kgMl:sg.kgMl||null,fixo:sg.fixo||null,carencia:sg.carencia==null?null:sg.carencia,barcodes:sg.barcode?[sg.barcode]:[],via:[],pend:['Sugerido por uma fazenda: conferir tudo na bula'],conferido:false,origem:'sugestao',atualizadoPor:S.profile.nome,atualizadoEm:Date.now()}},{op:'set',col:'sugestoes',id:v,data:{st:'ok',decididoPor:S.profile.nome,decididoEm:Date.now()}});
+    }
+    DB.batch(sops);toast(a==='sugOk'?'Aprovado':'Descartado');
+  }
+  else if(a==='medNew'){S.medEdit='novo';S.medDraft=null;S.mq='';S.pendCode=''}
   else if(a==='medEdit'){S.medEdit=v}
-  else if(a==='medCancel'){S.medEdit=null}
+  else if(a==='medCancel'){S.medEdit=null;S.medDraft=null;S.mq='';S.pendCode=''}
   else if(a==='medSave'){
     var nome=g('f-nome').trim(),fr=parseNum(g('f-frasco'));
     if(!nome||fr<=0){toast('Preencha o nome e o tamanho do frasco');return}
     var mid=S.medEdit==='novo'?'m'+uid8():S.medEdit,kg=parseNum(g('f-kgml')),fx=parseNum(g('f-fixo'));
     if(!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
-    var mdata={nome:nome,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
-    DB.batch([{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o medicamento '+nome+' (frasco '+fr+' mL, '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})]);
-    S.medEdit=null;toast('Medicamento salvo');
+    var dr2=(S.medEdit==='novo'&&S.medDraft)||{},bcode=g('f-barcode').replace(/\D/g,''),lab=g('f-lab').trim();
+    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||null,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
+    var mops=[{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o medicamento '+nome+(lab?' ('+lab+')':'')+' (frasco '+fr+' mL, '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})];
+    if(S.medEdit==='novo'){
+      var base={st:'pend',ts:Date.now(),fazendaId:fidNow(),por:S.profile.nome};
+      if(dr2.catId&&dr2.codeNew&&bcode)mops.push({op:'set',col:'sugestoes',id:'S'+uid8(),data:ext({tipo:'codigo',codigo:bcode,catId:dr2.catId,nomeCat:dr2.nome},base)});
+      else if(!dr2.catId)mops.push({op:'set',col:'sugestoes',id:'S'+uid8(),data:ext({tipo:'produto',nome:nome,lab:lab,cat:mdata.cat,frasco:fr,kgMl:mdata.kgMl,fixo:mdata.fixo,carencia:mdata.carencia,barcode:bcode},base)});
+    }
+    DB.batch(mops);
+    S.medEdit=null;S.medDraft=null;S.mq='';S.pendCode='';toast('Medicamento salvo');
   }
   else if(a==='rtSave'){
     var arr=retiros().map(function(r){return {id:r.id,nome:r.nome,cabecas:r.cabecas||0}}),rn,rc;
@@ -1365,8 +1560,17 @@ document.addEventListener('input',function(ev){
   else if(t.id==='perda-q'){S.perdaQ=t.value}
   else if(t.id==='c-nf'){S.compra.nf=t.value}
 });
+document.addEventListener('keydown',function(ev){
+  if(ev.key!=='Enter')return;
+  var t=ev.target;
+  if(t.id==='mq'){ev.preventDefault();mqRun(t.value)}
+  else if(t.id==='cat-q2'){ev.preventDefault();S.catQ=t.value.trim();S.catN=40;render(true)}
+});
 document.addEventListener('change',function(ev){
   var t=ev.target;
+  if(t.id==='cat-lab'){S.catLab=t.value;S.catN=40}
+  else if(t.id==='cat-st'){S.catSt=t.value;S.catN=40}
+  else
   if(t.id==='g-dest'){S.env.dest=t.value}
   else if(t.id==='g-med'){S.env.med=t.value;S.env.frascos=1}
   else if(t.id==='c-med'){S.compra.med=t.value;S.compra.frascos=1}
