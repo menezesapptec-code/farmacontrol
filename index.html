@@ -1156,7 +1156,7 @@ function gCatalogo(){
   h+='<div class="note info">'+ic('book',20)+'<div>Este catálogo é seu e vale para todas as fazendas. Quando a fazenda cadastra um remédio, o sistema procura aqui e preenche tudo. <b>Dose e carência só preenchem sozinhas depois que você marca o produto como conferido com a bula.</b></div></div>';
   var total=D.catalogo.length,ok=D.catalogo.filter(function(c){return c.conferido}).length,comBc=D.catalogo.filter(function(c){return (c.barcodes||[]).length}).length;
   h+='<div class="kpis"><div class="kpi"><small>Produtos</small><b>'+total+'</b></div><div class="kpi"><small>Conferidos</small><b>'+ok+'</b></div><div class="kpi"><small>Aguardando conferência</small><b>'+(total-ok)+'</b></div><div class="kpi"><small>Com código de barras</small><b>'+comBc+'</b></div></div>';
-  if(total)h+='<div class="row"><button class="btn" data-act="catImport" '+(S.importing?'disabled':'')+'>Atualizar a partir do catálogo inicial</button></div>';
+  if(total)h+='<div class="row"><button class="btn" data-act="catImport" '+(S.importing?'disabled':'')+'>Atualizar a partir do catálogo inicial</button>'+((total-ok)?'<button class="btn '+(S.okAll?'danger':'cta')+'" data-act="catOkAll">'+(S.okAll?'Confirmar: liberar os '+(total-ok)+' produtos':'Conferir e liberar todos (modo teste)')+'</button>':'')+(S.okAll?'<button class="btn" data-act="catOkAllNo">Cancelar</button>':'')+'</div>';
   if(!total)h+='<div class="card stack full"><div class="h2">Catálogo vazio</div><div class="small muted">Importe o arquivo catalogo-inicial.json (publicado junto com o sistema) com as bulas já lidas.</div><button class="btn cta" data-act="catImport" '+(S.importing?'disabled':'')+'>Importar catálogo inicial</button></div>';
   if(sug.length){
     h+='<div class="h2">Sugestões das fazendas ('+sug.length+')</div>';
@@ -1433,6 +1433,16 @@ document.addEventListener('click',function(ev){
     var kok=!!($('#k-ok')||{}).checked,kkg=parseNum(g('k-kg')),kfx=parseNum(g('k-fx')),kfr=parseNum(g('k-fr')),kcar=g('k-car').trim();
     DB.batch([{op:'set',col:'catalogo',id:kid,data:{nome:kn,lab:kl,cat:g('k-cat'),unidade:g('k-uni'),frasco:kfr||null,kgMl:kkg||null,fixo:kfx||null,carencia:kcar===''?null:Math.round(parseNum(kcar)),carenciaLeite:g('k-lt').trim()||null,via:g('k-via').split(',').map(function(x){return x.trim()}).filter(Boolean),barcodes:bcs,obs:g('k-obs').trim(),conferido:kok,pend:kok?[]:((kcur&&kcur.pend)||[]),atualizadoPor:S.profile.nome,atualizadoEm:Date.now()}}]);
     S.catEdit=null;toast(kok?'Salvo e conferido':'Salvo');
+  }
+  else if(a==='catOkAllNo'){S.okAll=false}
+  else if(a==='catOkAll'){
+    var pe=D.catalogo.filter(function(c){return !c.conferido});
+    if(!pe.length){toast('Todos já estão conferidos');return}
+    if(!S.okAll){S.okAll=true;toast('Clique de novo para liberar todos');render(true);return}
+    S.okAll=false;
+    var oo=pe.map(function(c){return {op:'set',col:'catalogo',id:c.id,data:{conferido:true,conferidoEm:Date.now(),conferidoPor:S.profile.nome,liberadoEmLote:true}}});
+    var ch=[],i2;for(i2=0;i2<oo.length;i2+=400)ch.push(oo.slice(i2,i2+400));
+    ch.reduce(function(p,x){return p.then(function(){return DB.batch(x)})},Promise.resolve()).then(function(){toast(oo.length+' produtos liberados (marcados como conferidos)');render(true)});
   }
   else if(a==='catImport'){
     if(S.importing)return;
