@@ -268,7 +268,7 @@ var TIPOS=[
   {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'}
 ];
 function tipoNome(id){var t=byId(TIPOS,id);return t?t.nome:id}
-var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',vaqueiro:'Responsável por retiro'};
+var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',conferente:'Conferente',vaqueiro:'Responsável por retiro'};
 var GRUPOS=[['todos','Tudo'],['aplicacao','Aplicações'],['estoque','Estoque'],['aprovacao','Aprovações'],['cadastro','Cadastro'],['equipe','Equipe']];
 var SEED_RETIROS=[
   {id:'r1',nome:'Retiro 1',cabecas:1240},{id:'r2',nome:'Retiro 2',cabecas:1080},{id:'r3',nome:'Retiro 3',cabecas:980},
@@ -430,6 +430,7 @@ function seedDemo(){
   DB.batch([
     {op:'set',col:'users',id:'u-super',data:{nome:'Ismael (Admin geral)',email:'agrosafra7@gmail.com',role:'superadmin',status:'ativo',fazendaId:null,retiros:[]}},
     {op:'set',col:'users',id:'u-ger',data:{nome:'Marcos (Gerente)',email:'gerente@teste.com',role:'gerente',status:'ativo',fazendaId:'f-demo',retiros:[]}},
+    {op:'set',col:'users',id:'u-conf',data:{nome:'Davi (Conferente)',email:'conferente@teste.com',role:'conferente',status:'ativo',fazendaId:'f-demo',retiros:[]}},
     {op:'set',col:'users',id:'u-alm',data:{nome:'Fábio (Almoxarife)',email:'almoxarife@teste.com',role:'almoxarife',status:'ativo',fazendaId:'f-demo',retiros:[]}},
     {op:'set',col:'users',id:'u-vaq',data:{nome:'Raimundo S.',email:'raimundo@teste.com',role:'vaqueiro',status:'ativo',fazendaId:'f-demo',retiros:['r3']}},
     {op:'set',col:'users',id:'u-vaq2',data:{nome:'Joaquim P.',email:'joaquim@teste.com',role:'vaqueiro',status:'ativo',fazendaId:'f-demo',retiros:['r1','r2']}},
@@ -445,17 +446,18 @@ function clearTestOps(){
 }
 
 /* ================= estado ================= */
-var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[]};
+var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[],conferencias:[]};
 var SM={};
 var S={satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
   perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
-  online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
+  cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
 
 function isSuper(){return !!S.profile&&S.profile.role==='superadmin'}
 function isAlmox(){return !!S.profile&&S.profile.role==='almoxarife'}
+function isConf(){return !!S.profile&&S.profile.role==='conferente'}
 function isStaff(){return isMgr()||isAlmox()}
-function homeView(){return isSuper()?'sa':isMgr()?'ger':isAlmox()?'alm':'vaq'}
+function homeView(){return isSuper()?'sa':isMgr()?'ger':isAlmox()?'alm':isConf()?'conf':'vaq'}
 function isMgr(){return !!S.profile&&(S.profile.role==='superadmin'||S.profile.role==='gerente')}
 function fidNow(){return isSuper()?S.fid:(S.profile?S.profile.fazendaId:null)}
 function retiros(){return (D.config&&D.config.retiros)||[]}
@@ -491,7 +493,7 @@ function onData(col,docs){
   render();
 }
 function clearFarmData(){
-  D.config=null;D.meds=[];D.stock=[];D.transfers=[];D.launches=[];D.approvals=[];D.compras=[];D.logs=[];SM={};
+  D.config=null;D.meds=[];D.stock=[];D.transfers=[];D.launches=[];D.approvals=[];D.compras=[];D.logs=[];D.conferencias=[];SM={};
 }
 function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];clearFarmData();D.fazendas=[];D.users=[];D.catalogo=[];D.sugestoes=[]}
 function startSubs(){
@@ -505,7 +507,9 @@ function startSubs(){
   unsubs.push(DB.subDoc('fazendas',fid,function(doc){D.config=doc;render()},function(err){if(err&&err.code==='permission-denied'){S.farmBlocked=true;render(true)}}));
   s('meds');
   if(mgr&&!sup)s('catalogo');
+  if(isConf()){s('catalogo');s('conferencias',{order:['ts','desc'],limit:60});return}
   if(mgr){
+    s('conferencias',{order:['ts','desc'],limit:60});
     s('stock');s('transfers');s('launches',{where:['ts','>=',since]});s('approvals');s('compras');
     if(boss)s('logs',{order:['ts','desc'],limit:300});
     if(boss&&!sup)s('users',{where:['fazendaId','==',fid]});
@@ -619,6 +623,7 @@ function screenLogin(){
       '<button class="btn cta" data-act="dlogin" data-v="u-super">Administrador geral</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-ger">Gerente · Fazenda Boa Vista</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-alm">Almoxarife · Fazenda Boa Vista</button>'+
+      '<button class="btn" data-act="dlogin" data-v="u-conf">Conferente · Fazenda Boa Vista</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq">Responsável · Retiro 3</button>'+
       '<button class="btn" data-act="dlogin" data-v="u-vaq2">Responsável · Retiros 1 e 2</button>'+
       (isInstalled()?'':'<button class="btn" data-act="install">'+ic('download',18)+' Baixar o aplicativo</button>')+'<button class="lnk" data-act="dreset">Recarregar os dados de teste do zero</button></div>';
@@ -704,7 +709,7 @@ function vEstoque(ret){
     n++;
     var pct=Math.min(s.q/(m.min*2),1)*100;
     h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b>'+(s.low?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
-      '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+ml(s.q)+'</span><span class="small muted">mínimo '+ml(m.min)+'</span></div>'+
+      '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+ml(s.q)+'</span><span class="small muted">mínimo no retiro '+ml(m.min)+'</span></div>'+
       '<div class="bar" aria-hidden="true"><i class="'+(s.low?'low':'')+'" style="width:'+pct+'%"></i></div>'+
       '<div class="row sb small"><span class="muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+'</span>'+(s.exp?'<span class="pill crit">Vence em '+s.d+' dias</span>':'')+'</div>'+
       '<div class="row" style="flex-wrap:wrap">'+
@@ -759,7 +764,7 @@ function vReceber(ret){
 function wizStart(){S.wiz={step:0,tipo:null,modo:'animal',brinco:'',peso:380,loteNome:'',n:20,med:null,dose:0,all:false,q:'',last:null};S.tab='home'}
 function calc(){
   var w=S.wiz,m=medById(w.med),heads=w.modo==='lote'?w.n:1;
-  var per=m.fixo?m.fixo:Math.max(1,Math.round(w.peso/(m.kgMl||50)));
+  var per=m.fixo?m.fixo:(m.kgMl?Math.max(1,Math.round(w.peso/m.kgMl)):0);
   return {m:m,per:per,heads:heads,sug:per*heads};
 }
 function alvoTxt(){var w=S.wiz;return w.modo==='lote'?((w.loteNome||'Lote sem nome')+' · '+w.n+' animais'):('Brinco '+(w.brinco||'sem número'))}
@@ -802,7 +807,9 @@ function wizBody(ret){
   if(w.step===3){
     var c=calc(),m=c.m,s3=medStatus(m,ret),falta=w.dose>s3.q;
     h+='<div class="h1">'+esc(m.nome)+'</div>';
-    h+='<div class="card small"><div class="muted">Dose sugerida pelo protocolo cadastrado</div><div style="margin-top:4px">'+(m.fixo?m.fixo+' mL por animal':w.peso+' kg ÷ '+m.kgMl+' kg por mL = <b>'+c.per+' mL</b> por animal')+(c.heads>1?' × '+c.heads+' animais = <b>'+ml(c.sug)+'</b>':'')+'</div></div>';
+    if(!m.fixo)h+='<div class="field"><label for="wpesoin">Peso aproximado do '+(w.modo==='lote'?'lote (média, kg)':'animal (kg)')+'</label><input class="input" id="wpesoin" inputmode="numeric" maxlength="4" value="'+w.peso+'"></div>';
+    if(!m.fixo&&!m.kgMl)h+='<div class="note crit">'+ic('alert',20)+'<div>Este remédio está sem a dose cadastrada. Use + e − para informar a quantidade ou peça à gerência para cadastrar a dose.</div></div>';
+    h+='<div class="card small"><div class="muted">Dose calculada pelo peso</div><div style="margin-top:4px">'+(m.fixo?m.fixo+' mL por animal (dose fixa)':m.kgMl?w.peso+' kg ÷ '+m.kgMl+' kg por mL = <b>'+c.per+' mL</b> por animal':'Dose não cadastrada')+(c.heads>1?' × '+c.heads+' animais = <b>'+ml(c.sug)+'</b>':'')+'</div></div>';
     h+='<div class="field"><label>Quantidade total que vai usar</label><div class="stepper"><button data-act="dose" data-v="-1" aria-label="Diminuir">−</button><output>'+num(w.dose)+'<small>mL</small></output><button data-act="dose" data-v="1" aria-label="Aumentar">+</button></div></div>';
     if(falta)h+='<div class="note crit">'+ic('alert',20)+'<div>O retiro só tem '+ml(s3.q)+'. Peça reposição ou use menos.</div></div>';
     else h+='<div class="note info"><div>Sobra no retiro depois deste lançamento: <b>'+ml(s3.q-w.dose)+'</b></div></div>';
@@ -855,8 +862,11 @@ function hdrG(){
 function hdrA(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Almoxarife · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
+function hdrC(){
+  return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Conferente · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
+}
 function navA(){
-  var items=[['central','Central','truck'],['aprov','Aprovações','list'],['alert','Estoque baixo','alert'],['meds','Medicamentos','pill']];
+  var items=[['central','Central','truck'],['aprov','Aprovações','list'],['alert','Estoque baixo','alert'],['meds','Medicamentos','pill'],['conf','Conferência','box']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length,low=stats().alerts.length+centralLow().length;
   var h='<nav class="side" aria-label="Almoxarifado">';
   items.forEach(function(it){
@@ -865,9 +875,10 @@ function navA(){
   });
   return h+'</nav>';
 }
+function minC(m){return (m.minC!=null&&m.minC!=='')?m.minC:(m.min||0)*8}
 function centralLow(){
-  var out=[];D.meds.forEach(function(m){var q=qty('central',m.id);if(q<m.min*8)out.push({m:m,q:q})});
-  return out.sort(function(a,b){return a.q/(a.m.min*8)-b.q/(b.m.min*8)});
+  var out=[];D.meds.forEach(function(m){var q=qty('central',m.id);if(q<minC(m))out.push({m:m,q:q})});
+  return out.sort(function(a,b){return a.q/(minC(a.m)||1)-b.q/(minC(b.m)||1)});
 }
 function gAlertas(){
   var st=stats(),cl=centralLow(),h='<div class="h1">Estoque baixo e vencimentos</div>';
@@ -881,7 +892,7 @@ function gAlertas(){
   return h;
 }
 function navG(){
-  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['equipe','Equipe','users'],['hist','Histórico','book']];
+  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['conf','Conferência','box'],['equipe','Equipe','users'],['hist','Histórico','book']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length;
   var h='<nav class="side" aria-label="Gerência">';
   items.forEach(function(it){
@@ -938,8 +949,8 @@ function gCentral(){
   var h='<div class="h1">Farmácia central</div>';
   h+='<div class="card stack"><div class="h2">Estoque da central</div>';
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(x){
-    var q=qty('central',x.id),low=q<x.min*8;
-    h+='<div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
+    var q=qty('central',x.id),low=q<minC(x);
+    h+='<div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+' · mínimo na central '+ml(minC(x))+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
   });
   h+='</div>';
   h+='<div class="card stack"><div class="h2">Enviar para um retiro</div>'+
@@ -994,6 +1005,7 @@ function gCad(){
   return h+gMeds(true);
 }
 var scanStop=function(){};
+var scanTarget=null;
 function mqRun(q){
   q=String(q||'').trim();S.mq=q;
   if(isCode(q)){
@@ -1024,7 +1036,7 @@ function scanOpen(){
   navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(function(st){
     stream=st;var v=document.getElementById('scanv');if(!v){scanStop();return}
     v.srcObject=st;v.play();
-    timer=setInterval(function(){det.detect(v).then(function(r){if(r&&r.length){var code=r[0].rawValue;scanStop();mqRun(code)}}).catch(function(){})},350);
+    timer=setInterval(function(){det.detect(v).then(function(r){if(r&&r.length){var code=r[0].rawValue;scanStop();(scanTarget||mqRun)(code)}}).catch(function(){})},350);
   }).catch(function(){scanStop();toast('Não consegui abrir a câmera. Confira a permissão do navegador.')});
 }
 function mqResults(){
@@ -1064,20 +1076,22 @@ function gMeds(embed){
       '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:(dr.cat||'trat'))===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
       '<div class="grid2"><div class="field"><label for="f-frasco">Frasco (mL)</label><input class="input t" id="f-frasco" data-keep inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
       '<div class="field"><label for="f-preco">Preço do frasco (R$)</label><input class="input t" id="f-preco" data-keep inputmode="decimal" value="'+v('preco')+'"></div>'+
-      '<div class="field"><label for="f-kgml">Peso por 1 mL (kg)</label><input class="input t" id="f-kgml" data-keep inputmode="decimal" placeholder="Ex.: 10" value="'+v('kgMl')+'"></div>'+
-      '<div class="field"><label for="f-fixo">Ou dose fixa (mL)</label><input class="input t" id="f-fixo" data-keep inputmode="decimal" placeholder="Ex.: 2" value="'+v('fixo')+'"></div>'+
+      '<div class="field"><label for="f-kgml">Dose por peso: 1 mL para cada quantos kg?</label><input class="input t" id="f-kgml" data-keep inputmode="decimal" placeholder="Ex.: 50 (1 mL a cada 50 kg)" value="'+v('kgMl')+'"></div>'+
+      '<div class="field"><label for="f-fixo">Ou dose fixa por animal (mL)</label><input class="input t" id="f-fixo" data-keep inputmode="decimal" placeholder="Ex.: 2" value="'+v('fixo')+'"></div>'+
       '<div class="field"><label for="f-car">Carência (dias)</label><input class="input t" id="f-car" data-keep inputmode="numeric" value="'+v('carencia',0)+'"></div>'+
-      '<div class="field"><label for="f-min">Mínimo por retiro (mL)</label><input class="input t" id="f-min" data-keep inputmode="decimal" value="'+v('min')+'"></div>'+
+      '<div class="field"><label for="f-min">Estoque mínimo em cada RETIRO (mL)</label><input class="input t" id="f-min" data-keep inputmode="decimal" value="'+v('min')+'"><div class="small muted">Abaixo disso, o retiro aparece como "Baixo" e a gerência é avisada para repor.</div></div>'+
+      '<div class="field"><label for="f-minc">Estoque mínimo na CENTRAL (mL)</label><input class="input t" id="f-minc" data-keep inputmode="decimal" placeholder="Se vazio: 8 vezes o mínimo do retiro" value="'+(ed&&ed.minC!=null?ed.minC:'')+'"><div class="small muted">Abaixo disso, a central aparece como "Baixo" e entra em "Estoque baixo" para comprar.</div></div>'+
       '<div class="field"><label for="f-lote">Lote</label><input class="input t" id="f-lote" data-keep value="'+v('lote')+'"></div>'+
       '<div class="field"><label for="f-venc">Validade</label><input class="input t" id="f-venc" data-keep type="date" value="'+isoDate(ed?ed.venc:Date.now()+365*DAY)+'"></div></div>'+
-      '<div class="small muted">Use o peso por mL para dose por peso do animal, ou a dose fixa para vacinas.</div>'+
+      '<div class="small muted">Dose por peso: se a bula diz 1 mL a cada 50 kg, digite 50. Para vacinas e doses iguais para todo animal, use a dose fixa.</div>'+
       '<button class="btn cta" data-act="medSave">Salvar medicamento</button><button class="btn" data-act="medCancel">Cancelar</button></div>';
   }else{
     h+='<button class="btn cta" data-act="medNew">Novo medicamento</button>';
   }
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){
     h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b><span class="pill info">'+tipoNome(m.cat)+'</span></div>'+
-      '<div class="small muted">Frasco '+m.frasco+' mL · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por mL · mínimo '+ml(m.min)+'</div>'+
+      '<div class="small muted">Frasco '+m.frasco+' mL · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por mL </div>'+
+      '<div class="small muted">Mínimo no retiro '+ml(m.min)+' · mínimo na central '+ml(minC(m))+'</div>'+
       '<div class="small muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+' · carência '+(m.carencia?m.carencia+' dias':'nenhuma')+'</div>'+
       '<button class="btn sm" style="align-self:flex-start" data-act="medEdit" data-v="'+esc(m.id)+'">Editar</button></div>';
   });
@@ -1086,14 +1100,205 @@ function gMeds(embed){
     '<button class="btn" data-act="seed">Carregar dados de exemplo</button><button class="btn danger" data-act="clearTest">Apagar lançamentos, transferências e aprovações de exemplo</button></div>';
   return h;
 }
+/* ================= conferência de almoxarifado ================= */
+var jsLoad=null;
+function loadScript(u){return new Promise(function(res,rej){var s=document.createElement('script');s.src=u;s.onload=res;s.onerror=function(){rej(new Error('falha ao carregar '+u))};document.head.appendChild(s)})}
+function pdfLibs(){
+  if(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API&&window.jspdf.jsPDF.API.autoTable)return Promise.resolve();
+  if(!jsLoad)jsLoad=loadScript('jspdf.umd.min.js').then(function(){return loadScript('jspdf.plugin.autotable.min.js')}).catch(function(e){jsLoad=null;throw e});
+  return jsLoad;
+}
+function cfTot(c){var q=0,m=0,it=c.itens||[];it.forEach(function(i){q+=i.qtd||0;m+=(i.qtd||0)*(i.ml||0)});return {n:it.length,q:q,ml:m}}
+function cfSorted(){return D.conferencias.slice().sort(function(a,b){return (b.ts||0)-(a.ts||0)})}
+function cfSave(c,itens,extra){
+  var data=JSON.parse(JSON.stringify(ext({itens:itens},extra||{})));
+  DB.batch([{op:'set',col:'conferencias',id:c.id,data:data}]);
+}
+/* Descobre o volume do frasco a partir do texto "50 mL: 7898... / 250 mL: 7898..." do catálogo. */
+function mlDoCodigo(apres,code){
+  if(!apres||!code)return null;var m,re=/(\d+(?:[.,]\d+)?)\s*(mL|L)\b[^:;|\/]*:\s*(\d{13})/g;
+  while((m=re.exec(apres))){if(m[3]===code){var n=parseFloat(m[1].replace(',','.'));return m[2]==='L'?n*1000:n}}
+  return null;
+}
+function cfBuild(code,own,cat){
+  var nome=own?own.nome:cat?cat.nome:'',lab=own?(own.lab||(cat&&cat.lab)||''):(cat?cat.lab:'');
+  var mlv=mlDoCodigo(cat&&cat.apres,code)||(own&&own.frasco)||(cat&&cat.frasco)||'';
+  return {nome:nome,lab:lab,barcode:code||'',ml:mlv,qtd:1,medId:own?own.id:null,catId:cat?cat.id:null,fora:!own&&!cat,apres:(cat&&cat.apres)||''};
+}
+function cfRun(q){
+  q=String(q||'').trim();S.cfQ=q;S.cfCur=null;S.cfRes=[];S.cfAsk=false;
+  if(!q){render(true);return}
+  if(isCode(q)){
+    var own=ownByCode(q),cat=catFind(q)[0]||null;
+    S.cfCur=cfBuild(q,own,cat);
+  }else{
+    var tk=norm(q).split(/\s+/).filter(Boolean),res=[];
+    D.meds.forEach(function(m){var h=norm(m.nome+' '+(m.lab||''));if(tk.every(function(t){return h.indexOf(t)>-1}))res.push({src:'fazenda',nome:m.nome,lab:m.lab||'',own:m,cat:null})});
+    catFind(q).slice(0,12).forEach(function(c){
+      if(res.some(function(r){return norm(r.nome)===norm(c.nome)&&norm(r.lab)===norm(c.lab)}))return;
+      res.push({src:'catalogo',nome:c.nome,lab:c.lab,own:null,cat:c});
+    });
+    S.cfRes=res.slice(0,10);
+    if(!res.length)S.cfCur={nome:q,lab:'',barcode:'',ml:'',qtd:1,medId:null,catId:null,fora:true,apres:''};
+  }
+  render(true);
+  setTimeout(function(){var e=$('#cf-qtd');if(e){e.focus();e.select()}},80);
+}
+function cfPick(i){
+  var r=S.cfRes[i];if(!r)return;
+  var cb=(r.cat&&(r.cat.barcodes||[])[0])||(r.own&&r.own.barcode)||'';
+  var cur=cfBuild(cb,r.own,r.cat);cur.barcode=cb;
+  if(!r.cat&&r.own)cur.barcode=r.own.barcode||'';
+  S.cfCur=cur;S.cfRes=[];render(true);
+  setTimeout(function(){var e=$('#cf-qtd');if(e){e.focus();e.select()}},80);
+}
+function cfAdd(){
+  var c=byId(D.conferencias,S.cfId);if(!c||c.status!=='aberta'||!S.cfCur)return;
+  var g=function(id){return (($('#'+id)||{}).value||'')};
+  var nome=g('cf-nome').trim(),lab=g('cf-lab').trim(),qtd=Math.round(parseNum(g('cf-qtd'))),mlv=parseNum(g('cf-ml'));
+  if(!nome){toast('Informe o nome do produto');return}
+  if(!(qtd>0)){toast('Informe quantos frascos/caixas');return}
+  if(!(mlv>0)){toast('Informe quantos mL tem cada frasco');return}
+  var cur=S.cfCur,it=(c.itens||[]).slice(),hit=-1;
+  it.forEach(function(x,i){if(hit<0&&x.ml===mlv&&((cur.barcode&&x.barcode===cur.barcode)||(!cur.barcode&&norm(x.nome)===norm(nome)&&norm(x.lab)===norm(lab))))hit=i});
+  if(hit>-1){it[hit]=ext(it[hit],{qtd:(it[hit].qtd||0)+qtd})}
+  else it.push({id:'I'+uid8(),nome:nome,lab:lab,barcode:cur.barcode||'',qtd:qtd,ml:mlv,fora:!!cur.fora,medId:cur.medId||null,catId:cur.catId||null,ts:Date.now()});
+  cfSave(c,it,{atualizadoEm:Date.now()});
+  S.cfCur=null;S.cfQ='';S.cfRes=[];
+  toast(hit>-1?'Somado ao que já estava na lista':'Adicionado à conferência');
+  render(true);setTimeout(function(){var e=$('#cf-q');if(e)e.focus()},80);
+}
+function cfRows(c){return (c.itens||[]).slice().sort(function(a,b){return norm(a.nome).localeCompare(norm(b.nome))})}
+function gConf(){
+  var h='<div class="h1">Conferência de almoxarifado</div>';
+  var c=S.cfId?byId(D.conferencias,S.cfId):null;
+  if(S.cfId&&!c)S.cfId=null;
+  if(!c){
+    h+='<div class="note info">'+ic('book',20)+'<div>Leia o código de barras de cada produto, informe quantos frascos e quantos mL tem cada um. No fim o sistema gera um PDF com a lista para enviar ao supervisor.</div></div>';
+    h+='<div class="card stack"><div class="h2">Nova conferência</div>'+
+      '<div class="field"><label for="cf-local">Almoxarifado / local</label><input class="input t" id="cf-local" data-keep autocomplete="off" value="'+esc((D.config&&D.config.nome)?'Almoxarifado · '+D.config.nome:'Almoxarifado')+'"></div>'+
+      '<div class="field"><label for="cf-obs">Observação (opcional)</label><input class="input t" id="cf-obs" data-keep autocomplete="off" placeholder="Ex.: conferência mensal"></div>'+
+      '<button class="btn cta" data-act="cfNew">Iniciar conferência</button></div>';
+    var L=cfSorted();
+    h+='<div class="h2">Conferências feitas</div>';
+    if(!L.length)h+='<div class="card empty">Nenhuma conferência ainda.</div>';
+    L.forEach(function(x){
+      var t=cfTot(x);
+      h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(x.local||'Almoxarifado')+'</b><div class="small muted">'+dstr(x.ts)+' '+hhmm(x.ts)+' · '+esc(x.nome||'')+'</div></div><span class="pill '+(x.status==='aberta'?'warn':'ok')+'">'+(x.status==='aberta'?'Em andamento':'Finalizada')+'</span></div>'+
+        '<div class="small muted">'+t.n+' produtos · '+num(t.q)+' frascos · '+ml(t.ml)+'</div>'+
+        '<button class="btn sm" style="align-self:flex-start" data-act="cfOpen" data-v="'+esc(x.id)+'">'+(x.status==='aberta'?'Continuar':'Abrir')+'</button></div>';
+    });
+    return h;
+  }
+  var t=cfTot(c),open=c.status==='aberta';
+  h+='<button class="btn sm" style="align-self:flex-start" data-act="cfBack">'+ic('back',18)+'Voltar às conferências</button>';
+  h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(c.local||'Almoxarifado')+'</b><div class="small muted">Iniciada em '+dstr(c.ts)+' '+hhmm(c.ts)+' por '+esc(c.nome||'')+(c.finalizadaEm?' · finalizada em '+dstr(c.finalizadaEm)+' '+hhmm(c.finalizadaEm):'')+'</div>'+(c.obs?'<div class="small muted">'+esc(c.obs)+'</div>':'')+'</div><span class="pill '+(open?'warn':'ok')+'">'+(open?'Em andamento':'Finalizada')+'</span></div></div>';
+  h+='<div class="kpis"><div class="kpi"><small>Produtos</small><b>'+t.n+'</b></div><div class="kpi"><small>Frascos / caixas</small><b>'+num(t.q)+'</b></div><div class="kpi"><small>Total em mL</small><b>'+num(Math.round(t.ml*10)/10)+'</b></div></div>';
+  if(open){
+    h+='<div class="card stack"><div class="h2">Ler produto</div><div class="row" style="flex-wrap:wrap"><input class="input t" id="cf-q" data-keep style="flex:1;min-width:220px" autocomplete="off" inputmode="text" placeholder="Leia o código de barras ou digite o nome" value="'+esc(S.cfQ)+'"><button class="btn sm cta" data-act="cfGo">Buscar</button><button class="btn sm" data-act="cfScan">'+ic('box',18)+'Câmera</button></div>'+
+      '<div class="small muted">Com o leitor USB é só apontar e ler: o código entra sozinho. Na câmera, aponte para o código de barras.</div>';
+    if(S.cfRes.length){
+      h+='<div class="small muted">Toque no produto certo:</div>';
+      S.cfRes.forEach(function(r,i){h+='<button class="opt" data-act="cfPick" data-v="'+i+'"><div class="grow"><b>'+esc(r.nome)+'</b><div class="small muted">'+esc(r.lab)+(r.src==='fazenda'?' · cadastrado na fazenda':' · catálogo')+'</div></div></button>'});
+    }
+    var cu=S.cfCur;
+    if(cu){
+      h+='<div class="card stack" style="border-color:var(--cta,#f5c20f)">'+
+        (cu.fora?'<div class="note warn">'+ic('alert',20)+'<div>'+(cu.barcode?'O código <b>'+esc(cu.barcode)+'</b> não está no nosso banco.':'Produto não encontrado no banco.')+' Digite o nome e o laboratório para registrar.</div></div>':'<div class="note info">'+ic('check',20)+'<div>Produto encontrado'+(cu.medId?' (cadastrado na fazenda)':' no catálogo')+'. Confira e informe as quantidades.</div></div>')+
+        '<div class="field"><label for="cf-nome">Produto</label><input class="input t" id="cf-nome" data-keep autocomplete="off" value="'+esc(cu.nome)+'"></div>'+
+        '<div class="grid2"><div class="field"><label for="cf-lab">Laboratório</label><input class="input t" id="cf-lab" data-keep autocomplete="off" value="'+esc(cu.lab)+'"></div><div class="field"><label>Código de barras</label><div class="input" style="display:flex;align-items:center;font-size:16px">'+(esc(cu.barcode)||'—')+'</div></div></div>'+
+        '<div class="grid2"><div class="field"><label for="cf-qtd">Quantos frascos / caixas</label><input class="input t" id="cf-qtd" data-keep inputmode="numeric" value="'+(cu.qtd||1)+'"></div>'+
+        '<div class="field"><label for="cf-ml">Quantos mL em cada frasco</label><input class="input t" id="cf-ml" data-keep inputmode="decimal" placeholder="Ex.: 100" value="'+esc(cu.ml)+'"></div></div>'+
+        (cu.apres?'<div class="small muted">Apresentações e códigos: '+esc(cu.apres)+'</div>':'')+
+        '<div class="row" style="flex-wrap:wrap"><button class="btn cta" data-act="cfAdd">Adicionar à conferência</button><button class="btn" data-act="cfCancel">Cancelar</button></div></div>';
+    }
+    h+='</div>';
+  }
+  h+='<div class="h2">Produtos conferidos ('+t.n+')</div>';
+  var rows=cfRows(c);
+  if(!rows.length)h+='<div class="card empty">Nada na lista ainda. Leia o primeiro código de barras.</div>';
+  rows.forEach(function(x){
+    var idx=(c.itens||[]).indexOf(byId(c.itens,x.id)||x);
+    var tot=(x.qtd||0)*(x.ml||0);
+    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b>'+(x.fora?' <span class="pill warn">fora do banco</span>':'')+'<div class="small muted">'+esc(x.lab||'')+(x.barcode?' · '+esc(x.barcode):'')+'</div></div><b class="num">'+ml(tot)+'</b></div>';
+    if(open)h+='<div class="grid2"><div class="field"><label>Frascos</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="qtd" inputmode="numeric" value="'+x.qtd+'"></div><div class="field"><label>mL por frasco</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="ml" inputmode="decimal" value="'+x.ml+'"></div></div><button class="btn sm danger" style="align-self:flex-start" data-act="cfDel" data-v="'+esc(x.id)+'">Remover da lista</button>';
+    else h+='<div class="small muted">'+num(x.qtd)+' frascos × '+num(x.ml)+' mL</div>';
+    h+='</div>';
+  });
+  h+='<div class="card stack"><div class="h2">Relatório para o supervisor</div><div class="row" style="flex-wrap:wrap"><button class="btn cta" data-act="cfPdf" '+(t.n?'':'disabled')+'>Baixar PDF</button>'+((navigator.canShare&&navigator.share)?'<button class="btn" data-act="cfShare" '+(t.n?'':'disabled')+'>Compartilhar PDF</button>':'')+'</div>';
+  if(open)h+='<button class="btn '+(S.cfAsk?'danger':'')+'" data-act="cfFin" '+(t.n?'':'disabled')+'>'+(S.cfAsk?'Confirmar: finalizar a conferência':'Finalizar conferência')+'</button>'+(S.cfAsk?'<div class="small muted">Depois de finalizada a lista não pode mais ser alterada.</div>':'');
+  else if(isMgr())h+='<button class="btn" data-act="cfReopen">Reabrir conferência</button>';
+  h+='</div>';
+  return h;
+}
+function cfFileName(c){
+  var d=new Date(c.finalizadaEm||c.ts||Date.now()),p=function(n){return (n<10?'0':'')+n};
+  return 'conferencia-'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'-'+norm(c.local||'almoxarifado').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)+'.pdf';
+}
+function cfPrintHtml(c){
+  var t=cfTot(c),rows=cfRows(c),w=window.open('','_blank');
+  if(!w){toast('O navegador bloqueou a janela do relatório');return}
+  var tr=rows.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(x.nome)+(x.fora?' *':'')+'</td><td>'+esc(x.lab||'')+'</td><td>'+esc(x.barcode||'')+'</td><td style="text-align:right">'+num(x.qtd)+'</td><td style="text-align:right">'+num(x.ml)+'</td><td style="text-align:right">'+num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)+'</td></tr>'}).join('');
+  w.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>'+esc(cfFileName(c))+'</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#111}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #999;padding:5px 6px}th{background:#14452f;color:#fff;text-align:left}</style></head><body><h2>Conferência de almoxarifado</h2><p>'+esc((D.config&&D.config.nome)||'')+' · '+esc(c.local||'')+'<br>Conferente: '+esc(c.nome||'')+' · '+dstr(c.ts)+' '+hhmm(c.ts)+'<br><b>'+t.n+' produtos · '+num(t.q)+' frascos · '+num(Math.round(t.ml*10)/10)+' mL</b></p><table><thead><tr><th>#</th><th>Produto</th><th>Laboratório</th><th>Código de barras</th><th>Frascos</th><th>mL/frasco</th><th>Total mL</th></tr></thead><tbody>'+tr+'</tbody></table><p style="margin-top:50px">Conferente: ______________________ &nbsp;&nbsp;&nbsp; Supervisor: ______________________</p></body></html>');
+  w.document.close();setTimeout(function(){try{w.focus();w.print()}catch(e){}},400);
+}
+function cfMakePdf(c){
+  var J=window.jspdf.jsPDF,doc=new J({unit:'mm',format:'a4'}),t=cfTot(c),rows=cfRows(c),W=doc.internal.pageSize.getWidth();
+  doc.setFillColor(20,69,47);doc.rect(0,0,W,24,'F');
+  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(16);doc.text('Conferência de Almoxarifado',14,11);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);doc.text('Farma Control · '+((D.config&&D.config.nome)||''),14,18);
+  doc.setTextColor(30,30,30);doc.setFontSize(10);
+  var y=33;
+  doc.text('Local: '+(c.local||'Almoxarifado'),14,y);y+=5.5;
+  doc.text('Conferente: '+(c.nome||'')+'   ·   Início: '+dstr(c.ts)+' '+hhmm(c.ts)+(c.finalizadaEm?'   ·   Fim: '+dstr(c.finalizadaEm)+' '+hhmm(c.finalizadaEm):'   ·   (conferência em andamento)'),14,y);y+=5.5;
+  if(c.obs){doc.text('Observação: '+c.obs,14,y);y+=5.5}
+  doc.setFont('helvetica','bold');
+  doc.text(t.n+' produtos   ·   '+num(t.q)+' frascos/caixas   ·   '+num(Math.round(t.ml*10)/10)+' mL no total',14,y+1);y+=6;
+  doc.setFont('helvetica','normal');
+  var body=rows.map(function(x,i){return [String(i+1),x.nome+(x.fora?' *':''),x.lab||'',x.barcode||'',num(x.qtd),num(x.ml),num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)]});
+  var anyFora=rows.some(function(x){return x.fora});
+  doc.autoTable({startY:y+2,head:[['#','Produto','Laboratório','Código de barras','Frascos','mL/frasco','Total (mL)']],body:body,
+    foot:[['','TOTAL','','',{content:num(t.q),styles:{halign:'right'}},'',{content:num(Math.round(t.ml*10)/10),styles:{halign:'right'}}]],
+    styles:{fontSize:8.5,cellPadding:1.8,lineColor:[200,200,200],lineWidth:.1},headStyles:{fillColor:[20,69,47],textColor:255},footStyles:{fillColor:[235,240,236],textColor:20,fontStyle:'bold'},
+    columnStyles:{0:{cellWidth:9},3:{cellWidth:34},4:{halign:'right',cellWidth:16},5:{halign:'right',cellWidth:20},6:{halign:'right',cellWidth:24}},
+    margin:{left:14,right:14,bottom:28},showFoot:'lastPage'});
+  var fy=doc.lastAutoTable.finalY+8,H=doc.internal.pageSize.getHeight();
+  if(anyFora){doc.setFontSize(8);doc.setTextColor(90,90,90);doc.text('* produto que não estava no banco de dados do sistema (nome digitado pelo conferente).',14,fy);fy+=6}
+  if(fy>H-30){doc.addPage();fy=30}
+  doc.setTextColor(30,30,30);doc.setFontSize(10);
+  doc.line(14,fy+14,84,fy+14);doc.text('Conferente: '+(c.nome||''),14,fy+19);
+  doc.line(110,fy+14,180,fy+14);doc.text('Supervisor',110,fy+19);
+  var n=doc.internal.getNumberOfPages(),i;
+  for(i=1;i<=n;i++){doc.setPage(i);doc.setFontSize(8);doc.setTextColor(120,120,120);doc.text('Gerado em '+dstr(Date.now())+' '+hhmm(Date.now())+' · Farma Control',14,H-8);doc.text('Página '+i+' de '+n,W-14,H-8,{align:'right'})}
+  return doc;
+}
+function cfPdf(share){
+  var c=byId(D.conferencias,S.cfId);if(!c||!(c.itens||[]).length)return;
+  toast('Gerando o PDF...');
+  pdfLibs().then(function(){
+    var doc=cfMakePdf(c),name=cfFileName(c);
+    if(share&&navigator.canShare){
+      var blob=doc.output('blob'),f=new File([blob],name,{type:'application/pdf'});
+      if(navigator.canShare({files:[f]})){return navigator.share({files:[f],title:'Conferência de almoxarifado',text:'Conferência de almoxarifado · '+(c.local||'')}).catch(function(){})}
+    }
+    doc.save(name);toast('PDF salvo: '+name);
+  }).catch(function(e){console.error(e);toast('Não consegui gerar o PDF direto. Abrindo versão para imprimir/salvar como PDF.');cfPrintHtml(c)});
+}
+
+function noRet(u){return u.role==='almoxarife'||u.role==='conferente'}
 function gEquipe(){
-  var R=retiros(),fid=fidNow(),team=D.users.filter(function(u){return (u.role==='vaqueiro'||u.role==='almoxarife')&&u.fazendaId===fid}).sort(function(a,b){return String(a.nome).localeCompare(String(b.nome))});
+  var R=retiros(),fid=fidNow(),team=D.users.filter(function(u){return (u.role==='vaqueiro'||u.role==='almoxarife'||u.role==='conferente')&&u.fazendaId===fid}).sort(function(a,b){return String(a.nome).localeCompare(String(b.nome))});
   var h='<div class="h1">Equipe</div><div class="small muted">Todos entram com o próprio e-mail. O almoxarife cuida da farmácia central. Cada responsável de retiro só vê e lança nos retiros que você liberar.</div>';
   h+='<div class="card stack span2"><div class="h2">Novo almoxarife</div>'+
     '<div class="field"><label for="al-nome">Nome</label><input class="input t" id="al-nome" data-keep autocomplete="off"></div>'+
     '<div class="grid2"><div class="field"><label for="al-email">E-mail (login)</label><input class="input t" id="al-email" data-keep type="email" autocomplete="off"></div>'+
     '<div class="field"><label for="al-senha">Senha inicial</label><input class="input t" id="al-senha" data-keep type="text" autocomplete="off" placeholder="6 ou mais caracteres"></div></div>'+
-    '<button class="btn cta" data-act="alNew" '+(S.busy?'disabled':'')+'>Cadastrar almoxarife</button><div class="small muted">Acessa a farmácia central: compras, envios aos retiros, aprovações, estoque baixo e medicamentos.</div></div>';
+    '<button class="btn cta" data-act="alNew" '+(S.busy?'disabled':'')+'>Cadastrar almoxarife</button><div class="small muted">Acessa a farmácia central: compras, envios aos retiros, aprovações, estoque baixo e medicamentos.</div></div>'+
+    '<div class="card stack span2"><div class="h2">Novo conferente</div>'+
+    '<div class="field"><label for="cn-nome">Nome</label><input class="input t" id="cn-nome" data-keep autocomplete="off"></div>'+
+    '<div class="grid2"><div class="field"><label for="cn-email">E-mail (login)</label><input class="input t" id="cn-email" data-keep type="email" autocomplete="off"></div>'+
+    '<div class="field"><label for="cn-senha">Senha inicial</label><input class="input t" id="cn-senha" data-keep type="text" autocomplete="off" placeholder="6 ou mais caracteres"></div></div>'+
+    '<button class="btn cta" data-act="cnNew" '+(S.busy?'disabled':'')+'>Cadastrar conferente</button><div class="small muted">Acesso só à tela de Conferência de almoxarifado: lê os códigos de barras, informa as quantidades e gera o PDF. Não vê estoque, valores nem lançamentos.</div></div>';
   if(!R.length)return h+'<div class="card empty stack">Cadastre os retiros antes de cadastrar a equipe.<button class="btn cta" data-act="gnav" data-v="cad">Ir para Cadastro</button></div>';
   h+='<div class="card stack span2"><div class="h2">Novo responsável de retiro</div>'+
     '<div class="field"><label for="eq-nome">Nome</label><input class="input t" id="eq-nome" data-keep autocomplete="off"></div>'+
@@ -1106,10 +1311,10 @@ function gEquipe(){
   if(!team.length)h+='<div class="card empty">Ninguém cadastrado ainda.</div>';
   team.forEach(function(u){
     var pill=u.status==='ativo'?'ok':'crit';
-    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+' · '+(u.role==='almoxarife'?'Almoxarife':'Responsável de retiro')+'</div></div><span class="pill '+pill+'">'+(u.status==='ativo'?'Ativo':'Bloqueado')+'</span></div>'+
-      (u.role==='almoxarife'?'':'<div class="field"><label>Retiros liberados</label><div class="chks">');
-    if(u.role!=='almoxarife')R.forEach(function(r){h+='<label class="chk"><input type="checkbox" data-keep data-eqr="'+esc(u.id)+'" value="'+esc(r.id)+'"'+((u.retiros||[]).indexOf(r.id)>-1?' checked':'')+'>'+esc(r.nome)+'</label>'});
-    h+=(u.role==='almoxarife'?'':'</div></div>')+'<div class="row" style="flex-wrap:wrap">'+(u.role==='almoxarife'?'':'<button class="btn sm cta" data-act="eqSave" data-v="'+esc(u.id)+'">Salvar retiros</button>')+
+    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(u.nome)+'</b><div class="small muted">'+esc(u.email)+' · '+(u.role==='almoxarife'?'Almoxarife':u.role==='conferente'?'Conferente':'Responsável de retiro')+'</div></div><span class="pill '+pill+'">'+(u.status==='ativo'?'Ativo':'Bloqueado')+'</span></div>'+
+      (noRet(u)?'':'<div class="field"><label>Retiros liberados</label><div class="chks">');
+    if(!noRet(u))R.forEach(function(r){h+='<label class="chk"><input type="checkbox" data-keep data-eqr="'+esc(u.id)+'" value="'+esc(r.id)+'"'+((u.retiros||[]).indexOf(r.id)>-1?' checked':'')+'>'+esc(r.nome)+'</label>'});
+    h+=(noRet(u)?'':'</div></div>')+'<div class="row" style="flex-wrap:wrap">'+(noRet(u)?'':'<button class="btn sm cta" data-act="eqSave" data-v="'+esc(u.id)+'">Salvar retiros</button>')+
       (u.status==='ativo'?'<button class="btn sm danger" data-act="eqBlock" data-v="'+esc(u.id)+'">Bloquear</button>':'<button class="btn sm" data-act="eqUnblock" data-v="'+esc(u.id)+'">Reativar</button>')+
       '<button class="btn sm" data-act="eqReset" data-v="'+esc(u.id)+'">Enviar link de nova senha</button></div></div>';
   });
@@ -1253,14 +1458,18 @@ function draw(){
     wide=true;
     html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+(S.satab==='cat'?gCatalogo():gSuper())+'</main></div>';
   }
+  else if(isConf()){
+    wide=true;
+    html=hdrC()+'<div class="shell"><main class="view desk px">'+gConf()+'</main></div>';
+  }
   else if(isAlmox()&&S.view==='alm'){
     wide=true;
-    var ba=S.gtab==='aprov'?gAprov():S.gtab==='meds'?gMeds():S.gtab==='alert'?gAlertas():gCentral();
+    var ba=S.gtab==='conf'?gConf():S.gtab==='aprov'?gAprov():S.gtab==='meds'?gMeds():S.gtab==='alert'?gAlertas():gCentral();
     html=stripHtml()+hdrA()+'<div class="shell">'+navA()+'<main class="view desk px">'+ba+'</main></div>';
   }
   else if(isMgr()&&S.view==='ger'){
     wide=true;
-    var b=S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist();
+    var b=S.gtab==='conf'?gConf():S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist();
     html=stripHtml()+hdrG()+'<div class="shell">'+navG()+'<main class="view desk px">'+b+'</main></div>';
   }else{
     var ret=ctxRet();
@@ -1271,7 +1480,7 @@ function draw(){
       html=stripHtml()+hdrV()+'<main class="view px">'+v+'</main>'+navV();
     }
   }
-  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit].join('|');
+  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit,S.cfId].join('|');
   var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
   $('#dev').className='device'+(wide?' desktop':'');
   document.body.className=wide?'dsk':'';
@@ -1312,8 +1521,8 @@ function createResponsavel(nome,email,senha,rets,role){
   var fid=fidNow();
   function gravar(uid){
     DB.batch([{op:'set',col:'users',id:uid,data:{nome:nome,email:email.toLowerCase(),role:role,status:'ativo',fazendaId:fid,retiros:rets,criadoPor:S.profile.id,criadoEm:Date.now()}},
-      lg('equipe','usuario_criado',role==='almoxarife'?'Cadastrou o almoxarife '+nome+' ('+email+')':'Cadastrou o responsável '+nome+' ('+email+') nos retiros: '+rets.map(retiroNome).join(', '),null,{uid:uid,retiros:rets,role:role})]);
-    S.busy=false;toast(role==='almoxarife'?'Almoxarife cadastrado':'Responsável cadastrado');render(true);
+      lg('equipe','usuario_criado',role==='almoxarife'?'Cadastrou o almoxarife '+nome+' ('+email+')':role==='conferente'?'Cadastrou o conferente '+nome+' ('+email+')':'Cadastrou o responsável '+nome+' ('+email+') nos retiros: '+rets.map(retiroNome).join(', '),null,{uid:uid,retiros:rets,role:role})]);
+    S.busy=false;toast(role==='almoxarife'?'Almoxarife cadastrado':role==='conferente'?'Conferente cadastrado':'Responsável cadastrado');render(true);
   }
   if(DEMO){gravar('u-'+uid8());return}
   var sec=null;firebase.apps.forEach(function(a){if(a.name==='sec')sec=a});
@@ -1415,7 +1624,32 @@ document.addEventListener('click',function(ev){
   }
   else if(a==='mqGo'){mqRun(g('mq'));return}
   else if(a==='catUse'){catUse(v);return}
-  else if(a==='scanOpen'){scanOpen();return}
+  else if(a==='scanOpen'){scanTarget=null;scanOpen();return}
+  else if(a==='cfScan'){scanTarget=cfRun;scanOpen();return}
+  else if(a==='cfNew'){
+    var cl=g('cf-local').trim()||'Almoxarifado',cid='CF'+uid8();
+    DB.batch([{op:'set',col:'conferencias',id:cid,data:{ts:Date.now(),local:cl,obs:g('cf-obs').trim(),uid:S.profile.id,nome:S.profile.nome,status:'aberta',itens:[]}},
+      lg('estoque','conferencia_iniciada','Iniciou a conferência do almoxarifado: '+cl,null,{cid:cid})]);
+    S.cfId=cid;S.cfQ='';S.cfCur=null;S.cfRes=[];S.cfAsk=false;toast('Conferência iniciada');
+  }
+  else if(a==='cfOpen'){S.cfId=v;S.cfQ='';S.cfCur=null;S.cfRes=[];S.cfAsk=false}
+  else if(a==='cfBack'){S.cfId=null;S.cfCur=null;S.cfRes=[];S.cfAsk=false}
+  else if(a==='cfGo'){cfRun(g('cf-q'));return}
+  else if(a==='cfPick'){cfPick(parseInt(v,10));return}
+  else if(a==='cfAdd'){cfAdd();return}
+  else if(a==='cfCancel'){S.cfCur=null;S.cfQ='';S.cfRes=[]}
+  else if(a==='cfDel'){var cc=byId(D.conferencias,S.cfId);if(cc&&cc.status==='aberta'){cfSave(cc,(cc.itens||[]).filter(function(x){return x.id!==v}),{atualizadoEm:Date.now()});toast('Removido da lista')}}
+  else if(a==='cfFin'){
+    var cf=byId(D.conferencias,S.cfId);if(!cf)return;
+    if(!S.cfAsk){S.cfAsk=true;toast('Toque de novo para confirmar');render(true);return}
+    S.cfAsk=false;var tt=cfTot(cf);
+    DB.batch([{op:'set',col:'conferencias',id:cf.id,data:{status:'finalizada',finalizadaEm:Date.now(),finalizadaPor:S.profile.nome}},
+      lg('estoque','conferencia_finalizada','Finalizou a conferência do almoxarifado "'+(cf.local||'')+'": '+tt.n+' produtos, '+tt.q+' frascos, '+ml(tt.ml),null,{cid:cf.id})]);
+    toast('Conferência finalizada. Baixe o PDF abaixo.');
+  }
+  else if(a==='cfReopen'){var cr=byId(D.conferencias,S.cfId);if(cr){DB.batch([{op:'set',col:'conferencias',id:cr.id,data:{status:'aberta',finalizadaEm:null}},lg('estoque','conferencia_reaberta','Reabriu a conferência do almoxarifado "'+(cr.local||'')+'"',null,{cid:cr.id})])}}
+  else if(a==='cfPdf'){cfPdf(false);return}
+  else if(a==='cfShare'){cfPdf(true);return}
   else if(a==='scanClose'){scanStop();return}
   else if(a==='sanav'){S.satab=v;S.catEdit=null}
   else if(a==='catNew'){S.catEdit='novo'}
@@ -1480,7 +1714,7 @@ document.addEventListener('click',function(ev){
     var mid=S.medEdit==='novo'?'m'+uid8():S.medEdit,kg=parseNum(g('f-kgml')),fx=parseNum(g('f-fixo'));
     if(!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
     var dr2=(S.medEdit==='novo'&&S.medDraft)||{},bcode=g('f-barcode').replace(/\D/g,''),lab=g('f-lab').trim();
-    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||null,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
+    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||null,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),minC:(g('f-minc').trim()===''?null:parseNum(g('f-minc'))),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
     var mops=[{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o medicamento '+nome+(lab?' ('+lab+')':'')+' (frasco '+fr+' mL, '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})];
     if(S.medEdit==='novo'){
       var base={st:'pend',ts:Date.now(),fazendaId:fidNow(),por:S.profile.nome};
@@ -1511,6 +1745,12 @@ document.addEventListener('click',function(ev){
     if(!anome||!aemail){toast('Preencha o nome e o e-mail');return}
     if(asenha.length<6){toast('A senha precisa ter 6 ou mais caracteres');return}
     createResponsavel(anome,aemail,asenha,[],'almoxarife');return;
+  }
+  else if(a==='cnNew'){
+    var cnome=g('cn-nome').trim(),cemail=g('cn-email').trim(),csenha=g('cn-senha');
+    if(!cnome||!cemail){toast('Preencha o nome e o e-mail');return}
+    if(csenha.length<6){toast('A senha precisa ter 6 ou mais caracteres');return}
+    createResponsavel(cnome,cemail,csenha,[],'conferente');return;
   }
   else if(a==='eqNew'){
     var enome=g('eq-nome').trim(),eemail=g('eq-email').trim(),esenha=g('eq-senha'),rets=[];
@@ -1566,6 +1806,7 @@ document.addEventListener('input',function(ev){
   var t=ev.target,w=S.wiz;
   if(t.id==='brinco'&&w){w.brinco=t.value.replace(/\D/g,'').slice(0,15);render()}
   else if(t.id==='lnome'&&w){w.loteNome=t.value;render()}
+  else if(t.id==='wpesoin'&&w){var pv=parseInt(t.value.replace(/\D/g,''),10)||0;w.peso=Math.max(0,Math.min(1500,pv));w.dose=calc().sug;render()}
   else if(t.id==='busca'&&w){w.q=t.value;render()}
   else if(t.id==='perda-q'){S.perdaQ=t.value}
   else if(t.id==='c-nf'){S.compra.nf=t.value}
@@ -1574,11 +1815,21 @@ document.addEventListener('keydown',function(ev){
   if(ev.key!=='Enter')return;
   var t=ev.target;
   if(t.id==='mq'){ev.preventDefault();mqRun(t.value)}
+  else if(t.id==='cf-q'){ev.preventDefault();cfRun(t.value)}
+  else if(t.id==='cf-qtd'||t.id==='cf-ml'){ev.preventDefault();if(t.id==='cf-qtd'){var ml2=$('#cf-ml');if(ml2&&!ml2.value){ml2.focus()}else cfAdd()}else cfAdd()}
   else if(t.id==='cat-q2'){ev.preventDefault();S.catQ=t.value.trim();S.catN=40;render(true)}
 });
 document.addEventListener('change',function(ev){
   var t=ev.target;
-  if(t.id==='cat-lab'){S.catLab=t.value;S.catN=40}
+  if(t.getAttribute&&t.getAttribute('data-cfi')){
+    var cc2=byId(D.conferencias,S.cfId);
+    if(cc2&&cc2.status==='aberta'){
+      var fld=t.getAttribute('data-cff'),val=parseNum(t.value);
+      if(!(val>0)){toast('Informe um número maior que zero');render(true);return}
+      cfSave(cc2,(cc2.itens||[]).map(function(x){if(x.id!==t.getAttribute('data-cfi'))return x;var o=ext({},x);o[fld]=fld==='qtd'?Math.round(val):val;return o}),{atualizadoEm:Date.now()});
+    }
+  }
+  else if(t.id==='cat-lab'){S.catLab=t.value;S.catN=40}
   else if(t.id==='cat-st'){S.catSt=t.value;S.catN=40}
   else
   if(t.id==='g-dest'){S.env.dest=t.value}
