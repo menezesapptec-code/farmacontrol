@@ -241,7 +241,7 @@ function byId(arr,id){for(var i=0;i<arr.length;i++){if(arr[i].id===id)return arr
 function brl(n){return (n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 function num(n){return (n||0).toLocaleString('pt-BR')}
 function ml(n){return num(Math.round((n||0)*10)/10)+' mL'}
-function shortMoney(v){return v>=1000?'R$ '+(v/1000).toFixed(1).replace('.',',')+' mil':brl(Math.round(v))}
+function shortMoney(v){return v>=1e6?'R$ '+(v/1e6).toFixed(2).replace('.',',')+' mi':v>=1000?'R$ '+(v/1000).toFixed(1).replace('.',',')+' mil':brl(Math.round(v))}
 function dstr(ms){return new Date(ms).toLocaleDateString('pt-BR')}
 function hhmm(ms){return new Date(ms||Date.now()).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
 function startOfDay(){var d=new Date();d.setHours(0,0,0,0);return d.getTime()}
@@ -450,7 +450,7 @@ var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfe
 var SM={};
 var S={satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
   perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
-  cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
+  demoAsk:null,cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
 
 function isSuper(){return !!S.profile&&S.profile.role==='superadmin'}
@@ -1423,6 +1423,93 @@ function catForm(){
 function hdrSA(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Administrador geral · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
+/* ================= dados de demonstração grandes (painel do administrador geral) ================= */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function hashStr(s){var h=2166136261,i;for(i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+var DEMO_RET=[{id:'dm1',nome:'Retiro Boa Esperança',cabecas:1420},{id:'dm2',nome:'Retiro Pedra Branca',cabecas:1180},{id:'dm3',nome:'Retiro São Pedro',cabecas:960},{id:'dm4',nome:'Retiro Córrego Fundo',cabecas:1310},{id:'dm5',nome:'Retiro Água Limpa',cabecas:870}];
+var DEMO_LOTES=[{id:'dmA',nome:'Bezerros desmama',n:42,peso:190},{id:'dmB',nome:'Novilhas recria',n:58,peso:310},{id:'dmC',nome:'Lote enfermaria',n:9,peso:420},{id:'dmD',nome:'Vacas paridas',n:36,peso:480}];
+var DEMO_NOMES=['Raimundo S.','Joaquim P.','Adailton M.','Francisco L.','Edivaldo R.','Josenildo C.','Márcio T.','Wanderson A.'];
+function seedBig(fid){
+  var now=Date.now(),R=mulberry(20261106),ops=[],pool=D.catalogo.filter(function(c){return c.unidade!=='outro'}).slice();
+  pool.sort(function(a,b){return hashStr(a.id)-hashStr(b.id)});pool=pool.slice(0,200);
+  var meds=pool.map(function(c,i){
+    var fr=c.frasco||(c.apres&&c.barcodes&&c.barcodes[0]&&mlDoCodigo(c.apres,c.barcodes[0]))||100;
+    var base=c.cat==='vac'?[25,120]:c.cat==='verm'?[60,420]:c.cat==='trat'?[40,350]:[20,150];
+    var preco=Math.round(base[0]+R()*(base[1]-base[0]));
+    var kg=c.kgMl||(c.cat==='trat'?[10,15,20,25,45,50][i%6]:c.cat==='verm'?50:c.cat==='outro'?50:null);
+    var fx=c.fixo||(c.cat==='vac'?[2,5][i%2]:null);
+    if(fx)kg=null;
+    var venc=now+((i%17===3)?(8+R()*18):(60+R()*460))*DAY;
+    return {id:'dm_'+c.id,nome:c.nome,lab:c.lab,cat:c.cat||'outro',frasco:fr,preco:preco,kgMl:kg,fixo:fx,carencia:c.carencia||0,min:fr*2,minC:fr*12,lote:'L'+(1000+Math.floor(R()*8999)),venc:Math.round(venc),barcode:(c.barcodes&&c.barcodes[0])||'',catId:c.id,teste:true};
+  });
+  var act=meds.filter(function(m,i){return i%5===0});  // 40 medicamentos em uso nos retiros
+  var demo={meds:meds.map(function(m){return m.id}),retiros:DEMO_RET.map(function(r){return r.id}),lotes:DEMO_LOTES.map(function(l){return l.id}),act:act.map(function(m){return m.id}),nl:0,nt:12,na:6,nc:12,em:now};
+  var farm=byId(D.fazendas,fid)||{};
+  var ret0=(farm.retiros||[]).filter(function(r){return !r.demo}),lot0=(farm.lotes||[]).filter(function(l){return !l.demo});
+  ops.push({op:'set',col:'fazendas',id:fid,data:{retiros:ret0.concat(DEMO_RET.map(function(r){return ext({demo:true},r)})),lotes:lot0.concat(DEMO_LOTES.map(function(l){return ext({demo:true},l)})),demo:demo}});
+  meds.forEach(function(m,i){
+    ops.push({op:'set',col:'meds',id:m.id,data:m});
+    var low=(i%9===4);
+    var q=low?m.frasco*(2+Math.floor(R()*5)):m.frasco*(14+Math.floor(R()*46));
+    ops.push({op:'set',col:'stock',id:'central__'+m.id,data:{loc:'central',med:m.id,qtd:q,teste:true}});
+  });
+  meds.forEach(function(m,j){
+    DEMO_RET.forEach(function(r,ri){
+      var low=((j+ri)%13===0);
+      var q=low?Math.round(m.frasco*(0.3+R()*1.4)):Math.round(m.frasco*(2.5+R()*5));
+      ops.push({op:'set',col:'stock',id:r.id+'__'+m.id,data:{loc:r.id,med:m.id,qtd:q,teste:true}});
+    });
+  });
+  var tipos=['Tratamento','Vacinação','Vermifugação','Tratamento','Tratamento'],n=0,i2;
+  for(i2=0;i2<180;i2++){
+    var r=DEMO_RET[Math.floor(R()*5)],m=act[Math.floor(R()*act.length)],ani=R()<0.3,lot=DEMO_LOTES[Math.floor(R()*4)];
+    var peso=ani?Math.round(150+R()*330):lot.peso,heads=ani?1:Math.round(8+R()*52);
+    var perHead=m.fixo?m.fixo:m.kgMl?Math.max(1,Math.round(peso/m.kgMl)):5,qtd=Math.round(perHead*heads);
+    var ts=Math.round(now-(i2<4?R()*8*3600e3:(0.3+R()*29.5)*DAY));
+    if(i2>=4&&ts>startOfDay())ts-=DAY;
+    var br=ani?String(100+Math.floor(R()*899)).padStart(4,'0'):null;
+    ops.push({op:'set',col:'launches',id:'DL-'+i2,data:{ts:ts,retiro:r.id,uid:'demo',userName:DEMO_NOMES[Math.floor(R()*DEMO_NOMES.length)],tipo:m.cat==='vac'?'Vacinação':m.cat==='verm'?'Vermifugação':'Tratamento',modo:ani?'animal':'lote',
+      alvo:ani?'Brinco '+br:lot.nome+' · '+heads+' animais',brinco:br,peso:peso,animais:heads,med:m.id,medNome:m.nome,qtd:qtd,custo:qtd*m.preco/m.frasco,lote:m.lote,libera:m.carencia?ts+m.carencia*DAY:null,st:'ok',teste:true}});
+    n++;
+  }
+  demo.nl=n;
+  for(i2=0;i2<demo.nt;i2++){
+    var d=DEMO_RET[i2%5],its=[],k;
+    for(k=0;k<1+(i2%3);k++){var mm=act[(i2*3+k*7)%act.length];its.push({med:mm.id,ml:mm.frasco*(1+(k+i2)%4)})}
+    var ts2=now-(i2<3?(1+i2)*3600e3:(2+i2*2)*DAY);
+    var tr={dest:d.id,ts:ts2,itens:its,st:i2<3?'transito':'recebida',por:'Almoxarife',teste:true};
+    if(i2>=3)tr.recebido=its.map(function(x){return {med:x.med,ml:x.ml}});
+    ops.push({op:'set',col:'transfers',id:'DT-'+i2,data:tr});
+  }
+  var ap=[['Perda','dm1','pend','Retiro Boa Esperança · 2 frascos vencidos',{med:act[0].id,loc:'dm1',qtd:act[0].frasco*2,valor:act[0].preco*2,motivo:'Vencido'}],
+    ['Perda','dm3','pend','Retiro São Pedro · frasco quebrado no transporte',{med:act[3].id,loc:'dm3',qtd:act[3].frasco,valor:act[3].preco,motivo:'Quebrado'}],
+    ['Divergência','dm4','pend','Retiro Córrego Fundo recebeu menos do que o enviado (DT-4)',{}],
+    ['Reposição','dm2','pend','Retiro Pedra Branca pediu reposição de '+act[5].nome,{med:act[5].id}],
+    ['Perda','dm5','ok','Retiro Água Limpa · frascos vencidos',{med:act[8].id,loc:'dm5',qtd:0,valor:act[8].preco,motivo:'Vencido'}],
+    ['Perda','dm2','no','Retiro Pedra Branca · perda sem justificativa',{med:act[9].id,loc:'dm2',qtd:0,valor:act[9].preco,motivo:'Outro'}]];
+  ap.forEach(function(a,i){ops.push({op:'set',col:'approvals',id:'DA-'+i,data:{ts:now-(i<4?(1+i)*3600e3:(6+i)*DAY),tipo:a[0],retiro:a[1],st:a[2],por:'Encarregado do '+retiroNomeDemo(a[1]),txt:a[3],payload:a[4],teste:true}})});
+  for(i2=0;i2<demo.nc;i2++){var mc=act[(i2*3)%act.length];ops.push({op:'set',col:'compras',id:'DC-'+i2,data:{ts:now-(2+i2*2.4)*DAY,med:mc.id,ml:mc.frasco*(20+(i2*7)%40),nf:'NF '+(20100+i2*37),por:'Gerência',teste:true}})}
+  ops.forEach(function(o){if(!TOP[o.col])o.fid=fid});
+  return ops;
+}
+function retiroNomeDemo(id){var r=DEMO_RET.filter(function(x){return x.id===id})[0];return r?r.nome:id}
+function runChunks(ops,done){
+  var ch=[],i;for(i=0;i<ops.length;i+=400)ch.push(ops.slice(i,i+400));
+  S.busy=true;render(true);
+  ch.reduce(function(p,x){return p.then(function(){return DB.batch(x)})},Promise.resolve()).then(function(){S.busy=false;if(done)done();render(true)},function(){S.busy=false;render(true)});
+}
+function demoDelOps(fid){
+  var f=byId(D.fazendas,fid),d=f&&f.demo,ops=[],i;if(!d)return null;
+  (d.meds||[]).forEach(function(id){ops.push({op:'del',col:'meds',id:id,fid:fid});ops.push({op:'del',col:'stock',id:'central__'+id,fid:fid})});
+  (d.meds||[]).forEach(function(id){(d.retiros||[]).forEach(function(r){ops.push({op:'del',col:'stock',id:r+'__'+id,fid:fid})})});
+  for(i=0;i<d.nl;i++)ops.push({op:'del',col:'launches',id:'DL-'+i,fid:fid});
+  for(i=0;i<d.nt;i++)ops.push({op:'del',col:'transfers',id:'DT-'+i,fid:fid});
+  for(i=0;i<d.na;i++)ops.push({op:'del',col:'approvals',id:'DA-'+i,fid:fid});
+  for(i=0;i<d.nc;i++)ops.push({op:'del',col:'compras',id:'DC-'+i,fid:fid});
+  ops.push({op:'set',col:'fazendas',id:fid,data:{retiros:(f.retiros||[]).filter(function(r){return !r.demo}),lotes:(f.lotes||[]).filter(function(l){return !l.demo}),demo:null}});
+  return ops;
+}
+
 function gSuper(){
   var pend=D.users.filter(function(u){return u.role==='gerente'&&u.status==='pendente'}).sort(function(a,b){return (a.criadoEm||0)-(b.criadoEm||0)});
   var h='<div class="h1">Fazendas</div><div class="h2">Pedidos de liberação ('+pend.length+')</div>';
@@ -1441,7 +1528,9 @@ function gSuper(){
     h+='<div class="card stack"><div class="row sb"><b>'+esc(f.nome)+'</b><span class="pill '+(ativa?'ok':'crit')+'">'+(ativa?'Ativa':'Bloqueada')+'</span></div>'+
       '<div class="small muted">'+(ger?'Gerente: '+esc(ger.nome)+' · '+esc(ger.email):'Sem gerente cadastrado')+' · '+n+' responsáveis</div>'+
       '<div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="fzOpen" data-v="'+esc(f.id)+'">Abrir fazenda</button>'+
-      (ativa?'<button class="btn sm danger" data-act="fzBlock" data-v="'+esc(f.id)+'">Bloquear</button>':'<button class="btn sm" data-act="fzUnblock" data-v="'+esc(f.id)+'">Reativar</button>')+'</div></div>';
+      (ativa?'<button class="btn sm danger" data-act="fzBlock" data-v="'+esc(f.id)+'">Bloquear</button>':'<button class="btn sm" data-act="fzUnblock" data-v="'+esc(f.id)+'">Reativar</button>')+'</div>'+
+      '<div class="row" style="flex-wrap:wrap"><button class="btn sm '+(S.demoAsk===f.id?'danger':'')+'" data-act="fzDemo" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>'+(S.busy?'Aguarde...':S.demoAsk===f.id?'Confirmar: gerar 200 medicamentos, 5 retiros e ações':'Gerar dados de demonstração')+'</button>'+
+      (f.demo?'<button class="btn sm" data-act="fzDemoDel" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>Remover dados de demonstração</button><span class="pill info">Com dados de demonstração</span>':'')+'</div></div>';
   });
   h+='<div class="card stack"><div class="h2">Fazenda de teste</div><div class="small muted">Cria uma fazenda com retiros, medicamentos, estoque e consumo de exemplo para você testar o sistema. Depois é só bloquear.</div><button class="btn" data-act="fzTest">Criar fazenda de teste com dados</button></div>';
   return h;
@@ -1793,9 +1882,27 @@ document.addEventListener('click',function(ev){
     toast(fb?'Fazenda bloqueada':'Fazenda reativada');
   }
   else if(a==='fzOpen'){S.fid=v;S.view='ger';S.gtab='painel';S.tab='home';S.asRetiro=null;startSubs()}
+  else if(a==='fzDemo'){
+    if(S.busy)return;
+    if(D.catalogo.filter(function(c){return c.unidade!=='outro'}).length<20){toast('Importe o catálogo primeiro (aba Catálogo).');return}
+    if(S.demoAsk!==v){S.demoAsk=v;toast('Toque de novo para confirmar');render(true);return}
+    S.demoAsk=null;
+    var dfz=byId(D.fazendas,v);if(!dfz)return;
+    var dops=(dfz.demo?demoDelOps(v):[]).concat(seedBig(v));
+    dops.push(lg('cadastro','dados_demonstracao','Gerou os dados de demonstração na fazenda '+dfz.nome+' (200 medicamentos, 5 retiros, aplicações, envios, aprovações e compras)',null,{},v));
+    toast('Gerando os dados de demonstração...');
+    runChunks(dops,function(){toast('Dados de demonstração criados. Abra a fazenda para ver.')});return;
+  }
+  else if(a==='fzDemoDel'){
+    if(S.busy)return;
+    var rops=demoDelOps(v);if(!rops){toast('Esta fazenda não tem dados de demonstração');return}
+    var rfz=byId(D.fazendas,v);
+    rops.push(lg('cadastro','dados_demonstracao_removidos','Removeu os dados de demonstração da fazenda '+(rfz?rfz.nome:''),null,{},v));
+    runChunks(rops,function(){toast('Dados de demonstração removidos')});return;
+  }
   else if(a==='fzTest'){
     var tf='f'+uid8(),tnome='Fazenda Teste '+dstr(Date.now());
-    var tops=[{op:'set',col:'fazendas',id:tf,data:{nome:tnome,status:'ativa',criadoEm:Date.now(),gerenteUid:null,teste:true}}].concat(seedOps(tf,true));
+    var tops=[{op:'set',col:'fazendas',id:tf,data:{nome:tnome,status:'ativa',criadoEm:Date.now(),gerenteUid:null,teste:true}}].concat(seedOps(tf,DEMO));
     tops.push(lg('cadastro','fazenda_teste','Criou a fazenda de teste '+tnome,null,{},tf));
     DB.batch(tops);toast('Fazenda de teste criada');
   }
