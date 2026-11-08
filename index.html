@@ -464,10 +464,10 @@ function clearTestOps(){
 }
 
 /* ================= estado ================= */
-var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[],conferencias:[]};
+var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],retiradas:[],logs:[],conferencias:[]};
 var SM={};
 var S={gq:'',rtSel:null,rtF:'low',rtN:60,satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
-  perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
+  perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},ret:{med:'',qtd:'1',dest:'',outro:'',por:'',obs:''},
   demoAsk:null,cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
 
@@ -511,7 +511,7 @@ function onData(col,docs){
   render();
 }
 function clearFarmData(){
-  D.config=null;D.meds=[];D.stock=[];D.transfers=[];D.launches=[];D.approvals=[];D.compras=[];D.logs=[];D.conferencias=[];SM={};
+  D.config=null;D.meds=[];D.stock=[];D.transfers=[];D.launches=[];D.approvals=[];D.compras=[];D.retiradas=[];D.logs=[];D.conferencias=[];SM={};
 }
 function stopSubs(){unsubs.forEach(function(u){try{u()}catch(e){}});unsubs=[];clearFarmData();D.fazendas=[];D.users=[];D.catalogo=[];D.sugestoes=[]}
 function startSubs(){
@@ -528,7 +528,7 @@ function startSubs(){
   if(isConf()){s('catalogo');s('conferencias',{order:['ts','desc'],limit:60});return}
   if(mgr){
     s('conferencias',{order:['ts','desc'],limit:60});
-    s('stock');s('transfers');s('launches',{where:['ts','>=',since]});s('approvals');s('compras');
+    s('stock');s('transfers');s('launches',{where:['ts','>=',since]});s('approvals');s('compras');s('retiradas',{order:['ts','desc'],limit:40});
     if(boss)s('logs',{order:['ts','desc'],limit:300});
     if(boss&&!sup)s('users',{where:['fazendaId','==',fid]});
   }else{
@@ -977,6 +977,19 @@ function gCentral(){
     '<div class="small muted">Na central: '+qs(dispo,m)+(isMat(m)?'':' · cada unidade tem '+m.frasco+' '+uLbl(m))+'</div>'+
     '<div class="field"><label>Frascos</label><div class="stepper"><button data-act="gfr" data-v="-1" aria-label="Menos um frasco">−</button><output>'+e.frascos+'<small>= '+ml(e.frascos*m.frasco)+'</small></output><button data-act="gfr" data-v="1" aria-label="Mais um frasco">+</button></div></div>'+
     '<button class="btn cta" data-act="send" '+(e.frascos*m.frasco>dispo?'disabled':'')+'>Enviar para '+esc(retiroNome(e.dest))+'</button></div>';
+  if(!medById(S.ret.med))S.ret.med=D.meds[0].id;
+  var rm=medById(S.ret.med),rdisp=qty('central',S.ret.med),rq=parseNum(S.ret.qtd)||0,rbase=isMat(rm)?rq:rq*rm.frasco;
+  h+='<div class="card stack"><div class="h2">Registrar retirada da central</div><div class="small muted">Use quando alguém retira um produto direto da farmácia central. Informe para onde ele vai. Se o destino for um retiro, o estoque dele aumenta na hora.</div>'+
+    '<div class="field"><label for="rt-med">Produto</label><select class="input t" id="rt-med">'+opts(S.ret.med)+'</select></div>'+
+    '<div class="small muted">Na central: '+qs(rdisp,rm)+'</div>'+
+    '<div class="grid2"><div class="field"><label for="rt-qtd">Quantas unidades saem</label><input class="input t" id="rt-qtd" data-keep inputmode="decimal" value="'+esc(S.ret.qtd)+'"></div>'+
+    '<div class="field"><label for="rt-dest">Para onde vai</label><select class="input t" id="rt-dest">'+retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(r.id===S.ret.dest?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'<option value="_outro"'+(S.ret.dest==='_outro'?' selected':'')+'>Outro destino (escrever)</option></select></div></div>'+
+    (S.ret.dest==='_outro'?'<div class="field"><label for="rt-outro">Qual destino</label><input class="input t" id="rt-outro" data-keep placeholder="Ex.: Veterinário, outra fazenda, descarte, oficina" value="'+esc(S.ret.outro)+'"></div>':'')+
+    '<div class="grid2"><div class="field"><label for="rt-por">Quem retirou (opcional)</label><input class="input t" id="rt-por" data-keep value="'+esc(S.ret.por)+'"></div>'+
+    '<div class="field"><label for="rt-obs">Observação (opcional)</label><input class="input t" id="rt-obs" data-keep value="'+esc(S.ret.obs)+'"></div></div>'+
+    '<button class="btn cta" data-act="retirada" '+((rq>0&&rbase<=rdisp)?'':'disabled')+'>Registrar retirada'+(rq>0?' de '+num(rq)+' un':'')+'</button>'+(rbase>rdisp?'<div class="small" style="color:var(--crit)">A central só tem '+qs(rdisp,rm)+'.</div>':'')+'</div>';
+  var rts=D.retiradas.slice().sort(function(a,b){return b.ts-a.ts}).slice(0,6);
+  if(rts.length){h+='<div class="h2">Últimas retiradas</div>';rts.forEach(function(r){var x=medById(r.med);h+='<div class="card row sb"><div class="grow"><b>'+esc(r.medNome||(x?x.nome:r.med))+' · '+(x?qs(r.qtd,x):ml(r.qtd))+'</b><div class="small muted">Para '+esc(r.destNome||'')+(r.por?' · retirado por '+esc(r.por):'')+' · registrado por '+esc(r.reg||'')+' em '+dstr(r.ts)+' '+hhmm(r.ts)+(r.obs?' · '+esc(r.obs):'')+'</div></div></div>'})}
   h+='<div class="card stack"><div class="h2">Registrar compra (entrada)</div>'+
     '<div class="field"><label for="c-med">Medicamento</label><select class="input t" id="c-med">'+opts(cp.med)+'</select></div>'+
     '<div class="field"><label>Frascos recebidos</label><div class="stepper"><button data-act="cfr" data-v="-1" aria-label="Menos um frasco">−</button><output>'+cp.frascos+'<small>= '+ml(cp.frascos*mc.frasco)+'</small></output><button data-act="cfr" data-v="1" aria-label="Mais um frasco">+</button></div></div>'+
@@ -1896,6 +1909,17 @@ document.addEventListener('click',function(ev){
       lg('estoque','compra','Registrou compra de '+ml(qc)+' de '+mc.nome+(cp.nf?' ('+cp.nf+')':''),null,{med:cp.med,ml:qc,nf:cp.nf})]);
     S.compra.nf='';S.compra.frascos=1;toast('Entrada registrada na central');
   }
+  else if(a==='retirada'){
+    var re=S.ret,rmd=medById(re.med),rqq=parseNum(re.qtd)||0,rb2=isMat(rmd)?rqq:rqq*rmd.frasco;
+    if(!(rqq>0)||rb2>qty('central',re.med)){toast('Confira a quantidade');return}
+    var rdest=re.dest||(retiros()[0]||{}).id,isOut=(rdest==='_outro'),dn=isOut?(re.outro||'').trim():retiroNome(rdest);
+    if(!dn){toast('Escreva para onde vai');return}
+    var rops=[{op:'inc',col:'stock',id:'central__'+re.med,data:{loc:'central',med:re.med},n:-rb2},
+      {op:'set',col:'retiradas',id:'RT'+uid8(),data:{ts:Date.now(),med:re.med,medNome:rmd.nome,qtd:rb2,dest:isOut?null:rdest,destNome:dn,por:re.por.trim(),obs:re.obs.trim(),reg:S.profile.nome}},
+      lg('estoque','retirada','Retirou '+num(rqq)+' un de '+rmd.nome+' da central para '+dn+(re.por.trim()?' (retirado por '+re.por.trim()+')':''),isOut?null:rdest,{med:re.med,qtd:rb2})];
+    if(!isOut)rops.push({op:'inc',col:'stock',id:rdest+'__'+re.med,data:{loc:rdest,med:re.med},n:rb2});
+    DB.batch(rops);S.ret.qtd='1';S.ret.outro='';S.ret.por='';S.ret.obs='';toast('Retirada registrada');
+  }
   else if(a==='apr'){var pp=v.split('|'),ap=byId(D.approvals,pp[0]);if(ap){resolveApproval(ap,pp[1]==='ok');toast(pp[1]==='ok'?'Aprovado':'Rejeitado')}}
   else if(a==='atender'){
     var ar=byId(D.approvals,v);if(ar&&ar.payload){S.env.dest=ar.payload.retiro;S.env.med=ar.payload.med;S.env.frascos=1;S.gtab='central';toast('Confira a quantidade e envie')}
@@ -2113,6 +2137,10 @@ document.addEventListener('input',function(ev){
   else if(t.id==='gs-q'){S.gq=t.value;render(true)}
   else if(t.id==='perda-q'){S.perdaQ=t.value}
   else if(t.id==='c-nf'){S.compra.nf=t.value}
+  else if(t.id==='rt-qtd'){S.ret.qtd=t.value;var rb=$('[data-act=retirada]');if(rb){var rm2=medById(S.ret.med),q2=parseNum(t.value)||0,b2=isMat(rm2)?q2:q2*rm2.frasco;rb.disabled=!(q2>0&&b2<=qty('central',S.ret.med))}}
+  else if(t.id==='rt-outro'){S.ret.outro=t.value}
+  else if(t.id==='rt-por'){S.ret.por=t.value}
+  else if(t.id==='rt-obs'){S.ret.obs=t.value}
 });
 document.addEventListener('keydown',function(ev){
   if(ev.key!=='Enter')return;
@@ -2136,7 +2164,9 @@ document.addEventListener('change',function(ev){
   else if(t.id==='cat-lab'){S.catLab=t.value;S.catN=40}
   else if(t.id==='cat-st'){S.catSt=t.value;S.catN=40}
   else
-  if(t.id==='g-dest'){S.env.dest=t.value}
+  if(t.id==='rt-med'){S.ret.med=t.value}
+  else if(t.id==='rt-dest'){S.ret.dest=t.value}
+  else if(t.id==='g-dest'){S.env.dest=t.value}
   else if(t.id==='g-med'){S.env.med=t.value;S.env.frascos=1}
   else if(t.id==='c-med'){S.compra.med=t.value;S.compra.frascos=1}
   else if(t.id==='as-ret'){S.asRetiro=t.value;S.wiz=null}
