@@ -61,6 +61,10 @@ button{cursor:pointer}
 .hdr-sub{font-size:13px;opacity:.82;margin-top:3px}
 .hdr .back{background:transparent;border:0;color:var(--hdr-ink);display:flex;align-items:center;gap:6px;min-height:44px;min-width:44px;margin-left:-8px;padding:0 8px;font-weight:600}
 .modal{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.mbox.ficha{max-width:660px;max-height:90vh;overflow:auto}
+.gsbar{display:flex;gap:8px;align-items:center;margin-bottom:6px}.gsbar input{flex:1}
+.fk{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.fk>div{background:rgba(127,127,127,.12);border-radius:10px;padding:8px 10px}.fk small{display:block;opacity:.7;font-size:12px}
+.clk{cursor:pointer}
 .mbox{background:var(--surface);color:var(--ink);border-radius:16px;padding:22px;max-width:420px;width:100%;display:flex;flex-direction:column;gap:12px}
 .hdr .out svg{vertical-align:-3px}
 .hdr .out{background:transparent;border:1px solid rgba(255,255,255,.3);color:var(--hdr-ink);border-radius:99px;min-height:32px;padding:0 12px;font-size:13px}
@@ -366,14 +370,14 @@ function lg(grupo,acao,resumo,retiro,detalhe,fid){
 function seedMeds(){
   var t=Date.now();
   return [
-    {id:'oxi',nome:'Oxitetraciclina LA 200 mg/mL',cat:'trat',frasco:100,preco:38,kgMl:10,fixo:null,carencia:28,min:300,lote:'OX-2291',venc:t+210*DAY},
-    {id:'flor',nome:'Florfenicol 300 mg/mL',cat:'trat',frasco:100,preco:210,kgMl:15,fixo:null,carencia:44,min:300,lote:'FL-0873',venc:t+160*DAY},
-    {id:'flu',nome:'Flunixina 5%',cat:'trat',frasco:50,preco:95,kgMl:45,fixo:null,carencia:4,min:100,lote:'FX-1190',venc:t+300*DAY},
-    {id:'iver',nome:'Ivermectina 1%',cat:'verm',frasco:500,preco:160,kgMl:50,fixo:null,carencia:35,min:500,lote:'IV-5520',venc:t+18*DAY},
-    {id:'dora',nome:'Doramectina 1%',cat:'verm',frasco:500,preco:390,kgMl:50,fixo:null,carencia:42,min:400,lote:'DR-3307',venc:t+240*DAY},
-    {id:'aft',nome:'Vacina Aftosa',cat:'vac',frasco:50,preco:80,kgMl:null,fixo:2,carencia:0,min:400,lote:'AF-7741',venc:t+120*DAY},
-    {id:'clo',nome:'Vacina Clostridioses',cat:'vac',frasco:100,preco:52,kgMl:null,fixo:5,carencia:0,min:400,lote:'CL-6012',venc:t+180*DAY},
-    {id:'vit',nome:'Complexo Vitamínico B',cat:'outro',frasco:100,preco:28,kgMl:50,fixo:null,carencia:0,min:150,lote:'VB-2204',venc:t+400*DAY}
+    {id:'oxi',nome:'Oxitetraciclina LA 200 mg/mL',cat:'trat',frasco:100,preco:38,kgMl:10,fixo:null,carencia:28,min:300,lote:'OX-2291',pasta:'Pastilheira 1',fila:'Fileira 1',venc:t+210*DAY},
+    {id:'flor',nome:'Florfenicol 300 mg/mL',cat:'trat',frasco:100,preco:210,kgMl:15,fixo:null,carencia:44,min:300,lote:'FL-0873',pasta:'Pastilheira 1',fila:'Fileira 2',venc:t+160*DAY},
+    {id:'flu',nome:'Flunixina 5%',cat:'trat',frasco:50,preco:95,kgMl:45,fixo:null,carencia:4,min:100,lote:'FX-1190',pasta:'Pastilheira 1',fila:'Fileira 3',venc:t+300*DAY},
+    {id:'iver',nome:'Ivermectina 1%',cat:'verm',frasco:500,preco:160,kgMl:50,fixo:null,carencia:35,min:500,lote:'IV-5520',pasta:'Pastilheira 2',fila:'Fileira 1',venc:t+18*DAY},
+    {id:'dora',nome:'Doramectina 1%',cat:'verm',frasco:500,preco:390,kgMl:50,fixo:null,carencia:42,min:400,lote:'DR-3307',pasta:'Pastilheira 2',fila:'Fileira 2',venc:t+240*DAY},
+    {id:'aft',nome:'Vacina Aftosa',cat:'vac',frasco:50,preco:80,kgMl:null,fixo:2,carencia:0,min:400,lote:'AF-7741',pasta:'Geladeira',fila:'Prateleira 1',venc:t+120*DAY},
+    {id:'clo',nome:'Vacina Clostridioses',cat:'vac',frasco:100,preco:52,kgMl:null,fixo:5,carencia:0,min:400,lote:'CL-6012',pasta:'Geladeira',fila:'Prateleira 2',venc:t+180*DAY},
+    {id:'vit',nome:'Complexo Vitamínico B',cat:'outro',frasco:100,preco:28,kgMl:50,fixo:null,carencia:0,min:150,lote:'VB-2204',pasta:'Pastilheira 2',fila:'Fileira 3',venc:t+400*DAY}
   ];
 }
 function seedOps(fid,withLogs){
@@ -448,7 +452,7 @@ function clearTestOps(){
 /* ================= estado ================= */
 var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],logs:[],conferencias:[]};
 var SM={};
-var S={satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
+var S={gq:'',rtSel:null,rtF:'low',rtN:60,satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
   perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1},compra:{med:'',frascos:1,nf:''},
   demoAsk:null,cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
@@ -866,7 +870,7 @@ function hdrC(){
   return '<header class="hdr px"><div class="hdr-row"><div><div class="brand">Farma Control</div><div class="hdr-sub">Conferente · '+esc((D.config&&D.config.nome)||'Fazenda')+' · '+esc(S.profile.nome)+'</div></div><div class="hr-right">'+connPill()+instBtn()+'<button class="out" data-act="logout">Sair</button></div></div></header>';
 }
 function navA(){
-  var items=[['central','Central','truck'],['aprov','Aprovações','list'],['alert','Estoque baixo','alert'],['meds','Medicamentos','pill'],['conf','Conferência','box']];
+  var items=[['central','Central','truck'],['aprov','Aprovações','list'],['alert','Estoque baixo','alert'],['meds','Medicamentos','pill'],['conf','Conferência','box'],['ret','Retiros','home']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length,low=stats().alerts.length+centralLow().length;
   var h='<nav class="side" aria-label="Almoxarifado">';
   items.forEach(function(it){
@@ -892,7 +896,7 @@ function gAlertas(){
   return h;
 }
 function navG(){
-  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['conf','Conferência','box'],['equipe','Equipe','users'],['hist','Histórico','book']];
+  var items=[['painel','Painel','chart'],['central','Central','truck'],['aprov','Aprovações','list'],['cad','Cadastro','pill'],['conf','Conferência','box'],['equipe','Equipe','users'],['hist','Histórico','book'],['ret','Retiros','home']];
   var ap=D.approvals.filter(function(a){return a.st==='pend'}).length;
   var h='<nav class="side" aria-label="Gerência">';
   items.forEach(function(it){
@@ -947,10 +951,10 @@ function gCentral(){
   var e=S.env,m=medById(e.med),cp=S.compra,mc=medById(cp.med),dispo=qty('central',e.med);
   var opts=function(sel){return D.meds.map(function(x){return '<option value="'+esc(x.id)+'"'+(x.id===sel?' selected':'')+'>'+esc(x.nome)+'</option>'}).join('')};
   var h='<div class="h1">Farmácia central</div>';
-  h+='<div class="card stack"><div class="h2">Estoque da central</div>';
+  h+='<div class="card stack"><div class="h2">Estoque da central</div><div class="small muted">Toque em um remédio para abrir a ficha (local na pastilheira, para que serve e bula).</div>';
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(x){
     var q=qty('central',x.id),low=q<minC(x);
-    h+='<div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+' · mínimo na central '+ml(minC(x))+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
+    h+='<div class="row sb clk" data-act="ficha" data-v="'+esc(x.id)+'"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+(locTxt(x)?esc(locTxt(x))+' · ':'')+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+' · mínimo na central '+ml(minC(x))+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
   });
   h+='</div>';
   h+='<div class="card stack"><div class="h2">Enviar para um retiro</div>'+
@@ -1081,6 +1085,8 @@ function gMeds(embed){
       '<div class="field"><label for="f-car">Carência (dias)</label><input class="input t" id="f-car" data-keep inputmode="numeric" value="'+v('carencia',0)+'"></div>'+
       '<div class="field"><label for="f-min">Estoque mínimo em cada RETIRO (mL)</label><input class="input t" id="f-min" data-keep inputmode="decimal" value="'+v('min')+'"><div class="small muted">Abaixo disso, o retiro aparece como "Baixo" e a gerência é avisada para repor.</div></div>'+
       '<div class="field"><label for="f-minc">Estoque mínimo na CENTRAL (mL)</label><input class="input t" id="f-minc" data-keep inputmode="decimal" placeholder="Se vazio: 8 vezes o mínimo do retiro" value="'+(ed&&ed.minC!=null?ed.minC:'')+'"><div class="small muted">Abaixo disso, a central aparece como "Baixo" e entra em "Estoque baixo" para comprar.</div></div>'+
+      '<div class="field"><label for="f-pasta">Pastilheira (onde fica na central)</label><input class="input t" id="f-pasta" data-keep placeholder="Ex.: Pastilheira 1" value="'+v('pasta')+'"></div>'+
+      '<div class="field"><label for="f-fila">Fileira / prateleira</label><input class="input t" id="f-fila" data-keep placeholder="Ex.: Fileira 3" value="'+v('fila')+'"></div>'+
       '<div class="field"><label for="f-lote">Lote</label><input class="input t" id="f-lote" data-keep value="'+v('lote')+'"></div>'+
       '<div class="field"><label for="f-venc">Validade</label><input class="input t" id="f-venc" data-keep type="date" value="'+isoDate(ed?ed.venc:Date.now()+365*DAY)+'"></div></div>'+
       '<div class="small muted">Dose por peso: se a bula diz 1 mL a cada 50 kg, digite 50. Para vacinas e doses iguais para todo animal, use a dose fixa.</div>'+
@@ -1091,7 +1097,7 @@ function gMeds(embed){
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){
     h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b><span class="pill info">'+tipoNome(m.cat)+'</span></div>'+
       '<div class="small muted">Frasco '+m.frasco+' mL · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por mL </div>'+
-      '<div class="small muted">Mínimo no retiro '+ml(m.min)+' · mínimo na central '+ml(minC(m))+'</div>'+
+      '<div class="small muted">'+(locTxt(m)?'Local: '+esc(locTxt(m))+' · ':'')+'Mínimo no retiro '+ml(m.min)+' · mínimo na central '+ml(minC(m))+'</div>'+
       '<div class="small muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+' · carência '+(m.carencia?m.carencia+' dias':'nenhuma')+'</div>'+
       '<button class="btn sm" style="align-self:flex-start" data-act="medEdit" data-v="'+esc(m.id)+'">Editar</button></div>';
   });
@@ -1099,6 +1105,157 @@ function gMeds(embed){
   if(embed)h+='<div class="card stack"><div class="h2">Dados de exemplo</div><div class="small muted">Carrega retiros, medicamentos, estoques, transferências, aprovações e 30 dias de consumo de exemplo para testar.</div>'+
     '<button class="btn" data-act="seed">Carregar dados de exemplo</button><button class="btn danger" data-act="clearTest">Apagar lançamentos, transferências e aprovações de exemplo</button></div>';
   return h;
+}
+/* ================= busca, ficha e alternativas ================= */
+var ATV={"ivermectina": ["ivermectina"], "abamectina": ["abamectina"], "doramectina": ["doramectina"], "eprinomectina": ["eprinomectina"], "moxidectina": ["moxidectina"], "albendazol": ["albendazol"], "levamisol": ["levamisol"], "closantel": ["closantel"], "nitroxinil": ["nitroxinil"], "triclorfon": ["triclorfon"], "fenbendazol": ["fenbendazol"], "oxfendazol": ["oxfendazol"], "ricobendazol": ["ricobendazol"], "febantel": ["febantel"], "praziquantel": ["praziquantel"], "fipronil": ["fipronil"], "fluazuron": ["fluazuron"], "cipermetrina": ["cipermetrina"], "clorpirifos": ["clorpirifos"], "deltametrina": ["deltametrina"], "amitraz": ["amitraz"], "diazinon": ["diazinon"], "flumetrina": ["flumetrina"], "clorfenvinfos": ["clorfenvinfos"], "imidocarb": ["imidocarb"], "diminazeno": ["diminazeno"], "piriproxifem": ["piriproxifem"], "permetrina": ["permetrina"], "oxitetraciclina": ["oxitetraciclina"], "tetraciclina": ["tetraciclina"], "florfenicol": ["florfenicol"], "enrofloxacina": ["enrofloxacina"], "marbofloxacina": ["marbofloxacina"], "danofloxacina": ["danofloxacina"], "ciprofloxacina": ["ciprofloxacina"], "ceftiofur": ["ceftiofur"], "cefalexina": ["cefalexina"], "cefquinoma": ["cefquinoma"], "cefoperazona": ["cefoperazona"], "cefapirina": ["cefapirina"], "penicilina": ["penicilina", "benzilpenicilina"], "estreptomicina": ["estreptomicina", "dihidroestreptomicina"], "gentamicina": ["gentamicina"], "neomicina": ["neomicina"], "amoxicilina": ["amoxicilina"], "ampicilina": ["ampicilina"], "cloxacilina": ["cloxacilina"], "tilmicosina": ["tilmicosina"], "tulatromicina": ["tulatromicina"], "tilosina": ["tilosina"], "gamitromicina": ["gamitromicina"], "sulfadimetoxina": ["sulfadimetoxina"], "sulfadiazina": ["sulfadiazina"], "sulfametoxazol": ["sulfametoxazol"], "trimetoprima": ["trimetoprima", "trimetoprim"], "lincomicina": ["lincomicina"], "espectinomicina": ["espectinomicina"], "tiamulina": ["tiamulina"], "eritromicina": ["eritromicina"], "colistina": ["colistina"], "paromomicina": ["paromomicina"], "flunixina": ["flunixina", "flunixin"], "cetoprofeno": ["cetoprofeno"], "meloxicam": ["meloxicam"], "dexametasona": ["dexametasona"], "betametasona": ["betametasona"], "prednisolona": ["prednisolona"], "isoflupredona": ["isoflupredona"], "diclofenaco": ["diclofenaco"], "fenilbutazona": ["fenilbutazona"], "dipirona": ["dipirona"], "carprofeno": ["carprofeno"], "salicilato": ["salicilato", "acido acetilsalicilico"], "gonadorelina": ["gonadorelina"], "cloprostenol": ["cloprostenol"], "dinoprost": ["dinoprost"], "ocitocina": ["ocitocina"], "estradiol": ["estradiol"], "progesterona": ["progesterona"], "gonadotrofina": ["gonadotrofina", "ecg "], "somatotropina": ["somatotropina"], "buserelina": ["buserelina"], "xilazina": ["xilazina"], "detomidina": ["detomidina"], "lidocaina": ["lidocaina"], "cetamina": ["cetamina"], "acepromazina": ["acepromazina"], "bromexina": ["bromexina"], "butafosfano": ["butafosfano"], "cianocobalamina": ["cianocobalamina", "vitamina b12"], "selenio": ["selenio", "selenito"], "ferro": ["ferro dextran", "dextrano de ferro", "ferro "], "cobre": ["cobre", "edetato de cobre"], "calcio": ["borogluconato", "gluconato de calcio", "calcio"], "vitamina a": ["vitamina a", "retinol"], "vitamina d3": ["vitamina d", "colecalciferol"], "vitamina e": ["vitamina e", "tocoferol"], "complexo b": ["complexo b", "vitamina b1", "tiamina"], "atropina": ["atropina"], "furosemida": ["furosemida"], "tiabendazol": ["tiabendazol"], "nitrofurazona": ["nitrofurazona"], "clorexidina": ["clorexidina"], "iodo": ["iodo ", "iodopovidona"], "aftosa": ["aftosa"], "clostridioses": ["clostrid", "clostridi"], "brucelose": ["brucela", "brucelose"], "raiva": ["raiva"], "ibr/bvd": ["ibr", "bvd", "rinotraqueite"], "leptospirose": ["leptospir"], "carbunculo": ["carbunculo"], "botulismo": ["botulismo", "botulinica", "botulismo"], "pasteurelose": ["pasteurel", "mannheimia"], "e. coli": ["e. coli", "escherichia"], "rotavirus": ["rotavirus"], "coronavirus": ["coronavirus"], "tuberculose (ppd)": ["ppd", "tuberculina"]};
+var ATV_CACHE={};
+function findAtv(txt){
+  var t=' '+norm(txt)+' ',out=[];
+  Object.keys(ATV).forEach(function(k){
+    for(var i=0;i<ATV[k].length;i++){var v=ATV[k][i].trim();if(!v)continue;
+      var re=new RegExp('(?:^|[^a-z])'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![a-z])');
+      if(re.test(t)){out.push(k);break}}
+  });
+  return out;
+}
+function catDe(m){
+  if(!m)return null;
+  var c=m.catId&&byId(D.catalogo,m.catId);
+  if(!c&&m.barcode)c=D.catalogo.filter(function(x){return (x.barcodes||[]).indexOf(m.barcode)>-1})[0];
+  if(!c){var n=norm(m.nome);c=D.catalogo.filter(function(x){return norm(x.nome)===n})[0]}
+  return c||null;
+}
+function ativosDe(m){
+  var k=m.id+'|'+D.catalogo.length+'|'+m.nome;
+  if(ATV_CACHE[k])return ATV_CACHE[k];
+  var c=catDe(m),a=(c&&c.ativos&&c.ativos.length)?c.ativos.slice():findAtv(m.nome+' '+(m.lab||''));
+  ATV_CACHE[k]=a;return a;
+}
+function locTxt(m){return [m.pasta,m.fila].filter(Boolean).join(' · ')}
+function doseMed(m){
+  if(m.fixo)return m.fixo+' mL por animal (dose fixa, qualquer peso)';
+  if(m.kgMl){var ex=[100,300,450].map(function(p){return p+' kg = '+num(Math.max(1,Math.round(p/m.kgMl)))+' mL'});return '1 mL a cada '+m.kgMl+' kg de peso. Exemplos: '+ex.join(' · ')}
+  return 'Dose não cadastrada. Consulte a bula ou o veterinário.';
+}
+function qEscopo(m,ret){
+  if(ret)return qty(ret,m.id);
+  var t=qty('central',m.id);retiros().forEach(function(r){t+=qty(r.id,m.id)});return t;
+}
+function alternativas(m,ret){
+  var A=ativosDe(m);if(!A.length)return [];
+  var out=[];
+  D.meds.forEach(function(x){
+    if(x.id===m.id)return;
+    var B=ativosDe(x);if(!B.length)return;
+    var ok=A.every(function(a){return B.indexOf(a)>-1});if(!ok)return;
+    var q=qEscopo(x,ret);if(q<=0)return;
+    out.push({m:x,q:q,exato:B.length===A.length});
+  });
+  out.sort(function(a,b){return (b.exato-a.exato)||(b.q-a.q)});
+  return out.slice(0,5);
+}
+function gsBar(){
+  return '<div class="gsbar"><input class="input t" id="gs-q" data-keep type="search" autocomplete="off" placeholder="Buscar remédio: tem estoque? onde está? quantos mL usar?" value="'+esc(S.gq)+'" aria-label="Buscar remédio">'+(S.gq?'<button class="btn sm" data-act="gsClear">Limpar</button>':'')+'</div>';
+}
+function stockLinha(m,ret){
+  var l='';
+  if(ret){
+    var q=qty(ret,m.id);
+    return '<div class="small"><b>'+esc(retiroNome(ret))+':</b> '+(q>0?ml(q):'<span class="muted">sem estoque neste retiro</span>')+'</div>'+
+      (qty('central',m.id)>0?'<div class="small muted">A farmácia central tem '+ml(qty('central',m.id))+'. Peça reposição.</div>':'');
+  }
+  var c=qty('central',m.id);
+  l+='<div class="small"><b>Central:</b> '+(c>0?ml(c)+(locTxt(m)?' · <b>'+esc(locTxt(m))+'</b>':''):'<span class="muted">sem estoque</span>')+'</div>';
+  var rs=retiros().map(function(r){return {r:r,q:qty(r.id,m.id)}}).filter(function(x){return x.q>0});
+  if(rs.length)l+='<div class="small"><b>Retiros:</b> '+rs.slice(0,6).map(function(x){return esc(x.r.nome)+' '+ml(x.q)}).join(' · ')+(rs.length>6?' · +'+(rs.length-6):'')+'</div>';
+  else l+='<div class="small muted">Nenhum retiro tem este remédio.</div>';
+  return l;
+}
+function gsRes(ret){
+  var q=S.gq.trim(),tk=norm(q).split(/\s+/).filter(Boolean);
+  var found=D.meds.filter(function(m){
+    var h=norm(m.nome+' '+(m.lab||'')+' '+ativosDe(m).join(' ')+' '+(m.barcode||''));
+    return tk.every(function(t){return h.indexOf(t)>-1});
+  }).sort(function(a,b){return qEscopo(b,ret)-qEscopo(a,ret)||a.nome.localeCompare(b.nome)});
+  var h='<div class="h2">'+found.length+' resultado'+(found.length===1?'':'s')+' para “'+esc(q)+'”</div>';
+  if(!found.length){
+    h+='<div class="card empty">Nenhum remédio cadastrado com esse nome. Confira a grafia ou tente o princípio ativo (ex.: ivermectina).</div>';
+    return h;
+  }
+  found.slice(0,10).forEach(function(m){
+    var tot=qEscopo(m,ret),has=tot>0;
+    h+='<div class="card stack"><div class="row sb"><b class="clk" data-act="ficha" data-v="'+esc(m.id)+'">'+esc(m.nome)+'</b>'+(has?'<span class="pill ok">Tem estoque</span>':'<span class="pill crit">Sem estoque</span>')+'</div>'+
+      stockLinha(m,ret)+
+      '<div class="small"><b>Dose:</b> '+esc(doseMed(m))+'</div>'+
+      (m.carencia?'<div class="small muted">Carência: '+m.carencia+' dias para abate</div>':'')+
+      '<button class="btn sm" style="align-self:flex-start" data-act="ficha" data-v="'+esc(m.id)+'">Abrir ficha</button>';
+    if(!has){
+      var alt=alternativas(m,ret),A=ativosDe(m);
+      if(alt.length){
+        h+='<div class="note warn">'+ic('alert',20)+'<div><b>Sem estoque. Alternativa com o mesmo princípio ativo ('+esc(A.join(' + '))+'):</b>'+
+          alt.map(function(a){return '<div style="margin-top:6px"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span> · tem '+ml(a.q)+(a.exato?'':' · <i>combinação com outros ativos</i>')+'<div class="small">Dose: '+esc(doseMed(a.m))+'</div></div>'}).join('')+
+          '<div class="small muted" style="margin-top:6px">Confira a concentração e a carência na bula e fale com o veterinário antes de trocar.</div></div></div>';
+      }else if(A.length)h+='<div class="note info"><div>Sem estoque e nenhum outro remédio cadastrado tem o mesmo princípio ativo ('+esc(A.join(' + '))+') disponível.</div></div>';
+      else h+='<div class="note info"><div>Sem estoque. O princípio ativo deste produto não está identificado, então não dá para sugerir alternativa automática. Fale com o veterinário.</div></div>';
+    }
+    h+='</div>';
+  });
+  if(found.length>10)h+='<div class="small muted">Mostrando 10 de '+found.length+'. Digite mais letras para filtrar.</div>';
+  return h;
+}
+function fichaOpen(id){
+  var m=medById(id);if(!m)return;
+  var c=catDe(m),A=ativosDe(m),h='';
+  var old=document.querySelector('.modal');if(old)old.parentNode.removeChild(old);
+  var cq=qty('central',m.id),low=cq<minC(m),d=daysTo(m.venc);
+  h+='<div class="row sb"><div><div class="h2" style="margin:0">'+esc(m.nome)+'</div><div class="small muted">'+esc(m.lab||(c&&c.lab)||'')+' · '+tipoNome(m.cat)+'</div></div><button class="btn sm" data-act="closeModal">Fechar</button></div>';
+  h+='<div class="fk"><div><small>Na central</small><b>'+ml(cq)+'</b><small>'+num(Math.round(cq/m.frasco*10)/10)+' frascos de '+m.frasco+' mL</small>'+(low?'<span class="pill warn">Abaixo do mínimo</span>':'')+'</div>'+
+    '<div><small>Local na central</small><b>'+(locTxt(m)?esc(locTxt(m)):'não informado')+'</b></div>'+
+    '<div><small>Lote / validade</small><b>'+esc(m.lote||'—')+'</b><small>vence '+dstr(m.venc)+(d<=30?' · em '+d+' dias':'')+'</small></div>'+
+    '<div><small>Carência</small><b>'+(m.carencia?m.carencia+' dias':'nenhuma')+'</b>'+(c&&c.carenciaLeite?'<small>leite: '+esc(String(c.carenciaLeite))+'</small>':'')+'</div></div>';
+  h+='<div class="h2" style="margin:4px 0 0">Estoque nos retiros</div>';
+  var R=retiros();
+  if(!R.length)h+='<div class="small muted">Nenhum retiro cadastrado.</div>';
+  else h+='<div class="stack" style="gap:4px">'+R.map(function(r){var q=qty(r.id,m.id),lw=q<(m.min||0);return '<div class="row sb small"><span>'+esc(r.nome)+'</span><span><b>'+ml(q)+'</b> <span class="muted">(mín. '+ml(m.min||0)+')</span> '+(lw?'<span class="pill warn">Baixo</span>':'')+'</span></div>'}).join('')+'</div>';
+  h+='<div class="h2" style="margin:4px 0 0">Para que serve</div><div class="small">'+((c&&c.indic)?esc(c.indic):'<span class="muted">Indicação ainda não cadastrada no catálogo. Consulte a bula do frasco.</span>')+'</div>';
+  if(A.length)h+='<div class="row" style="flex-wrap:wrap;gap:6px"><span class="small muted">Princípio ativo:</span>'+A.map(function(a){return '<span class="pill info">'+esc(a)+'</span>'}).join('')+'</div>';
+  h+='<div class="h2" style="margin:4px 0 0">Dose</div><div class="small">'+esc(doseMed(m))+'</div>';
+  if(c&&c.posol)h+='<div class="small"><b>Posologia na bula:</b> '+esc(c.posol)+'</div>';
+  if(c&&c.via&&c.via.length)h+='<div class="small"><b>Via:</b> '+esc(c.via.join(', '))+(c.especies&&c.especies.length?' · <b>Espécies:</b> '+esc(c.especies.join(', ')):'')+'</div>';
+  if(c&&c.comp)h+='<div class="small"><b>Composição:</b> '+esc(c.comp)+'</div>';
+  if(c&&c.contra)h+='<div class="small"><b>Contraindicações / cuidados:</b> '+esc(c.contra)+'</div>';
+  if(!c||(!c.indic&&!c.posol&&!c.contra))h+='<div class="note info"><div>Este produto ainda não tem o resumo da bula no catálogo. Consulte a bula impressa.</div></div>';
+  var alt=alternativas(m,null);
+  if(alt.length)h+='<div class="h2" style="margin:4px 0 0">Mesmo princípio ativo em estoque</div>'+alt.map(function(a){return '<div class="row sb small"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span><span>'+ml(a.q)+'</span></div>'}).join('');
+  h+='<div class="small muted">Resumo para consulta rápida. A bula original e a orientação do veterinário valem sempre.</div>';
+  if(isMgr()||isAlmox()||isSuper())h+='<button class="btn" data-act="fichaEdit" data-v="'+esc(m.id)+'">Editar cadastro e local na pastilheira</button>';
+  var d2=document.createElement('div');d2.className='modal';d2.setAttribute('role','dialog');
+  d2.innerHTML='<div class="mbox ficha">'+h+'</div>';
+  document.body.appendChild(d2);
+}
+/* ================= aba Retiros (gerência e almoxarifado) ================= */
+function gRetiros(){
+  var R=retiros(),h='<div class="h1">Retiros e seus estoques</div>';
+  if(!R.length)return h+'<div class="card empty">Nenhum retiro cadastrado.</div>';
+  if(!byId(R,S.rtSel))S.rtSel=R[0].id;
+  var lowN={};R.forEach(function(r){var n=0;D.meds.forEach(function(m){if(qty(r.id,m.id)<(m.min||0))n++});lowN[r.id]=n});
+  h+='<div class="chips" role="group" aria-label="Retiro">'+R.map(function(r){return '<button class="chip" data-act="rtSel" data-v="'+esc(r.id)+'" aria-pressed="'+(S.rtSel===r.id)+'">'+esc(r.nome)+(lowN[r.id]?' · '+lowN[r.id]+' baixo':'')+'</button>'}).join('')+'</div>';
+  var r=byId(R,S.rtSel),val=0,com=0;
+  D.meds.forEach(function(m){var q=qty(r.id,m.id);if(q>0){com++;val+=q*m.preco/m.frasco}});
+  h+='<div class="kpis"><div class="kpi"><small>Remédios com estoque</small><b>'+com+'</b></div><div class="kpi"><small>Abaixo do mínimo</small><b>'+lowN[r.id]+'</b></div><div class="kpi"><small>Valor em estoque</small><b>'+shortMoney(val)+'</b></div><div class="kpi"><small>Animais</small><b>'+num(r.cabecas||0)+'</b></div></div>';
+  h+='<div class="chips" role="group" aria-label="Filtro">'+[['low','Abaixo do mínimo'],['all','Todos'],['zero','Zerados']].map(function(f){return '<button class="chip" data-act="rtF" data-v="'+f[0]+'" aria-pressed="'+(S.rtF===f[0])+'">'+f[1]+'</button>'}).join('')+'</div>';
+  var rows=D.meds.map(function(m){return {m:m,q:qty(r.id,m.id)}}).filter(function(x){
+    return S.rtF==='low'?x.q<(x.m.min||0):S.rtF==='zero'?x.q<=0:true;
+  }).sort(function(a,b){return (a.q/((a.m.min)||1))-(b.q/((b.m.min)||1))||a.m.nome.localeCompare(b.m.nome)});
+  if(!rows.length)h+='<div class="card empty">'+(S.rtF==='low'?'Este retiro não tem nada abaixo do mínimo.':'Nenhum item neste filtro.')+'</div>';
+  h+='<div class="card stack">';
+  rows.slice(0,S.rtN).forEach(function(x){
+    var lw=x.q<(x.m.min||0),pct=Math.min(x.q/((x.m.min||1)*2),1)*100;
+    h+='<div class="stack clk" style="gap:4px" data-act="ficha" data-v="'+esc(x.m.id)+'"><div class="row sb"><b>'+esc(x.m.nome)+'</b>'+(x.q<=0?'<span class="pill crit">Zerado</span>':lw?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
+      '<div class="row sb small"><span><b>'+ml(x.q)+'</b> no retiro</span><span class="muted">mínimo '+ml(x.m.min||0)+(lw?' · faltam '+ml((x.m.min||0)-x.q):'')+'</span></div><div class="bar" aria-hidden="true"><i class="'+(lw?'low':'')+'" style="width:'+pct+'%"></i></div></div>';
+  });
+  if(rows.length>S.rtN)h+='<button class="btn" data-act="rtMore">Mostrar mais ('+(rows.length-S.rtN)+')</button>';
+  return h+'</div>';
 }
 /* ================= conferência de almoxarifado ================= */
 var jsLoad=null;
@@ -1440,7 +1597,7 @@ function seedBig(fid){
     var fx=c.fixo||(c.cat==='vac'?[2,5][i%2]:null);
     if(fx)kg=null;
     var venc=now+((i%17===3)?(8+R()*18):(60+R()*460))*DAY;
-    return {id:'dm_'+c.id,nome:c.nome,lab:c.lab,cat:c.cat||'outro',frasco:fr,preco:preco,kgMl:kg,fixo:fx,carencia:c.carencia||0,min:fr*2,minC:fr*12,lote:'L'+(1000+Math.floor(R()*8999)),venc:Math.round(venc),barcode:(c.barcodes&&c.barcodes[0])||'',catId:c.id,teste:true};
+    return {id:'dm_'+c.id,nome:c.nome,lab:c.lab,cat:c.cat||'outro',frasco:fr,preco:preco,kgMl:kg,fixo:fx,carencia:c.carencia||0,min:fr*2,minC:fr*12,lote:'L'+(1000+Math.floor(R()*8999)),venc:Math.round(venc),barcode:(c.barcodes&&c.barcodes[0])||'',catId:c.id,pasta:'Pastilheira '+(1+Math.floor(i/40)),fila:'Fileira '+(1+(i%6)),teste:true};
   });
   var act=meds.filter(function(m,i){return i%5===0});  // 40 medicamentos em uso nos retiros
   var demo={meds:meds.map(function(m){return m.id}),retiros:DEMO_RET.map(function(r){return r.id}),lotes:DEMO_LOTES.map(function(l){return l.id}),act:act.map(function(m){return m.id}),nl:0,nt:12,na:6,nc:12,em:now};
@@ -1553,12 +1710,12 @@ function draw(){
   }
   else if(isAlmox()&&S.view==='alm'){
     wide=true;
-    var ba=S.gtab==='conf'?gConf():S.gtab==='aprov'?gAprov():S.gtab==='meds'?gMeds():S.gtab==='alert'?gAlertas():gCentral();
+    var ba=gsBar()+(S.gq.trim()?gsRes():S.gtab==='ret'?gRetiros():S.gtab==='conf'?gConf():S.gtab==='aprov'?gAprov():S.gtab==='meds'?gMeds():S.gtab==='alert'?gAlertas():gCentral());
     html=stripHtml()+hdrA()+'<div class="shell">'+navA()+'<main class="view desk px">'+ba+'</main></div>';
   }
   else if(isMgr()&&S.view==='ger'){
     wide=true;
-    var b=S.gtab==='conf'?gConf():S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist();
+    var b=gsBar()+(S.gq.trim()?gsRes():S.gtab==='ret'?gRetiros():S.gtab==='conf'?gConf():S.gtab==='painel'?gPainel():S.gtab==='central'?gCentral():S.gtab==='aprov'?gAprov():S.gtab==='cad'?gCad():S.gtab==='equipe'?gEquipe():gHist());
     html=stripHtml()+hdrG()+'<div class="shell">'+navG()+'<main class="view desk px">'+b+'</main></div>';
   }else{
     var ret=ctxRet();
@@ -1566,10 +1723,10 @@ function draw(){
     else if(S.wiz){html=stripHtml()+hdrWiz(ret)+'<main class="view px">'+wizBody(ret)+'</main>'+wizFoot(ret)}
     else{
       var v=S.tab==='home'?vHome(ret):S.tab==='estoque'?vEstoque(ret):S.tab==='hist'?vHist(ret):vReceber(ret);
-      html=stripHtml()+hdrV()+'<main class="view px">'+v+'</main>'+navV();
+      html=stripHtml()+hdrV()+'<main class="view px">'+gsBar()+(S.gq.trim()?gsRes(ret):v)+'</main>'+navV();
     }
   }
-  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit,S.cfId].join('|');
+  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit,S.cfId,S.rtSel,S.rtF,!!S.gq.trim()].join('|');
   var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
   $('#dev').className='device'+(wide?' desktop':'');
   document.body.className=wide?'dsk':'';
@@ -1697,7 +1854,13 @@ document.addEventListener('click',function(ev){
   else if(a==='save'){saveLaunch(ret)}
   else if(a==='wnew'){wizStart()}
   else if(a==='whome'){S.wiz=null;S.tab='home'}
-  else if(a==='gnav'){S.gtab=v}
+  else if(a==='gnav'){S.gtab=v;S.gq=''}
+  else if(a==='gsClear'){S.gq=''}
+  else if(a==='ficha'){fichaOpen(v);return}
+  else if(a==='fichaEdit'){var mq0=document.querySelector('.modal');if(mq0)mq0.parentNode.removeChild(mq0);S.gq='';S.gtab=isAlmox()?'meds':'cad';S.medEdit=v}
+  else if(a==='rtSel'){S.rtSel=v;S.rtN=60}
+  else if(a==='rtF'){S.rtF=v;S.rtN=60}
+  else if(a==='rtMore'){S.rtN+=60}
   else if(a==='gfr'){S.env.frascos=Math.max(1,S.env.frascos+parseInt(v,10))}
   else if(a==='cfr'){S.compra.frascos=Math.max(1,S.compra.frascos+parseInt(v,10))}
   else if(a==='send'){sendTransfer()}
@@ -1773,9 +1936,14 @@ document.addEventListener('click',function(ev){
     fetch('catalogo-inicial.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('http '+r.status);return r.json()}).then(function(list){
       var have={};D.catalogo.forEach(function(c){have[c.id]=c.conferido?2:1});
       var ops=list.filter(function(c){return have[c.id]!==2}).map(function(c){return {op:'set',col:'catalogo',id:c.id,data:ext(ext({},c),{importadoEm:Date.now()})}});
+      /* produtos já conferidos: só completa o resumo da bula e os princípios ativos, sem mexer em dose e carência */
+      list.forEach(function(c){if(have[c.id]!==2)return;var ex=byId(D.catalogo,c.id)||{},up={};
+        ['indic','posol','contra'].forEach(function(k){if(c[k]&&!ex[k])up[k]=c[k]});
+        if(c.ativos&&c.ativos.length&&!(ex.ativos&&ex.ativos.length))up.ativos=c.ativos;
+        if(Object.keys(up).length)ops.push({op:'set',col:'catalogo',id:c.id,data:up})});
       if(!ops.length){toast('Nada novo para importar');return}
       var chunks=[],i;for(i=0;i<ops.length;i+=400)chunks.push(ops.slice(i,i+400));
-      return chunks.reduce(function(p,ch){return p.then(function(){return DB.batch(ch)})},Promise.resolve()).then(function(){toast(ops.length+' produtos importados/atualizados (os conferidos não foram alterados)')});
+      return chunks.reduce(function(p,ch){return p.then(function(){return DB.batch(ch)})},Promise.resolve()).then(function(){toast(ops.length+' produtos importados/atualizados (nos conferidos só foram completados o resumo da bula e os princípios ativos)')});
     }).catch(function(e){console.error(e);toast('Não consegui ler o catalogo-inicial.json. Ele está no GitHub junto do index.html?')}).then(function(){S.importing=false;render(true)});
     return;
   }
@@ -1803,7 +1971,7 @@ document.addEventListener('click',function(ev){
     var mid=S.medEdit==='novo'?'m'+uid8():S.medEdit,kg=parseNum(g('f-kgml')),fx=parseNum(g('f-fixo'));
     if(!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
     var dr2=(S.medEdit==='novo'&&S.medDraft)||{},bcode=g('f-barcode').replace(/\D/g,''),lab=g('f-lab').trim();
-    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||null,cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),minC:(g('f-minc').trim()===''?null:parseNum(g('f-minc'))),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
+    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||(S.medEdit!=='novo'&&(medById(S.medEdit)||{}).catId)||null,pasta:g('f-pasta').trim(),fila:g('f-fila').trim(),cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),minC:(g('f-minc').trim()===''?null:parseNum(g('f-minc'))),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
     var mops=[{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o medicamento '+nome+(lab?' ('+lab+')':'')+' (frasco '+fr+' mL, '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})];
     if(S.medEdit==='novo'){
       var base={st:'pend',ts:Date.now(),fazendaId:fidNow(),por:S.profile.nome};
@@ -1915,6 +2083,7 @@ document.addEventListener('input',function(ev){
   else if(t.id==='lnome'&&w){w.loteNome=t.value;render()}
   else if(t.id==='wpesoin'&&w){var pv=parseInt(t.value.replace(/\D/g,''),10)||0;w.peso=Math.max(0,Math.min(1500,pv));w.dose=calc().sug;render()}
   else if(t.id==='busca'&&w){w.q=t.value;render()}
+  else if(t.id==='gs-q'){S.gq=t.value;render(true)}
   else if(t.id==='perda-q'){S.perdaQ=t.value}
   else if(t.id==='c-nf'){S.compra.nf=t.value}
 });
