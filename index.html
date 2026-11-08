@@ -245,6 +245,19 @@ function byId(arr,id){for(var i=0;i<arr.length;i++){if(arr[i].id===id)return arr
 function brl(n){return (n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 function num(n){return (n||0).toLocaleString('pt-BR')}
 function ml(n){return num(Math.round((n||0)*10)/10)+' mL'}
+/* unidade de medida do produto: 'ml' (líquido), 'mg' (pó/sólido) ou 'un' (material veterinário: agulha, brincador, extrator...) */
+var UNIDS=[{id:'ml',nome:'Líquido (mL)'},{id:'mg',nome:'Pó ou sólido (mg)'},{id:'un',nome:'Material veterinário (unidade)'}];
+function unid(m){return (m&&m.unid)||'ml'}
+function uLbl(m){var u=unid(m);return u==='mg'?'mg':u==='un'?'un':'mL'}
+function isMat(m){return unid(m)==='un'}
+function qs(q,m){
+  /* quantidade em unidades (frascos/caixas/peças) com o conteúdo ao lado */
+  if(!m)return ml(q);
+  var f=m.frasco||1,n=Math.round((q||0)/f*10)/10;
+  if(isMat(m))return num(Math.round(q||0))+' un';
+  var u=uLbl(m),cq=Math.round((q||0)*10)/10,ct=(u==='mg'&&cq>=10000)?num(Math.round(cq/100)/10)+' g':num(cq)+' '+u;
+  return num(n)+' un <span class="muted" style="font-weight:400">('+ct+')</span>';
+}
 function shortMoney(v){return v>=1e6?'R$ '+(v/1e6).toFixed(2).replace('.',',')+' mi':v>=1000?'R$ '+(v/1000).toFixed(1).replace('.',',')+' mil':brl(Math.round(v))}
 function dstr(ms){return new Date(ms).toLocaleDateString('pt-BR')}
 function hhmm(ms){return new Date(ms||Date.now()).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}
@@ -269,7 +282,8 @@ var TIPOS=[
   {id:'trat',nome:'Tratamento',sub:'Antibiótico e anti-inflamatório'},
   {id:'vac',nome:'Vacinação',sub:'Aftosa, clostridioses'},
   {id:'verm',nome:'Vermifugação',sub:'Antiparasitário'},
-  {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'}
+  {id:'outro',nome:'Outro',sub:'Vitaminas e suplementos'},
+  {id:'mat',nome:'Material veterinário',sub:'Agulha, brincador, extrator de brinco'}
 ];
 function tipoNome(id){var t=byId(TIPOS,id);return t?t.nome:id}
 var ROLE_NOME={superadmin:'Administrador geral',gerente:'Gerência',almoxarife:'Almoxarife',conferente:'Conferente',vaqueiro:'Responsável por retiro'};
@@ -696,7 +710,7 @@ function vHome(ret){
   else if(!alerts.length)h+='<div class="card empty">Nenhum medicamento abaixo do mínimo ou perto de vencer.</div>';
   alerts.forEach(function(a){
     h+='<div class="card stack"><div class="row sb"><b>'+esc(a.m.nome)+'</b>'+(a.s.low?'<span class="pill warn">Abaixo do mínimo</span>':'<span class="pill crit">Vence em '+a.s.d+' dias</span>')+'</div>'+
-      '<div class="small muted">Tem '+ml(a.s.q)+' · mínimo '+ml(a.m.min)+'</div>'+
+      '<div class="small muted">Tem '+qs(a.s.q,a.m)+' · mínimo '+qs(a.m.min,a.m)+'</div>'+
       (a.s.low?(reposPend(ret,a.m.id)?'<span class="pill info" style="align-self:flex-start">Pedido enviado à farmácia central</span>':'<button class="btn sm" style="align-self:flex-start" data-act="repor1" data-v="'+esc(a.m.id)+'">Pedir reposição</button>'):'<div class="small muted">Lote '+esc(a.m.lote)+'. Use este primeiro.</div>')+'</div>';
   });
   return h;
@@ -713,7 +727,7 @@ function vEstoque(ret){
     n++;
     var pct=Math.min(s.q/(m.min*2),1)*100;
     h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b>'+(s.low?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
-      '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+ml(s.q)+'</span><span class="small muted">mínimo no retiro '+ml(m.min)+'</span></div>'+
+      '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+qs(s.q,m)+'</span><span class="small muted">mínimo no retiro '+qs(m.min,m)+'</span></div>'+
       '<div class="bar" aria-hidden="true"><i class="'+(s.low?'low':'')+'" style="width:'+pct+'%"></i></div>'+
       '<div class="row sb small"><span class="muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+'</span>'+(s.exp?'<span class="pill crit">Vence em '+s.d+' dias</span>':'')+'</div>'+
       '<div class="row" style="flex-wrap:wrap">'+
@@ -783,7 +797,7 @@ function wizBody(ret){
   var w=S.wiz,h='';
   if(w.step===0){
     h+='<div class="h1">O que você vai aplicar?</div><div class="two">';
-    TIPOS.forEach(function(t){h+='<button class="tile" data-act="wtipo" data-v="'+t.id+'" aria-pressed="'+(w.tipo===t.id)+'"><b>'+t.nome+'</b><span class="small muted">'+t.sub+'</span></button>'});
+    TIPOS.filter(function(t){return t.id!=='mat'}).forEach(function(t){h+='<button class="tile" data-act="wtipo" data-v="'+t.id+'" aria-pressed="'+(w.tipo===t.id)+'"><b>'+t.nome+'</b><span class="small muted">'+t.sub+'</span></button>'});
     h+='</div>';
   }
   if(w.step===1){
@@ -800,11 +814,11 @@ function wizBody(ret){
   }
   if(w.step===2){
     h+='<div class="h1">Qual remédio?</div><div class="field"><label for="busca">Buscar</label><input class="input t" id="busca" placeholder="Digite o nome" value="'+esc(w.q)+'"></div>';
-    var list=D.meds.filter(function(m){return (w.all||m.cat===w.tipo)&&m.nome.toLowerCase().indexOf(w.q.toLowerCase())>-1});
+    var list=D.meds.filter(function(m){return !isMat(m)&&(w.all||m.cat===w.tipo)&&m.nome.toLowerCase().indexOf(w.q.toLowerCase())>-1});
     if(!list.length)h+='<div class="card empty">Nenhum remédio encontrado.</div>';
     list.forEach(function(m){
       var s=medStatus(m,ret);
-      h+='<button class="opt" data-act="wmed" data-v="'+esc(m.id)+'" '+(s.q<=0?'disabled':'')+'><div class="grow"><b>'+esc(m.nome)+'</b><div class="small muted">No retiro: '+ml(s.q)+'</div></div>'+(s.low?'<span class="pill warn">Baixo</span>':'')+(s.exp?'<span class="pill crit">Vence em '+s.d+'d</span>':'')+'</button>';
+      h+='<button class="opt" data-act="wmed" data-v="'+esc(m.id)+'" '+(s.q<=0?'disabled':'')+'><div class="grow"><b>'+esc(m.nome)+'</b><div class="small muted">No retiro: '+qs(s.q,m)+'</div></div>'+(s.low?'<span class="pill warn">Baixo</span>':'')+(s.exp?'<span class="pill crit">Vence em '+s.d+'d</span>':'')+'</button>';
     });
     h+='<button class="btn sm" data-act="wall" style="align-self:flex-start">'+(w.all?'Mostrar só '+tipoNome(w.tipo):'Ver todos os remédios')+'</button>';
   }
@@ -888,9 +902,9 @@ function gAlertas(){
   var st=stats(),cl=centralLow(),h='<div class="h1">Estoque baixo e vencimentos</div>';
   if(!cl.length&&!st.alerts.length&&!st.exp.length)return h+'<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
   if(cl.length){h+='<div class="h2">Farmácia central</div>';
-    cl.forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>'+esc(c.m.nome)+'</b><div class="small muted">Tem '+ml(c.q)+' na central · '+num(Math.round(c.q/c.m.frasco*10)/10)+' frascos</div></div><span class="pill warn">Repor</span></div>'})}
+    cl.forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>'+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na central, mínimo '+qs(minC(c.m),c.m)+'</div></div><span class="pill warn">Repor</span></div>'})}
   if(st.alerts.length){h+='<div class="h2">Nos retiros</div>';
-    st.alerts.forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+ml(a.q)+', mínimo '+ml(a.m.min)+'</div></div><span class="pill warn">Baixo</span></div>'})}
+    st.alerts.forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'})}
   if(st.exp.length){h+='<div class="h2">Vencendo</div>';
     st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'})}
   return h;
@@ -936,10 +950,10 @@ function gPainel(){
   if(total>0&&per[hi]>avg*1.15)h+='<div class="note warn">'+ic('alert',20)+'<div><b>'+esc(R[hi].nome)+'</b> gasta '+brl(Math.round(per[hi]))+' por 100 animais, '+Math.round((per[hi]/avg-1)*100)+'% acima da média da fazenda ('+brl(Math.round(avg))+'). Vale conferir o motivo.</div></div>';
   h+='<div class="h2">Atenção hoje</div>';
   var cl=centralLow();
-  cl.slice(0,6).forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>Central · '+esc(c.m.nome)+'</b><div class="small muted">Tem '+ml(c.q)+' na farmácia central, está acabando</div></div><span class="pill warn">Acabando</span></div>'});
+  cl.slice(0,6).forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>Central · '+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na farmácia central, está acabando</div></div><span class="pill warn">Acabando</span></div>'});
   if(!st.alerts.length&&!st.exp.length&&!cl.length)h+='<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
   st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'});
-  st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+ml(a.q)+', mínimo '+ml(a.m.min)+'</div></div><span class="pill warn">Baixo</span></div>'});
+  st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'});
   if(st.alerts.length>8)h+='<div class="small muted">e mais '+(st.alerts.length-8)+' itens abaixo do mínimo.</div>';
   return h;
 }
@@ -954,13 +968,13 @@ function gCentral(){
   h+='<div class="card stack"><div class="h2">Estoque da central</div><div class="small muted">Toque em um remédio para abrir a ficha (local na pastilheira, para que serve e bula).</div>';
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(x){
     var q=qty('central',x.id),low=q<minC(x);
-    h+='<div class="row sb clk" data-act="ficha" data-v="'+esc(x.id)+'"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+(locTxt(x)?esc(locTxt(x))+' · ':'')+num(Math.round(q/x.frasco*10)/10)+' frascos · '+shortMoney(q*x.preco/x.frasco)+' · mínimo na central '+ml(minC(x))+'</div></div><span class="num"><b>'+ml(q)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
+    h+='<div class="row sb clk" data-act="ficha" data-v="'+esc(x.id)+'"><div class="grow"><b>'+esc(x.nome)+'</b><div class="small muted">'+(locTxt(x)?esc(locTxt(x))+' · ':'')+shortMoney(q*x.preco/x.frasco)+' · mínimo na central '+qs(minC(x),x)+'</div></div><span class="num"><b>'+qs(q,x)+'</b></span>'+(low?'<span class="pill warn">Baixo</span>':'')+'</div>';
   });
   h+='</div>';
   h+='<div class="card stack"><div class="h2">Enviar para um retiro</div>'+
     '<div class="field"><label for="g-dest">Destino</label><select class="input t" id="g-dest">'+retiros().map(function(r){return '<option value="'+esc(r.id)+'"'+(r.id===e.dest?' selected':'')+'>'+esc(r.nome)+'</option>'}).join('')+'</select></div>'+
     '<div class="field"><label for="g-med">Medicamento</label><select class="input t" id="g-med">'+opts(e.med)+'</select></div>'+
-    '<div class="small muted">Na central: '+ml(dispo)+' · frasco de '+m.frasco+' mL</div>'+
+    '<div class="small muted">Na central: '+qs(dispo,m)+(isMat(m)?'':' · cada unidade tem '+m.frasco+' '+uLbl(m))+'</div>'+
     '<div class="field"><label>Frascos</label><div class="stepper"><button data-act="gfr" data-v="-1" aria-label="Menos um frasco">−</button><output>'+e.frascos+'<small>= '+ml(e.frascos*m.frasco)+'</small></output><button data-act="gfr" data-v="1" aria-label="Mais um frasco">+</button></div></div>'+
     '<button class="btn cta" data-act="send" '+(e.frascos*m.frasco>dispo?'disabled':'')+'>Enviar para '+esc(retiroNome(e.dest))+'</button></div>';
   h+='<div class="card stack"><div class="h2">Registrar compra (entrada)</div>'+
@@ -1077,14 +1091,15 @@ function gMeds(embed){
     h+='<div class="card stack span2"><div class="h2">'+(ed?'Editar':'Novo medicamento')+'</div>'+
       '<div class="field"><label for="f-nome">Nome</label><input class="input t" id="f-nome" data-keep value="'+v('nome')+'"></div>'+
       '<div class="grid2"><div class="field"><label for="f-lab">Laboratório</label><input class="input t" id="f-lab" data-keep value="'+v('lab')+'"></div><div class="field"><label for="f-barcode">Código de barras</label><input class="input t" id="f-barcode" data-keep inputmode="numeric" value="'+v('barcode')+'"></div></div>'+
-      '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:(dr.cat||'trat'))===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
-      '<div class="grid2"><div class="field"><label for="f-frasco">Frasco (mL)</label><input class="input t" id="f-frasco" data-keep inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
-      '<div class="field"><label for="f-preco">Preço do frasco (R$)</label><input class="input t" id="f-preco" data-keep inputmode="decimal" value="'+v('preco')+'"></div>'+
+      '<div class="field"><label for="f-unid">Unidade de medida do produto</label><select class="input t" id="f-unid" data-keep>'+UNIDS.map(function(u){return '<option value="'+u.id+'"'+((ed?unid(ed):(dr.unid||'ml'))===u.id?' selected':'')+'>'+u.nome+'</option>'}).join('')+'</select><div class="small muted">Líquido: o conteúdo de cada unidade é em mL. Pó: em mg. Material (agulha, brincador, extrator de brinco): conta só unidades.</div></div>'+
+      '<div class="field"><label for="f-cat">Tipo</label><select class="input t" id="f-cat" data-keep>'+TIPOS.filter(function(t){return t.id!=='mat'}).map(function(t){return '<option value="'+t.id+'"'+((ed?ed.cat:(dr.cat||'trat'))===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
+      '<div class="grid2"><div class="field"><label for="f-frasco">Conteúdo de cada unidade (mL ou mg; material = 1)</label><input class="input t" id="f-frasco" data-keep inputmode="decimal" value="'+v('frasco',100)+'"></div>'+
+      '<div class="field"><label for="f-preco">Preço de cada unidade (R$)</label><input class="input t" id="f-preco" data-keep inputmode="decimal" value="'+v('preco')+'"></div>'+
       '<div class="field"><label for="f-kgml">Dose por peso: 1 mL para cada quantos kg?</label><input class="input t" id="f-kgml" data-keep inputmode="decimal" placeholder="Ex.: 50 (1 mL a cada 50 kg)" value="'+v('kgMl')+'"></div>'+
       '<div class="field"><label for="f-fixo">Ou dose fixa por animal (mL)</label><input class="input t" id="f-fixo" data-keep inputmode="decimal" placeholder="Ex.: 2" value="'+v('fixo')+'"></div>'+
       '<div class="field"><label for="f-car">Carência (dias)</label><input class="input t" id="f-car" data-keep inputmode="numeric" value="'+v('carencia',0)+'"></div>'+
-      '<div class="field"><label for="f-min">Estoque mínimo em cada RETIRO (mL)</label><input class="input t" id="f-min" data-keep inputmode="decimal" value="'+v('min')+'"><div class="small muted">Abaixo disso, o retiro aparece como "Baixo" e a gerência é avisada para repor.</div></div>'+
-      '<div class="field"><label for="f-minc">Estoque mínimo na CENTRAL (mL)</label><input class="input t" id="f-minc" data-keep inputmode="decimal" placeholder="Se vazio: 8 vezes o mínimo do retiro" value="'+(ed&&ed.minC!=null?ed.minC:'')+'"><div class="small muted">Abaixo disso, a central aparece como "Baixo" e entra em "Estoque baixo" para comprar.</div></div>'+
+      '<div class="field"><label for="f-min">Estoque mínimo em cada RETIRO (unidades)</label><input class="input t" id="f-min" data-keep inputmode="decimal" value="'+(ed&&ed.min!=null?Math.round(ed.min/(ed.frasco||1)*10)/10:'')+'"><div class="small muted">Abaixo disso, o retiro aparece como "Baixo" e a gerência é avisada para repor.</div></div>'+
+      '<div class="field"><label for="f-minc">Estoque mínimo na CENTRAL (unidades)</label><input class="input t" id="f-minc" data-keep inputmode="decimal" placeholder="Se vazio: 8 vezes o mínimo do retiro" value="'+(ed&&ed.minC!=null?Math.round(ed.minC/(ed.frasco||1)*10)/10:'')+'"><div class="small muted">Abaixo disso, a central aparece como "Baixo" e entra em "Estoque baixo" para comprar.</div></div>'+
       '<div class="field"><label for="f-pasta">Pastilheira (onde fica na central)</label><input class="input t" id="f-pasta" data-keep placeholder="Ex.: Pastilheira 1" value="'+v('pasta')+'"></div>'+
       '<div class="field"><label for="f-fila">Fileira / prateleira</label><input class="input t" id="f-fila" data-keep placeholder="Ex.: Fileira 3" value="'+v('fila')+'"></div>'+
       '<div class="field"><label for="f-lote">Lote</label><input class="input t" id="f-lote" data-keep value="'+v('lote')+'"></div>'+
@@ -1096,8 +1111,8 @@ function gMeds(embed){
   }
   D.meds.slice().sort(function(a,b){return a.nome.localeCompare(b.nome)}).forEach(function(m){
     h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b><span class="pill info">'+tipoNome(m.cat)+'</span></div>'+
-      '<div class="small muted">Frasco '+m.frasco+' mL · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por mL </div>'+
-      '<div class="small muted">'+(locTxt(m)?'Local: '+esc(locTxt(m))+' · ':'')+'Mínimo no retiro '+ml(m.min)+' · mínimo na central '+ml(minC(m))+'</div>'+
+      '<div class="small muted">'+(isMat(m)?'Material · preço por unidade '+brl(m.preco):'Cada unidade '+m.frasco+' '+uLbl(m)+' · '+brl(m.preco)+' · '+brl(m.preco/m.frasco)+' por '+uLbl(m))+'</div>'+
+      '<div class="small muted">'+(locTxt(m)?'Local: '+esc(locTxt(m))+' · ':'')+'Mínimo no retiro '+qs(m.min,m)+' · mínimo na central '+qs(minC(m),m)+'</div>'+
       '<div class="small muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+' · carência '+(m.carencia?m.carencia+' dias':'nenhuma')+'</div>'+
       '<button class="btn sm" style="align-self:flex-start" data-act="medEdit" data-v="'+esc(m.id)+'">Editar</button></div>';
   });
@@ -1133,6 +1148,7 @@ function ativosDe(m){
 }
 function locTxt(m){return [m.pasta,m.fila].filter(Boolean).join(' · ')}
 function doseMed(m){
+  if(isMat(m))return 'Material veterinário: não tem dose.';
   if(m.fixo)return m.fixo+' mL por animal (dose fixa, qualquer peso)';
   if(m.kgMl){var ex=[100,300,450].map(function(p){return p+' kg = '+num(Math.max(1,Math.round(p/m.kgMl)))+' mL'});return '1 mL a cada '+m.kgMl+' kg de peso. Exemplos: '+ex.join(' · ')}
   return 'Dose não cadastrada. Consulte a bula ou o veterinário.';
@@ -1161,13 +1177,13 @@ function stockLinha(m,ret){
   var l='';
   if(ret){
     var q=qty(ret,m.id);
-    return '<div class="small"><b>'+esc(retiroNome(ret))+':</b> '+(q>0?ml(q):'<span class="muted">sem estoque neste retiro</span>')+'</div>'+
-      (qty('central',m.id)>0?'<div class="small muted">A farmácia central tem '+ml(qty('central',m.id))+'. Peça reposição.</div>':'');
+    return '<div class="small"><b>'+esc(retiroNome(ret))+':</b> '+(q>0?qs(q,m):'<span class="muted">sem estoque neste retiro</span>')+'</div>'+
+      (qty('central',m.id)>0?'<div class="small muted">A farmácia central tem '+qs(qty('central',m.id),m)+'. Peça reposição.</div>':'');
   }
   var c=qty('central',m.id);
-  l+='<div class="small"><b>Central:</b> '+(c>0?ml(c)+(locTxt(m)?' · <b>'+esc(locTxt(m))+'</b>':''):'<span class="muted">sem estoque</span>')+'</div>';
+  l+='<div class="small"><b>Central:</b> '+(c>0?qs(c,m)+(locTxt(m)?' · <b>'+esc(locTxt(m))+'</b>':''):'<span class="muted">sem estoque</span>')+'</div>';
   var rs=retiros().map(function(r){return {r:r,q:qty(r.id,m.id)}}).filter(function(x){return x.q>0});
-  if(rs.length)l+='<div class="small"><b>Retiros:</b> '+rs.slice(0,6).map(function(x){return esc(x.r.nome)+' '+ml(x.q)}).join(' · ')+(rs.length>6?' · +'+(rs.length-6):'')+'</div>';
+  if(rs.length)l+='<div class="small"><b>Retiros:</b> '+rs.slice(0,6).map(function(x){return esc(x.r.nome)+' '+qs(x.q,m)}).join(' · ')+(rs.length>6?' · +'+(rs.length-6):'')+'</div>';
   else l+='<div class="small muted">Nenhum retiro tem este remédio.</div>';
   return l;
 }
@@ -1193,7 +1209,7 @@ function gsRes(ret){
       var alt=alternativas(m,ret),A=ativosDe(m);
       if(alt.length){
         h+='<div class="note warn">'+ic('alert',20)+'<div><b>Sem estoque. Alternativa com o mesmo princípio ativo ('+esc(A.join(' + '))+'):</b>'+
-          alt.map(function(a){return '<div style="margin-top:6px"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span> · tem '+ml(a.q)+(a.exato?'':' · <i>combinação com outros ativos</i>')+'<div class="small">Dose: '+esc(doseMed(a.m))+'</div></div>'}).join('')+
+          alt.map(function(a){return '<div style="margin-top:6px"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span> · tem '+qs(a.q,a.m)+(a.exato?'':' · <i>combinação com outros ativos</i>')+'<div class="small">Dose: '+esc(doseMed(a.m))+'</div></div>'}).join('')+
           '<div class="small muted" style="margin-top:6px">Confira a concentração e a carência na bula e fale com o veterinário antes de trocar.</div></div></div>';
       }else if(A.length)h+='<div class="note info"><div>Sem estoque e nenhum outro remédio cadastrado tem o mesmo princípio ativo ('+esc(A.join(' + '))+') disponível.</div></div>';
       else h+='<div class="note info"><div>Sem estoque. O princípio ativo deste produto não está identificado, então não dá para sugerir alternativa automática. Fale com o veterinário.</div></div>';
@@ -1209,14 +1225,14 @@ function fichaOpen(id){
   var old=document.querySelector('.modal');if(old)old.parentNode.removeChild(old);
   var cq=qty('central',m.id),low=cq<minC(m),d=daysTo(m.venc);
   h+='<div class="row sb"><div><div class="h2" style="margin:0">'+esc(m.nome)+'</div><div class="small muted">'+esc(m.lab||(c&&c.lab)||'')+' · '+tipoNome(m.cat)+'</div></div><button class="btn sm" data-act="closeModal">Fechar</button></div>';
-  h+='<div class="fk"><div><small>Na central</small><b>'+ml(cq)+'</b><small>'+num(Math.round(cq/m.frasco*10)/10)+' frascos de '+m.frasco+' mL</small>'+(low?'<span class="pill warn">Abaixo do mínimo</span>':'')+'</div>'+
+  h+='<div class="fk"><div><small>Na central</small><b>'+qs(cq,m)+'</b>'+(isMat(m)?'':'<small>cada unidade tem '+m.frasco+' '+uLbl(m)+'</small>')+(low?'<span class="pill warn">Abaixo do mínimo</span>':'')+'</div>'+
     '<div><small>Local na central</small><b>'+(locTxt(m)?esc(locTxt(m)):'não informado')+'</b></div>'+
     '<div><small>Lote / validade</small><b>'+esc(m.lote||'—')+'</b><small>vence '+dstr(m.venc)+(d<=30?' · em '+d+' dias':'')+'</small></div>'+
     '<div><small>Carência</small><b>'+(m.carencia?m.carencia+' dias':'nenhuma')+'</b>'+(c&&c.carenciaLeite?'<small>leite: '+esc(String(c.carenciaLeite))+'</small>':'')+'</div></div>';
   h+='<div class="h2" style="margin:4px 0 0">Estoque nos retiros</div>';
   var R=retiros();
   if(!R.length)h+='<div class="small muted">Nenhum retiro cadastrado.</div>';
-  else h+='<div class="stack" style="gap:4px">'+R.map(function(r){var q=qty(r.id,m.id),lw=q<(m.min||0);return '<div class="row sb small"><span>'+esc(r.nome)+'</span><span><b>'+ml(q)+'</b> <span class="muted">(mín. '+ml(m.min||0)+')</span> '+(lw?'<span class="pill warn">Baixo</span>':'')+'</span></div>'}).join('')+'</div>';
+  else h+='<div class="stack" style="gap:4px">'+R.map(function(r){var q=qty(r.id,m.id),lw=q<(m.min||0);return '<div class="row sb small"><span>'+esc(r.nome)+'</span><span><b>'+qs(q,m)+'</b> <span class="muted">(mín. '+qs(m.min||0,m)+')</span> '+(lw?'<span class="pill warn">Baixo</span>':'')+'</span></div>'}).join('')+'</div>';
   h+='<div class="h2" style="margin:4px 0 0">Para que serve</div><div class="small">'+((c&&c.indic)?esc(c.indic):'<span class="muted">Indicação ainda não cadastrada no catálogo. Consulte a bula do frasco.</span>')+'</div>';
   if(A.length)h+='<div class="row" style="flex-wrap:wrap;gap:6px"><span class="small muted">Princípio ativo:</span>'+A.map(function(a){return '<span class="pill info">'+esc(a)+'</span>'}).join('')+'</div>';
   h+='<div class="h2" style="margin:4px 0 0">Dose</div><div class="small">'+esc(doseMed(m))+'</div>';
@@ -1226,7 +1242,7 @@ function fichaOpen(id){
   if(c&&c.contra)h+='<div class="small"><b>Contraindicações / cuidados:</b> '+esc(c.contra)+'</div>';
   if(!c||(!c.indic&&!c.posol&&!c.contra))h+='<div class="note info"><div>Este produto ainda não tem o resumo da bula no catálogo. Consulte a bula impressa.</div></div>';
   var alt=alternativas(m,null);
-  if(alt.length)h+='<div class="h2" style="margin:4px 0 0">Mesmo princípio ativo em estoque</div>'+alt.map(function(a){return '<div class="row sb small"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span><span>'+ml(a.q)+'</span></div>'}).join('');
+  if(alt.length)h+='<div class="h2" style="margin:4px 0 0">Mesmo princípio ativo em estoque</div>'+alt.map(function(a){return '<div class="row sb small"><span class="clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><b>'+esc(a.m.nome)+'</b></span><span>'+qs(a.q,a.m)+'</span></div>'}).join('');
   h+='<div class="small muted">Resumo para consulta rápida. A bula original e a orientação do veterinário valem sempre.</div>';
   if(isMgr()||isAlmox()||isSuper())h+='<button class="btn" data-act="fichaEdit" data-v="'+esc(m.id)+'">Editar cadastro e local na pastilheira</button>';
   var d2=document.createElement('div');d2.className='modal';d2.setAttribute('role','dialog');
@@ -1252,7 +1268,7 @@ function gRetiros(){
   rows.slice(0,S.rtN).forEach(function(x){
     var lw=x.q<(x.m.min||0),pct=Math.min(x.q/((x.m.min||1)*2),1)*100;
     h+='<div class="stack clk" style="gap:4px" data-act="ficha" data-v="'+esc(x.m.id)+'"><div class="row sb"><b>'+esc(x.m.nome)+'</b>'+(x.q<=0?'<span class="pill crit">Zerado</span>':lw?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
-      '<div class="row sb small"><span><b>'+ml(x.q)+'</b> no retiro</span><span class="muted">mínimo '+ml(x.m.min||0)+(lw?' · faltam '+ml((x.m.min||0)-x.q):'')+'</span></div><div class="bar" aria-hidden="true"><i class="'+(lw?'low':'')+'" style="width:'+pct+'%"></i></div></div>';
+      '<div class="row sb small"><span><b>'+qs(x.q,x.m)+'</b> no retiro</span><span class="muted">mínimo '+qs(x.m.min||0,x.m)+(lw?' · faltam '+qs((x.m.min||0)-x.q,x.m):'')+'</span></div><div class="bar" aria-hidden="true"><i class="'+(lw?'low':'')+'" style="width:'+pct+'%"></i></div></div>';
   });
   if(rows.length>S.rtN)h+='<button class="btn" data-act="rtMore">Mostrar mais ('+(rows.length-S.rtN)+')</button>';
   return h+'</div>';
@@ -1265,7 +1281,11 @@ function pdfLibs(){
   if(!jsLoad)jsLoad=loadScript('jspdf.umd.min.js').then(function(){return loadScript('jspdf.plugin.autotable.min.js')}).catch(function(e){jsLoad=null;throw e});
   return jsLoad;
 }
-function cfTot(c){var q=0,m=0,it=c.itens||[];it.forEach(function(i){q+=i.qtd||0;m+=(i.qtd||0)*(i.ml||0)});return {n:it.length,q:q,ml:m}}
+function cfUn(x){return x.un||'ml'}
+function cfTot(c){var q=0,m=0,it=c.itens||[],by={ml:0,mg:0,un:0};it.forEach(function(i){q+=i.qtd||0;var tt=(i.qtd||0)*(i.ml||0);by[cfUn(i)]+=tt;if(cfUn(i)==='ml')m+=tt});return {n:it.length,q:q,ml:m,by:by}}
+function cfTotTxt(t){var p=[];if(t.by.ml)p.push(num(Math.round(t.by.ml*10)/10)+' mL');if(t.by.mg)p.push(num(Math.round(t.by.mg*10)/10)+' mg');if(t.by.un)p.push(num(t.by.un)+' peças de material');return p.join(' · ')||'0'}
+function cfLbl(x){var u=cfUn(x);return u==='mg'?'mg':u==='un'?'un':'mL'}
+function cfLine(x){var u=cfUn(x);return u==='un'?num(x.qtd)+' un':num(x.qtd)+' un × '+num(x.ml)+' '+cfLbl(x)+' = '+num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)+' '+cfLbl(x)}
 function cfSorted(){return D.conferencias.slice().sort(function(a,b){return (b.ts||0)-(a.ts||0)})}
 function cfSave(c,itens,extra){
   var data=JSON.parse(JSON.stringify(ext({itens:itens},extra||{})));
@@ -1280,7 +1300,7 @@ function mlDoCodigo(apres,code){
 function cfBuild(code,own,cat){
   var nome=own?own.nome:cat?cat.nome:'',lab=own?(own.lab||(cat&&cat.lab)||''):(cat?cat.lab:'');
   var mlv=mlDoCodigo(cat&&cat.apres,code)||(own&&own.frasco)||(cat&&cat.frasco)||'';
-  return {nome:nome,lab:lab,barcode:code||'',ml:mlv,qtd:1,medId:own?own.id:null,catId:cat?cat.id:null,fora:!own&&!cat,apres:(cat&&cat.apres)||''};
+  return {nome:nome,lab:lab,barcode:code||'',un:(own&&own.unid)||'ml',ml:(own&&isMat(own))?1:mlv,qtd:1,medId:own?own.id:null,catId:cat?cat.id:null,fora:!own&&!cat,apres:(cat&&cat.apres)||''};
 }
 function cfRun(q){
   q=String(q||'').trim();S.cfQ=q;S.cfCur=null;S.cfRes=[];S.cfAsk=false;
@@ -1296,7 +1316,7 @@ function cfRun(q){
       res.push({src:'catalogo',nome:c.nome,lab:c.lab,own:null,cat:c});
     });
     S.cfRes=res.slice(0,10);
-    if(!res.length)S.cfCur={nome:q,lab:'',barcode:'',ml:'',qtd:1,medId:null,catId:null,fora:true,apres:''};
+    if(!res.length)S.cfCur={nome:q,lab:'',barcode:'',un:'ml',ml:'',qtd:1,medId:null,catId:null,fora:true,apres:''};
   }
   render(true);
   setTimeout(function(){var e=$('#cf-qtd');if(e){e.focus();e.select()}},80);
@@ -1312,14 +1332,15 @@ function cfPick(i){
 function cfAdd(){
   var c=byId(D.conferencias,S.cfId);if(!c||c.status!=='aberta'||!S.cfCur)return;
   var g=function(id){return (($('#'+id)||{}).value||'')};
-  var nome=g('cf-nome').trim(),lab=g('cf-lab').trim(),qtd=Math.round(parseNum(g('cf-qtd'))),mlv=parseNum(g('cf-ml'));
+  var nome=g('cf-nome').trim(),lab=g('cf-lab').trim(),qtd=Math.round(parseNum(g('cf-qtd'))),mlv=parseNum(g('cf-ml')),un=g('cf-un')||'ml';
+  if(un==='un')mlv=1;
   if(!nome){toast('Informe o nome do produto');return}
-  if(!(qtd>0)){toast('Informe quantos frascos/caixas');return}
-  if(!(mlv>0)){toast('Informe quantos mL tem cada frasco');return}
+  if(!(qtd>0)){toast('Informe quantas unidades');return}
+  if(!(mlv>0)){toast('Informe o conteúdo de cada unidade ('+(un==='mg'?'mg':'mL')+')');return}
   var cur=S.cfCur,it=(c.itens||[]).slice(),hit=-1;
-  it.forEach(function(x,i){if(hit<0&&x.ml===mlv&&((cur.barcode&&x.barcode===cur.barcode)||(!cur.barcode&&norm(x.nome)===norm(nome)&&norm(x.lab)===norm(lab))))hit=i});
+  it.forEach(function(x,i){if(hit<0&&x.ml===mlv&&cfUn(x)===un&&((cur.barcode&&x.barcode===cur.barcode)||(!cur.barcode&&norm(x.nome)===norm(nome)&&norm(x.lab)===norm(lab))))hit=i});
   if(hit>-1){it[hit]=ext(it[hit],{qtd:(it[hit].qtd||0)+qtd})}
-  else it.push({id:'I'+uid8(),nome:nome,lab:lab,barcode:cur.barcode||'',qtd:qtd,ml:mlv,fora:!!cur.fora,medId:cur.medId||null,catId:cur.catId||null,ts:Date.now()});
+  else it.push({id:'I'+uid8(),nome:nome,lab:lab,barcode:cur.barcode||'',qtd:qtd,ml:mlv,un:un,fora:!!cur.fora,medId:cur.medId||null,catId:cur.catId||null,ts:Date.now()});
   cfSave(c,it,{atualizadoEm:Date.now()});
   S.cfCur=null;S.cfQ='';S.cfRes=[];
   toast(hit>-1?'Somado ao que já estava na lista':'Adicionado à conferência');
@@ -1342,7 +1363,7 @@ function gConf(){
     L.forEach(function(x){
       var t=cfTot(x);
       h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(x.local||'Almoxarifado')+'</b><div class="small muted">'+dstr(x.ts)+' '+hhmm(x.ts)+' · '+esc(x.nome||'')+'</div></div><span class="pill '+(x.status==='aberta'?'warn':'ok')+'">'+(x.status==='aberta'?'Em andamento':'Finalizada')+'</span></div>'+
-        '<div class="small muted">'+t.n+' produtos · '+num(t.q)+' frascos · '+ml(t.ml)+'</div>'+
+        '<div class="small muted">'+t.n+' produtos · '+num(t.q)+' unidades · '+cfTotTxt(t)+'</div>'+
         '<button class="btn sm" style="align-self:flex-start" data-act="cfOpen" data-v="'+esc(x.id)+'">'+(x.status==='aberta'?'Continuar':'Abrir')+'</button></div>';
     });
     return h;
@@ -1350,7 +1371,7 @@ function gConf(){
   var t=cfTot(c),open=c.status==='aberta';
   h+='<button class="btn sm" style="align-self:flex-start" data-act="cfBack">'+ic('back',18)+'Voltar às conferências</button>';
   h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(c.local||'Almoxarifado')+'</b><div class="small muted">Iniciada em '+dstr(c.ts)+' '+hhmm(c.ts)+' por '+esc(c.nome||'')+(c.finalizadaEm?' · finalizada em '+dstr(c.finalizadaEm)+' '+hhmm(c.finalizadaEm):'')+'</div>'+(c.obs?'<div class="small muted">'+esc(c.obs)+'</div>':'')+'</div><span class="pill '+(open?'warn':'ok')+'">'+(open?'Em andamento':'Finalizada')+'</span></div></div>';
-  h+='<div class="kpis"><div class="kpi"><small>Produtos</small><b>'+t.n+'</b></div><div class="kpi"><small>Frascos / caixas</small><b>'+num(t.q)+'</b></div><div class="kpi"><small>Total em mL</small><b>'+num(Math.round(t.ml*10)/10)+'</b></div></div>';
+  h+='<div class="kpis"><div class="kpi"><small>Produtos</small><b>'+t.n+'</b></div><div class="kpi"><small>Unidades</small><b>'+num(t.q)+'</b></div><div class="kpi"><small>Total</small><b style="font-size:.7em">'+cfTotTxt(t)+'</b></div></div>';
   if(open){
     h+='<div class="card stack"><div class="h2">Ler produto</div><div class="row" style="flex-wrap:wrap"><input class="input t" id="cf-q" data-keep style="flex:1;min-width:220px" autocomplete="off" inputmode="text" placeholder="Leia o código de barras ou digite o nome" value="'+esc(S.cfQ)+'"><button class="btn sm cta" data-act="cfGo">Buscar</button><button class="btn sm" data-act="cfScan">'+ic('box',18)+'Câmera</button></div>'+
       '<div class="small muted">Com o leitor USB é só apontar e ler: o código entra sozinho. Na câmera, aponte para o código de barras.</div>';
@@ -1364,8 +1385,9 @@ function gConf(){
         (cu.fora?'<div class="note warn">'+ic('alert',20)+'<div>'+(cu.barcode?'O código <b>'+esc(cu.barcode)+'</b> não está no nosso banco.':'Produto não encontrado no banco.')+' Digite o nome e o laboratório para registrar.</div></div>':'<div class="note info">'+ic('check',20)+'<div>Produto encontrado'+(cu.medId?' (cadastrado na fazenda)':' no catálogo')+'. Confira e informe as quantidades.</div></div>')+
         '<div class="field"><label for="cf-nome">Produto</label><input class="input t" id="cf-nome" data-keep autocomplete="off" value="'+esc(cu.nome)+'"></div>'+
         '<div class="grid2"><div class="field"><label for="cf-lab">Laboratório</label><input class="input t" id="cf-lab" data-keep autocomplete="off" value="'+esc(cu.lab)+'"></div><div class="field"><label>Código de barras</label><div class="input" style="display:flex;align-items:center;font-size:16px">'+(esc(cu.barcode)||'—')+'</div></div></div>'+
-        '<div class="grid2"><div class="field"><label for="cf-qtd">Quantos frascos / caixas</label><input class="input t" id="cf-qtd" data-keep inputmode="numeric" value="'+(cu.qtd||1)+'"></div>'+
-        '<div class="field"><label for="cf-ml">Quantos mL em cada frasco</label><input class="input t" id="cf-ml" data-keep inputmode="decimal" placeholder="Ex.: 100" value="'+esc(cu.ml)+'"></div></div>'+
+        '<div class="field"><label for="cf-un">O que é este produto?</label><select class="input t" id="cf-un" data-keep>'+UNIDS.map(function(u){return '<option value="'+u.id+'"'+((cu.un||'ml')===u.id?' selected':'')+'>'+u.nome+'</option>'}).join('')+'</select></div>'+
+        '<div class="grid2"><div class="field"><label for="cf-qtd">Quantas unidades</label><input class="input t" id="cf-qtd" data-keep inputmode="numeric" value="'+(cu.qtd||1)+'"></div>'+
+        ((cu.un||'ml')==='un'?'':'<div class="field"><label for="cf-ml">Quantos '+((cu.un||'ml')==='mg'?'mg':'mL')+' em cada unidade</label><input class="input t" id="cf-ml" data-keep inputmode="decimal" placeholder="Ex.: 100" value="'+esc(cu.ml)+'"></div>')+'</div>'+
         (cu.apres?'<div class="small muted">Apresentações e códigos: '+esc(cu.apres)+'</div>':'')+
         '<div class="row" style="flex-wrap:wrap"><button class="btn cta" data-act="cfAdd">Adicionar à conferência</button><button class="btn" data-act="cfCancel">Cancelar</button></div></div>';
     }
@@ -1377,9 +1399,10 @@ function gConf(){
   rows.forEach(function(x){
     var idx=(c.itens||[]).indexOf(byId(c.itens,x.id)||x);
     var tot=(x.qtd||0)*(x.ml||0);
-    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b>'+(x.fora?' <span class="pill warn">fora do banco</span>':'')+'<div class="small muted">'+esc(x.lab||'')+(x.barcode?' · '+esc(x.barcode):'')+'</div></div><b class="num">'+ml(tot)+'</b></div>';
-    if(open)h+='<div class="grid2"><div class="field"><label>Frascos</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="qtd" inputmode="numeric" value="'+x.qtd+'"></div><div class="field"><label>mL por frasco</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="ml" inputmode="decimal" value="'+x.ml+'"></div></div><button class="btn sm danger" style="align-self:flex-start" data-act="cfDel" data-v="'+esc(x.id)+'">Remover da lista</button>';
-    else h+='<div class="small muted">'+num(x.qtd)+' frascos × '+num(x.ml)+' mL</div>';
+    var uu=cfUn(x);
+    h+='<div class="card stack"><div class="row sb"><div class="grow"><b>'+esc(x.nome)+'</b>'+(x.fora?' <span class="pill warn">fora do banco</span>':'')+'<div class="small muted">'+esc(x.lab||'')+(x.barcode?' · '+esc(x.barcode):'')+'</div></div><b class="num">'+(uu==='un'?num(tot)+' un':num(Math.round(tot*10)/10)+' '+cfLbl(x))+'</b></div>';
+    if(open)h+='<div class="grid2"><div class="field"><label>Unidades</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="qtd" inputmode="numeric" value="'+x.qtd+'"></div>'+(uu==='un'?'':'<div class="field"><label>'+cfLbl(x)+' por unidade</label><input class="input t" data-keep data-cfi="'+esc(x.id)+'" data-cff="ml" inputmode="decimal" value="'+x.ml+'"></div>')+'</div><button class="btn sm danger" style="align-self:flex-start" data-act="cfDel" data-v="'+esc(x.id)+'">Remover da lista</button>';
+    else h+='<div class="small muted">'+cfLine(x)+'</div>';
     h+='</div>';
   });
   h+='<div class="card stack"><div class="h2">Relatório para o supervisor</div><div class="row" style="flex-wrap:wrap"><button class="btn cta" data-act="cfPdf" '+(t.n?'':'disabled')+'>Baixar PDF</button>'+((navigator.canShare&&navigator.share)?'<button class="btn" data-act="cfShare" '+(t.n?'':'disabled')+'>Compartilhar PDF</button>':'')+'</div>';
@@ -1395,8 +1418,8 @@ function cfFileName(c){
 function cfPrintHtml(c){
   var t=cfTot(c),rows=cfRows(c),w=window.open('','_blank');
   if(!w){toast('O navegador bloqueou a janela do relatório');return}
-  var tr=rows.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(x.nome)+(x.fora?' *':'')+'</td><td>'+esc(x.lab||'')+'</td><td>'+esc(x.barcode||'')+'</td><td style="text-align:right">'+num(x.qtd)+'</td><td style="text-align:right">'+num(x.ml)+'</td><td style="text-align:right">'+num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)+'</td></tr>'}).join('');
-  w.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>'+esc(cfFileName(c))+'</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#111}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #999;padding:5px 6px}th{background:#14452f;color:#fff;text-align:left}</style></head><body><h2>Conferência de almoxarifado</h2><p>'+esc((D.config&&D.config.nome)||'')+' · '+esc(c.local||'')+'<br>Conferente: '+esc(c.nome||'')+' · '+dstr(c.ts)+' '+hhmm(c.ts)+'<br><b>'+t.n+' produtos · '+num(t.q)+' frascos · '+num(Math.round(t.ml*10)/10)+' mL</b></p><table><thead><tr><th>#</th><th>Produto</th><th>Laboratório</th><th>Código de barras</th><th>Frascos</th><th>mL/frasco</th><th>Total mL</th></tr></thead><tbody>'+tr+'</tbody></table><p style="margin-top:50px">Conferente: ______________________ &nbsp;&nbsp;&nbsp; Supervisor: ______________________</p><p style="margin-top:40px;text-align:center;font-weight:bold;color:#14452f;border-top:1px solid #ccc;padding-top:8px">AIMEX SOFTWARE</p></body></html>');
+  var tr=rows.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(x.nome)+(x.fora?' *':'')+'</td><td>'+esc(x.lab||'')+'</td><td>'+esc(x.barcode||'')+'</td><td style="text-align:right">'+num(x.qtd)+'</td><td style="text-align:right">'+(cfUn(x)==='un'?'—':num(x.ml)+' '+cfLbl(x))+'</td><td style="text-align:right">'+num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)+' '+cfLbl(x)+'</td></tr>'}).join('');
+  w.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>'+esc(cfFileName(c))+'</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#111}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #999;padding:5px 6px}th{background:#14452f;color:#fff;text-align:left}</style></head><body><h2>Conferência de almoxarifado</h2><p>'+esc((D.config&&D.config.nome)||'')+' · '+esc(c.local||'')+'<br>Conferente: '+esc(c.nome||'')+' · '+dstr(c.ts)+' '+hhmm(c.ts)+'<br><b>'+t.n+' produtos · '+num(t.q)+' unidades · '+cfTotTxt(t)+'</b></p><table><thead><tr><th>#</th><th>Produto</th><th>Laboratório</th><th>Código de barras</th><th>Unidades</th><th>Conteúdo/un</th><th>Total</th></tr></thead><tbody>'+tr+'</tbody></table><p style="margin-top:50px">Conferente: ______________________ &nbsp;&nbsp;&nbsp; Supervisor: ______________________</p><p style="margin-top:40px;text-align:center;font-weight:bold;color:#14452f;border-top:1px solid #ccc;padding-top:8px">AIMEX SOFTWARE</p></body></html>');
   w.document.close();setTimeout(function(){try{w.focus();w.print()}catch(e){}},400);
 }
 function cfMakePdf(c){
@@ -1410,14 +1433,14 @@ function cfMakePdf(c){
   doc.text('Conferente: '+(c.nome||'')+'   ·   Início: '+dstr(c.ts)+' '+hhmm(c.ts)+(c.finalizadaEm?'   ·   Fim: '+dstr(c.finalizadaEm)+' '+hhmm(c.finalizadaEm):'   ·   (conferência em andamento)'),14,y);y+=5.5;
   if(c.obs){doc.text('Observação: '+c.obs,14,y);y+=5.5}
   doc.setFont('helvetica','bold');
-  doc.text(t.n+' produtos   ·   '+num(t.q)+' frascos/caixas   ·   '+num(Math.round(t.ml*10)/10)+' mL no total',14,y+1);y+=6;
+  doc.text(t.n+' produtos   ·   '+num(t.q)+' unidades   ·   '+cfTotTxt(t),14,y+1);y+=6;
   doc.setFont('helvetica','normal');
-  var body=rows.map(function(x,i){return [String(i+1),x.nome+(x.fora?' *':''),x.lab||'',x.barcode||'',num(x.qtd),num(x.ml),num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)]});
+  var body=rows.map(function(x,i){return [String(i+1),x.nome+(x.fora?' *':''),x.lab||'',x.barcode||'',num(x.qtd),(cfUn(x)==='un'?'-':num(x.ml)+' '+cfLbl(x)),num(Math.round((x.qtd||0)*(x.ml||0)*10)/10)+' '+cfLbl(x)]});
   var anyFora=rows.some(function(x){return x.fora});
-  doc.autoTable({startY:y+2,head:[['#','Produto','Laboratório','Código de barras','Frascos','mL/frasco','Total (mL)']],body:body,
-    foot:[['','TOTAL','','',{content:num(t.q),styles:{halign:'right'}},'',{content:num(Math.round(t.ml*10)/10),styles:{halign:'right'}}]],
+  doc.autoTable({startY:y+2,head:[['#','Produto','Laboratório','Código de barras','Unidades','Conteúdo/un','Total']],body:body,
+    foot:[['','TOTAL','','',{content:num(t.q),styles:{halign:'right'}},'',{content:cfTotTxt(t),styles:{halign:'right'}}]],
     styles:{fontSize:8.5,cellPadding:1.8,lineColor:[200,200,200],lineWidth:.1},headStyles:{fillColor:[20,69,47],textColor:255},footStyles:{fillColor:[235,240,236],textColor:20,fontStyle:'bold'},
-    columnStyles:{0:{cellWidth:9},3:{cellWidth:34},4:{halign:'right',cellWidth:16},5:{halign:'right',cellWidth:20},6:{halign:'right',cellWidth:24}},
+    columnStyles:{0:{cellWidth:9},3:{cellWidth:34},4:{halign:'right',cellWidth:16},5:{halign:'right',cellWidth:24},6:{halign:'right',cellWidth:30}},
     margin:{left:14,right:14,bottom:28},showFoot:'lastPage'});
   var fy=doc.lastAutoTable.finalY+8,H=doc.internal.pageSize.getHeight();
   if(anyFora){doc.setFontSize(8);doc.setTextColor(90,90,90);doc.text('* produto que não estava no banco de dados do sistema (nome digitado pelo conferente).',14,fy);fy+=6}
@@ -1600,6 +1623,9 @@ function seedBig(fid){
     return {id:'dm_'+c.id,nome:c.nome,lab:c.lab,cat:c.cat||'outro',frasco:fr,preco:preco,kgMl:kg,fixo:fx,carencia:c.carencia||0,min:fr*2,minC:fr*12,lote:'L'+(1000+Math.floor(R()*8999)),venc:Math.round(venc),barcode:(c.barcodes&&c.barcodes[0])||'',catId:c.id,pasta:'Pastilheira '+(1+Math.floor(i/40)),fila:'Fileira '+(1+(i%6)),teste:true};
   });
   var act=meds.filter(function(m,i){return i%5===0});  // 40 medicamentos em uso nos retiros
+  var MATS=[['Agulha 18G x 1/2 (peça)','Gaveta 1'],['Agulha 16G x 1 (peça)','Gaveta 1'],['Seringa 20 mL (peça)','Gaveta 2'],['Brincador de identificação (peça)','Gaveta 3'],['Extrator de brinco (peça)','Gaveta 3'],['Pistola aplicadora dosadora (peça)','Gaveta 4']];
+  MATS.forEach(function(x,i){meds.push({id:'dm_mat'+i,nome:x[0],lab:'',cat:'mat',unid:'un',frasco:1,preco:[1.2,1.5,2.8,4.5,38,160][i],kgMl:null,fixo:null,carencia:0,min:10,minC:60,lote:'M'+(300+i),venc:Math.round(now+700*DAY),barcode:'',catId:null,pasta:'Armário de materiais',fila:x[1],teste:true})});
+  [['Sulfa em pó solúvel (pote 500 g)',500000,'Pastilheira 5','Fileira 6'],['Sal oral de reidratação (sachê 50 g)',50000,'Pastilheira 5','Fileira 5']].forEach(function(x,i){meds.push({id:'dm_mg'+i,nome:x[0],lab:'',cat:'trat',unid:'mg',frasco:x[1],preco:[85,6][i],kgMl:null,fixo:null,carencia:0,min:x[1]*2,minC:x[1]*8,lote:'P'+(500+i),venc:Math.round(now+400*DAY),barcode:'',catId:null,pasta:x[2],fila:x[3],teste:true})});
   var demo={meds:meds.map(function(m){return m.id}),retiros:DEMO_RET.map(function(r){return r.id}),lotes:DEMO_LOTES.map(function(l){return l.id}),act:act.map(function(m){return m.id}),nl:0,nt:12,na:6,nc:12,em:now};
   var farm=byId(D.fazendas,fid)||{};
   var ret0=(farm.retiros||[]).filter(function(r){return !r.demo}),lot0=(farm.lotes||[]).filter(function(l){return !l.demo});
@@ -1607,13 +1633,13 @@ function seedBig(fid){
   meds.forEach(function(m,i){
     ops.push({op:'set',col:'meds',id:m.id,data:m});
     var low=(i%9===4);
-    var q=low?m.frasco*(2+Math.floor(R()*5)):m.frasco*(14+Math.floor(R()*46));
+    var q=low?(isMat(m)?8:m.frasco)*(2+Math.floor(R()*5)):(isMat(m)?8:m.frasco)*(14+Math.floor(R()*46));
     ops.push({op:'set',col:'stock',id:'central__'+m.id,data:{loc:'central',med:m.id,qtd:q,teste:true}});
   });
   meds.forEach(function(m,j){
     DEMO_RET.forEach(function(r,ri){
       var low=((j+ri)%13===0);
-      var q=low?Math.round(m.frasco*(0.3+R()*1.4)):Math.round(m.frasco*(2.5+R()*5));
+      var q=low?Math.round((isMat(m)?8:m.frasco)*(0.3+R()*1.4)):Math.round((isMat(m)?8:m.frasco)*(2.5+R()*5));
       ops.push({op:'set',col:'stock',id:r.id+'__'+m.id,data:{loc:r.id,med:m.id,qtd:q,teste:true}});
     });
   });
@@ -1966,13 +1992,14 @@ document.addEventListener('click',function(ev){
   else if(a==='medEdit'){S.medEdit=v}
   else if(a==='medCancel'){S.medEdit=null;S.medDraft=null;S.mq='';S.pendCode=''}
   else if(a==='medSave'){
-    var nome=g('f-nome').trim(),fr=parseNum(g('f-frasco'));
-    if(!nome||fr<=0){toast('Preencha o nome e o tamanho do frasco');return}
+    var nome=g('f-nome').trim(),un0=g('f-unid')||'ml',fr=parseNum(g('f-frasco'));
+    if(un0==='un'&&!(fr>0))fr=1;
+    if(!nome||fr<=0){toast('Preencha o nome e o conteúdo de cada unidade');return}
     var mid=S.medEdit==='novo'?'m'+uid8():S.medEdit,kg=parseNum(g('f-kgml')),fx=parseNum(g('f-fixo'));
-    if(!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
+    if(un0!=='un'&&!kg&&!fx){toast('Informe o peso por mL ou a dose fixa');return}
     var dr2=(S.medEdit==='novo'&&S.medDraft)||{},bcode=g('f-barcode').replace(/\D/g,''),lab=g('f-lab').trim();
-    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||(S.medEdit!=='novo'&&(medById(S.medEdit)||{}).catId)||null,pasta:g('f-pasta').trim(),fila:g('f-fila').trim(),cat:g('f-cat'),frasco:fr,preco:parseNum(g('f-preco')),kgMl:kg||null,fixo:fx||null,carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min')),minC:(g('f-minc').trim()===''?null:parseNum(g('f-minc'))),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
-    var mops=[{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o medicamento '+nome+(lab?' ('+lab+')':'')+' (frasco '+fr+' mL, '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})];
+    var mdata={nome:nome,lab:lab,barcode:bcode,catId:dr2.catId||(S.medEdit!=='novo'&&(medById(S.medEdit)||{}).catId)||null,pasta:g('f-pasta').trim(),fila:g('f-fila').trim(),unid:un0,cat:(un0==='un'?'mat':g('f-cat')),frasco:fr,preco:parseNum(g('f-preco')),kgMl:(un0==='un'?null:kg||null),fixo:(un0==='un'?null:fx||null),carencia:Math.round(parseNum(g('f-car'))),min:parseNum(g('f-min'))*fr,minC:(g('f-minc').trim()===''?null:parseNum(g('f-minc'))*fr),lote:g('f-lote').trim(),venc:new Date((g('f-venc')||isoDate(Date.now()))+'T12:00:00').getTime()};
+    var mops=[{op:'set',col:'meds',id:mid,data:mdata},lg('cadastro','medicamento_salvo',(S.medEdit==='novo'?'Cadastrou':'Alterou')+' o produto '+nome+(lab?' ('+lab+')':'')+' (unidade '+fr+' '+(un0==='mg'?'mg':un0==='un'?'un':'mL')+', '+brl(mdata.preco)+', lote '+mdata.lote+')',null,{med:mid})];
     if(S.medEdit==='novo'){
       var base={st:'pend',ts:Date.now(),fazendaId:fidNow(),por:S.profile.nome};
       if(dr2.catId&&dr2.codeNew&&bcode)mops.push({op:'set',col:'sugestoes',id:'S'+uid8(),data:ext({tipo:'codigo',codigo:bcode,catId:dr2.catId,nomeCat:dr2.nome},base)});
@@ -2097,6 +2124,7 @@ document.addEventListener('keydown',function(ev){
 });
 document.addEventListener('change',function(ev){
   var t=ev.target;
+  if(t.id==='cf-un'&&S.cfCur){var gv=function(id){return (($('#'+id)||{}).value||'')};S.cfCur.nome=gv('cf-nome');S.cfCur.lab=gv('cf-lab');S.cfCur.qtd=gv('cf-qtd')||1;S.cfCur.ml=gv('cf-ml')||S.cfCur.ml;S.cfCur.un=t.value;if(t.value==='un')S.cfCur.ml=1;else if(S.cfCur.ml===1)S.cfCur.ml='';render(true);return}
   if(t.getAttribute&&t.getAttribute('data-cfi')){
     var cc2=byId(D.conferencias,S.cfId);
     if(cc2&&cc2.status==='aberta'){
