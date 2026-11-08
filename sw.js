@@ -1,5 +1,5 @@
 /* Farma Control: guarda o app no celular para abrir sem sinal. Os dados ficam no Firestore (cache offline). */
-var VERSAO = 'farmacontrol-v14';
+var VERSAO = 'farmacontrol-v15';
 var BASE = ['./', 'index.html', 'manifest.json'];
 
 self.addEventListener('install', function (e) {
