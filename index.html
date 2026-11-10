@@ -709,7 +709,7 @@ function vHome(ret){
   if(!D.meds.length)h+=emptyMeds();
   else if(!alerts.length)h+='<div class="card empty">Nenhum medicamento abaixo do mínimo ou perto de vencer.</div>';
   alerts.forEach(function(a){
-    h+='<div class="card stack"><div class="row sb"><b>'+esc(a.m.nome)+'</b>'+(a.s.low?'<span class="pill warn">Abaixo do mínimo</span>':'<span class="pill crit">Vence em '+a.s.d+' dias</span>')+'</div>'+
+    h+='<div class="card stack clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><div class="row sb"><b>'+esc(a.m.nome)+'</b>'+(a.s.low?'<span class="pill warn">Abaixo do mínimo</span>':'<span class="pill crit">Vence em '+a.s.d+' dias</span>')+'</div>'+
       '<div class="small muted">Tem '+qs(a.s.q,a.m)+' · mínimo '+qs(a.m.min,a.m)+'</div>'+
       (a.s.low?(reposPend(ret,a.m.id)?'<span class="pill info" style="align-self:flex-start">Pedido enviado à farmácia central</span>':'<button class="btn sm" style="align-self:flex-start" data-act="repor1" data-v="'+esc(a.m.id)+'">Pedir reposição</button>'):'<div class="small muted">Lote '+esc(a.m.lote)+'. Use este primeiro.</div>')+'</div>';
   });
@@ -726,7 +726,7 @@ function vEstoque(ret){
     if(S.filtro==='vence'&&!s.exp)return;
     n++;
     var pct=Math.min(s.q/(m.min*2),1)*100;
-    h+='<div class="card stack"><div class="row sb"><b>'+esc(m.nome)+'</b>'+(s.low?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
+    h+='<div class="card stack clk" data-act="ficha" data-v="'+esc(m.id)+'"><div class="row sb"><b>'+esc(m.nome)+'</b>'+(s.low?'<span class="pill warn">Baixo</span>':'<span class="pill ok">Em dia</span>')+'</div>'+
       '<div class="row sb"><span class="num" style="font-family:var(--font-display);font-size:26px;font-weight:700">'+qs(s.q,m)+'</span><span class="small muted">mínimo no retiro '+qs(m.min,m)+'</span></div>'+
       '<div class="bar" aria-hidden="true"><i class="'+(s.low?'low':'')+'" style="width:'+pct+'%"></i></div>'+
       '<div class="row sb small"><span class="muted">Lote '+esc(m.lote)+' · vence '+dstr(m.venc)+'</span>'+(s.exp?'<span class="pill crit">Vence em '+s.d+' dias</span>':'')+'</div>'+
@@ -902,11 +902,11 @@ function gAlertas(){
   var st=stats(),cl=centralLow(),h='<div class="h1">Estoque baixo e vencimentos</div>';
   if(!cl.length&&!st.alerts.length&&!st.exp.length)return h+'<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
   if(cl.length){h+='<div class="h2">Farmácia central</div>';
-    cl.forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>'+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na central, mínimo '+qs(minC(c.m),c.m)+'</div></div><span class="pill warn">Repor</span></div>'})}
+    cl.forEach(function(c){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(c.m.id)+'"><div class="grow"><b>'+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na central, mínimo '+qs(minC(c.m),c.m)+'</div></div><span class="pill warn">Repor</span></div>'})}
   if(st.alerts.length){h+='<div class="h2">Nos retiros</div>';
-    st.alerts.forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'})}
+    st.alerts.forEach(function(a){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'})}
   if(st.exp.length){h+='<div class="h2">Vencendo</div>';
-    st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'})}
+    st.exp.forEach(function(e){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(e.m.id)+'"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'})}
   return h;
 }
 function navG(){
@@ -950,10 +950,10 @@ function gPainel(){
   if(total>0&&per[hi]>avg*1.15)h+='<div class="note warn">'+ic('alert',20)+'<div><b>'+esc(R[hi].nome)+'</b> gasta '+brl(Math.round(per[hi]))+' por 100 animais, '+Math.round((per[hi]/avg-1)*100)+'% acima da média da fazenda ('+brl(Math.round(avg))+'). Vale conferir o motivo.</div></div>';
   h+='<div class="h2">Atenção hoje</div>';
   var cl=centralLow();
-  cl.slice(0,6).forEach(function(c){h+='<div class="card row sb"><div class="grow"><b>Central · '+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na farmácia central, está acabando</div></div><span class="pill warn">Acabando</span></div>'});
+  cl.slice(0,6).forEach(function(c){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(c.m.id)+'"><div class="grow"><b>Central · '+esc(c.m.nome)+'</b><div class="small muted">Tem '+qs(c.q,c.m)+' na farmácia central, está acabando</div></div><span class="pill warn">Acabando</span></div>'});
   if(!st.alerts.length&&!st.exp.length&&!cl.length)h+='<div class="card empty">Nada abaixo do mínimo e nada vencendo.</div>';
-  st.exp.forEach(function(e){h+='<div class="card row sb"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'});
-  st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'});
+  st.exp.forEach(function(e){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(e.m.id)+'"><div class="grow"><b>'+esc(e.m.nome)+'</b><div class="small muted">Lote '+esc(e.m.lote)+' vence em '+e.d+' dias</div></div><span class="pill crit">Vencendo</span></div>'});
+  st.alerts.slice(0,8).forEach(function(a){h+='<div class="card row sb clk" data-act="ficha" data-v="'+esc(a.m.id)+'"><div class="grow"><b>'+esc(a.r.nome)+' · '+esc(a.m.nome)+'</b><div class="small muted">Tem '+qs(a.q,a.m)+', mínimo '+qs(a.m.min,a.m)+'</div></div><span class="pill warn">Baixo</span></div>'});
   if(st.alerts.length>8)h+='<div class="small muted">e mais '+(st.alerts.length-8)+' itens abaixo do mínimo.</div>';
   return h;
 }
