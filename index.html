@@ -1049,7 +1049,7 @@ function mqRun(q){
 function catUse(id){
   var c=byId(D.catalogo,id);if(!c)return;
   var code=S.pendCode||'';
-  var d={nome:c.nome,lab:c.lab,cat:c.cat,frasco:c.frasco,catId:c.id,conf:!!c.conferido,
+  var d={nome:c.nome,lab:c.lab,cat:c.cat,unid:c.unid||'ml',frasco:c.frasco,catId:c.id,conf:!!c.conferido,
     barcode:code||((c.barcodes||[])[0]||''),codeNew:!!code&&(c.barcodes||[]).indexOf(code)<0};
   if(c.conferido){d.kgMl=c.kgMl;d.fixo=c.fixo;d.carencia=c.carencia}
   S.medDraft=d;S.medEdit='novo';S.pendCode='';
@@ -1334,7 +1334,7 @@ function mlDoCodigo(apres,code){
 function cfBuild(code,own,cat){
   var nome=own?own.nome:cat?cat.nome:'',lab=own?(own.lab||(cat&&cat.lab)||''):(cat?cat.lab:'');
   var mlv=mlDoCodigo(cat&&cat.apres,code)||(own&&own.frasco)||(cat&&cat.frasco)||'';
-  return {nome:nome,lab:lab,barcode:code||'',un:(own&&own.unid)||'ml',ml:(own&&isMat(own))?1:mlv,qtd:1,medId:own?own.id:null,catId:cat?cat.id:null,fora:!own&&!cat,apres:(cat&&cat.apres)||''};
+  return {nome:nome,lab:lab,barcode:code||'',un:(own&&own.unid)||(cat&&cat.unid)||'ml',ml:((own&&isMat(own))||(!own&&cat&&cat.unid==='un'))?1:mlv,qtd:1,medId:own?own.id:null,catId:cat?cat.id:null,fora:!own&&!cat,apres:(cat&&cat.apres)||''};
 }
 function cfRun(q){
   q=String(q||'').trim();S.cfQ=q;S.cfCur=null;S.cfRes=[];S.cfAsk=false;
