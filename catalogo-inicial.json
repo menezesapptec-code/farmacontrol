@@ -4042,7 +4042,7 @@
  },
  {
   "nome": "Supravac 10 (50 mL)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "vac",
   "frasco": null,
   "kgMl": null,
@@ -4079,7 +4079,7 @@
  },
  {
   "nome": "Cálcio Reforçado (200 mL)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -4118,7 +4118,7 @@
  },
  {
   "nome": "Boostin",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -4155,7 +4155,7 @@
  },
  {
   "nome": "Diclofenaco 50",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": 50.0,
@@ -4192,7 +4192,7 @@
  },
  {
   "nome": "Pareun",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "vac",
   "frasco": 100.0,
   "kgMl": null,
@@ -4229,7 +4229,7 @@
  },
  {
   "nome": "Produce",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 50.0,
@@ -4267,7 +4267,7 @@
  },
  {
   "nome": "Evol",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 40.0,
@@ -4306,7 +4306,7 @@
  },
  {
   "nome": "Master LP",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 50.0,
@@ -4344,7 +4344,7 @@
  },
  {
   "nome": "Finador",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -4383,7 +4383,7 @@
  },
  {
   "nome": "Desflan",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": 45.5,
@@ -4422,7 +4422,7 @@
  },
  {
   "nome": "Mastifin Vaca Seca",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "vac",
   "frasco": null,
   "kgMl": null,
@@ -4456,7 +4456,7 @@
  },
  {
   "nome": "Maxicam 2%",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -4496,7 +4496,7 @@
  },
  {
   "nome": "Colosso Pour On",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 10.0,
@@ -4533,7 +4533,7 @@
  },
  {
   "nome": "Colosso FC30",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": null,
@@ -4571,7 +4571,7 @@
  },
  {
   "nome": "Sincro eCG",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -4607,7 +4607,7 @@
  },
  {
   "nome": "Enfrent",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 100.0,
@@ -4645,7 +4645,7 @@
  },
  {
   "nome": "Fluatac Duo",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 10.0,
@@ -4683,7 +4683,7 @@
  },
  {
   "nome": "Resolutor",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": 100.0,
   "kgMl": null,
@@ -4721,7 +4721,7 @@
  },
  {
   "nome": "Maxicam Gel",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -4759,7 +4759,7 @@
  },
  {
   "nome": "Vacina Feedlot (Ourofino)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "vac",
   "frasco": null,
   "kgMl": null,
@@ -4795,7 +4795,7 @@
  },
  {
   "nome": "NexLaner (1 L)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": 10.0,
@@ -4829,7 +4829,7 @@
  },
  {
   "nome": "Fortemil (500 mL)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -4872,7 +4872,7 @@
  },
  {
   "nome": "Biobac PRO",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -4905,7 +4905,7 @@
  },
  {
   "nome": "Lepecid BR Spray (400 mL)",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": null,
@@ -4939,7 +4939,7 @@
  },
  {
   "nome": "Brinco Mosquicida Na Mosca",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": null,
@@ -4974,7 +4974,7 @@
  },
  {
   "nome": "Colosso Pulverização",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "verm",
   "frasco": null,
   "kgMl": null,
@@ -5013,7 +5013,7 @@
  },
  {
   "nome": "Sincrocio",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -5052,7 +5052,7 @@
  },
  {
   "nome": "SincroCP",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -5087,7 +5087,7 @@
  },
  {
   "nome": "Sincrodiol",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -5125,7 +5125,7 @@
  },
  {
   "nome": "Sincrogest",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "outro",
   "frasco": null,
   "kgMl": null,
@@ -5161,7 +5161,7 @@
  },
  {
   "nome": "Hidrat Up",
-  "lab": "Ourofino",
+  "lab": "Ouro Fino",
   "cat": "trat",
   "frasco": null,
   "kgMl": null,
@@ -9968,5 +9968,1685 @@
    "vitamina e",
    "complexo b"
   ]
+ },
+ {
+  "nome": "Agrovet Plus",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "5420036906391"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "agrovet-plus"
+ },
+ {
+  "nome": "Agulha Hipodérmica",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898283814215"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "agulha-hipodermica"
+ },
+ {
+  "nome": "All Atack",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 5000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898201801792"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "all-atack"
+ },
+ {
+  "nome": "Anestesico Bravet",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7897614100010"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "anestesico-bravet"
+ },
+ {
+  "nome": "Aplicador de Brincos Universal",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "aplicador-de-brincos-universal"
+ },
+ {
+  "nome": "Ative A.D.E",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270822"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "j-a-saude-animal-ative-a-d-e"
+ },
+ {
+  "nome": "Azium",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 10.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896185950918"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "dexametasona"
+  ],
+  "id": "azium"
+ },
+ {
+  "nome": "Bactrovet Prata AM",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 200.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7791432010202"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "bactrovet-prata-am"
+ },
+ {
+  "nome": "Bainha de IA Genesis PC 50",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898967214027"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "bainha-de-ia-genesis-pc-50"
+ },
+ {
+  "nome": "Bainhas P/ IA WTA Ponta Verde SC (50 un)",
+  "lab": "WTA",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "apres": "Pacote com 50 bainhas",
+  "id": "wta-bainhas-p-ia-wta-ponta-verde-sc-50-un"
+ },
+ {
+  "nome": "Banamine",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "8713184127617"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "flunixina"
+  ],
+  "id": "banamine"
+ },
+ {
+  "nome": "Bioxan",
+  "lab": "Vallée",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 500.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896370104133"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "vallee-bioxan"
+ },
+ {
+  "nome": "Bisnaga Verde",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7891260507711"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "bisnaga-verde"
+ },
+ {
+  "nome": "Borgal",
+  "lab": "MSD",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896185979360"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "sulfadoxina",
+   "trimetoprima"
+  ],
+  "id": "msd-borgal"
+ },
+ {
+  "nome": "Botão EMP.P/AUT",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898070961450"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "botao-emp-p-aut"
+ },
+ {
+  "nome": "Brincos Identificação Azul Caixa 25 un",
+  "lab": "Alflex",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "apres": "Caixa com 25 brincos",
+  "id": "alflex-brincos-identificacao-azul-caixa-25-un"
+ },
+ {
+  "nome": "Caneta de marcação",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "018583062919"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "caneta-de-marcacao"
+ },
+ {
+  "nome": "CB 30",
+  "lab": "Ouro Fino",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898019862893"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "ouro-fino-cb-30"
+ },
+ {
+  "nome": "Cidental",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898186009343"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "cidental"
+ },
+ {
+  "nome": "Cidental Unguento Pasta",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898186000913"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "cidental-unguento-pasta"
+ },
+ {
+  "nome": "Cobalzan",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7897614100065"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "cobalzan"
+ },
+ {
+  "nome": "Corante Bisnaga Vermelha",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7891260507728"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "corante-bisnaga-vermelha"
+ },
+ {
+  "nome": "Corpo Seringa Hoopner",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898070961184"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "corpo-seringa-hoopner"
+ },
+ {
+  "nome": "Corta Curso",
+  "lab": "Ouro Fino",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898019862367"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "ourofino-corta-curso"
+ },
+ {
+  "nome": "Caixa 100 un Seringas Descartáveis 3 mL",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898283815083"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "apres": "Caixa com 100 seringas",
+  "id": "caixa-100-un-seringas-descartaveis-3-ml"
+ },
+ {
+  "nome": "Caixa 25 un Brinco Macho e Fêmea BTM Verde",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "apres": "Caixa com 25 pares",
+  "id": "caixa-25-un-brinco-macho-e-femea-btm-verde"
+ },
+ {
+  "nome": "Caixa 12 un Agulha Vet Triângulo 12x18",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898940538843"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "apres": "Caixa com 12 agulhas",
+  "id": "caixa-12-un-agulha-vet-triangulo-12x18"
+ },
+ {
+  "nome": "Detto Vet 1%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 5.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898601270150"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "j-a-saude-animal-detto-vet-1"
+ },
+ {
+  "nome": "Egvalan Gold",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 7.74,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898053772998"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "egvalan-gold"
+ },
+ {
+  "nome": "Específico P. Esser",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898249720031"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "especifico-p-esser"
+ },
+ {
+  "nome": "Estron Cloprostenol",
+  "lab": "Agener União",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 60.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896006208822"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "cloprostenol"
+  ],
+  "id": "agener-uniao-estron-cloprostenol"
+ },
+ {
+  "nome": "Fundo para pistola vacinação",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898070961191"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "fundo-para-pistola-vacinacao"
+ },
+ {
+  "nome": "Ganaseg 7%",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 30.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "5420036923664"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "ganaseg-7"
+ },
+ {
+  "nome": "Hepatoxan Vallée",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896370104164"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "hepatoxan-vallee"
+ },
+ {
+  "nome": "Ivermectina 1%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "unid": "ml",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181024"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "ivermectina"
+  ],
+  "id": "j-a-saude-animal-ivermectina-1"
+ },
+ {
+  "nome": "Kinetomax",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "5420036971139"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "kinetomax"
+ },
+ {
+  "nome": "Longamectina 3,5%",
+  "lab": "J.A. Saúde Animal",
+  "cat": "verm",
+  "unid": "ml",
+  "frasco": 1000.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898903181222"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "ivermectina"
+  ],
+  "id": "j-a-saude-animal-longamectina-3-5"
+ },
+ {
+  "nome": "Master Soro Plus",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 2.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898344750308"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "master-soro-plus"
+ },
+ {
+  "nome": "Monovin",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7897614100287"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "monovin"
+ },
+ {
+  "nome": "Nuflor",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896185962188"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "florfenicol"
+  ],
+  "id": "nuflor"
+ },
+ {
+  "nome": "Óleo Lubrificante P Seringas",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898523541000"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "oleo-lubrificante-p-seringas"
+ },
+ {
+  "nome": "Pencivet Plus PPU",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 50.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896185903129"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "penicilina",
+   "estreptomicina"
+  ],
+  "id": "pencivet-plus-ppu"
+ },
+ {
+  "nome": "Punho para pistola",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898070961160"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "punho-para-pistola"
+ },
+ {
+  "nome": "Regrow",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896185912350"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "regrow"
+ },
+ {
+  "nome": "Seringa Descartável 20 mL",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898283815113"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "seringa-descartavel-20-ml"
+ },
+ {
+  "nome": "Seringa Descartável 10 mL",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898283815106"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "seringa-descartavel-10-ml"
+ },
+ {
+  "nome": "Soro Antitetânico",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 5.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898259440028"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "soro-antitetanico"
+ },
+ {
+  "nome": "Tanidil",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 200.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "5420036972167"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "tanidil"
+ },
+ {
+  "nome": "Terra Cotril Spray",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898597990490"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "zoetis-terra-cotril-spray"
+ },
+ {
+  "nome": "Terramicina Pó Solúvel com Antigerm 77",
+  "lab": "Zoetis",
+  "cat": "trat",
+  "unid": "mg",
+  "frasco": 100000,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898597993729"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "oxitetraciclina"
+  ],
+  "apres": "Pó solúvel, pote de 100 g",
+  "id": "zoetis-terramicina-po-soluvel-com-antigerm-77"
+ },
+ {
+  "nome": "Treoxin",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 100.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898201806063"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "treoxin"
+ },
+ {
+  "nome": "Tristezina",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 20.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898006193702"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "tristezina"
+ },
+ {
+  "nome": "Tubo de vidro 50MPL Aut",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898523541253"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "tubo-de-vidro-50mpl-aut"
+ },
+ {
+  "nome": "Umbicura",
+  "lab": "",
+  "cat": "trat",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898932554028"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "umbicura"
+ },
+ {
+  "nome": "Vallée Cálcio",
+  "lab": "",
+  "cat": "outro",
+  "unid": "ml",
+  "frasco": 250.0,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "ml",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7896370105369"
+  ],
+  "bula": "",
+  "pend": [
+   "Cadastrado a partir da conferência da Agro Paulo-TO (06/11/2026): nome, categoria, dose, carência e bula ainda não conferidos",
+   "Tamanho do frasco vindo da conferência: conferir no rótulo"
+  ],
+  "conferido": false,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [
+   "calcio"
+  ],
+  "id": "vallee-calcio"
+ },
+ {
+  "nome": "Vedação P Aplicador 50ml",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7898070961436"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "vedacao-p-aplicador-50ml"
+ },
+ {
+  "nome": "ZooMarc Plus - Tinta Marcadora Azul",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7899677513721"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "zoomarc-plus-tinta-marcadora-azul"
+ },
+ {
+  "nome": "ZooMarc Plus - Tinta Marcadora Vermelha",
+  "lab": "",
+  "cat": "mat",
+  "unid": "un",
+  "frasco": 1,
+  "kgMl": null,
+  "fixo": null,
+  "carencia": 0,
+  "carenciaLeite": 0,
+  "unidade": "outro",
+  "via": [],
+  "especies": [],
+  "comp": "",
+  "barcodes": [
+   "7899677513707"
+  ],
+  "bula": "",
+  "pend": [
+   "Material veterinário: contado em unidades, sem dose"
+  ],
+  "conferido": true,
+  "indic": "",
+  "posol": "",
+  "contra": "",
+  "ativos": [],
+  "id": "zoomarc-plus-tinta-marcadora-vermelha"
  }
 ]
