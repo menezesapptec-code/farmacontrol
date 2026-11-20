@@ -336,6 +336,11 @@ var DB=(function(){
         cb(snap.exists?ext({id:id},snap.data()):null,snap.metadata.fromCache);
       },function(err){console.error(col,err);if(errcb)errcb(err)});
     },
+    listIds:function(col,fid){
+      var p=path(col,fid);
+      if(DEMO)return Promise.resolve(Object.keys(L[p]||{}));
+      return fs.collection(p).get().then(function(sn){return sn.docs.map(function(d){return d.id})});
+    },
     setSimOff:function(off){
       simOff=off;
       if(!off){for(var c in L){for(var id in L[c]){delete L[c][id]._pend}}lsSave();Object.keys(L).forEach(emit)}
@@ -466,7 +471,7 @@ function clearTestOps(){
 /* ================= estado ================= */
 var D={config:null,fazendas:[],catalogo:[],sugestoes:[],meds:[],stock:[],transfers:[],launches:[],approvals:[],users:[],compras:[],retiradas:[],logs:[],conferencias:[]};
 var SM={};
-var S={gq:'',rtSel:null,rtF:'low',rtN:60,satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
+var S={revId:null,revF:'pend',revQ:'',delAsk:null,delTxt:'',gq:'',rtSel:null,rtF:'low',rtN:60,satab:'faz',catQ:'',catLab:'todos',catSt:'todos',catN:40,catEdit:null,mq:'',medDraft:null,pendCode:'',importing:false,profile:null,authReady:DEMO||NOFB,view:'vaq',fid:null,asRetiro:null,retiroSel:null,tab:'home',gtab:'painel',filtro:'todos',wiz:null,corrOpen:null,
   perdaOpen:null,perdaMotivo:'Vencido',perdaQ:'',medEdit:null,env:{dest:'',med:'',frascos:1,q:''},compra:{med:'',frascos:1,nf:''},ret:{q:'',med:'',qtd:'1',dest:'',outro:'',por:'',obs:''},
   demoAsk:null,cfId:null,cfQ:'',cfCur:null,cfRes:[],cfAsk:false,online:true,loginSignup:false,err:'',busy:false,vkey:'',subKey:'',farmBlocked:false,histGrupo:'todos',histRet:'todos',histN:100};
 var unsubs=[],profUnsub=null;
@@ -659,9 +664,9 @@ function screenLogin(){
     '</form>';
 }
 function screenWait(){
-  var p=S.profile,bloq=p.status==='bloqueado'||p.status==='recusado'||S.farmBlocked;
-  var tit=S.farmBlocked?'Fazenda suspensa':p.status==='recusado'?'Pedido recusado':bloq?'Acesso bloqueado':'Aguardando liberação';
-  var txt=S.farmBlocked?'O acesso desta fazenda está suspenso. Fale com o administrador do Farma Control.':
+  var p=S.profile,bloq=p.status==='bloqueado'||p.status==='recusado'||p.status==='removido'||S.farmBlocked;
+  var tit=p.status==='removido'?'Fazenda encerrada':S.farmBlocked?'Fazenda suspensa':p.status==='recusado'?'Pedido recusado':bloq?'Acesso bloqueado':'Aguardando liberação';
+  var txt=p.status==='removido'?'Esta fazenda foi encerrada e apagada do Farma Control. Fale com o administrador.':S.farmBlocked?'O acesso desta fazenda está suspenso. Fale com o administrador do Farma Control.':
     p.status==='recusado'?'O pedido de acesso desta fazenda não foi aceito. Fale com o administrador do Farma Control.':
     bloq?'Fale com a gerência da fazenda.':
     'Recebemos o pedido da fazenda <b>'+esc(p.fazendaNome||'')+'</b>. O administrador vai liberar o acesso. Esta tela atualiza sozinha.';
@@ -1554,9 +1559,10 @@ function gHist(){
 
 /* ================= telas: administrador geral ================= */
 function navSA(){
-  var np=D.sugestoes.filter(function(x){return x.st==='pend'}).length;
+  var np=D.sugestoes.filter(function(x){return x.st==='pend'}).length,npc=D.catalogo.filter(function(c){return !c.conferido}).length;
   return '<nav class="side" aria-label="Administrador"><button data-act="sanav" data-v="faz" '+(S.satab==='faz'?'aria-current="page"':'')+'>'+ic('farm',22)+'Fazendas</button>'+
-    '<button data-act="sanav" data-v="cat" '+(S.satab==='cat'?'aria-current="page"':'')+'>'+ic('pill',22)+'Catálogo'+(np?'<span class="badge">'+np+'</span>':'')+'</button></nav>';
+    '<button data-act="sanav" data-v="cat" '+(S.satab==='cat'?'aria-current="page"':'')+'>'+ic('pill',22)+'Catálogo'+(np?'<span class="badge">'+np+'</span>':'')+'</button>'+
+    '<button data-act="sanav" data-v="rev" '+(S.satab==='rev'?'aria-current="page"':'')+'>'+ic('book',22)+'Revisar remédios'+(npc?'<span class="badge">'+npc+'</span>':'')+'</button></nav>';
 }
 /* ================= catálogo de medicamentos ================= */
 function norm(x){return String(x==null?'':x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
@@ -1604,34 +1610,69 @@ function gCatalogo(){
   if(!list.length)return h+'<div class="card empty">Nenhum produto encontrado.</div>';
   h+='<div class="card full tbl"><table><thead><tr><th>Produto</th><th>Laboratório</th><th>Frasco</th><th>Dose</th><th>Carência (abate)</th><th>Códigos</th><th>Situação</th><th></th></tr></thead><tbody>';
   list.slice(0,S.catN).forEach(function(c){
-    h+='<tr><td><b>'+esc(c.nome)+'</b><div class="small muted">'+tipoNome(c.cat)+(c.unidade==='outro'?' · não é em mL':'')+'</div></td><td>'+esc(c.lab)+'</td><td>'+(c.frasco?c.frasco+' mL':'<span class="muted">?</span>')+'</td><td>'+doseTxt(c)+'</td><td>'+(c.carencia==null?'<span class="muted">?</span>':c.carencia+' dias')+'</td><td class="small">'+((c.barcodes||[]).map(esc).join('<br>')||'<span class="muted">—</span>')+'</td><td>'+(c.conferido?'<span class="pill ok">Conferido</span>':'<span class="pill warn">Conferir'+((c.pend||[]).length?' ('+c.pend.length+')':'')+'</span>')+'</td><td><button class="btn sm" data-act="catEdit" data-v="'+esc(c.id)+'">Abrir</button></td></tr>';
+    h+='<tr><td><b>'+esc(c.nome)+'</b><div class="small muted">'+tipoNome(c.cat)+(c.unidade==='outro'?' · não é em mL':'')+'</div></td><td>'+esc(c.lab)+'</td><td>'+(c.unid==='un'?'1 un':c.frasco?c.frasco+' '+(c.unid==='mg'?'mg':'mL'):'<span class="muted">?</span>')+'</td><td>'+doseTxt(c)+'</td><td>'+(c.carencia==null?'<span class="muted">?</span>':c.carencia+' dias')+'</td><td class="small">'+((c.barcodes||[]).map(esc).join('<br>')||'<span class="muted">—</span>')+'</td><td>'+(c.conferido?'<span class="pill ok">Conferido</span>':'<span class="pill warn">Conferir'+((c.pend||[]).length?' ('+c.pend.length+')':'')+'</span>')+'</td><td><button class="btn sm" data-act="catEdit" data-v="'+esc(c.id)+'">Abrir</button></td></tr>';
   });
   h+='</tbody></table></div>';
   if(list.length>S.catN)h+='<button class="btn" data-act="catMais">Mostrar mais</button>';
   h+='<div class="small muted">Mostrando '+Math.min(list.length,S.catN)+' de '+list.length+' produtos.</div>';
   return h;
 }
-function catForm(){
-  var e=S.catEdit,c=e==='novo'?{cat:'trat',unidade:'mL',barcodes:[],pend:[]}:byId(D.catalogo,e);
+function revList(){
+  var tk=norm(S.revQ).split(/\s+/).filter(Boolean);
+  return D.catalogo.filter(function(c){
+    if(S.revF==='pend'&&c.conferido)return false;
+    if(tk.length){var h=norm(c.nome+' '+c.lab+' '+(c.barcodes||[]).join(' '));if(!tk.every(function(t){return h.indexOf(t)>-1}))return false}
+    return true;
+  }).sort(function(a,b){return norm(a.nome).localeCompare(norm(b.nome))});
+}
+function revNextId(curId){
+  var l=revList(),i=-1,k;for(k=0;k<l.length;k++)if(l[k].id===curId){i=k;break}
+  if(i<0){return l[0]?l[0].id:null}
+  /* se o atual ainda está na lista (filtro Todos ou não conferido), vai para o seguinte; senão o seguinte ocupa o mesmo lugar */
+  var conf=false;return (l[i+1]||l[i-1]||{}).id||null;
+}
+function gRevisao(){
+  var total=D.catalogo.length,ok=D.catalogo.filter(function(c){return c.conferido}).length;
+  var h='<div class="h1">Revisar remédios</div>';
+  if(!total)return h+'<div class="card empty">O catálogo está vazio. Importe o catálogo inicial na aba Catálogo.</div>';
+  h+='<div class="kpis"><div class="kpi"><small>Revisados</small><b>'+ok+' de '+total+'</b></div><div class="kpi"><small>Faltam</small><b>'+(total-ok)+'</b></div></div>'+
+    '<div class="bar" aria-hidden="true"><i style="width:'+Math.round(ok/total*100)+'%"></i></div>';
+  h+='<div class="filters"><div class="chips" role="group" aria-label="Filtro">'+[['pend','Faltam revisar'],['todos','Todos']].map(function(f){return '<button class="chip" data-act="revF" data-v="'+f[0]+'" aria-pressed="'+(S.revF===f[0])+'">'+f[1]+'</button>'}).join('')+'</div>'+
+    '<div class="field" style="flex:1;min-width:200px"><label for="rev-q">Buscar produto</label><input class="input t" id="rev-q" data-keep value="'+esc(S.revQ)+'" placeholder="Nome, laboratório ou código"></div></div>';
+  var l=revList();
+  if(!l.length)return h+'<div class="card empty">'+(S.revF==='pend'&&!S.revQ?'Todos os remédios já foram revisados.':'Nenhum produto encontrado.')+'</div>';
+  var cur=byId(l,S.revId);if(!cur){S.revId=l[0].id;cur=l[0]}
+  var pos=l.indexOf(cur)+1;
+  h+='<div class="h2">Produto '+pos+' de '+l.length+(cur.conferido?' · <span class="pill ok">Revisado</span>':' · <span class="pill warn">Falta revisar</span>')+'</div>';
+  h+=catForm(true);
+  h+='<div class="small muted">Dica: confira com a bula do frasco. Ao salvar com “Conferido” marcado, o produto sai da lista de pendentes.</div>';
+  return h;
+}
+function catForm(rev){
+  var e=rev?S.revId:S.catEdit,c=e==='novo'?{cat:'trat',unidade:'mL',barcodes:[],pend:[]}:byId(D.catalogo,e);
   if(!c){S.catEdit=null;return ''}
   var v=function(k){return esc(c[k]==null?'':c[k])};
-  var h='<div class="h2">'+(e==='novo'?'Novo produto':'Produto do catálogo')+'</div><div class="card stack span2">';
+  var h=(rev?'':'<div class="h2">'+(e==='novo'?'Novo produto':'Produto do catálogo')+'</div>')+'<div class="card stack span2">';
   if((c.pend||[]).length)h+='<div class="note warn">'+ic('alert',20)+'<div><b>Conferir na bula:</b><ul style="margin:6px 0 0 18px">'+c.pend.map(function(p){return '<li>'+esc(p)+'</li>'}).join('')+'</ul></div></div>';
   if(c.bula)h+='<div class="small muted">Bula de origem: '+esc(c.bula)+'</div>';
   if(c.comp)h+='<div class="small muted">Composição lida: '+esc(c.comp)+'</div>';
   h+='<div class="grid2"><div class="field"><label for="k-nome">Nome</label><input class="input t" id="k-nome" data-keep value="'+v('nome')+'"></div><div class="field"><label for="k-lab">Laboratório</label><input class="input t" id="k-lab" data-keep value="'+v('lab')+'"></div>'+
     '<div class="field"><label for="k-cat">Tipo</label><select class="input t" id="k-cat" data-keep>'+TIPOS.map(function(t){return '<option value="'+t.id+'"'+(c.cat===t.id?' selected':'')+'>'+t.nome+'</option>'}).join('')+'</select></div>'+
-    '<div class="field"><label for="k-uni">Apresentação</label><select class="input t" id="k-uni" data-keep><option value="mL"'+(c.unidade!=='outro'?' selected':'')+'>Líquido (mL)</option><option value="outro"'+(c.unidade==='outro'?' selected':'')+'>Outra (dispositivo, pasta, brinco, seringa)</option></select></div>'+
-    '<div class="field"><label for="k-fr">Frasco (mL)</label><input class="input t" id="k-fr" data-keep inputmode="decimal" value="'+v('frasco')+'"></div>'+
+    '<div class="field"><label for="k-unid">Unidade de medida</label><select class="input t" id="k-unid" data-keep>'+UNIDS.map(function(u){return '<option value="'+u.id+'"'+((c.unid||'ml')===u.id?' selected':'')+'>'+u.nome+'</option>'}).join('')+'</select></div>'+
+    '<div class="field"><label for="k-fr">Conteúdo de cada unidade (mL ou mg; material = 1)</label><input class="input t" id="k-fr" data-keep inputmode="decimal" value="'+v('frasco')+'"></div>'+
     '<div class="field"><label for="k-kg">Peso por 1 mL (kg)</label><input class="input t" id="k-kg" data-keep inputmode="decimal" value="'+v('kgMl')+'"></div>'+
     '<div class="field"><label for="k-fx">Ou dose fixa (mL)</label><input class="input t" id="k-fx" data-keep inputmode="decimal" value="'+v('fixo')+'"></div>'+
     '<div class="field"><label for="k-car">Carência para abate (dias)</label><input class="input t" id="k-car" data-keep inputmode="numeric" value="'+v('carencia')+'"></div>'+
     '<div class="field"><label for="k-lt">Carência do leite</label><input class="input t" id="k-lt" data-keep value="'+v('carenciaLeite')+'" placeholder="Ex.: 4 dias"></div>'+
     '<div class="field"><label for="k-via">Via de aplicação</label><input class="input t" id="k-via" data-keep value="'+esc((c.via||[]).join(', '))+'"></div></div>'+
+    '<div class="field"><label for="k-ativos">Princípio ativo (separe por vírgula)</label><input class="input t" id="k-ativos" data-keep value="'+esc((c.ativos||[]).join(', '))+'"></div>'+
+    '<div class="field"><label for="k-indic">Para que serve (indicação)</label><textarea class="input t" id="k-indic" data-keep rows="2">'+v('indic')+'</textarea></div>'+
+    '<div class="field"><label for="k-posol">Posologia na bula</label><textarea class="input t" id="k-posol" data-keep rows="2">'+v('posol')+'</textarea></div>'+
+    '<div class="field"><label for="k-contra">Contraindicações e cuidados</label><textarea class="input t" id="k-contra" data-keep rows="2">'+v('contra')+'</textarea></div>'+
     '<div class="field"><label for="k-bc">Códigos de barras (um por linha)</label><textarea class="input t" id="k-bc" data-keep rows="3">'+esc((c.barcodes||[]).join('\n'))+'</textarea></div>'+
     '<div class="field"><label for="k-obs">Observações da bula</label><textarea class="input t" id="k-obs" data-keep rows="2">'+v('obs')+'</textarea></div>'+
-    '<label class="chk"><input type="checkbox" id="k-ok" data-keep'+(c.conferido?' checked':'')+'>Conferido com a bula (libera o preenchimento automático de dose e carência)</label>'+
-    '<button class="btn cta" data-act="catSave">Salvar</button><button class="btn" data-act="catCancel">Voltar</button></div>';
+    '<label class="chk"><input type="checkbox" id="k-ok" data-keep'+((c.conferido||rev)?' checked':'')+'>Conferido com a bula (libera o preenchimento automático de dose e carência)</label>'+
+    (rev?'<div class="row" style="flex-wrap:wrap"><button class="btn cta" data-act="catSave">Salvar e ir para o próximo</button><button class="btn" data-act="revPrev">Anterior</button><button class="btn" data-act="revSkip">Pular</button></div>':'<button class="btn cta" data-act="catSave">Salvar</button><button class="btn" data-act="catCancel">Voltar</button>')+'</div>';
   return h;
 }
 function hdrSA(){
@@ -1746,8 +1787,9 @@ function gSuper(){
       '<div class="small muted">'+(ger?'Gerente: '+esc(ger.nome)+' · '+esc(ger.email):'Sem gerente cadastrado')+' · '+n+' responsáveis</div>'+
       '<div class="row" style="flex-wrap:wrap"><button class="btn sm cta" data-act="fzOpen" data-v="'+esc(f.id)+'">Abrir fazenda</button>'+
       (ativa?'<button class="btn sm danger" data-act="fzBlock" data-v="'+esc(f.id)+'">Bloquear</button>':'<button class="btn sm" data-act="fzUnblock" data-v="'+esc(f.id)+'">Reativar</button>')+'</div>'+
+      (S.delAsk===f.id?'<div class="note warn">'+ic('alert',20)+'<div><b>Apagar a fazenda “'+esc(f.nome)+'” para sempre?</b><div class="small">Apaga medicamentos, estoque, aplicações, envios, aprovações, compras, retiradas e conferências. O histórico (log) fica guardado por segurança e os usuários dela perdem o acesso. Isso não pode ser desfeito.</div><div class="field" style="margin-top:8px"><label for="fz-del">Digite o nome da fazenda para confirmar</label><input class="input t" id="fz-del" data-keep autocomplete="off" value="'+esc(S.delTxt)+'"></div><div class="row" style="flex-wrap:wrap;margin-top:8px"><button class="btn sm danger" data-act="fzDelGo" data-v="'+esc(f.id)+'" '+((S.busy||norm(S.delTxt).trim()!==norm(f.nome).trim())?'disabled':'')+'>'+(S.busy?'Apagando...':'Apagar definitivamente')+'</button><button class="btn sm" data-act="fzDelNo">Cancelar</button></div></div></div>':'')+
       '<div class="row" style="flex-wrap:wrap"><button class="btn sm '+(S.demoAsk===f.id?'danger':'')+'" data-act="fzDemo" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>'+(S.busy?'Aguarde...':S.demoAsk===f.id?'Confirmar: gerar 200 medicamentos, 5 retiros e ações':'Gerar dados de demonstração')+'</button>'+
-      (f.demo?'<button class="btn sm" data-act="fzDemoDel" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>Remover dados de demonstração</button><span class="pill info">Com dados de demonstração</span>':'')+'</div></div>';
+      (f.demo?'<button class="btn sm" data-act="fzDemoDel" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>Remover dados de demonstração</button><span class="pill info">Com dados de demonstração</span>':'')+'<button class="btn sm danger" data-act="fzDel" data-v="'+esc(f.id)+'" '+(S.busy?'disabled':'')+'>Apagar fazenda</button></div></div>';
   });
   h+='<div class="card stack"><div class="h2">Fazenda de teste</div><div class="small muted">Cria uma fazenda com retiros, medicamentos, estoque e consumo de exemplo para você testar o sistema. Depois é só bloquear.</div><button class="btn" data-act="fzTest">Criar fazenda de teste com dados</button></div>';
   return h;
@@ -1762,7 +1804,7 @@ function draw(){
   else if(S.profile.status!=='ativo'||S.farmBlocked){wide=true;html=screenWait()}
   else if(isSuper()&&S.view==='sa'){
     wide=true;
-    html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+(S.satab==='cat'?gCatalogo():gSuper())+'</main></div>';
+    html=hdrSA()+'<div class="shell">'+navSA()+'<main class="view desk px">'+(S.satab==='cat'?gCatalogo():S.satab==='rev'?gRevisao():gSuper())+'</main></div>';
   }
   else if(isConf()){
     wide=true;
@@ -1786,7 +1828,7 @@ function draw(){
       html=stripHtml()+hdrV()+'<main class="view px">'+gsBar()+(S.gq.trim()?gsRes(ret):v)+'</main>'+navV();
     }
   }
-  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit,S.cfId,S.rtSel,S.rtF,!!S.gq.trim()].join('|');
+  var key=[!!S.profile,S.view,S.tab,S.gtab,S.wiz?S.wiz.step:'x',S.filtro,S.asRetiro,S.retiroSel,S.medEdit,S.fid,S.histGrupo,S.histRet,S.satab,S.catEdit,S.revId,S.revF,S.delAsk,S.cfId,S.rtSel,S.rtF,!!S.gq.trim()].join('|');
   var old=$('.view'),sc=old?old.scrollTop:0,same=(key===S.vkey);
   $('#dev').className='device'+(wide?' desktop':'');
   document.body.className=wide?'dsk':'';
@@ -1976,22 +2018,26 @@ document.addEventListener('click',function(ev){
   else if(a==='cfPdf'){cfPdf(false);return}
   else if(a==='cfShare'){cfPdf(true);return}
   else if(a==='scanClose'){scanStop();return}
-  else if(a==='sanav'){S.satab=v;S.catEdit=null}
+  else if(a==='sanav'){S.satab=v;S.catEdit=null;S.revId=null;S.delAsk=null}
   else if(a==='catNew'){S.catEdit='novo'}
+  else if(a==='revF'){S.revF=v;S.revId=null}
+  else if(a==='revSkip'){var rl=revList(),ri=-1,rk;for(rk=0;rk<rl.length;rk++)if(rl[rk].id===S.revId)ri=rk;S.revId=(rl[ri+1]||rl[0]||{}).id||null}
+  else if(a==='revPrev'){var rl2=revList(),ri2=-1,rk2;for(rk2=0;rk2<rl2.length;rk2++)if(rl2[rk2].id===S.revId)ri2=rk2;S.revId=(rl2[ri2-1]||rl2[rl2.length-1]||{}).id||null}
   else if(a==='catEdit'){S.catEdit=v}
   else if(a==='catCancel'){S.catEdit=null}
   else if(a==='catMais'){S.catN+=60}
   else if(a==='catSave'){
     var kn=g('k-nome').trim(),kl=g('k-lab').trim();
     if(!kn||!kl){toast('Preencha o nome e o laboratório');return}
-    var kcur=S.catEdit==='novo'?null:byId(D.catalogo,S.catEdit),kid=kcur?kcur.id:norm(kl+' '+kn).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    var kce=S.satab==='rev'?S.revId:S.catEdit,kcur=kce==='novo'?null:byId(D.catalogo,kce),kid=kcur?kcur.id:norm(kl+' '+kn).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
     if(!kcur&&byId(D.catalogo,kid)){toast('Já existe um produto com esse nome e laboratório');return}
     var bcs=[];g('k-bc').split(/[\s,;]+/).forEach(function(x){x=x.replace(/\D/g,'');if(x.length>=8&&bcs.indexOf(x)<0)bcs.push(x)});
     var dup=null;bcs.forEach(function(b){D.catalogo.forEach(function(o){if(o.id!==kid&&(o.barcodes||[]).indexOf(b)>-1)dup=o})});
     if(dup){toast('Esse código já está em '+dup.nome+' ('+dup.lab+')');return}
     var kok=!!($('#k-ok')||{}).checked,kkg=parseNum(g('k-kg')),kfx=parseNum(g('k-fx')),kfr=parseNum(g('k-fr')),kcar=g('k-car').trim();
-    DB.batch([{op:'set',col:'catalogo',id:kid,data:{nome:kn,lab:kl,cat:g('k-cat'),unidade:g('k-uni'),frasco:kfr||null,kgMl:kkg||null,fixo:kfx||null,carencia:kcar===''?null:Math.round(parseNum(kcar)),carenciaLeite:g('k-lt').trim()||null,via:g('k-via').split(',').map(function(x){return x.trim()}).filter(Boolean),barcodes:bcs,obs:g('k-obs').trim(),conferido:kok,pend:kok?[]:((kcur&&kcur.pend)||[]),atualizadoPor:S.profile.nome,atualizadoEm:Date.now()}}]);
-    S.catEdit=null;toast(kok?'Salvo e conferido':'Salvo');
+    DB.batch([{op:'set',col:'catalogo',id:kid,data:{nome:kn,lab:kl,cat:(g('k-unid')==='un'?'mat':g('k-cat')),unid:g('k-unid')||'ml',unidade:(g('k-unid')==='ml'?'mL':'outro'),ativos:g('k-ativos').split(',').map(function(x){return norm(x).trim()}).filter(Boolean),indic:g('k-indic').trim(),posol:g('k-posol').trim(),contra:g('k-contra').trim(),frasco:kfr||null,kgMl:kkg||null,fixo:kfx||null,carencia:kcar===''?null:Math.round(parseNum(kcar)),carenciaLeite:g('k-lt').trim()||null,via:g('k-via').split(',').map(function(x){return x.trim()}).filter(Boolean),barcodes:bcs,obs:g('k-obs').trim(),conferido:kok,pend:kok?[]:((kcur&&kcur.pend)||[]),atualizadoPor:S.profile.nome,atualizadoEm:Date.now()}}]);
+    if(S.satab==='rev'){S.revId=revNextId(kid);toast(kok?'Salvo e conferido':'Salvo');}
+    else{S.catEdit=null;toast(kok?'Salvo e conferido':'Salvo');}
   }
   else if(a==='catOkAllNo'){S.okAll=false}
   else if(a==='catOkAll'){
@@ -2135,6 +2181,23 @@ document.addEventListener('click',function(ev){
     toast('Gerando os dados de demonstração...');
     runChunks(dops,function(){toast('Dados de demonstração criados. Abra a fazenda para ver.')});return;
   }
+  else if(a==='fzDel'){S.delAsk=v;S.delTxt=''}
+  else if(a==='fzDelNo'){S.delAsk=null;S.delTxt=''}
+  else if(a==='fzDelGo'){
+    if(S.busy)return;
+    var xf=byId(D.fazendas,v);if(!xf||norm(S.delTxt).trim()!==norm(xf.nome).trim()){toast('Digite o nome da fazenda para confirmar');return}
+    var cols=['meds','stock','retiradas','transfers','launches','approvals','conferencias','compras'];
+    S.busy=true;toast('Apagando a fazenda...');render(true);
+    Promise.all(cols.map(function(c){return DB.listIds(c,v).then(function(ids){return ids.map(function(id){return {op:'del',col:c,id:id,fid:v}})})})).then(function(parts){
+      var xops=[];parts.forEach(function(p){xops=xops.concat(p)});
+      D.users.forEach(function(u){if(u.fazendaId===v&&u.role!=='superadmin')xops.push({op:'set',col:'users',id:u.id,data:{status:'removido'}})});
+      var ch=[],i;for(i=0;i<xops.length;i+=400)ch.push(xops.slice(i,i+400));
+      return ch.reduce(function(p,x){return p.then(function(){return DB.batch(x)})},Promise.resolve());
+    }).then(function(){return DB.batch([{op:'del',col:'fazendas',id:v}])}).then(function(){
+      S.busy=false;S.delAsk=null;S.delTxt='';toast('Fazenda apagada');render(true);
+    },function(e){S.busy=false;toast('Não consegui apagar: '+((e&&(e.code||e.message))||'erro'));render(true)});
+    return;
+  }
   else if(a==='fzDemoDel'){
     if(S.busy)return;
     var rops=demoDelOps(v);if(!rops){toast('Esta fazenda não tem dados de demonstração');return}
@@ -2158,6 +2221,8 @@ document.addEventListener('input',function(ev){
   else if(t.id==='wpesoin'&&w){var pv=parseInt(t.value.replace(/\D/g,''),10)||0;w.peso=Math.max(0,Math.min(1500,pv));w.dose=calc().sug;render()}
   else if(t.id==='busca'&&w){w.q=t.value;render()}
   else if(t.id==='gs-q'){S.gq=t.value;render(true)}
+  else if(t.id==='rev-q'){S.revQ=t.value;S.revId=null;render(true)}
+  else if(t.id==='fz-del'){S.delTxt=t.value;render(true)}
   else if(t.id==='g-q'||t.id==='rt-q'){
     var tg=(t.id==='g-q')?S.env:S.ret;tg.q=t.value;var ml0=medMatch(t.value);
     if(ml0.length){var pick=ml0.filter(function(x){return qty('central',x.id)>0})[0]||ml0[0];
